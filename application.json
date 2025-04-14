@@ -1,0 +1,314 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "title": "Linus Torvalds",
+      "description": "Contributor to linux kernel"
+    },
+    {
+      "id": 2,
+      "title": "David S. Miller",
+      "description": "Contributor to linux network"
+    },
+    {
+      "id": 3,
+      "title": "Mark Brown",
+      "description": "Contributor to linux network and zlib"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Linux Axion OS by ACME Inc.",
+      "description": "Linux Axion OS is an open source software operating system for desktops"
+    },
+    {
+      "id": 2,
+      "title": "Linux Branon OS by ACME Inc.",
+      "description": "Linux Axion OS is an open source software operating system for servers"
+    },
+    {
+      "id": 3,
+      "title": "Linux Majoron OS by ACME Inc.",
+      "description": "Linux Axion OS is an open source software operating system for embedded devices"
+    }
+  ],
+  "radars": [
+    {
+      "id": 1,
+      "title": "OS technology radar",
+      "print_layout": true,
+      "svg_id": "radar",
+      "width": 1450,
+      "height": 1000,
+      "colors": {
+        "background": "#fff",
+        "grid": "#bbb",
+        "inactive": "#ddd"
+      },
+      "quadrants": [
+        {
+          "name": "Languages",
+          "description": "Programming languages we use"
+        },
+        {
+          "name": "Infrastructure",
+          "description": "Where we can deploy or run our applications"
+        },
+        {
+          "name": "Datastores",
+          "description": "Where we can store our data"
+        },
+        {
+          "name": "Data Management",
+          "description": "Tools for data management"
+        }
+      ],
+      "rings": [
+        {
+          "name": "ADOPT",
+          "description": "Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with a usage culture in production environment, low risk and recommended to be widely used.",
+          "priority": 0,
+          "color": "#93c47d"
+        },
+        {
+          "name": "TRIAL",
+          "description": "Technologies that we have seen work with success in project work to solve a real problem; first serious usage experience that confirm benefits and can uncover limitations. TRIAL technologies are slightly more risky; some engineers in our organization walked this path and will share knowledge and experiences.",
+          "priority": 1,
+          "color": "#93d2c2"
+        },
+        {
+          "name": "ASSESS",
+          "description": "Technologies that are promising and have clear potential value-add for us; technologies worth to invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have higher risks; they are often brand new and highly unproven in our organisation. You will find some engineers that have knowledge in the technology and promote it, you may even find teams that have started a prototyping effort.",
+          "priority": 2,
+          "color": "#fbdb84"
+        },
+        {
+          "name": "HOLD",
+          "description": "Technologies not recommended to be used for new projects. Technologies that we think are not (yet) worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can be continued for existing projects.",
+          "priority": 3,
+          "color": "#efafa9"
+        }
+      ],
+      "entries": [
+        {
+          "label": "Java",
+          "quadrant": 0,
+          "ring": 0,
+          "moved": 0,
+          "active": true
+        },
+        {
+          "label": "JavaScript",
+          "quadrant": 0,
+          "ring": 0,
+          "moved": 0,
+          "active": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Web technology",
+      "print_layout": true,
+      "svg_id": "radar",
+      "width": 1450,
+      "height": 1000,
+      "colors": {
+        "background": "#fff",
+        "grid": "#bbb",
+        "inactive": "#ddd"
+      },
+      "quadrants": [
+        {
+          "name": "Languages",
+          "description": "Programming languages we use"
+        },
+        {
+          "name": "Infrastructure",
+          "description": "Where we can deploy or run our applications"
+        },
+        {
+          "name": "Datastores",
+          "description": "Where we can store our data"
+        },
+        {
+          "name": "Data Management",
+          "description": "Tools for data management"
+        }
+      ],
+      "rings": [
+        {
+          "name": "ADOPT",
+          "description": "Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with a usage culture in production environment, low risk and recommended to be widely used.",
+          "priority": 0,
+          "color": "#93c47d"
+        },
+        {
+          "name": "TRIAL",
+          "description": "Technologies that we have seen work with success in project work to solve a real problem; first serious usage experience that confirm benefits and can uncover limitations. TRIAL technologies are slightly more risky; some engineers in our organization walked this path and will share knowledge and experiences.",
+          "priority": 1,
+          "color": "#93d2c2"
+        },
+        {
+          "name": "ASSESS",
+          "description": "Technologies that are promising and have clear potential value-add for us; technologies worth to invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have higher risks; they are often brand new and highly unproven in our organisation. You will find some engineers that have knowledge in the technology and promote it, you may even find teams that have started a prototyping effort.",
+          "priority": 2,
+          "color": "#fbdb84"
+        },
+        {
+          "name": "HOLD",
+          "description": "Technologies not recommended to be used for new projects. Technologies that we think are not (yet) worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can be continued for existing projects.",
+          "priority": 3,
+          "color": "#efafa9"
+        }
+      ],
+      "entries": [
+        {
+          "label": "Java",
+          "quadrant": 0,
+          "ring": 0,
+          "moved": 0,
+          "active": true
+        },
+        {
+          "label": "JavaScript",
+          "quadrant": 0,
+          "ring": 0,
+          "moved": 0,
+          "active": true
+        }
+      ]
+    }
+  ],
+  "repositories": [
+    {
+      "id": 1,
+      "title": "Linux kernel source tree",
+      "description": "Linux kernel source tree"
+    },
+    {
+      "id": 2,
+      "title": "Linux kernel networking",
+      "description": "Linux kernel networking"
+    },
+    {
+      "id": 3,
+      "title": "Linux kernel sparc",
+      "description": "Linux kernel sparc"
+    }
+  ],
+  "rings": [
+    {
+      "id": 1,
+      "title": "ADOPT",
+      "description": "Tools for data management."
+    },
+    {
+      "id": 2,
+      "title": "TRIAL",
+      "description": "Where we can store our data."
+    },
+    {
+      "id": 3,
+      "title": "ASSESS",
+      "description": "Technologies that are promising and have clear potential value-add for us."
+    },
+    {
+      "id": 4,
+      "title": "HOLD",
+      "description": "Technologies not recommended to be used for new projects."
+    }
+  ],
+  "segments": [
+    {
+      "id": 1,
+      "title": "Data Management",
+      "description": "Technologies we have high confidence in to serve our purpose, also in large scale."
+    },
+    {
+      "id": 2,
+      "title": "Datastores",
+      "description": "Technologies that we have seen work with success in project work to solve a real problem."
+    },
+    {
+      "id": 3,
+      "title": "Frameworks",
+      "description": "Frameworks we use."
+    },
+    {
+      "id": 4,
+      "title": "Infrastructure",
+      "description": "Where we can deploy or run our applications."
+    },
+    {
+      "id": 5,
+      "title": "Languages",
+      "description": "Programming languages we use."
+    },
+    {
+      "id": 6,
+      "title": "Languages and Framework",
+      "description": "Programming languages and framework we use."
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "title": "C developer team",
+      "description": "Core developer team"
+    },
+    {
+      "id": 2,
+      "title": "QA team",
+      "description": "Quality assurance team"
+    },
+    {
+      "id": 3,
+      "title": "DevOps team",
+      "description": "DevOps CI/CD team "
+    }
+  ],
+  "technologies": [
+    {
+      "id": 1,
+      "title": "AWS Athena",
+      "description": "AWS Athena is ...",
+      "website": "",
+      "moved": 0,
+      "active": true
+    },
+    {
+      "id": 2,
+      "title": "Aerospike",
+      "description": "Aerospike is ... ",
+      "website": "https://aerospike.com/",
+      "moved": 0,
+      "active": true
+    },
+    {
+      "id": 3,
+      "title": "C language",
+      "description": "C language is ... ",
+      "website": "https://gcc.gnu.org/",
+      "moved": 0,
+      "active": true
+    }
+  ],
+  "technology-blips": [
+    {
+      "id": 1,
+      "radar": "OS technology radar",
+      "ring": "ADOPT",
+      "segment": "Languages",
+      "technology": "C language"
+    },
+    {
+      "id": 2,
+      "radar": "OS technology radar",
+      "ring": "ADOPT",
+      "segment": "Infrastructure",
+      "technology": "AWS Athena"
+    }
+  ]
+}
