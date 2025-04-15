@@ -9,10 +9,7 @@ const getAuthHealth = async () => {
   if (!response.ok) {
     throw new Error("Please confirm your auth server is up");
   }
-  const data = await response.json();
-  console.log(data);
-
-  return data;
+  return await response.json();
 };
 
 interface IPrivateProvider {
