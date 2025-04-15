@@ -14,7 +14,6 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 * download and setup nodeJS, at least v22.14.0
 * install all npm packages by command: npm install
 * setup GitHub account and add ssh keys to GitHub profile
-* clone repo by command git clone: git@github.com:h5radar/h5radar_app.git
 
 ## Idea configuration
 ### JavaScript checkstyle
@@ -35,25 +34,12 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 * login to console at http://127.0.0.1:8180 and click create realm button
 * select json file realm.json at docker folder to create a new realm
 
-# GPG key configuration
-* gpg --full-gen-key
-* gpg --list-secret-keys --keyid-format long
-* gpg --armor --export "key-gen" for example gpg --armor --export 3AA5C34371567BD2
-* git config --global user.signingkey "key-gen"
-* git config --global commit.gpgSign true
-* git config --global tag.gpgSign true
-
 # Useful commands:
-* install nvm by command: brew install nvm and make post configuration
-* install nodejs by command: nvm install --lts
-* run npm command to install packages: npm install --legacy-peer-deps
 * run server by command: npx http-server ./dist -o -c-1
 * run json-server by command: npx json-server -p 4000 application.json
 * run cypress to e2e tests from cmd by command: npx cypress run
 * open cypress e2e tests environment by command: npx cypress open
 * run bundler analyzer by command: npx vite-bundle-visualizer
-* setup tag by command: git tag -v0.1.0 && git push origin --tags
-* prune tags by command: git fetch --prune --prune-tags
 
 # Appendix: work with tokens
 ```bash
