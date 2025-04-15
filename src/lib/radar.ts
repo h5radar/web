@@ -9,7 +9,6 @@ import * as d3 from "d3";
 import { radarSchema } from "@/schemas/radar.tsx";
 
 export function drawRadar(config: z.infer<typeof radarSchema>) {
-  // console.log(config);
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295
   let seed = 42;
