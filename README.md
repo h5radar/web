@@ -1,11 +1,11 @@
-# T9Radar
-Technical and business radar. Demo available at https://app.t9radar.com. 
+# H5Radar
+Technical and business radar. Demo available at https://app.h5radar.com. 
 
 # Release application
 * add release notes file to docs
 * update version at antora.yml file
 * run command mvn release:prepare and mvn release:perform
-* create archive by command: tar -zcvf Binaries.tar.gz t9radar*.jar
+* create archive by command: tar -zcvf Binaries.tar.gz h5radar*.jar
 * setup version at antora.yml file at latest value
 * create and publish the new release at GitHub
 
@@ -14,7 +14,7 @@ Technical and business radar. Demo available at https://app.t9radar.com.
 * download and setup nodeJS, at least v22.14.0
 * install all npm packages by command: npm install
 * setup GitHub account and add ssh keys to GitHub profile
-* clone repo by command git clone: git@github.com:t9radar/t9radar_app.git
+* clone repo by command git clone: git@github.com:h5radar/h5radar_app.git
 
 ## Idea configuration
 ### JavaScript checkstyle
@@ -57,7 +57,7 @@ Technical and business radar. Demo available at https://app.t9radar.com.
 
 # Appendix: work with tokens
 ```bash
-export access_token=$(curl -X POST http://localhost:8180/realms/t9radar/protocol/openid-connect/token \
+export access_token=$(curl -X POST http://localhost:8180/realms/h5radar/protocol/openid-connect/token \
 -H 'content-type: application/x-www-form-urlencoded' -d 'client_id=app-ui' \
 -d 'username=alice&password=secret&grant_type=password' | jq --raw-output '.access_token' )
   ```

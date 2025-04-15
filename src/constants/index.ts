@@ -1,7 +1,7 @@
 /*
  * Application info
  */
-export const APP_NAME = "T9Radar";
+export const APP_NAME = "H5Radar";
 export const APP_DESCRIPTION = "No terra incognita!";
 export const APP_VERSION = "0.0.1";
 
