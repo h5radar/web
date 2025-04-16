@@ -22,6 +22,15 @@ jobs:
       - name: Install npm packages
         shell: bash
         run: npm install
-      - name: Run commands
+      - name: Run lint commands
         shell: bash
         run: npm run lint
+      - name: Run prettier commands
+        shell: bash
+        run: npm run prettier
+      - name: Run build commands
+        shell: bash
+        run: npm run build
+      - name: Run test commands
+        shell: bash
+        run: npm run test

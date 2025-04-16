@@ -15,6 +15,7 @@ const getAuthHealth = async () => {
 interface IPrivateProvider {
   children: React.ReactNode;
 }
+
 export const PrivateProvider: FC<IPrivateProvider> = (props) => {
   const { children } = props;
   const auth = useAuth();
