@@ -7,7 +7,7 @@ import { hasAuthParams, useAuth } from "react-oidc-context";
 const getAuthHealth = async () => {
   const response = await fetch(import.meta.env.VITE_AUTHORITY);
   if (!response.ok) {
-    throw new Error("Please confirm your auth server is up");
+    throw new Error(`Please confirm your auth server(${import.meta.env.VITE_AUTHORITY}) is up`);
   }
   return await response.json();
 };
