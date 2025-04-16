@@ -5,11 +5,16 @@ import { type FC, useEffect, useState } from "react";
 import { hasAuthParams, useAuth } from "react-oidc-context";
 
 const getAuthHealth = async () => {
+  console.log("getAuthHealth1");
   const response = await fetch(import.meta.env.VITE_AUTHORITY);
   if (!response.ok) {
     throw new Error("Please confirm your auth server is up");
   }
+  console.log("getAuthHealth2");
   return await response.json();
+  // const data = await response.json();
+  // console.log("getAuthHealth2" + data.toString());
+  // return data;
 };
 
 interface IPrivateProvider {
