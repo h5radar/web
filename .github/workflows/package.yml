@@ -15,19 +15,13 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: "21"
-          distribution: "liberica"
-          cache: maven
       - name: Set up NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - name: Install npm packages
         shell: bash
         run: npm install
-      - name: Build package
+      - name: Run commands
         shell: bash
-        run: mvn package
+        run: npm run lint
