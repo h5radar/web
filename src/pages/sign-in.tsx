@@ -11,12 +11,14 @@ export default function SignInPage() {
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
           <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
-              <CardDescription>Enter your login below to login to your account</CardDescription>
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl">Welcome back</CardTitle>
+              <CardDescription>Login with your Keycloak account</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={() => auth.signinRedirect()}>Login</Button>
+              <Button className="w-full" onClick={() => auth.signinRedirect()}>
+                Login
+              </Button>
             </CardContent>
           </Card>
         </div>
