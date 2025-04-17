@@ -10,7 +10,7 @@ on:
     branches: ["main"]
 
 jobs:
-  package:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -22,15 +22,44 @@ jobs:
       - name: Install npm packages
         shell: bash
         run: npm install
-      - name: Run lint commands
+      - name: Run eslint commands
         shell: bash
         run: npm run lint
       - name: Run prettier commands
         shell: bash
         run: npm run prettier
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - name: Install npm packages
+        shell: bash
+        run: npm install
       - name: Run build commands
         shell: bash
         run: npm run build
+      - name: Run test commands
+        shell: bash
+        run: npm run test
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - name: Install npm packages
+        shell: bash
+        run: npm install
       - name: Run test commands
         shell: bash
         run: npm run test
