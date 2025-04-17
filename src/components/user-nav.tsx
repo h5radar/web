@@ -13,6 +13,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "react-oidc-context";
 
 /*
  * TODO:
@@ -27,23 +28,24 @@ export function UserNav() {
   // const { data: session } = useSession();
   const { data: session } = { data: { user: { image: null, name: "a5gurnakov", email: null } } };
   const navigate = useNavigate();
+  const auth = useAuth();
 
-  if (session) {
+  if (auth?.user?.profile) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={session.user?.image ?? ""} alt={session.user?.name ?? ""} />
-              <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
+              <AvatarImage src={session.user?.image ?? ""} alt={auth?.user?.profile.name ?? ""} />
+              <AvatarFallback>{auth?.user?.profile.name?.[0]}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">{session.user?.name}</p>
-              <p className="text-xs leading-none text-muted-foreground">{session.user?.email}</p>
+              <p className="text-sm font-medium leading-none">{auth?.user?.profile.name}</p>
+              <p className="text-xs leading-none text-muted-foreground">{auth?.user?.profile?.email}</p>
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
