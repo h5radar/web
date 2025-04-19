@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-// import { signOut } from 'next-auth/react';
-// TODO: import { signOut, useSession } from 'next-auth/react';
+import { useAuth } from "react-oidc-context";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +12,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "react-oidc-context";
 
 /*
  * TODO:
