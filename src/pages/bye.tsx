@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 import { useAuth } from "react-oidc-context";
 
-export default function SignInPage() {
+export default function WelcomePage() {
   const auth = useAuth();
 
   return (

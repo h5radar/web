@@ -6,10 +6,10 @@ import "@/index.css";
 
 // Include layout
 import AccountLayout from "@/layouts/account";
-import AuthLayout from "@/layouts/auth";
 import BillingLayout from "@/layouts/billing";
 import NotificationsLayout from "@/layouts/notifications";
 import LegalLayout from "@/layouts/legal";
+import AppLayout from "@/layouts/app-layout";
 import RadarLayout from "@/layouts/radar";
 
 // Include root pages at alphabet
@@ -36,10 +36,10 @@ import RaysPage from "@/pages/rays";
 import RepositoriesPage from "@/pages/repositories/list";
 import RingsPage from "@/pages/rings/list";
 import SegmentsPage from "@/pages/segments/list";
-import SignInPage from "@/pages/sign-in";
 import TeamsPage from "@/pages/teams/list";
 import TechnologiesPage from "@/pages/technologies/list";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
+import WelcomePage from "@/pages/bye";
 
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
@@ -59,7 +59,7 @@ import NewTechnologyPage from "@/pages/technologies/new";
 import EditTechnologyPage from "@/pages/technologies/edit";
 import { PrivateProvider } from "@/providers/private-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { onSigninCallback, userManager } from "@/providers/auth-provider";
+import { onSigninCallback, userManager } from "@/providers/auth-config";
 import { AuthProvider } from "react-oidc-context";
 
 export const queryClient = new QueryClient();
@@ -86,8 +86,8 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/account" element={<AccountPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
-            <Route path="/" element={<AuthLayout />}>
-              <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/" element={<AppLayout />}>
+              <Route path="/welcome" element={<WelcomePage />} />
             </Route>
             <Route
               path="/"
