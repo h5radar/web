@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,18 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-/*
- * TODO:
- *  1.add signOut actions
-   <DropdownMenuItem onClick={() => signOut()}>
-    <LogOut />
-    Log out
-  </DropdownMenuItem>
- * 2. Uncomment const { data: session } = useSession();
- */
 export function UserNav() {
-  // const { data: session } = useSession();
-  const { data: session } = { data: { user: { image: null, name: "a5gurnakov", email: null } } };
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -34,7 +23,6 @@ export function UserNav() {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={session.user?.image ?? ""} alt={auth?.user?.profile.name ?? ""} />
               <AvatarFallback>{auth?.user?.profile.name?.[0]}</AvatarFallback>
             </Avatar>
           </Button>
