@@ -44,7 +44,7 @@ const AppSidebarFooter = () => {
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src={session?.user?.image || ""} alt={auth?.user?.profile.name || ""} />
                     <AvatarFallback className="rounded-lg">
-                      {auth?.user?.profile.name?.slice(0, 2)?.toUpperCase() || "CN"}
+                      {auth?.user?.profile.name?.[0]?.toUpperCase() || "CN"}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
@@ -65,7 +65,7 @@ const AppSidebarFooter = () => {
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage src={session?.user?.image || ""} alt={auth?.user?.profile.name || ""} />
                       <AvatarFallback className="rounded-lg">
-                        {auth?.user?.profile.name?.slice(0, 2)?.toUpperCase() || "CN"}
+                        {auth?.user?.profile.name?.[0].toUpperCase() || "CN"}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
