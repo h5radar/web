@@ -1,8 +1,8 @@
-import SignInPage from "@/pages/sign-in";
-import { useQuery } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { hasAuthParams, useAuth } from "react-oidc-context";
+import WelcomePage from "@/pages/welcome";
 
 const getAuthHealth = async () => {
   const response = await fetch(import.meta.env.VITE_AUTHORITY);
@@ -66,6 +66,6 @@ export const PrivateProvider: FC<IPrivateProvider> = (props) => {
       </>
     );
   }
-  if (!auth.isAuthenticated) return <SignInPage />;
+  if (!auth.isAuthenticated) return <WelcomePage />;
   return <>{children}</>;
 };
