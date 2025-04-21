@@ -13,7 +13,7 @@ export default function WelcomePage() {
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-2xl">Welcome back</CardTitle>
-              <CardDescription>Login with your Keycloak account</CardDescription>
+              <CardDescription>Login with your account credentials</CardDescription>
             </CardHeader>
             <CardContent>
               <Button className="w-full" onClick={() => auth.signinRedirect()}>
