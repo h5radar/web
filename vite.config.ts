@@ -14,9 +14,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    allowedHosts: ["app.h5radar.com", "app.h5radar.ru"],
-  },
   test: {
     environment: "jsdom",
     globals: true,
