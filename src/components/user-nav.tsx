@@ -12,7 +12,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "react-oidc-context";
 
 export function UserNav() {
   const navigate = useNavigate();

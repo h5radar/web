@@ -1,15 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "react-oidc-context";
+import { onSigninCallback, userManager } from "@/auth-config";
+import { PrivateProvider } from "@/providers/private";
 
 import "@/index.css";
 
 // Include layout
+import ApplicationLayout from "@/layouts/application";
 import AccountLayout from "@/layouts/account";
 import BillingLayout from "@/layouts/billing";
 import NotificationsLayout from "@/layouts/notifications";
 import LegalLayout from "@/layouts/legal";
-import AppLayout from "@/layouts/app-layout";
 import RadarLayout from "@/layouts/radar";
 
 // Include root pages at alphabet
@@ -39,7 +43,7 @@ import SegmentsPage from "@/pages/segments/list";
 import TeamsPage from "@/pages/teams/list";
 import TechnologiesPage from "@/pages/technologies/list";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
-import WelcomePage from "@/pages/bye";
+import WelcomePage from "@/pages/welcome";
 
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
@@ -57,10 +61,6 @@ import ShowRadarPage from "@/pages/radars/show";
 // Include technology resource pages at alphabet
 import NewTechnologyPage from "@/pages/technologies/new";
 import EditTechnologyPage from "@/pages/technologies/edit";
-import { PrivateProvider } from "@/providers/private-provider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { onSigninCallback, userManager } from "@/providers/auth-config";
-import { AuthProvider } from "react-oidc-context";
 
 export const queryClient = new QueryClient();
 
@@ -86,7 +86,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/account" element={<AccountPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
-            <Route path="/" element={<AppLayout />}>
+            <Route path="/" element={<ApplicationLayout />}>
               <Route path="/welcome" element={<WelcomePage />} />
             </Route>
             <Route
