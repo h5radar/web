@@ -1,5 +1,5 @@
 # H5Radar
-Technical and business radar. Demo available at https://app.h5radar.com. 
+Technical and business radar. Demo available at https://app.h5radar.com.
 
 # Release application
 * add release notes file to docs
@@ -40,14 +40,3 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 * run cypress to e2e tests from cmd by command: npx cypress run
 * open cypress e2e tests environment by command: npx cypress open
 * run bundler analyzer by command: npx vite-bundle-visualizer
-
-# Appendix: work with tokens
-```bash
-export access_token=$(curl -X POST http://localhost:8180/realms/h5radar/protocol/openid-connect/token \
--H 'content-type: application/x-www-form-urlencoded' -d 'client_id=app-ui' \
--d 'username=alice&password=secret&grant_type=password' | jq --raw-output '.access_token' )
-  ```
-
-```bash
-curl http://localhost:8080/api/v1/technologies -H "Authorization: Bearer "$access_token
-```
