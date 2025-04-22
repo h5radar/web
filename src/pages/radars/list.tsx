@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { z } from "zod";
+import { useAuth } from "react-oidc-context";
 import { API_URL } from "@/constants";
 import { radarSchema } from "@/schemas/radar";
 import { RadarTable } from "@/components/radars/table";
-import { useAuth } from "react-oidc-context";
 
 export default function RadarsPage() {
-  const [radars, setRadars] = useState<z.infer<typeof radarSchema>[]>([]);
   const auth = useAuth();
+  const [radars, setRadars] = useState<z.infer<typeof radarSchema>[]>([]);
   useEffect(() => {
     fetch(`${API_URL}/radars`, {
       headers: {

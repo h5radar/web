@@ -43,11 +43,15 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 
 # Appendix: work with tokens
 ```bash
-export access_token=$(curl -X POST https://iam.h5radar.com:8443/realms/h5radar/protocol/openid-connect/token \
+export access_token=$(curl -X POST http://localhost:8180/realms/h5radar/protocol/openid-connect/token \
 -H 'content-type: application/x-www-form-urlencoded' -d 'client_id=app-ui' \
 -d 'username=alice&password=secret&grant_type=password' | jq --raw-output '.access_token' )
 ```
 
 ```bash
 curl https://api.h5radar.com/api/v1/technologies -H "Authorization: Bearer "$access_token
+```
+
+```bash
+curl http://localhost:8080/api/v1/technologies -H "Authorization: Bearer "$access_token
 ```
