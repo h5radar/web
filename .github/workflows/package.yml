@@ -44,9 +44,6 @@ jobs:
       - name: Run build commands
         shell: bash
         run: npm run build
-      - name: Run test commands
-        shell: bash
-        run: npm run test
   test:
     needs: build
     runs-on: ubuntu-latest
