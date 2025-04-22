@@ -11,7 +11,7 @@ export default function TechnologiesPage() {
   useEffect(() => {
     fetch(`${API_URL}/technologies`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {
@@ -20,7 +20,6 @@ export default function TechnologiesPage() {
       .then((data) => {
         setTechnologies(data);
       });
-
   }, [auth]);
 
   if (!technologies.length) return <h1>Loading...</h1>;

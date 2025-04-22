@@ -11,7 +11,7 @@ export default function AuthorsPage() {
   useEffect(() => {
     fetch(`${API_URL}/authors`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {

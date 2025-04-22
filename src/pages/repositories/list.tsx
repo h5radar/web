@@ -11,7 +11,7 @@ export default function RepositoriesPage() {
   useEffect(() => {
     fetch(`${API_URL}/repositories`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {

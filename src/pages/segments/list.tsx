@@ -11,7 +11,7 @@ export default function SegmentsPage() {
   useEffect(() => {
     fetch(`${API_URL}/segments`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {

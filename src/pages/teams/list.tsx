@@ -11,7 +11,7 @@ export default function TeamsPage() {
   useEffect(() => {
     fetch(`${API_URL}/teams`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {

@@ -11,7 +11,7 @@ export default function ProductsPage() {
   useEffect(() => {
     fetch(`${API_URL}/technology-blips`, {
       headers: {
-        "Authorization": `Bearer ${auth.user?.access_token}`,
+        Authorization: `Bearer ${auth.user?.access_token}`,
       },
     })
       .then((res) => {
