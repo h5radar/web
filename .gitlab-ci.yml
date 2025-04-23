@@ -6,7 +6,6 @@ cache:
 stages:
   - lint
   - build
-  - smoke
   - test
   - coverage
 
@@ -42,26 +41,17 @@ build-application:
     paths:
       - VERSION
 
-# Run smoke tests
-tests-smoke:
-  stage: smoke
+# Run all tests
+test-application:
+  stage: test
   tags:
     - linux
   script:
     - npm install
     - npm run test
 
-# Run all tests
-.test-tests:
-  stage: smoke
-  tags:
-    - linux
-  script:
-    - npm install
-  allow_failure: true
-
 # Run coverage
-coverage-tests:
+coverage-application:
   stage: coverage
   tags:
     - linux
