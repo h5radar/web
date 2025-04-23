@@ -10,6 +10,8 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
+    reporters: ["default", "junit", "html"],
     coverage: {
       // istanbul or v8
       provider: "v8",
