@@ -14,9 +14,6 @@
 # env files (can opt-in for committing if needed)
 .env
 
-# coverage files
-/coverage
-
 # cypress files
 /cypress/results/*
 /cypress/screenshots/*
@@ -28,6 +25,7 @@
 /node_modules
 
 # vitest files
+/tests/coverage/*
 /tests/results/*
 
 #

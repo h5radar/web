@@ -13,9 +13,9 @@ export default defineConfig({
     outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
     reporters: ["default", "junit", "html"],
     coverage: {
-      // istanbul or v8
-      provider: "v8",
+      provider: "v8", // istanbul or v8
       reporter: ["text", "json", "html"],
+      reportsDirectory: './tests/coverage',
       thresholds: {
         lines: 0.07,
         functions: 29.6,
