@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "dev": "vite",
     "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix",
