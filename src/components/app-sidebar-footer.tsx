@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useAuth } from "react-oidc-context";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, RadarIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -12,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { useAuth } from "react-oidc-context";
 
 const AppSidebarFooter = () => {
   const auth = useAuth();

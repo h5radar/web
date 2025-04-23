@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { z } from "zod";
 import { useAuth } from "react-oidc-context";
+import { z } from "zod";
 import { API_URL } from "@/constants";
 import { segmentSchema } from "@/schemas/segment";
 import { SegmentTable } from "@/components/segments/table";
