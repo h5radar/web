@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "coverage": "vitest run --coverage",
     "build": "tsc -b && vite build",
     "dev": "vite",
     "lint": "npx eslint .",
@@ -13,7 +12,8 @@
     "prettier": "npx prettier . --check",
     "prettier:fix": "npm run prettier -- --write",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [

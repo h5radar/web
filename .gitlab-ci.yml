@@ -6,8 +6,8 @@ cache:
 stages:
   - lint
   - build
-  - smoke
   - test
+  - coverage
 
 # Run linters
 lint-eslint:
@@ -41,20 +41,20 @@ build-application:
     paths:
       - VERSION
 
-# Run smoke tests
-smoke-tests:
-  stage: smoke
+# Run all tests
+test-application:
+  stage: test
   tags:
     - linux
   script:
     - npm install
     - npm run test
 
-# Run all tests
-.test-tests:
-  stage: smoke
+# Run coverage
+coverage-application:
+  stage: coverage
   tags:
     - linux
   script:
     - npm install
-  allow_failure: true
+    - npm run test:coverage

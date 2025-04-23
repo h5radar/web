@@ -13,6 +13,14 @@ export default defineConfig({
     coverage: {
       // istanbul or v8
       provider: "v8",
+      reporter: ["text", "json", "html"],
+      thresholds: {
+        lines: 61.9,
+        functions: 58.57,
+        branches: 84.17,
+        statements: 61.9,
+        autoUpdate: false,
+      },
     },
   },
 });
