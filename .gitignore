@@ -15,6 +15,7 @@
 .env
 
 # cypress files
+/cypress/results/*
 /cypress/screenshots/*
 
 # production
