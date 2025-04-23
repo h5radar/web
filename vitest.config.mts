@@ -15,7 +15,7 @@ export default defineConfig({
     coverage: {
       provider: "v8", // istanbul or v8
       reporter: ["text", "json", "html"],
-      reportsDirectory: './tests/coverage',
+      reportsDirectory: "./tests/coverage",
       thresholds: {
         lines: 0.07,
         functions: 29.6,
