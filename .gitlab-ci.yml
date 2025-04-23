@@ -8,6 +8,7 @@ stages:
   - build
   - smoke
   - test
+  - coverage
 
 # Run linters
 lint-eslint:
@@ -42,7 +43,7 @@ build-application:
       - VERSION
 
 # Run smoke tests
-smoke-tests:
+tests-smoke:
   stage: smoke
   tags:
     - linux
@@ -58,3 +59,12 @@ smoke-tests:
   script:
     - npm install
   allow_failure: true
+
+# Run coverage
+coverage-tests:
+  stage: coverage
+  tags:
+    - linux
+  script:
+    - npm install
+    - npm run test:coverage
