@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
 
 const AppSidebarFooter = () => {
   const auth = useAuth();
@@ -70,14 +71,18 @@ const AppSidebarFooter = () => {
                     <BadgeCheck />
                     Account
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/billing")}>
-                    <CreditCard />
-                    Billing
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/notifications")}>
-                    <Bell />
-                    Notifications
-                  </DropdownMenuItem>
+                  {BILLING_ENABLED === "true" && (
+                    <DropdownMenuItem onClick={() => navigate("/billing")}>
+                      <CreditCard />
+                      Billing
+                    </DropdownMenuItem>
+                  )}
+                  {NOTIFICATIONS_ENABLED === "true" && (
+                    <DropdownMenuItem onClick={() => navigate("/notifications")}>
+                      <Bell />
+                      Notifications
+                    </DropdownMenuItem>
+                  )}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => auth.signoutRedirect()}>

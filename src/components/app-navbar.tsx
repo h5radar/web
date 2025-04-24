@@ -1,6 +1,6 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { UserNav } from "@/components/user-nav";
+import { UserDropdown } from "@/components/user-dropdown.tsx";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import SearchInput from "@/components/search-input";
 import ThemeToggler from "@/components/theme-toggler";
@@ -19,7 +19,7 @@ const AppNavbar = () => {
           <SearchInput />
         </div>
         <TenantSwitcher />
-        <UserNav />
+        <UserDropdown />
         <ThemeToggler />
       </div>
     </header>
