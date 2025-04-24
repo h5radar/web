@@ -71,18 +71,18 @@ const AppSidebarFooter = () => {
                     <BadgeCheck />
                     Account
                   </DropdownMenuItem>
-                  {BILLING_ENABLED === "true" &&
+                  {BILLING_ENABLED === "true" && (
                     <DropdownMenuItem onClick={() => navigate("/billing")}>
                       <CreditCard />
                       Billing
                     </DropdownMenuItem>
-                  }
-                  {NOTIFICATIONS_ENABLED === "true" &&
-                  <DropdownMenuItem onClick={() => navigate("/notifications")}>
-                    <Bell />
-                    Notifications
-                  </DropdownMenuItem>
-                  }
+                  )}
+                  {NOTIFICATIONS_ENABLED === "true" && (
+                    <DropdownMenuItem onClick={() => navigate("/notifications")}>
+                      <Bell />
+                      Notifications
+                    </DropdownMenuItem>
+                  )}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => auth.signoutRedirect()}>
