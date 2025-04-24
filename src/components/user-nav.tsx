@@ -12,6 +12,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
 
 export function UserNav() {
   const navigate = useNavigate();
@@ -44,14 +45,18 @@ export function UserNav() {
               Account
               <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/billing")}>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/notifications")}>
-              Notifications
-              <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
-            </DropdownMenuItem>
+            {BILLING_ENABLED === "true" &&
+              <DropdownMenuItem onClick={() => navigate("/billing")}>
+                Billing
+                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            }
+            {NOTIFICATIONS_ENABLED === "true" &&
+              <DropdownMenuItem onClick={() => navigate("/notifications")}>
+                Notifications
+                <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            }
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => auth.signoutRedirect()}>
