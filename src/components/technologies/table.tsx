@@ -147,7 +147,7 @@ const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
   },
   {
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
@@ -156,7 +156,9 @@ const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <Link to={`/technologies/edit/${row.id}`}>
+            <DropdownMenuItem className="cursor-pointer">Edit {row.id}</DropdownMenuItem>
+          </Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
         </DropdownMenuContent>
