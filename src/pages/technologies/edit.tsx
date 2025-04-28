@@ -26,7 +26,7 @@ export default function EditTechnologyPage() {
 
   return (
     <>
-      <TechnologyForm form={form} onSubmit={onSubmit} />
+      <TechnologyForm form={form} onSubmit={onSubmit} disabled={false} /> {/* tmp */}
     </>
   );
 }
