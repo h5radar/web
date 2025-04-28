@@ -10,9 +10,10 @@ import { technologyFormSchema } from "@/schemas/technology";
 interface TechnologyFormProps {
   form: UseFormReturn<z.infer<typeof technologyFormSchema>>;
   onSubmit: (values: z.infer<typeof technologyFormSchema>) => void;
+  disabled: boolean;
 }
 
-export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }) => {
+export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit, disabled }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -87,7 +88,9 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className={disabled ? "cursor-progress" : "cursor-pointer"} disabled={disabled}>
+          Submit
+        </Button>
       </form>
     </Form>
   );
