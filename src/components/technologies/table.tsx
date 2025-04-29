@@ -59,7 +59,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { technologySchema } from "@/schemas/technology";
+import { technologyFormSchema, technologySchema } from "@/schemas/technology";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "react-oidc-context";
+import { API_URL } from "@/constants";
+import { toast } from "sonner";
+import { fetched } from "@/utils/fetched";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -80,92 +85,6 @@ function DragHandle({ id }: { id: number }) {
     </Button>
   );
 }
-
-const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
-  {
-    id: "drag",
-    header: () => null,
-    cell: ({ row }) => <DragHandle id={row.original.id} />,
-  },
-  {
-    id: "select",
-    header: ({ table }) => (
-      <div className="flex items-center justify-center">
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      </div>
-    ),
-    cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      </div>
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "title",
-    header: "Title",
-    cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
-  },
-  {
-    accessorKey: "website",
-    header: "Website",
-    cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
-  },
-  {
-    accessorKey: "moved",
-    header: "Moved",
-    cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.moved}
-        </Badge>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "active",
-    header: "Active",
-    cell: ({ row }) => (
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.active ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.active}
-      </Badge>
-    ),
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
-            <IconDotsVertical />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-32">
-          <Link to={`/technologies/edit/${row.id}`}>
-            <DropdownMenuItem className="cursor-pointer">Edit {row.id}</DropdownMenuItem>
-          </Link>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-];
 
 function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
@@ -191,6 +110,8 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
 }
 
 export function TechnologyTable({ data: initialData }: { data: z.infer<typeof technologySchema>[] }) {
+  const auth = useAuth();
+  const queryClient = useQueryClient();
   const [data, setData] = React.useState(() => initialData);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -204,6 +125,115 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
+
+  const { mutate: deleteTechnology } = useMutation({
+    mutationFn: (rowId: string) =>
+      fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
+        url: `${API_URL}/technologies/${rowId}`,
+        method: "DELETE",
+        token: auth.user?.access_token,
+      }),
+    mutationKey: ["create new technology"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      toast.success("Technology updated successfully!");
+    },
+    onError(error) {
+      toast.error(`Error: ${error.message}`);
+    },
+  });
+
+  const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
+    {
+      id: "drag",
+      header: () => null,
+      cell: ({ row }) => <DragHandle id={row.original.id} />,
+    },
+    {
+      id: "select",
+      header: ({ table }) => (
+        <div className="flex items-center justify-center">
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Select all"
+          />
+        </div>
+      ),
+      cell: ({ row }) => (
+        <div className="flex items-center justify-center">
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
+        </div>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "title",
+      header: "Title",
+      cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
+    },
+    {
+      accessorKey: "website",
+      header: "Website",
+      cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
+    },
+    {
+      accessorKey: "moved",
+      header: "Moved",
+      cell: ({ row }) => (
+        <div className="w-32">
+          <Badge variant="outline" className="text-muted-foreground px-1.5">
+            {row.original.moved}
+          </Badge>
+        </div>
+      ),
+    },
+    {
+      accessorKey: "active",
+      header: "Active",
+      cell: ({ row }) => (
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {row.original.active ? (
+            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+          ) : (
+            <IconLoader />
+          )}
+          {row.original.active}
+        </Badge>
+      ),
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
+              size="icon"
+            >
+              <IconDotsVertical />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-32">
+            <Link to={`/technologies/edit/${row.id}`}>
+              <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
+            </Link>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem variant="destructive" onClick={() => deleteTechnology(row.id)}>
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
 
   const table = useReactTable({
     data,
