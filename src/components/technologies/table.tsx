@@ -26,6 +26,7 @@ import {
   IconGripVertical,
   IconLayoutColumns,
   IconLoader,
+  IconPlus,
 } from "@tabler/icons-react";
 import {
   ColumnDef,
@@ -327,7 +328,10 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
             </DropdownMenuContent>
           </DropdownMenu>
           <Button asChild variant="outline" size="sm">
-            <Link to="/technologies/new">Add Section</Link>
+            <Link to="/technologies/new">
+              <IconPlus />
+              <span className="hidden lg:inline">Add Section</span>
+            </Link>
           </Button>
         </div>
       </div>
