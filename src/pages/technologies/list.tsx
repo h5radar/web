@@ -40,11 +40,11 @@ export const TechnologiesPage = () => {
   //     return { ...prev, ...filterData, page: 1 };
   //   });
   // }, []);
-  // const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
-  //   return setQueryParams((prev) => {
-  //     return { ...prev, sort: [id, desc], page: 1 };
-  //   });
-  // }, []);
+  const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
+    return setQueryParams((prev) => {
+      return { ...prev, sort: [id, desc], page: 1 };
+    });
+  }, []);
   const handlePaginationParams = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
       return { ...prev, page: page + 1, size: size };
@@ -58,7 +58,7 @@ export const TechnologiesPage = () => {
         handlePagination={handlePaginationParams}
         rowCount={technologiesData.totalElements}
         isLoading={isFetchingtechnologiesData}
-        // handleSorting={handleSortingParams}
+        handleSorting={handleSortingParams}
         // handleFilter={handleFilterParams}
         pageSize={technologiesData.pageable.pageSize}
         pageIndex={technologiesData.pageable.pageNumber}

@@ -21,6 +21,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
+  IconChevronUp,
   IconCircleCheckFilled,
   IconDotsVertical,
   IconGripVertical,
@@ -39,7 +40,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -112,7 +112,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
 export const TechnologyTable = ({
   data,
   handlePagination,
-  // handleSorting,
+  handleSorting,
   // handleFilter,
   isLoading = false,
   pageSize,
@@ -121,7 +121,7 @@ export const TechnologyTable = ({
 }: {
   data: z.infer<typeof technologySchema>[];
   handlePagination?: (page: number, size: number) => void;
-  // handleSorting?: (id: string, desc: "asc" | "desc") => void;
+  handleSorting?: (id: string, desc: "asc" | "desc") => void;
   // handleFilter?: (filterData: IFilter) => void;
   pageSize: number;
   isLoading: boolean;
@@ -272,10 +272,18 @@ export const TechnologyTable = ({
     // pageCount: totalPages || -1,
     rowCount: rowCount,
     manualPagination: true,
-    // manualSorting: true,
+    manualSorting: true,
     getRowId: (row) => row.id.toString(),
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
+    onSortingChange: (updaterOrValue) => {
+      const newSorting = typeof updaterOrValue === "function" ? updaterOrValue(sorting) : updaterOrValue;
+      if (handleSorting) {
+        const sort = newSorting[0];
+        if (newSorting.length > 0) handleSorting(sort.id, sort.desc ? "desc" : "asc");
+        else handleSorting("title", "desc");
+      }
+      return setSorting(newSorting);
+    },
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: (updaterOrValue) => {
@@ -287,8 +295,6 @@ export const TechnologyTable = ({
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    // getPaginationRowModel: handlePagination ? undefined : getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
@@ -385,7 +391,11 @@ export const TechnologyTable = ({
                         <TableHead key={header.id} colSpan={header.colSpan}>
                           {header.isPlaceholder ? null : (
                             <div
-                              className={header.column.getCanSort() ? "cursor-pointer select-none" : ""}
+                              className={
+                                header.column.getCanSort()
+                                  ? "cursor-pointer select-none flex align-middle leading-[1.5rem]"
+                                  : ""
+                              }
                               onClick={header.column.getToggleSortingHandler()}
                               title={
                                 header.column.getCanSort()
@@ -398,10 +408,12 @@ export const TechnologyTable = ({
                               }
                             >
                               {flexRender(header.column.columnDef.header, header.getContext())}
-                              {{
-                                asc: " 🔼",
-                                desc: " 🔽",
-                              }[header.column.getIsSorted() as string] ?? null}
+                              <div className="ml-1">
+                                {{
+                                  asc: <IconChevronUp />,
+                                  desc: <IconChevronDown />,
+                                }[header.column.getIsSorted() as string] ?? null}
+                              </div>
                             </div>
                           )}
                         </TableHead>
