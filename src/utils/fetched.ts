@@ -23,9 +23,21 @@ export const fetched = async <T = unknown, R = unknown>({
       const errorData = await response.json().catch(() => null);
       throw new Error(errorData?.message || `HTTP Error: ${response.status} ${response.statusText}`);
     }
-    return response.json();
+    if (response.status === 204) {
+      return null as unknown as R;
+    }
+    return await response.json();
   } catch (error) {
     console.error("Fetch error:", error);
     throw error;
   }
 };
+
+export function createQueryParams(params: Record<string, string | number | boolean | string[]>) {
+  //| string[]
+  const result = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    result.append(key, String(value));
+  });
+  return result;
+}

@@ -39,7 +39,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -110,17 +109,35 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
   );
 }
 
-export function TechnologyTable({ data: initialData }: { data: z.infer<typeof technologySchema>[] }) {
+export const TechnologyTable = ({
+  data,
+  handlePagination,
+  // handleSorting,
+  // handleFilter,
+  isLoading = false,
+  pageSize,
+  rowCount,
+  pageIndex,
+}: {
+  data: z.infer<typeof technologySchema>[];
+  handlePagination?: (page: number, size: number) => void;
+  // handleSorting?: (id: string, desc: "asc" | "desc") => void;
+  // handleFilter?: (filterData: IFilter) => void;
+  pageSize: number;
+  isLoading: boolean;
+  rowCount: number;
+  pageIndex: number;
+}) => {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const [data, setData] = React.useState(() => initialData);
+  const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: pageIndex,
+    pageSize: pageSize || 10,
   });
   const sortableId = React.useId();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
@@ -236,8 +253,14 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
     },
   ];
 
+  const defaultData = React.useMemo(() => [], []);
+
+  React.useEffect(() => {
+    if (!isLoading && data) setLocalData(data);
+  }, [isLoading, data]);
+
   const table = useReactTable({
-    data,
+    data: localData ?? defaultData,
     columns,
     state: {
       sorting,
@@ -246,16 +269,25 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
       columnFilters,
       pagination,
     },
+    // pageCount: totalPages || -1,
+    rowCount: rowCount,
+    manualPagination: true,
+    // manualSorting: true,
     getRowId: (row) => row.id.toString(),
-    enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange: (updaterOrValue) => {
+      const newPagination = typeof updaterOrValue === "function" ? updaterOrValue(pagination) : updaterOrValue;
+      if (handlePagination) {
+        handlePagination(newPagination.pageIndex, newPagination.pageSize);
+      }
+      return setPagination(newPagination);
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: handlePagination ? undefined : getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -264,7 +296,7 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active && over && active.id !== over.id) {
-      setData((data) => {
+      setLocalData((data) => {
         const oldIndex = dataIds.indexOf(active.id);
         const newIndex = dataIds.indexOf(over.id);
         return arrayMove(data, oldIndex, newIndex);
@@ -351,9 +383,27 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
                     {headerGroup.headers.map((header) => {
                       return (
                         <TableHead key={header.id} colSpan={header.colSpan}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
+                          {header.isPlaceholder ? null : (
+                            <div
+                              className={header.column.getCanSort() ? "cursor-pointer select-none" : ""}
+                              onClick={header.column.getToggleSortingHandler()}
+                              title={
+                                header.column.getCanSort()
+                                  ? header.column.getNextSortingOrder() === "asc"
+                                    ? "Sort ascending"
+                                    : header.column.getNextSortingOrder() === "desc"
+                                      ? "Sort descending"
+                                      : "Clear sort"
+                                  : undefined
+                              }
+                            >
+                              {flexRender(header.column.columnDef.header, header.getContext())}
+                              {{
+                                asc: " 🔼",
+                                desc: " 🔽",
+                              }[header.column.getIsSorted() as string] ?? null}
+                            </div>
+                          )}
                         </TableHead>
                       );
                     })}
@@ -361,18 +411,30 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
                 ))}
               </TableHeader>
               <TableBody className="**:data-[slot=table-cell]:first:w-8">
-                {table.getRowModel().rows?.length ? (
-                  <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
-                    {table.getRowModel().rows.map((row) => (
-                      <DraggableRow key={row.id} row={row} />
-                    ))}
-                  </SortableContext>
-                ) : (
+                {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      No results.
+                    <TableCell colSpan={columns.length} className="h-24 text-center relative">
+                      <div className="flex justify-center items-center h-full w-full absolute top-0 left-0">
+                        <IconLoader className="animate-spin" />
+                      </div>
                     </TableCell>
                   </TableRow>
+                ) : (
+                  <>
+                    {table.getRowModel().rows?.length ? (
+                      <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+                        {table.getRowModel().rows.map((row) => (
+                          <DraggableRow key={row.id} row={row} />
+                        ))}
+                      </SortableContext>
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={columns.length} className="h-24 text-center">
+                          No results.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </>
                 )}
               </TableBody>
             </Table>
@@ -464,4 +526,4 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
       </TabsContent>
     </Tabs>
   );
-}
+};

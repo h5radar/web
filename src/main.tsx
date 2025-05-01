@@ -41,7 +41,7 @@ import RepositoriesPage from "@/pages/repositories/list";
 import RingsPage from "@/pages/rings/list";
 import SegmentsPage from "@/pages/segments/list";
 import TeamsPage from "@/pages/teams/list";
-import TechnologiesPage from "@/pages/technologies/list";
+import { TechnologiesPage } from "@/pages/technologies/list";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
 import WelcomePage from "@/pages/welcome";
 
