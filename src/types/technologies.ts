@@ -1,11 +1,6 @@
 import { technologySchema } from "@/schemas/technology";
 import { z } from "zod";
 
-export interface IFilter {
-  title?: string;
-  website?: string;
-}
-
 interface IPageable {
   pageNumber: number;
   pageSize: number;

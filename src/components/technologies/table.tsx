@@ -65,6 +65,7 @@ import { useAuth } from "react-oidc-context";
 import { API_URL } from "@/constants";
 import { toast } from "sonner";
 import { fetched } from "@/utils/fetched";
+import { ServerTextFilter } from "../ui/server-filter";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -113,7 +114,7 @@ export const TechnologyTable = ({
   data,
   handlePagination,
   handleSorting,
-  // handleFilter,
+  handleFilter,
   isLoading = false,
   pageSize,
   rowCount,
@@ -122,7 +123,7 @@ export const TechnologyTable = ({
   data: z.infer<typeof technologySchema>[];
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
-  // handleFilter?: (filterData: IFilter) => void;
+  handleFilter?: (columnId: string, value: string) => void;
   pageSize: number;
   isLoading: boolean;
   rowCount: number;
@@ -210,6 +211,7 @@ export const TechnologyTable = ({
           </Badge>
         </div>
       ),
+      enableColumnFilter: false,
     },
     {
       accessorKey: "active",
@@ -224,6 +226,7 @@ export const TechnologyTable = ({
           {row.original.active}
         </Badge>
       ),
+      enableColumnFilter: false,
     },
     {
       id: "actions",
@@ -269,10 +272,10 @@ export const TechnologyTable = ({
       columnFilters,
       pagination,
     },
-    // pageCount: totalPages || -1,
     rowCount: rowCount,
     manualPagination: true,
     manualSorting: true,
+    manualFiltering: true,
     getRowId: (row) => row.id.toString(),
     onRowSelectionChange: setRowSelection,
     onSortingChange: (updaterOrValue) => {
@@ -390,30 +393,37 @@ export const TechnologyTable = ({
                       return (
                         <TableHead key={header.id} colSpan={header.colSpan}>
                           {header.isPlaceholder ? null : (
-                            <div
-                              className={
-                                header.column.getCanSort()
-                                  ? "cursor-pointer select-none flex align-middle leading-[1.5rem]"
-                                  : ""
-                              }
-                              onClick={header.column.getToggleSortingHandler()}
-                              title={
-                                header.column.getCanSort()
-                                  ? header.column.getNextSortingOrder() === "asc"
-                                    ? "Sort ascending"
-                                    : header.column.getNextSortingOrder() === "desc"
-                                      ? "Sort descending"
-                                      : "Clear sort"
-                                  : undefined
-                              }
-                            >
-                              {flexRender(header.column.columnDef.header, header.getContext())}
-                              <div className="ml-1">
-                                {{
-                                  asc: <IconChevronUp />,
-                                  desc: <IconChevronDown />,
-                                }[header.column.getIsSorted() as string] ?? null}
+                            <div className="flex align-middle ">
+                              <div
+                                className={
+                                  header.column.getCanSort()
+                                    ? "cursor-pointer select-none flex self-center leading-[1.5rem]"
+                                    : " flex align-middle "
+                                }
+                                onClick={header.column.getToggleSortingHandler()}
+                                title={
+                                  header.column.getCanSort()
+                                    ? header.column.getNextSortingOrder() === "asc"
+                                      ? "Sort ascending"
+                                      : header.column.getNextSortingOrder() === "desc"
+                                        ? "Sort descending"
+                                        : "Clear sort"
+                                    : undefined
+                                }
+                              >
+                                {flexRender(header.column.columnDef.header, header.getContext())}
+                                <div className="ml-4">
+                                  {{
+                                    asc: <IconChevronUp />,
+                                    desc: <IconChevronDown />,
+                                  }[header.column.getIsSorted() as string] ?? null}
+                                </div>
                               </div>
+                              {header.column.getCanFilter() ? (
+                                <div className="ml-4">
+                                  <ServerTextFilter column={header.column} onFilterChange={handleFilter} />
+                                </div>
+                              ) : null}
                             </div>
                           )}
                         </TableHead>

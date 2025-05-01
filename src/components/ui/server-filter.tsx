@@ -1,0 +1,68 @@
+import { useEffect, useRef, useState } from "react";
+import { Input } from "./input";
+import { Column } from "@tanstack/react-table";
+
+interface TextFilterProps<TData, TValue> {
+  column: Column<TData, TValue>;
+  debounceTime?: number;
+  onFilterChange?: (columnId: string, value: string) => Promise<void> | void;
+}
+
+export function ServerTextFilter<TData, TValue>({
+  column,
+  debounceTime = 400,
+  onFilterChange
+}: TextFilterProps<TData, TValue>) {
+  const [inputValue, setInputValue] = useState(() =>
+    (column.getFilterValue() as string) ?? ''
+  );
+
+  const initialValueRef = useRef(inputValue);
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    if (onFilterChange) {
+      onFilterChange(column.id, inputValue);
+    }
+    const currentFilterValue = column.getFilterValue() as string;
+    if (currentFilterValue !== inputValue) {
+      setInputValue(currentFilterValue ?? '');
+    }
+  }, [column.getFilterValue()]);
+
+  useEffect(() => {
+    if (inputValue === initialValueRef.current) return;
+
+    const timer = setTimeout(() => {
+      column.setFilterValue(inputValue);
+      initialValueRef.current = inputValue;
+    }, debounceTime);
+
+    return () => clearTimeout(timer);
+  }, [inputValue, debounceTime, column]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <div className="relative">
+      <Input
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+        className="w-full border px-2 py-1 rounded"
+      />
+      <button
+        onClick={() => setInputValue('')}
+        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+      >
+        ×
+      </button>
+    </div>
+  );
+}

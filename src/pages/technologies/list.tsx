@@ -35,11 +35,11 @@ export const TechnologiesPage = () => {
     });
   }
 
-  // const handleFilterParams = useCallback((filterData: IFilter) => {
-  //   return setQueryParams((prev) => {
-  //     return { ...prev, ...filterData, page: 1 };
-  //   });
-  // }, []);
+  const handleFilterParams = useCallback((columnId: string, value: string) => {
+    return setQueryParams((prev) => {
+      return { ...prev, [columnId]: value, page: 1 };
+    });
+  }, []);
   const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
     return setQueryParams((prev) => {
       return { ...prev, sort: [id, desc], page: 1 };
@@ -59,7 +59,7 @@ export const TechnologiesPage = () => {
         rowCount={technologiesData.totalElements}
         isLoading={isFetchingtechnologiesData}
         handleSorting={handleSortingParams}
-        // handleFilter={handleFilterParams}
+        handleFilter={handleFilterParams}
         pageSize={technologiesData.pageable.pageSize}
         pageIndex={technologiesData.pageable.pageNumber}
       />
