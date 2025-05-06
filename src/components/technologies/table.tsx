@@ -59,12 +59,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { technologyFormSchema, technologySchema } from "@/schemas/technology";
+import { technologySchema } from "@/schemas/technology";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "react-oidc-context";
 import { API_URL } from "@/constants";
 import { toast } from "sonner";
-import { fetched } from "@/utils/fetched";
 import { ServerTextFilter } from "../ui/server-filter";
 
 // Create a separate component for the drag handle
@@ -146,16 +145,19 @@ export const TechnologyTable = ({
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
   const { mutate: deleteTechnology } = useMutation({
-    mutationFn: (rowId: string) =>
-      fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
-        url: `${API_URL}/technologies/${rowId}`,
+    mutationFn: async (rowId: string) => {
+      await fetch(`${API_URL}/technologies/${rowId}`, {
         method: "DELETE",
-        token: auth.user?.access_token,
-      }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      toast.success("Technology updated successfully!");
+      toast.success("Technology deleted successfully!");
     },
     onError(error) {
       toast.error(`Error: ${error.message}`);

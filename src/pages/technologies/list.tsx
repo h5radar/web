@@ -2,10 +2,9 @@ import { useAuth } from "react-oidc-context";
 import { TechnologyTable } from "@/components/technologies/table";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { createQueryParams, fetched } from "@/utils/fetched";
+import { createQueryParams } from "@/utils/fetched";
 import { API_URL } from "@/constants";
 import { useCallback, useState } from "react";
-import { IGetTechnologies } from "@/types/technologies";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -22,13 +21,19 @@ export const TechnologiesPage = () => {
     error: errorDataList,
   } = useQuery({
     queryKey: ["get list technologies", JSON.stringify(queryParams)],
-    queryFn: () =>
-      fetched<unknown, IGetTechnologies>({
-        url: `${API_URL}/technologies?${createQueryParams({ ...queryParams })}`,
-        token: auth.user?.access_token,
-      }),
+    queryFn: async () => {
+      const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
     placeholderData: keepPreviousData,
   });
+
   if (isErrorDataList) {
     toast("Load error", {
       description: JSON.stringify(errorDataList.message),

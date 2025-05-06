@@ -3,7 +3,6 @@ import { toast } from "sonner";
 import { technologyFormSchema } from "@/schemas/technology";
 import TechnologyForm from "@/components/technologies/form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetched } from "@/utils/fetched";
 import { useAuth } from "react-oidc-context";
 import { API_URL } from "@/constants";
 import { useNavigate } from "react-router";
@@ -18,13 +17,17 @@ export default function NewTechnologyPage() {
     Error,
     z.infer<typeof technologyFormSchema>
   >({
-    mutationFn: (values: z.infer<typeof technologyFormSchema>) =>
-      fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
-        url: `${API_URL}/technologies`,
+    mutationFn: async (values: z.infer<typeof technologyFormSchema>) => {
+      const response = await fetch(`${API_URL}/technologies`, {
         method: "POST",
-        token: auth.user?.access_token,
-        body: values,
-      }),
+        body: JSON.stringify(values),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });

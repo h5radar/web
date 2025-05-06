@@ -4,7 +4,6 @@ import { technologyFormSchema } from "@/schemas/technology";
 import TechnologyForm from "@/components/technologies/form";
 import { useAuth } from "react-oidc-context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetched } from "@/utils/fetched";
 import { API_URL } from "@/constants";
 
 export default function EditTechnologyPage() {
@@ -20,11 +19,16 @@ export default function EditTechnologyPage() {
     error: errorDataList,
   } = useQuery({
     queryKey: ["get technologies by id", editId],
-    queryFn: () =>
-      fetched<unknown, z.infer<typeof technologyFormSchema>>({
-        url: `${API_URL}/technologies/${editId}`,
-        token: auth.user?.access_token,
-      }),
+    queryFn: async () => {
+      const response = await fetch(`${API_URL}/technologies/${editId}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
   });
 
   const { mutate: updateTechnology, isPending: isUpdateTechnology } = useMutation<
@@ -32,13 +36,24 @@ export default function EditTechnologyPage() {
     Error,
     z.infer<typeof technologyFormSchema>
   >({
-    mutationFn: (values: z.infer<typeof technologyFormSchema>) =>
-      fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
-        url: `${API_URL}/technologies/${editId}`,
+    mutationFn: async (values: z.infer<typeof technologyFormSchema>) => {
+      const response = await fetch(`${API_URL}/technologies`, {
         method: "PUT",
-        token: auth.user?.access_token,
-        body: values,
-      }),
+        body: JSON.stringify(values),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
+    // (values: z.infer<typeof technologyFormSchema>) =>
+    // fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
+    //   url: `${API_URL}/technologies/${editId}`,
+    //   method: "PUT",
+    //   token: auth.user?.access_token,
+    //   body: values,
+    // }),
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
