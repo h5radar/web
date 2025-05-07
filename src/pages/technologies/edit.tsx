@@ -1,10 +1,12 @@
-import { z } from "zod";
-import { toast } from "sonner";
-import { technologyFormSchema } from "@/schemas/technology";
-import TechnologyForm from "@/components/technologies/form";
-import { useAuth } from "react-oidc-context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "react-oidc-context";
+import { toast } from "sonner";
+import { z } from "zod";
+
+import TechnologyForm from "@/components/technologies/form";
+
 import { API_URL } from "@/constants";
+import { technologyFormSchema } from "@/schemas/technology";
 
 export default function EditTechnologyPage() {
   const auth = useAuth();
@@ -47,13 +49,6 @@ export default function EditTechnologyPage() {
       });
       return await response.json();
     },
-    // (values: z.infer<typeof technologyFormSchema>) =>
-    // fetched<z.infer<typeof technologyFormSchema>, z.infer<typeof technologyFormSchema>>({
-    //   url: `${API_URL}/technologies/${editId}`,
-    //   method: "PUT",
-    //   token: auth.user?.access_token,
-    //   body: values,
-    // }),
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });

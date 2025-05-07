@@ -1,9 +1,11 @@
-import { useAuth } from "react-oidc-context";
-import { TechnologyTable } from "@/components/technologies/table";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { API_URL } from "@/constants";
 import { useCallback, useState } from "react";
+import { useAuth } from "react-oidc-context";
+import { toast } from "sonner";
+
+import { TechnologyTable } from "@/components/technologies/table";
+
+import { API_URL } from "@/constants";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -14,7 +16,6 @@ export const TechnologiesPage = () => {
   });
 
   function createQueryParams(params: Record<string, string | number | boolean | string[]>) {
-    //| string[]
     const result = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       result.append(key, String(value));
@@ -24,7 +25,7 @@ export const TechnologiesPage = () => {
 
   const {
     data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
-    isLoading: isFetchingtechnologiesData,
+    isLoading: isFetchingTechnologiesData,
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
@@ -70,7 +71,7 @@ export const TechnologiesPage = () => {
         data={technologiesData.content}
         handlePagination={handlePaginationParams}
         rowCount={technologiesData.totalElements}
-        isLoading={isFetchingtechnologiesData}
+        isLoading={isFetchingTechnologiesData}
         handleSorting={handleSortingParams}
         handleFilter={handleFilterParams}
         pageSize={technologiesData.pageable.pageSize}

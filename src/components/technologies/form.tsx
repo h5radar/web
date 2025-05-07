@@ -1,12 +1,14 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+
 import { technologyFormSchema } from "@/schemas/technology";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 interface TechnologyFormProps {
   defaultDataForm?: z.infer<typeof technologyFormSchema>;
