@@ -2,7 +2,6 @@ import { useAuth } from "react-oidc-context";
 import { TechnologyTable } from "@/components/technologies/table";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { createQueryParams } from "@/utils/fetched";
 import { API_URL } from "@/constants";
 import { useCallback, useState } from "react";
 
@@ -13,6 +12,15 @@ export const TechnologiesPage = () => {
     size: 10,
     sort: ["title", "asc"],
   });
+
+  function createQueryParams(params: Record<string, string | number | boolean | string[]>) {
+    //| string[]
+    const result = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      result.append(key, String(value));
+    });
+    return result;
+  }
 
   const {
     data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
