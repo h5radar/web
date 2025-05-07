@@ -10,9 +10,19 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
+    reporters: ["default", "junit", "html"],
     coverage: {
-      // istanbul or v8
-      provider: "v8",
+      provider: "v8", // istanbul or v8
+      reporter: ["text", "json", "html"],
+      reportsDirectory: "./tests/coverage",
+      thresholds: {
+        lines: 0.07,
+        functions: 29.36,
+        statements: 0.07,
+        branches: 29.36,
+        autoUpdate: false,
+      },
     },
   },
 });
