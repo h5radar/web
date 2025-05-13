@@ -34,6 +34,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
       onSubmit(data); // 2. Вызываем переданный обработчик
     })();
   };
+
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="space-y-8">
