@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
+
+import { RepositoryTable } from "@/components/repositories/table";
+
 import { API_URL } from "@/constants";
 import { repositorySchema } from "@/schemas/repository";
-import { RepositoryTable } from "@/components/repositories/table";
 
 export default function RepositoriesPage() {
   const auth = useAuth();

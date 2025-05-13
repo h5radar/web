@@ -1,21 +1,18 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "react-oidc-context";
+import { BrowserRouter, Route, Routes } from "react-router";
+
 import { onSigninCallback, userManager } from "@/auth-config";
-import { PrivateProvider } from "@/providers/private";
-
 import "@/index.css";
-
+import AccountLayout from "@/layouts/account";
 // Include layout
 import ApplicationLayout from "@/layouts/application";
-import AccountLayout from "@/layouts/account";
 import BillingLayout from "@/layouts/billing";
-import NotificationsLayout from "@/layouts/notifications";
 import LegalLayout from "@/layouts/legal";
+import NotificationsLayout from "@/layouts/notifications";
 import RadarLayout from "@/layouts/radar";
-
 // Include root pages at alphabet
 import AboutPage from "@/pages/about";
 import AccountPage from "@/pages/account";
@@ -26,25 +23,14 @@ import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
 import HomePage from "@/pages/home";
-import LicensesPage from "@/pages/licenses";
 import InvoicesPage from "@/pages/invoices";
+import LicensesPage from "@/pages/licenses";
 import NotificationsPage from "@/pages/notifications";
 import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
 import PracticesPage from "@/pages/practices";
 import ProductsPage from "@/pages/products/list";
-import ProfilePage from "@/pages/profile";
-import RadarsPage from "@/pages/radars/list";
-import RaysPage from "@/pages/rays";
-import RepositoriesPage from "@/pages/repositories/list";
-import RingsPage from "@/pages/rings/list";
-import SegmentsPage from "@/pages/segments/list";
-import TeamsPage from "@/pages/teams/list";
-import { TechnologiesPage } from "@/pages/technologies/list";
-import TechnologyBlipsPage from "@/pages/technology-blips/list";
-import WelcomePage from "@/pages/welcome";
-
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
 import ShowProductContributionsPage from "@/pages/products/show-contributions";
@@ -52,15 +38,24 @@ import ShowProductFinancesPage from "@/pages/products/show-finances";
 import ShowProductLicensesPage from "@/pages/products/show-licenses";
 import ShowProductPracticesPage from "@/pages/products/show-practices";
 import ShowProductTechnologiesPage from "@/pages/products/show-technologies";
-
+import ProfilePage from "@/pages/profile";
+import EditRadarPage from "@/pages/radars/edit";
+import RadarsPage from "@/pages/radars/list";
 // Include radar resource pages at alphabet
 import NewRadarPage from "@/pages/radars/new";
-import EditRadarPage from "@/pages/radars/edit";
 import ShowRadarPage from "@/pages/radars/show";
-
+import RaysPage from "@/pages/rays";
+import RepositoriesPage from "@/pages/repositories/list";
+import RingsPage from "@/pages/rings/list";
+import SegmentsPage from "@/pages/segments/list";
+import TeamsPage from "@/pages/teams/list";
+import EditTechnologyPage from "@/pages/technologies/edit";
+import { TechnologiesPage } from "@/pages/technologies/list";
 // Include technology resource pages at alphabet
 import NewTechnologyPage from "@/pages/technologies/new";
-import EditTechnologyPage from "@/pages/technologies/edit";
+import TechnologyBlipsPage from "@/pages/technology-blips/list";
+import WelcomePage from "@/pages/welcome";
+import { PrivateProvider } from "@/providers/private";
 
 export const queryClient = new QueryClient();
 

@@ -1,14 +1,12 @@
 /* eslint-disable */
 // @ts-nocheck
-
 // import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import {z} from 'zod';
 // import {API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductHeatmapView from '@/components/products/heatmap-view';
-
-import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip } from "recharts";
+import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
 
 const data01 = [
   { hour: "12a", index: 1, value: 170 },

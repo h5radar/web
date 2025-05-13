@@ -1,7 +1,7 @@
+import { useAuth } from "react-oidc-context";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { useAuth } from "react-oidc-context";
 
 export default function WelcomePage() {
   const auth = useAuth();

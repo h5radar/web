@@ -4,8 +4,7 @@
 // import {API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductHeatmapView from '@/components/products/heatmap-view';
-
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 
 const data = [
   {

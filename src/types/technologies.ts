@@ -1,5 +1,6 @@
-import { technologySchema } from "@/schemas/technology";
 import { z } from "zod";
+
+import { technologySchema } from "@/schemas/technology";
 
 interface IPageable {
   pageNumber: number;

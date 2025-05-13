@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router";
-import { useAuth } from "react-oidc-context";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, RadarIcon } from "lucide-react";
+import { useAuth } from "react-oidc-context";
+import { useNavigate } from "react-router";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+
 import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
 
 const AppSidebarFooter = () => {

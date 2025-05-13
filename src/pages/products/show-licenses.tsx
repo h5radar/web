@@ -4,10 +4,9 @@
 // import {API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductLicenseDiffView from '@/components/products/license-diff-view';
-
 // import './styles.css';
 // import React /*, { useCallback, useState }*/ from 'react';
-import { PieChart, Pie, Cell } from "recharts";
+import { Cell, Pie, PieChart } from "recharts";
 
 const data = [
   { name: "Group A", value: 400 },

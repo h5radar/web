@@ -1,11 +1,10 @@
 //
 // Handler for home page
-
 /* eslint-disable */
 // @ts-nocheck
-
-import { z } from "zod";
 import * as d3 from "d3";
+import { z } from "zod";
+
 import { radarSchema } from "@/schemas/radar.tsx";
 
 export function drawRadar(config: z.infer<typeof radarSchema>) {

@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { z } from "zod";
+import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
+import { z } from "zod";
+
+import { TechnologyBlipTable } from "@/components/technology-blips/table";
+
 import { API_URL } from "@/constants";
 import { technologyBlipSchema } from "@/schemas/technology-blip";
-import { TechnologyBlipTable } from "@/components/technology-blips/table";
 
 export default function ProductsPage() {
   const auth = useAuth();

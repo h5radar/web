@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import { z } from "zod";
+import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
+import { z } from "zod";
+
+import { TeamTable } from "@/components/teams/table";
+
 import { API_URL } from "@/constants";
 import { teamSchema } from "@/schemas/team";
-import { TeamTable } from "@/components/teams/table";
 
 export default function TeamsPage() {
   const auth = useAuth();

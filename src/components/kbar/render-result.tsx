@@ -1,4 +1,5 @@
 import { KBarResults, useMatches } from "kbar";
+
 import ResultItem from "@/components/kbar/result-item";
 
 export default function RenderResults() {

@@ -4,8 +4,7 @@
 // import {API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductCobwebDiffView from '@/components/products/cobweb-diff-view';
-
-import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart } from "recharts";
 
 const data = [
   {

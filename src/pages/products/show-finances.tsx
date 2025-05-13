@@ -1,14 +1,12 @@
 /* eslint-disable */
 // @ts-nocheck
-
 // import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import {z} from 'zod';
 // import {API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductCobwebDiffView from '@/components/products/cobweb-diff-view';
-
-import { RadialBarChart, RadialBar, Legend } from "recharts";
+import { Legend, RadialBar, RadialBarChart } from "recharts";
 
 const data = [
   {
