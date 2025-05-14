@@ -28,10 +28,14 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
     },
   });
 
+  /**
+   * Function to handle submit. Important to prevent the default action
+   * before execute onSubmit handler.
+   */
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // 1. Важно: предотвращаем действие по умолчанию
+    e.preventDefault();
     form.handleSubmit((data) => {
-      onSubmit(data); // 2. Вызываем переданный обработчик
+      onSubmit(data);
     })();
   };
 
