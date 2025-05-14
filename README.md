@@ -36,7 +36,6 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 
 # Useful commands:
 * run server by command: npx http-server ./dist -o -c-1
-* run json-server by command: npx json-server -p 4000 application.json
 * run cypress to e2e tests from cmd by command: npx cypress run
 * open cypress e2e tests environment by command: npx cypress open
 * run bundler analyzer by command: npx vite-bundle-visualizer
