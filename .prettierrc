@@ -9,9 +9,8 @@
   "endOfLine": "auto",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@/screens/(.*)$",
+    "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
-    "^@/ui/(.*)$",
     "^@/hooks/(.*)$",
     "^@/shared/(.*)$",
     "^@/configs/(.*)$",
