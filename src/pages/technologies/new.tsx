@@ -1,32 +1,53 @@
-import { z } from "zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "react-oidc-context";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { technologyFormSchema } from "@/schemas/technology";
+import { z } from "zod";
+
 import TechnologyForm from "@/components/technologies/form";
 
+import { API_URL } from "@/constants";
+import { technologyFormSchema } from "@/schemas/technology";
+
 export default function NewTechnologyPage() {
-  const form = useForm<z.infer<typeof technologyFormSchema>>({
-    resolver: zodResolver(technologyFormSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-      website: "",
-      moved: 0,
-      active: true,
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: addTechnology, isPending: isAddTechnology } = useMutation<
+    z.infer<typeof technologyFormSchema>,
+    Error,
+    z.infer<typeof technologyFormSchema>
+  >({
+    mutationFn: async (values: z.infer<typeof technologyFormSchema>) => {
+      const response = await fetch(`${API_URL}/technologies`, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
+    mutationKey: ["create new technology"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      toast.success("Technology created successfully!");
+      navigate("/technologies");
+    },
+    onError(error) {
+      toast.error(`Error: ${error.message}`);
     },
   });
 
-  function onSubmit(values: z.infer<typeof technologyFormSchema>) {
-    // TODO: save data
-    toast("Technology has been created", {
-      description: JSON.stringify(values),
-    });
-  }
+  const onSubmit = (values: z.infer<typeof technologyFormSchema>) => {
+    addTechnology(values);
+  };
 
   return (
     <>
-      <TechnologyForm form={form} onSubmit={onSubmit} />
+      <TechnologyForm onSubmit={onSubmit} disabled={isAddTechnology} />
     </>
   );
 }

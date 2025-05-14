@@ -1,10 +1,10 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
-import { UserDropdown } from "@/components/user-dropdown.tsx";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import SearchInput from "@/components/search-input";
-import ThemeToggler from "@/components/theme-toggler";
 import { TenantSwitcher } from "@/components/tenant-switcher";
+import ThemeToggler from "@/components/theme-toggler";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { UserDropdown } from "@/components/user-dropdown.tsx";
 
 const AppNavbar = () => {
   return (

@@ -1,5 +1,6 @@
-import { Outlet } from "react-router";
 import { ThemeProvider } from "next-themes";
+import { Outlet } from "react-router";
+
 import KBar from "@/components/kbar";
 import { Toaster } from "@/components/ui/sonner.tsx";
 

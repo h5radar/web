@@ -1,21 +1,43 @@
-import { UseFormReturn } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+
 import { technologyFormSchema } from "@/schemas/technology";
 
 interface TechnologyFormProps {
-  form: UseFormReturn<z.infer<typeof technologyFormSchema>>;
+  defaultDataForm?: z.infer<typeof technologyFormSchema>;
   onSubmit: (values: z.infer<typeof technologyFormSchema>) => void;
+  disabled: boolean;
 }
 
-export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }) => {
+export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm, onSubmit, disabled }) => {
+  const form = useForm<z.infer<typeof technologyFormSchema>>({
+    resolver: zodResolver(technologyFormSchema),
+    defaultValues: defaultDataForm || {
+      title: "",
+      description: "",
+      website: "",
+      moved: 0,
+      active: true,
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // 1. Важно: предотвращаем действие по умолчанию
+    form.handleSubmit((data) => {
+      onSubmit(data); // 2. Вызываем переданный обработчик
+    })();
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <FormField
           control={form.control}
           name="title"
@@ -23,7 +45,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="title" {...field} />
+                <Input id="title" placeholder="title" {...field} />
               </FormControl>
               <FormDescription>This is technology title</FormDescription>
               <FormMessage />
@@ -37,7 +59,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="descripton" {...field} />
               </FormControl>
               <FormDescription>This is technology descripton</FormDescription>
               <FormMessage />
@@ -51,7 +73,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="website" {...field} />
+                <Input id="website" placeholder="website" {...field} />
               </FormControl>
               <FormDescription>This is technology website</FormDescription>
               <FormMessage />
@@ -65,7 +87,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="0" {...field} />
+                <Input id="moved" type="number" min={-1} max={1} placeholder="0" {...field} value={field.value ?? 0} />
               </FormControl>
               <FormDescription>This is technology moved</FormDescription>
               <FormMessage />
@@ -78,7 +100,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
               <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                <Checkbox id="active" checked={field.value} onCheckedChange={field.onChange} />
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel>Use different settings for my mobile devices</FormLabel>
@@ -87,7 +109,9 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ form, onSubmit }
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className={disabled ? "cursor-progress" : "cursor-pointer"} disabled={disabled}>
+          Submit
+        </Button>
       </form>
     </Form>
   );

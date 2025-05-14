@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
+import { useParams } from "react-router";
 import { z } from "zod";
+
+import ProductRadarDiffView from "@/components/products/technologies-view";
+
 import { API_URL } from "@/constants";
 import { radarSchema } from "@/schemas/radar";
-import ProductRadarDiffView from "@/components/products/technologies-view";
 
 export default function ShowProductTechnologiesPage() {
   const auth = useAuth();

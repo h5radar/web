@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router";
 import { useAuth } from "react-oidc-context";
+import { useNavigate } from "react-router";
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
 
 export function UserDropdown() {

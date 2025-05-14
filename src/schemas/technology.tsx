@@ -19,13 +19,16 @@ export const technologyFormSchema = z.object({
   website: z.string().min(3, {
     message: "Website must be at least 3 characters",
   }),
-  moved: z
-    .number()
-    .min(-1, {
-      message: "Moved must be greater or equal than -1",
-    })
-    .max(1, {
-      message: "Moved must be less or equal than 1",
-    }),
+  moved: z.preprocess(
+    (val) => Number(val),
+    z
+      .number()
+      .min(-1, {
+        message: "Moved must be greater or equal than -1",
+      })
+      .max(1, {
+        message: "Moved must be less or equal than 1",
+      }),
+  ),
   active: z.boolean(),
 });

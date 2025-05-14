@@ -1,5 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react";
+
 import { SidebarHeader } from "@/components/ui/sidebar";
+
 import { APP_NAME } from "@/constants";
 
 const company = {

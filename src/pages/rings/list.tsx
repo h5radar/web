@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
+
+import { RingTable } from "@/components/rings/table";
+
 import { API_URL } from "@/constants";
 import { ringSchema } from "@/schemas/ring";
-import { RingTable } from "@/components/rings/table";
 
 export default function RingsPage() {
   const auth = useAuth();

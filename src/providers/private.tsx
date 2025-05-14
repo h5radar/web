@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { hasAuthParams, useAuth } from "react-oidc-context";
+
 import WelcomePage from "@/pages/welcome";
 
 const getAuthHealth = async () => {

@@ -1,5 +1,9 @@
-import { Link, useLocation } from "react-router";
 import { ChevronRight } from "lucide-react";
+import { Link, useLocation } from "react-router";
+
+import AppSidebarFooter from "@/components/app-sidebar-footer";
+import AppSidebarHeader from "@/components/app-sidebar-header";
+import { Icons } from "@/components/icons";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -14,10 +18,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-import { Icons } from "@/components/icons";
 import { billingNavItems } from "@/constants/sidebar";
-import AppSidebarFooter from "@/components/app-sidebar-footer";
-import AppSidebarHeader from "@/components/app-sidebar-header";
 
 /*
  * TODO:

@@ -1,9 +1,9 @@
 import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
+import stylisticTs from "@stylistic/eslint-plugin-ts";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   { ignores: ["coverage", "dist", "src/components/ui"] },

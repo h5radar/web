@@ -1,16 +1,13 @@
-import * as React from "react";
-import { Link } from "react-router";
-import { z } from "zod";
 import {
   DndContext,
+  type DragEndEvent,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
+  type UniqueIdentifier,
   closestCenter,
   useSensor,
   useSensors,
-  type DragEndEvent,
-  type UniqueIdentifier,
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
@@ -19,6 +16,7 @@ import {
   IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
+  IconChevronUp,
   IconChevronsLeft,
   IconChevronsRight,
   IconCircleCheckFilled,
@@ -26,7 +24,9 @@ import {
   IconGripVertical,
   IconLayoutColumns,
   IconLoader,
+  IconPlus,
 } from "@tabler/icons-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -38,10 +38,13 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
+import { useAuth } from "react-oidc-context";
+import { Link } from "react-router";
+import { toast } from "sonner";
+import { z } from "zod";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -59,6 +62,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { ServerTextFilter } from "../ui/server-filter";
+
+import { API_URL } from "@/constants";
 import { technologySchema } from "@/schemas/technology";
 
 // Create a separate component for the drag handle
@@ -80,90 +86,6 @@ function DragHandle({ id }: { id: number }) {
     </Button>
   );
 }
-
-const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
-  {
-    id: "drag",
-    header: () => null,
-    cell: ({ row }) => <DragHandle id={row.original.id} />,
-  },
-  {
-    id: "select",
-    header: ({ table }) => (
-      <div className="flex items-center justify-center">
-        <Checkbox
-          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      </div>
-    ),
-    cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      </div>
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "title",
-    header: "Title",
-    cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
-  },
-  {
-    accessorKey: "website",
-    header: "Website",
-    cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
-  },
-  {
-    accessorKey: "moved",
-    header: "Moved",
-    cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.moved}
-        </Badge>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "active",
-    header: "Active",
-    cell: ({ row }) => (
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.active ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.active}
-      </Badge>
-    ),
-  },
-  {
-    id: "actions",
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="data-[state=open]:bg-muted text-muted-foreground flex size-8" size="icon">
-            <IconDotsVertical />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-];
 
 function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
@@ -188,23 +110,163 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
   );
 }
 
-export function TechnologyTable({ data: initialData }: { data: z.infer<typeof technologySchema>[] }) {
-  const [data, setData] = React.useState(() => initialData);
+export const TechnologyTable = ({
+  data,
+  handlePagination,
+  handleSorting,
+  handleFilter,
+  isLoading = false,
+  pageSize,
+  rowCount,
+  pageIndex,
+}: {
+  data: z.infer<typeof technologySchema>[];
+  handlePagination?: (page: number, size: number) => void;
+  handleSorting?: (id: string, desc: "asc" | "desc") => void;
+  handleFilter?: (columnId: string, value: string) => void;
+  pageSize: number;
+  isLoading: boolean;
+  rowCount: number;
+  pageIndex: number;
+}) => {
+  const auth = useAuth();
+  const queryClient = useQueryClient();
+  const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: pageIndex,
+    pageSize: pageSize || 10,
   });
   const sortableId = React.useId();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
+  const { mutate: deleteTechnology } = useMutation({
+    mutationFn: async (rowId: string) => {
+      await fetch(`${API_URL}/technologies/${rowId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: ["create new technology"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      toast.success("Technology deleted successfully!");
+    },
+    onError(error) {
+      toast.error(`Error: ${error.message}`);
+    },
+  });
+
+  const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
+    {
+      id: "drag",
+      header: () => null,
+      cell: ({ row }) => <DragHandle id={row.original.id} />,
+    },
+    {
+      id: "select",
+      header: ({ table }) => (
+        <div className="flex items-center justify-center">
+          <Checkbox
+            checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Select all"
+          />
+        </div>
+      ),
+      cell: ({ row }) => (
+        <div className="flex items-center justify-center">
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
+        </div>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      accessorKey: "title",
+      header: "Title",
+      cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
+    },
+    {
+      accessorKey: "website",
+      header: "Website",
+      cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
+    },
+    {
+      accessorKey: "moved",
+      header: "Moved",
+      cell: ({ row }) => (
+        <div className="w-32">
+          <Badge variant="outline" className="text-muted-foreground px-1.5">
+            {row.original.moved}
+          </Badge>
+        </div>
+      ),
+      enableColumnFilter: false,
+    },
+    {
+      accessorKey: "active",
+      header: "Active",
+      cell: ({ row }) => (
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {row.original.active ? (
+            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+          ) : (
+            <IconLoader />
+          )}
+          {row.original.active}
+        </Badge>
+      ),
+      enableColumnFilter: false,
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
+              size="icon"
+            >
+              <IconDotsVertical />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-32">
+            <Link to={`/technologies/edit/${row.id}`}>
+              <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
+            </Link>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem variant="destructive" onClick={() => deleteTechnology(row.id)}>
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
+
+  const defaultData = React.useMemo(() => [], []);
+
+  React.useEffect(() => {
+    if (!isLoading && data) setLocalData(data);
+  }, [isLoading, data]);
+
   const table = useReactTable({
-    data,
+    data: localData ?? defaultData,
     columns,
     state: {
       sorting,
@@ -213,17 +275,32 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
       columnFilters,
       pagination,
     },
+    rowCount: rowCount,
+    manualPagination: true,
+    manualSorting: true,
+    manualFiltering: true,
     getRowId: (row) => row.id.toString(),
-    enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
+    onSortingChange: (updaterOrValue) => {
+      const newSorting = typeof updaterOrValue === "function" ? updaterOrValue(sorting) : updaterOrValue;
+      if (handleSorting) {
+        const sort = newSorting[0];
+        if (newSorting.length > 0) handleSorting(sort.id, sort.desc ? "desc" : "asc");
+        else handleSorting("title", "desc");
+      }
+      return setSorting(newSorting);
+    },
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange: (updaterOrValue) => {
+      const newPagination = typeof updaterOrValue === "function" ? updaterOrValue(pagination) : updaterOrValue;
+      if (handlePagination) {
+        handlePagination(newPagination.pageIndex, newPagination.pageSize);
+      }
+      return setPagination(newPagination);
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
@@ -231,7 +308,7 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
     if (active && over && active.id !== over.id) {
-      setData((data) => {
+      setLocalData((data) => {
         const oldIndex = dataIds.indexOf(active.id);
         const newIndex = dataIds.indexOf(over.id);
         return arrayMove(data, oldIndex, newIndex);
@@ -295,7 +372,10 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
             </DropdownMenuContent>
           </DropdownMenu>
           <Button asChild variant="outline" size="sm">
-            <Link to="/technologies/new">Add Section</Link>
+            <Link to="/technologies/new">
+              <IconPlus />
+              <span className="hidden lg:inline">Add Section</span>
+            </Link>
           </Button>
         </div>
       </div>
@@ -315,9 +395,40 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
                     {headerGroup.headers.map((header) => {
                       return (
                         <TableHead key={header.id} colSpan={header.colSpan}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
+                          {header.isPlaceholder ? null : (
+                            <div className="flex align-middle ">
+                              <div
+                                className={
+                                  header.column.getCanSort()
+                                    ? "cursor-pointer select-none flex self-center leading-[1.5rem]"
+                                    : " flex align-middle "
+                                }
+                                onClick={header.column.getToggleSortingHandler()}
+                                title={
+                                  header.column.getCanSort()
+                                    ? header.column.getNextSortingOrder() === "asc"
+                                      ? "Sort ascending"
+                                      : header.column.getNextSortingOrder() === "desc"
+                                        ? "Sort descending"
+                                        : "Clear sort"
+                                    : undefined
+                                }
+                              >
+                                {flexRender(header.column.columnDef.header, header.getContext())}
+                                <div className="ml-4">
+                                  {{
+                                    asc: <IconChevronUp />,
+                                    desc: <IconChevronDown />,
+                                  }[header.column.getIsSorted() as string] ?? null}
+                                </div>
+                              </div>
+                              {header.column.getCanFilter() ? (
+                                <div className="ml-4">
+                                  <ServerTextFilter column={header.column} onFilterChange={handleFilter} />
+                                </div>
+                              ) : null}
+                            </div>
+                          )}
                         </TableHead>
                       );
                     })}
@@ -325,18 +436,30 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
                 ))}
               </TableHeader>
               <TableBody className="**:data-[slot=table-cell]:first:w-8">
-                {table.getRowModel().rows?.length ? (
-                  <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
-                    {table.getRowModel().rows.map((row) => (
-                      <DraggableRow key={row.id} row={row} />
-                    ))}
-                  </SortableContext>
-                ) : (
+                {isLoading ? (
                   <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      No results.
+                    <TableCell colSpan={columns.length} className="h-24 text-center relative">
+                      <div className="flex justify-center items-center h-full w-full absolute top-0 left-0">
+                        <IconLoader className="animate-spin" />
+                      </div>
                     </TableCell>
                   </TableRow>
+                ) : (
+                  <>
+                    {table.getRowModel().rows?.length ? (
+                      <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+                        {table.getRowModel().rows.map((row) => (
+                          <DraggableRow key={row.id} row={row} />
+                        ))}
+                      </SortableContext>
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={columns.length} className="h-24 text-center">
+                          No results.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </>
                 )}
               </TableBody>
             </Table>
@@ -428,4 +551,4 @@ export function TechnologyTable({ data: initialData }: { data: z.infer<typeof te
       </TabsContent>
     </Tabs>
   );
-}
+};
