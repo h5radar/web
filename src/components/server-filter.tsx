@@ -15,7 +15,7 @@ export function ServerTextFilter<TData, TValue>({
   onFilterChange
 }: TextFilterProps<TData, TValue>) {
   const [inputValue, setInputValue] = useState(() =>
-    (column.getFilterValue() as string) ?? ''
+    (column.getFilterValue() as string) ?? ""
   );
 
   const initialValueRef = useRef(inputValue);
@@ -31,7 +31,7 @@ export function ServerTextFilter<TData, TValue>({
     }
     const currentFilterValue = column.getFilterValue() as string;
     if (currentFilterValue !== inputValue) {
-      setInputValue(currentFilterValue ?? '');
+      setInputValue(currentFilterValue ?? "");
     }
   }, [column.getFilterValue()]);
 
@@ -59,7 +59,7 @@ export function ServerTextFilter<TData, TValue>({
         className="w-full border px-2 py-1 rounded"
       />
       <button
-        onClick={() => setInputValue('')}
+        onClick={() => setInputValue("")}
         className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
       >
         ×

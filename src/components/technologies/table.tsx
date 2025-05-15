@@ -62,7 +62,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { ServerTextFilter } from "../ui/server-filter";
+import { ServerTextFilter } from "@/components/server-filter";
 
 import { API_URL } from "@/constants";
 import { technologySchema } from "@/schemas/technology";
