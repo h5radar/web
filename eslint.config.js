@@ -21,6 +21,7 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      "react-hooks/exhaustive-deps": ["error"],
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "@stylistic/ts/indent": ["error", 2],
       "@stylistic/ts/quotes": ["error", "double"],
