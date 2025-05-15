@@ -1,11 +1,12 @@
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
+import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
+import { Toaster } from "@/ui/sonner.tsx";
+
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
 import KBar from "@/components/kbar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner.tsx";
 
 export default function AccountLayout() {
   // Persisting the sidebar state in the cookie.
