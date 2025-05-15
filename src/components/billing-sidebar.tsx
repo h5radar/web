@@ -15,11 +15,11 @@ import {
   SidebarRail,
 } from "@/ui/sidebar";
 
+import { billingNavItems } from "@/constants/sidebar";
+
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
 import { Icons } from "@/components/icons";
-
-import { billingNavItems } from "@/constants/sidebar";
 
 /*
  * TODO:

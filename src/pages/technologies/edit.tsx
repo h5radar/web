@@ -3,10 +3,11 @@ import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { technologyFormSchema } from "@/schemas/technology";
+
 import TechnologyForm from "@/components/technologies/form";
 
 import { API_URL } from "@/constants";
-import { technologyFormSchema } from "@/schemas/technology";
 
 export default function EditTechnologyPage() {
   const auth = useAuth();

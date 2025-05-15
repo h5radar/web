@@ -62,10 +62,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
+import { technologySchema } from "@/schemas/technology";
+
 import { ServerTextFilter } from "@/components/server-filter";
 
 import { API_URL } from "@/constants";
-import { technologySchema } from "@/schemas/technology";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {

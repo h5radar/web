@@ -1,9 +1,8 @@
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
-import { Toaster } from "@/components/ui/sonner.tsx";
-
 import KBar from "@/components/kbar";
+import { Toaster } from "@/components/ui/sonner.tsx";
 
 export default function AppLayout() {
   return (

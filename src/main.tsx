@@ -4,6 +4,8 @@ import { createRoot } from "react-dom/client";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 
+import { PrivateProvider } from "@/providers/private";
+
 import { onSigninCallback, userManager } from "@/auth-config";
 import "@/index.css";
 import AccountLayout from "@/layouts/account";
@@ -55,7 +57,6 @@ import { TechnologiesPage } from "@/pages/technologies/list";
 import NewTechnologyPage from "@/pages/technologies/new";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
 import WelcomePage from "@/pages/welcome";
-import { PrivateProvider } from "@/providers/private";
 
 export const queryClient = new QueryClient();
 
