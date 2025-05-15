@@ -145,26 +145,6 @@ export const TechnologyTable = ({
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
-  const { mutate: deleteTechnology } = useMutation({
-    mutationFn: async (rowId: string) => {
-      await fetch(`${API_URL}/technologies/${rowId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: ["create new technology"],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      toast.success("Technology deleted successfully!");
-    },
-    onError(error) {
-      toast.error(`Error: ${error.message}`);
-    },
-  });
-
   const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
     {
       id: "drag",
@@ -258,6 +238,26 @@ export const TechnologyTable = ({
       ),
     },
   ];
+
+  const { mutate: deleteTechnology } = useMutation({
+    mutationFn: async (rowId: string) => {
+      await fetch(`${API_URL}/technologies/${rowId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: ["create new technology"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      toast.success("Technology deleted successfully!");
+    },
+    onError(error) {
+      toast.error(`Error: ${error.message}`);
+    },
+  });
 
   const defaultData = React.useMemo(() => [], []);
 
