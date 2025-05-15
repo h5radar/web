@@ -3,9 +3,8 @@ import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
-import { API_URL } from "@/constants/application.ts";
-
 import { TechnologyTable } from "@/components/technologies/table";
+import { API_URL } from "@/constants/application.ts";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();

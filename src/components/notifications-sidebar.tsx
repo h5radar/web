@@ -15,20 +15,11 @@ import {
   SidebarRail,
 } from "@/ui/sidebar";
 
-import { notificationsNavItems } from "@/constants/sidebar";
-
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
 import { Icons } from "@/components/icons";
+import { notificationsNavItems } from "@/constants/sidebar";
 
-/*
- * TODO:
- *  1.add signOut actions
-   <DropdownMenuItem onClick={() => signOut()}>
-    <LogOut />
-    Log out
-  </DropdownMenuItem>
- */
 const NotificationsSidebar = () => {
   const location = useLocation();
 

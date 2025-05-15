@@ -4,11 +4,9 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application.ts";
-
-import { technologyFormSchema } from "@/schemas/technology";
-
 import TechnologyForm from "@/components/technologies/form";
+import { API_URL } from "@/constants/application.ts";
+import { technologyFormSchema } from "@/schemas/technology";
 
 export default function NewTechnologyPage() {
   const auth = useAuth();

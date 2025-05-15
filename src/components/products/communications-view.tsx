@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 import { z } from "zod";
 
-import { radarSchema } from "@/schemas/radar";
-
 import { drawRadar } from "@/lib/radar";
+import { radarSchema } from "@/schemas/radar";
 
 const ShowProductCommunicationsView = ({ data }: { data: z.infer<typeof radarSchema> }) => {
   const svgRef = useRef<SVGSVGElement>(null);

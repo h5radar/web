@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application.ts";
-
-import { segmentSchema } from "@/schemas/segment";
-
 import { SegmentTable } from "@/components/segments/table";
+import { API_URL } from "@/constants/application.ts";
+import { segmentSchema } from "@/schemas/segment";
 
 export default function SegmentsPage() {
   const auth = useAuth();

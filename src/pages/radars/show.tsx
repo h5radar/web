@@ -3,11 +3,9 @@ import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application.ts";
-
-import { radarSchema } from "@/schemas/radar";
-
 import RadarView from "@/components/radars/view";
+import { API_URL } from "@/constants/application.ts";
+import { radarSchema } from "@/schemas/radar";
 
 export default function ShowRadarPage() {
   const { id } = useParams();

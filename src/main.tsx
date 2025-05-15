@@ -4,10 +4,11 @@ import { createRoot } from "react-dom/client";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import { PrivateProvider } from "@/providers/private";
-
 import { onSigninCallback, userManager } from "@/auth-config";
 import "@/index.css";
+
+import PrivateProvider from "@/providers/private";
+
 // Include layout
 import AccountLayout from "@/layouts/account";
 import ApplicationLayout from "@/layouts/application";

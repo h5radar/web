@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application.ts";
-
-import { productSchema } from "@/schemas/product";
-
 import { ProductTable } from "@/components/products/table";
+import { API_URL } from "@/constants/application.ts";
+import { productSchema } from "@/schemas/product";
 
 export default function ProductsPage() {
   const auth = useAuth();
