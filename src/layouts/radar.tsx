@@ -1,11 +1,12 @@
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner.tsx";
+
 import AppNavbar from "@/components/app-navbar";
 import KBar from "@/components/kbar";
 import RadarSidebar from "@/components/radar-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner.tsx";
 
 export default function RadarLayout() {
   // Persisting the sidebar state in the cookie.

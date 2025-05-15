@@ -1,11 +1,12 @@
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner.tsx";
+
 import AppNavbar from "@/components/app-navbar";
 import BillingSidebar from "@/components/billing-sidebar";
 import KBar from "@/components/kbar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner.tsx";
 
 export default function BillingLayout() {
   // Persisting the sidebar state in the cookie.

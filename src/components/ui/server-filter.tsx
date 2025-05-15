@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Input } from "./input";
+import { Input } from "@/components/ui/input";
 import { Column } from "@tanstack/react-table";
+import { DEBOUNCE_TIME } from "@/constants";
 
 interface TextFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
@@ -10,7 +11,7 @@ interface TextFilterProps<TData, TValue> {
 
 export function ServerTextFilter<TData, TValue>({
   column,
-  debounceTime = 400,
+  debounceTime = DEBOUNCE_TIME,
   onFilterChange
 }: TextFilterProps<TData, TValue>) {
   const [inputValue, setInputValue] = useState(() =>
