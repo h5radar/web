@@ -107,7 +107,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
                 <Checkbox id="active" checked={field.value} onCheckedChange={field.onChange} />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>Use different settings for my mobile devices</FormLabel>
+                <FormLabel>Active</FormLabel>
                 <FormDescription>This is active or not technology</FormDescription>
               </div>
             </FormItem>
