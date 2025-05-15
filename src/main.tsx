@@ -6,9 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 import "@/index.css";
-
-import PrivateProvider from "@/providers/private";
-
 // Include layout
 import AccountLayout from "@/layouts/account";
 import ApplicationLayout from "@/layouts/application";
@@ -58,6 +55,7 @@ import { TechnologiesPage } from "@/pages/technologies/list";
 import NewTechnologyPage from "@/pages/technologies/new";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
 import WelcomePage from "@/pages/welcome";
+import PrivateProvider from "@/providers/private";
 
 export const queryClient = new QueryClient();
 
