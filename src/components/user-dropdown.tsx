@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
+import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants/application.ts";
 
 export function UserDropdown() {
   const navigate = useNavigate();

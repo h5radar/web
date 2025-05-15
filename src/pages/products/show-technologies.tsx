@@ -3,11 +3,11 @@ import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { z } from "zod";
 
+import { API_URL } from "@/constants/application.ts";
+
 import { radarSchema } from "@/schemas/radar";
 
 import ProductRadarDiffView from "@/components/products/technologies-view";
-
-import { API_URL } from "@/constants";
 
 export default function ShowProductTechnologiesPage() {
   const auth = useAuth();

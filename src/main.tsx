@@ -8,8 +8,8 @@ import { PrivateProvider } from "@/providers/private";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 import "@/index.css";
-import AccountLayout from "@/layouts/account";
 // Include layout
+import AccountLayout from "@/layouts/account";
 import ApplicationLayout from "@/layouts/application";
 import BillingLayout from "@/layouts/billing";
 import LegalLayout from "@/layouts/legal";

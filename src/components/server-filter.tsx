@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/ui/input";
 
-import { DEBOUNCE_TIME } from "@/constants";
+import { DEBOUNCE_TIME } from "@/constants/application.ts";
 
 interface TextFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
