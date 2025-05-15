@@ -2,7 +2,7 @@ import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, RadarIcon } from 
 import { useAuth } from "react-oidc-context";
 import { useNavigate } from "react-router";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+} from "@/ui/dropdown-menu";
+import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/ui/sidebar";
 
 import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants";
 

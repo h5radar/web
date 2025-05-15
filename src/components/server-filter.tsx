@@ -1,7 +1,7 @@
 import { Column } from "@tanstack/react-table";
 import { useEffect, useRef, useState } from "react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@/ui/input";
 
 import { DEBOUNCE_TIME } from "@/constants";
 
