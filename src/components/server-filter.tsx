@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Column } from "@tanstack/react-table";
+import { useEffect, useRef, useState } from "react";
+
+import { Input } from "@/components/ui/input";
+
 import { DEBOUNCE_TIME } from "@/constants";
 
 interface TextFilterProps<TData, TValue> {
@@ -12,11 +14,9 @@ interface TextFilterProps<TData, TValue> {
 export function ServerTextFilter<TData, TValue>({
   column,
   debounceTime = DEBOUNCE_TIME,
-  onFilterChange
+  onFilterChange,
 }: TextFilterProps<TData, TValue>) {
-  const [inputValue, setInputValue] = useState(() =>
-    (column.getFilterValue() as string) ?? ''
-  );
+  const [inputValue, setInputValue] = useState(() => (column.getFilterValue() as string) ?? "");
 
   const initialValueRef = useRef(inputValue);
   const isMounted = useRef(false);
@@ -31,7 +31,7 @@ export function ServerTextFilter<TData, TValue>({
     }
     const currentFilterValue = column.getFilterValue() as string;
     if (currentFilterValue !== inputValue) {
-      setInputValue(currentFilterValue ?? '');
+      setInputValue(currentFilterValue ?? "");
     }
   }, [column.getFilterValue()]);
 
@@ -52,14 +52,9 @@ export function ServerTextFilter<TData, TValue>({
 
   return (
     <div className="relative">
-      <Input
-        type="text"
-        value={inputValue}
-        onChange={handleChange}
-        className="w-full border px-2 py-1 rounded"
-      />
+      <Input type="text" value={inputValue} onChange={handleChange} className="w-full border px-2 py-1 rounded" />
       <button
-        onClick={() => setInputValue('')}
+        onClick={() => setInputValue("")}
         className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
       >
         ×
