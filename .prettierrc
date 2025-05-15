@@ -9,11 +9,14 @@
   "endOfLine": "auto",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@/components/ui/(.*)$",
+    "^@/ui/(.*)$",
+    "^@/constants/(.*)$",
+    "^@/types/(.*)$",
+    "^@/schemas/(.*)$",
+    "^@/lib/(.*)$",
     "^@/components/(.*)$",
+    "^@/providers/(.*)$",
     "^@/hooks/(.*)$",
-    "^@/shared/(.*)$",
-    "^@/configs/(.*)$",
     "^../(.*)",
     "^./(.*)"
   ],
