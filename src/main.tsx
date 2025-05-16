@@ -5,14 +5,17 @@ import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import { onSigninCallback, userManager } from "@/auth-config";
-import "@/index.css";
-import AccountLayout from "@/layouts/account";
+
+import PrivateProvider from "@/providers/private";
+
 // Include layout
+import AccountLayout from "@/layouts/account";
 import ApplicationLayout from "@/layouts/application";
 import BillingLayout from "@/layouts/billing";
 import LegalLayout from "@/layouts/legal";
 import NotificationsLayout from "@/layouts/notifications";
 import RadarLayout from "@/layouts/radar";
+
 // Include root pages at alphabet
 import AboutPage from "@/pages/about";
 import AccountPage from "@/pages/account";
@@ -55,7 +58,8 @@ import { TechnologiesPage } from "@/pages/technologies/list";
 import NewTechnologyPage from "@/pages/technologies/new";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
 import WelcomePage from "@/pages/welcome";
-import { PrivateProvider } from "@/providers/private";
+
+import "@/index.css";
 
 export const queryClient = new QueryClient();
 

@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -14,13 +14,13 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from "@/ui/sidebar";
+
+import { radarNavItems } from "@/constants/sidebar";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
 import { Icons } from "@/components/icons";
-
-import { radarNavItems } from "@/constants/sidebar";
 
 /*
  * TODO:

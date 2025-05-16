@@ -20,7 +20,7 @@ node_modules
 README.md
 
 # Ignore shadcn
-src/components/ui
+src/ui
 
 # Ignore files
 src/components/kbar/index.tsx

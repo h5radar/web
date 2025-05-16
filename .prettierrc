@@ -9,13 +9,18 @@
   "endOfLine": "auto",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@/components/ui/(.*)$",
+    "^@/ui/(.*)$",
+    "^@/(auth-config.*)",
+    "^@/constants/(.*)$",
+    "^@/types/(.*)$",
+    "^@/schemas/(.*)$",
+    "^@/lib/(.*)$",
     "^@/components/(.*)$",
+    "^@/providers/(.*)$",
     "^@/hooks/(.*)$",
-    "^@/shared/(.*)$",
-    "^@/configs/(.*)$",
-    "^../(.*)",
-    "^./(.*)"
+    "^@/layouts/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/(.*)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

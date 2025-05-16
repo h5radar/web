@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -13,22 +13,14 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from "@/ui/sidebar";
+
+import { notificationsNavItems } from "@/constants/sidebar";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
 import { Icons } from "@/components/icons";
 
-import { notificationsNavItems } from "@/constants/sidebar";
-
-/*
- * TODO:
- *  1.add signOut actions
-   <DropdownMenuItem onClick={() => signOut()}>
-    <LogOut />
-    Log out
-  </DropdownMenuItem>
- */
 const NotificationsSidebar = () => {
   const location = useLocation();
 
