@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { RadarTable } from "@/components/radars/table";
 import { API_URL } from "@/constants/application.ts";
+
 import { radarSchema } from "@/schemas/radar";
+
+import { RadarTable } from "@/components/radars/table";
 
 export default function RadarsPage() {
   const auth = useAuth();

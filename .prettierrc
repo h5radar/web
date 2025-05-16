@@ -10,7 +10,7 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^@/ui/(.*)$",
-    "^@/(.*)",
+    "^@/(auth-config.*)",
     "^@/constants/(.*)$",
     "^@/types/(.*)$",
     "^@/schemas/(.*)$",
@@ -19,7 +19,8 @@
     "^@/providers/(.*)$",
     "^@/hooks/(.*)$",
     "^@/layouts/(.*)$",
-    "^@/pages/(.*)$"
+    "^@/pages/(.*)$",
+    "^@/(.*)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
