@@ -1,0 +1,18 @@
+{
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src/*"],
+  "outputs": [
+    {
+      "name": "html",
+      "path": "docs",
+      "options": {
+        "navigation": {
+          "includeCategories": true,
+          "includeGroups": true,
+          "excludeReferences": false,
+          "includeFolders": true
+        }
+      }
+    }
+  ]
+}

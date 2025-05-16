@@ -21,6 +21,9 @@
 # production
 /dist
 
+# docs
+/docs
+
 # dependencies
 /node_modules
 

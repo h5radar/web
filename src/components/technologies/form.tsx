@@ -16,6 +16,9 @@ interface TechnologyFormProps {
   disabled: boolean;
 }
 
+/**
+ * TechnologyForm is ... .
+ */
 export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm, onSubmit, disabled }) => {
   const form = useForm<z.infer<typeof technologyFormSchema>>({
     resolver: zodResolver(technologyFormSchema),
