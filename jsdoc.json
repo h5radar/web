@@ -1,16 +1,29 @@
 {
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
   "source": {
     "include": ["src"],
-    "includePattern": ".+\\.(j|t)s(doc|x)?$"
+    "includePattern": "\\.(jsx|js|ts|tsx)$",
+    "excludePattern": "(^|\\/|\\\\)_"
   },
-  "plugins": ["plugins/markdown"],
-  "opts": {
-    "recurse": true,
-    "destination": "docs"
+  "plugins": [
+    "node_modules/better-docs/typescript"
+
+  ],
+  "typescript": {
+    "moduleRoot": "test"
   },
   "templates": {
-    "cleverLinks": false,
-    "monospaceLinks": false
+    "better-docs": {
+      "name": "My React components"
+    }
+  },
+  "opts": {
+    "template": "node_modules/better-docs",
+    "destination": "docs",
+    "recurse": true,
+    "readme": "README.md"
   }
 }
-
