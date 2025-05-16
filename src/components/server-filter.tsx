@@ -33,7 +33,7 @@ export function ServerTextFilter<TData, TValue>({
     if (currentFilterValue !== inputValue) {
       setInputValue(currentFilterValue ?? "");
     }
-  }, [column.getFilterValue()]);
+  }, [column, inputValue, onFilterChange]);
 
   useEffect(() => {
     if (inputValue === initialValueRef.current) return;
