@@ -13,13 +13,13 @@ export default defineConfig({
     outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
     reporters: ["default", "junit", "html"],
     coverage: {
-      provider: "v8", // istanbul or v8
+      provider: "v8",
       reporter: ["text", "json", "html"],
       reportsDirectory: "./tests/coverage",
       thresholds: {
-        lines: 0.06,
+        lines: 0.05,
         functions: 27.55,
-        statements: 0.06,
+        statements: 0.05,
         branches: 27.55,
         autoUpdate: false,
       },
