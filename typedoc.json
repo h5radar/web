@@ -1,4 +1,6 @@
 {
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src/*"],
   "outputs": [
     {
       "name": "html",

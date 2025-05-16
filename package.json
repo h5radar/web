@@ -8,7 +8,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "dev": "vite",
-    "docs": "typedoc --entryPointStrategy expand src",
+    "docs": "typedoc",
     "lint": "npx eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky",
