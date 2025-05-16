@@ -1,10 +1,10 @@
 import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import tsdoceslint from "eslint-plugin-tsdoc"
+import stylisticTs from "@stylistic/eslint-plugin-ts";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
+import tsdoceslint from "eslint-plugin-tsdoc";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   { ignores: ["coverage", "dist", "src/components/ui"] },
@@ -19,7 +19,7 @@ export default tseslint.config(
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       "@stylistic/ts": stylisticTs,
-      "tsdoc": tsdoceslint
+      tsdoc: tsdoceslint,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
