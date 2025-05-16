@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { AuthorTable } from "@/components/authors/table";
+import { API_URL } from "@/constants/application.ts";
 
-import { API_URL } from "@/constants";
 import { authorSchema } from "@/schemas/author";
+
+import { AuthorTable } from "@/components/authors/table";
 
 export default function AuthorsPage() {
   const auth = useAuth();

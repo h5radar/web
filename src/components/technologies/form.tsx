@@ -2,11 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/ui/button";
+import { Checkbox } from "@/ui/checkbox";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
+import { Input } from "@/ui/input";
+import { Textarea } from "@/ui/textarea";
 
 import { technologyFormSchema } from "@/schemas/technology";
 
@@ -16,6 +16,9 @@ interface TechnologyFormProps {
   disabled: boolean;
 }
 
+/**
+ * TechnologyForm is ... .
+ */
 export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm, onSubmit, disabled }) => {
   const form = useForm<z.infer<typeof technologyFormSchema>>({
     resolver: zodResolver(technologyFormSchema),
@@ -107,7 +110,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
                 <Checkbox id="active" checked={field.value} onCheckedChange={field.onChange} />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>Use different settings for my mobile devices</FormLabel>
+                <FormLabel>Active</FormLabel>
                 <FormDescription>This is active or not technology</FormDescription>
               </div>
             </FormItem>

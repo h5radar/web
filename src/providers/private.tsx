@@ -70,3 +70,5 @@ export const PrivateProvider: FC<IPrivateProvider> = (props) => {
   if (!auth.isAuthenticated) return <WelcomePage />;
   return <>{children}</>;
 };
+
+export default PrivateProvider;

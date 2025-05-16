@@ -46,9 +46,9 @@ import { Link } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/ui/badge";
+import { Button } from "@/ui/button";
+import { Checkbox } from "@/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -56,16 +56,17 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@/ui/dropdown-menu";
+import { Label } from "@/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
+
+import { API_URL } from "@/constants/application.ts";
+
+import { technologySchema } from "@/schemas/technology";
 
 import { ServerTextFilter } from "@/components/server-filter";
-
-import { API_URL } from "@/constants";
-import { technologySchema } from "@/schemas/technology";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -144,26 +145,6 @@ export const TechnologyTable = ({
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
-
-  const { mutate: deleteTechnology } = useMutation({
-    mutationFn: async (rowId: string) => {
-      await fetch(`${API_URL}/technologies/${rowId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: ["create new technology"],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      toast.success("Technology deleted successfully!");
-    },
-    onError(error) {
-      toast.error(`Error: ${error.message}`);
-    },
-  });
 
   const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
     {
@@ -258,6 +239,26 @@ export const TechnologyTable = ({
       ),
     },
   ];
+
+  const { mutate: deleteTechnology } = useMutation({
+    mutationFn: async (rowId: string) => {
+      await fetch(`${API_URL}/technologies/${rowId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: ["create new technology"],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      toast.success("Technology deleted successfully!");
+    },
+    onError(error) {
+      toast.error(`Error: ${error.message}`);
+    },
+  });
 
   const defaultData = React.useMemo(() => [], []);
 

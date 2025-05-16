@@ -1,8 +1,8 @@
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner.tsx";
+import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
+import { Toaster } from "@/ui/sonner.tsx";
 
 import AppNavbar from "@/components/app-navbar";
 import BillingSidebar from "@/components/billing-sidebar";
