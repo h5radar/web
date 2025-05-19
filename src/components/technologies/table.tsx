@@ -318,11 +318,11 @@ export const TechnologyTable = ({
   }
 
   const handleDeleteSelectionTechnology = () => {
-    const deleteArr = Object.keys(rowSelection)
+    const deleteArr = Object.keys(rowSelection);
     for (const item of deleteArr) {
-      deleteTechnology(item)
+      deleteTechnology(item);
     }
-  }
+  };
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
