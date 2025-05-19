@@ -33,7 +33,8 @@ export function ServerTextFilter<TData, TValue>({
     if (currentFilterValue !== inputValue) {
       setInputValue(currentFilterValue ?? "");
     }
-  }, [column, inputValue, onFilterChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [column.getFilterValue(), onFilterChange]);
 
   useEffect(() => {
     if (inputValue === initialValueRef.current) return;
@@ -51,7 +52,7 @@ export function ServerTextFilter<TData, TValue>({
   };
 
   return (
-    <div className="relative">
+    <div className="relative ml-4">
       <Input type="text" value={inputValue} onChange={handleChange} className="w-full border px-2 py-1 rounded" />
       <button
         onClick={() => setInputValue("")}

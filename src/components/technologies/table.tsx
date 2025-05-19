@@ -155,7 +155,7 @@ export const TechnologyTable = ({
     {
       id: "select",
       header: ({ table }) => (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center ">
           <Checkbox
             checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
@@ -416,7 +416,7 @@ export const TechnologyTable = ({
                                 }
                               >
                                 {flexRender(header.column.columnDef.header, header.getContext())}
-                                <div className="ml-4">
+                                <div>
                                   {{
                                     asc: <IconChevronUp />,
                                     desc: <IconChevronDown />,
@@ -424,7 +424,7 @@ export const TechnologyTable = ({
                                 </div>
                               </div>
                               {header.column.getCanFilter() ? (
-                                <div className="ml-4">
+                                <div>
                                   <ServerTextFilter column={header.column} onFilterChange={handleFilter} />
                                 </div>
                               ) : null}
