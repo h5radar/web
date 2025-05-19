@@ -8,11 +8,11 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
-import { technologyFormSchema } from "@/schemas/technology";
+import { technologySchema } from "@/schemas/technology";
 
 interface TechnologyFormProps {
-  defaultDataForm?: z.infer<typeof technologyFormSchema>;
-  onSubmit: (values: z.infer<typeof technologyFormSchema>) => void;
+  defaultDataForm?: z.infer<typeof technologySchema>;
+  onSubmit: (values: z.infer<typeof technologySchema>) => void;
   disabled: boolean;
 }
 
@@ -20,9 +20,10 @@ interface TechnologyFormProps {
  * TechnologyForm is ... .
  */
 export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm, onSubmit, disabled }) => {
-  const form = useForm<z.infer<typeof technologyFormSchema>>({
-    resolver: zodResolver(technologyFormSchema),
+  const form = useForm<z.infer<typeof technologySchema>>({
+    resolver: zodResolver(technologySchema),
     defaultValues: defaultDataForm || {
+      id: 0,
       title: "",
       description: "",
       website: "",
@@ -45,6 +46,20 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>id</FormLabel>
+              <FormControl>
+                <Input id="id" type="number" placeholder="id" {...field} />
+              </FormControl>
+              <FormDescription>This is technology id</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="title"

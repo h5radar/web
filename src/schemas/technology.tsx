@@ -1,15 +1,19 @@
 import { z } from "zod";
 
-export const technologySchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  description: z.string(),
-  website: z.string().optional(),
-  moved: z.number(),
-  active: z.boolean(),
-});
+// export const technologySchema = z.object({
+//   id: z.number(),
+//   title: z.string(),
+//   description: z.string(),
+//   website: z.string().optional(),
+//   moved: z.number(),
+//   active: z.boolean(),
+// });
 
-export const technologyFormSchema = z.object({
+export const technologySchema = z.object({
+  id: z.preprocess(
+    (val) => Number(val),
+    z
+      .number()),
   title: z.string().min(3, {
     message: "Title must be at least 3 characters",
   }),
