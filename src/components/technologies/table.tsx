@@ -317,6 +317,13 @@ export const TechnologyTable = ({
     }
   }
 
+  const handleDeleteSelectionTechnology = () => {
+    const deleteArr = Object.keys(rowSelection)
+    for (const item of deleteArr) {
+      deleteTechnology(item)
+    }
+  }
+
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
@@ -378,6 +385,18 @@ export const TechnologyTable = ({
               <span className="hidden lg:inline">Add Section</span>
             </Link>
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <IconDotsVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem variant="destructive" onClick={() => handleDeleteSelectionTechnology()}>
+                Delete selection
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6">
