@@ -40,3 +40,4 @@ Technical and business radar. Demo available at https://app.h5radar.com.
 * open cypress e2e tests environment by command: npx cypress open
 * run bundler analyzer by command: npx vite-bundle-visualizer
 * list package to update by command: npx npm-check-updates
+
