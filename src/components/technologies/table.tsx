@@ -179,7 +179,7 @@ export const TechnologyTable = ({
       accessorKey: "title",
       header: "Title",
       cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
-      enableHiding:false,
+      enableHiding: false,
     },
     {
       accessorKey: "website",
