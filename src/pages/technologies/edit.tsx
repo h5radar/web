@@ -17,7 +17,7 @@ export default function EditTechnologyPage() {
 
   const {
     data: prevDataTechnologies,
-    isFetching: isFetchingtechnologiesData,
+    isFetching: isFetchingTechnologiesData,
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
@@ -73,7 +73,7 @@ export default function EditTechnologyPage() {
     updateTechnology(values);
   }
 
-  if (isFetchingtechnologiesData) return <h1>Loading...</h1>;
+  if (isFetchingTechnologiesData) return <h1>Loading...</h1>;
 
   return (
     <>

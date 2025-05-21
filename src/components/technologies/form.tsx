@@ -78,7 +78,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
           name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Website</FormLabel>
               <FormControl>
                 <Input id="website" placeholder="website" {...field} />
               </FormControl>
@@ -92,7 +92,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
           name="moved"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Moved</FormLabel>
               <FormControl>
                 <Input id="moved" type="number" min={-1} max={1} placeholder="0" {...field} value={field.value ?? 0} />
               </FormControl>
@@ -111,7 +111,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel>Active</FormLabel>
-                <FormDescription>This is active or not technology</FormDescription>
+                <FormDescription>Is technology active or not</FormDescription>
               </div>
             </FormItem>
           )}
