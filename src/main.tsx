@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AuthProvider } from "react-oidc-context";
@@ -61,7 +62,17 @@ import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
 
-export const queryClient = new QueryClient();
+/*
+ * Create and configure query client. Default value for stale time is 0.
+ * Here is stale time is equal 15 sec (= 1000 ms * 15).
+ */
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 15,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -155,6 +166,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/technology-blips" element={<TechnologyBlipsPage />} />
             </Route>
           </Routes>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>

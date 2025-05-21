@@ -21,7 +21,7 @@ export default function EditTechnologyPage() {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technologies by id", editId],
+    queryKey: ["get technology", editId],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies/${editId}`, {
         method: "GET",
@@ -50,10 +50,10 @@ export default function EditTechnologyPage() {
       });
       return await response.json();
     },
-    mutationKey: ["create new technology"],
+    mutationKey: ["create technology"],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      queryClient.invalidateQueries({ queryKey: ["get technologies by id", editId] });
+      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
+      queryClient.invalidateQueries({ queryKey: ["get technology", editId] });
       toast.success("Technology has been updated successfully");
     },
     onError(error) {

@@ -251,9 +251,9 @@ export const TechnologyTable = ({
         },
       });
     },
-    mutationKey: ["create new technology"],
+    mutationKey: ["delete technology"],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
       toast.success("Technology has been deleted successfully");
     },
     onError(error) {

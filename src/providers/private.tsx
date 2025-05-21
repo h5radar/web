@@ -22,7 +22,7 @@ export const PrivateProvider: FC<IPrivateProvider> = (props) => {
   const auth = useAuth();
 
   const { isPending: getAuthHealthIsPending, error: getAuthHealthError } = useQuery({
-    queryKey: ["getAuthHealth"],
+    queryKey: ["get auth health"],
     queryFn: getAuthHealth,
     retry: false,
   });
