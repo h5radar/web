@@ -254,10 +254,12 @@ export const TechnologyTable = ({
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      toast.success("Technology deleted successfully!");
+      toast.success("Technology has been deleted successfully");
     },
     onError(error) {
-      toast.error(`Error: ${error.message}`);
+      toast.error("Error deleting technology", {
+        description: error.message,
+      });
     },
   });
 

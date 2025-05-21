@@ -44,8 +44,8 @@ export const TechnologiesPage = () => {
   });
 
   if (isErrorDataList) {
-    toast("Load error", {
-      description: JSON.stringify(errorDataList.message),
+    toast.error("Error getting technologies", {
+      description: errorDataList.message,
     });
   }
 
