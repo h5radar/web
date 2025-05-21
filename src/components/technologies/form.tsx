@@ -50,10 +50,10 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
           control={form.control}
           name="id"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="hidden">
               <FormLabel>id</FormLabel>
               <FormControl>
-                <Input id="id" type="number" placeholder="id" {...field} />
+                <Input id="id" type="hidden" placeholder="id" {...field} />
               </FormControl>
               <FormDescription>This is technology id</FormDescription>
               <FormMessage />
@@ -93,7 +93,7 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm,
           name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Website</FormLabel>
               <FormControl>
                 <Input id="website" placeholder="website" {...field} />
               </FormControl>
