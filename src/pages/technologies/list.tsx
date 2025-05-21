@@ -29,7 +29,7 @@ export const TechnologiesPage = () => {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get list technologies", JSON.stringify(queryParams)],
+    queryKey: ["get technologies", JSON.stringify(queryParams)],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",

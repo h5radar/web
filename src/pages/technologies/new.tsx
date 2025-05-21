@@ -31,9 +31,9 @@ export default function NewTechnologyPage() {
       });
       return await response.json();
     },
-    mutationKey: ["create new technology"],
+    mutationKey: ["create technology"],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
+      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
       toast.success("Technology has been created successfully");
       navigate("/technologies");
     },
