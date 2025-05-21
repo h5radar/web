@@ -34,11 +34,13 @@ export default function NewTechnologyPage() {
     mutationKey: ["create new technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      toast.success("Technology created successfully!");
+      toast.success("Technology has been created successfully");
       navigate("/technologies");
     },
     onError(error) {
-      toast.error(`Error: ${error.message}`);
+      toast.error("Error creating technology", {
+        description: error.message,
+      });
     },
   });
 

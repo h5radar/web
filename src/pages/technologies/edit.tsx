@@ -54,10 +54,12 @@ export default function EditTechnologyPage() {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
       queryClient.invalidateQueries({ queryKey: ["get technologies by id", editId] });
-      toast.success("Technology updated successfully!");
+      toast.success("Technology has been updated successfully");
     },
     onError(error) {
-      toast.error(`Error: ${error.message}`);
+      toast.error("Error updating technology", {
+        description: error.message,
+      });
     },
   });
 
