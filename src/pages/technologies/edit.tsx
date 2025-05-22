@@ -13,7 +13,7 @@ export default function EditTechnologyPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const url = new URL(window.location.href);
-  const editId = url.pathname.split("/")[3];
+  const id = url.pathname.split("/")[3];
 
   const {
     data: prevDataTechnologies,
@@ -21,9 +21,9 @@ export default function EditTechnologyPage() {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technology", editId],
+    queryKey: ["get technology", id],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/technologies/${editId}`, {
+      const response = await fetch(`${API_URL}/technologies/${id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -40,7 +40,7 @@ export default function EditTechnologyPage() {
     z.infer<typeof technologySchema>
   >({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
-      const response = await fetch(`${API_URL}/technologies`, {
+      const response = await fetch(`${API_URL}/technologies/${id}`, {
         method: "PUT",
         body: JSON.stringify(values),
         headers: {
@@ -53,7 +53,7 @@ export default function EditTechnologyPage() {
     mutationKey: ["create technology"],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["get technologies"] });
-      queryClient.invalidateQueries({ queryKey: ["get technology", editId] });
+      queryClient.invalidateQueries({ queryKey: ["get technology", id] });
       toast.success("Technology has been updated successfully");
     },
     onError(error) {
