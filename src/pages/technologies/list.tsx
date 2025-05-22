@@ -3,8 +3,9 @@ import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
-import {createQueryParams} from "@/lib/params"
 import { API_URL } from "@/constants/application.ts";
+
+import { createQueryParams } from "@/lib/params";
 
 import { TechnologyTable } from "@/components/technologies/table";
 
