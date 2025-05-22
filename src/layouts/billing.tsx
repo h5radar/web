@@ -23,7 +23,7 @@ export default function BillingLayout() {
             <SidebarInset>
               <AppNavbar />
               <div className="flex">
-                <div className="p-5 w-full md:max-w-[1140px]">
+                <div className="p-5 w-full">
                   <Outlet />
                 </div>
               </div>
