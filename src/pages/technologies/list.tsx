@@ -12,7 +12,7 @@ import { TechnologyTable } from "@/components/technologies/table";
 export const TechnologiesPage = () => {
   const auth = useAuth();
   const [queryParams, setQueryParams] = useState({
-    index: 1,
+    page: 1,
     size: 10,
     sort: ["title", "asc"],
   });
@@ -23,7 +23,7 @@ export const TechnologiesPage = () => {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technologies", JSON.stringify(queryParams)],
+    queryKey: ["get technologies", queryParams],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",
