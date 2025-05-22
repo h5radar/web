@@ -318,7 +318,7 @@ export const TechnologyTable = ({
     }
   }
 
-  const handleDeleteSelectionTechnology = () => {
+  const handleDeleteSelectedTechnologies = () => {
     const deleteArr = Object.keys(rowSelection);
     for (const item of deleteArr) {
       deleteTechnology(item);
@@ -447,12 +447,12 @@ export const TechnologyTable = ({
                                       <IconDotsVertical />
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-56">
+                                  <DropdownMenuContent align="end" className="w-32">
                                     <DropdownMenuItem
                                       variant="destructive"
-                                      onClick={() => handleDeleteSelectionTechnology()}
+                                      onClick={() => handleDeleteSelectedTechnologies()}
                                     >
-                                      Delete selection row
+                                      Delete selected
                                     </DropdownMenuItem>
                                   </DropdownMenuContent>
                                 </DropdownMenu>
