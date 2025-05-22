@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { API_URL } from "@/constants/application.ts";
 
-import { technologyFormSchema } from "@/schemas/technology";
+import { technologySchema } from "@/schemas/technology";
 
 import TechnologyForm from "@/components/technologies/form";
 
@@ -16,11 +16,11 @@ export default function NewTechnologyPage() {
   const queryClient = useQueryClient();
 
   const { mutate: addTechnology, isPending: isAddTechnology } = useMutation<
-    z.infer<typeof technologyFormSchema>,
+    z.infer<typeof technologySchema>,
     Error,
-    z.infer<typeof technologyFormSchema>
+    z.infer<typeof technologySchema>
   >({
-    mutationFn: async (values: z.infer<typeof technologyFormSchema>) => {
+    mutationFn: async (values: z.infer<typeof technologySchema>) => {
       const response = await fetch(`${API_URL}/technologies`, {
         method: "POST",
         body: JSON.stringify(values),
@@ -44,7 +44,7 @@ export default function NewTechnologyPage() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof technologyFormSchema>) => {
+  const onSubmit = (values: z.infer<typeof technologySchema>) => {
     addTechnology(values);
   };
 
