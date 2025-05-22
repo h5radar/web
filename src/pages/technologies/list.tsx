@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
-import { API_URL } from "@/constants/application.ts";
+import { API_URL } from "@/constants/application";
 
 import { createQueryParams } from "@/lib/params";
 

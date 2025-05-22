@@ -14,7 +14,7 @@ import {
 } from "@/ui/dropdown-menu";
 import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/ui/sidebar";
 
-import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants/application.ts";
+import { BILLING_ENABLED, NOTIFICATIONS_ENABLED } from "@/constants/application";
 
 const AppSidebarFooter = () => {
   const auth = useAuth();

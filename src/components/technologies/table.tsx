@@ -62,7 +62,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
-import { API_URL } from "@/constants/application.ts";
+import { API_URL } from "@/constants/application";
 
 import { technologySchema } from "@/schemas/technology";
 
