@@ -17,11 +17,11 @@ export default function EditTechnologyPage() {
 
   const {
     data: prevDataTechnologies,
-    isFetching: isFetchingtechnologiesData,
+    isFetching: isFetchingTechnologiesData,
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technologies by id", editId],
+    queryKey: ["get technology", editId],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies/${editId}`, {
         method: "GET",
@@ -50,14 +50,16 @@ export default function EditTechnologyPage() {
       });
       return await response.json();
     },
-    mutationKey: ["create new technology"],
+    mutationKey: ["create technology"],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get list technologies"] });
-      queryClient.invalidateQueries({ queryKey: ["get technologies by id", editId] });
-      toast.success("Technology updated successfully!");
+      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
+      queryClient.invalidateQueries({ queryKey: ["get technology", editId] });
+      toast.success("Technology has been updated successfully");
     },
     onError(error) {
-      toast.error(`Error: ${error.message}`);
+      toast.error("Error updating technology", {
+        description: error.message,
+      });
     },
   });
 
@@ -71,7 +73,7 @@ export default function EditTechnologyPage() {
     updateTechnology(values);
   }
 
-  if (isFetchingtechnologiesData) return <h1>Loading...</h1>;
+  if (isFetchingTechnologiesData) return <h1>Loading...</h1>;
 
   return (
     <>

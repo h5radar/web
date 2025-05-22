@@ -29,7 +29,7 @@ export const TechnologiesPage = () => {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get list technologies", JSON.stringify(queryParams)],
+    queryKey: ["get technologies", JSON.stringify(queryParams)],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",
@@ -44,8 +44,8 @@ export const TechnologiesPage = () => {
   });
 
   if (isErrorDataList) {
-    toast("Load error", {
-      description: JSON.stringify(errorDataList.message),
+    toast.error("Error getting technologies", {
+      description: errorDataList.message,
     });
   }
 

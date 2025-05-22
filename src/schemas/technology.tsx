@@ -8,9 +8,7 @@ export const technologySchema = z.object({
   description: z.string().min(3, {
     message: "Description must be at least 3 characters",
   }),
-  website: z.string().min(3, {
-    message: "Website must be at least 3 characters",
-  }),
+  website: z.string().optional(),
   moved: z.preprocess(
     (val) => Number(val),
     z
