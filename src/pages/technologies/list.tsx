@@ -3,7 +3,9 @@ import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
-import { API_URL } from "@/constants/application.ts";
+import { API_URL } from "@/constants/application";
+
+import { createQueryParams } from "@/lib/params";
 
 import { TechnologyTable } from "@/components/technologies/table";
 
@@ -14,14 +16,6 @@ export const TechnologiesPage = () => {
     size: 10,
     sort: ["title", "asc"],
   });
-
-  function createQueryParams(params: Record<string, string | number | boolean | string[]>) {
-    const result = new URLSearchParams();
-    Object.entries(params).forEach(([key, value]) => {
-      result.append(key, String(value));
-    });
-    return result;
-  }
 
   const {
     data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },

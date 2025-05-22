@@ -3,7 +3,7 @@ import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application.ts";
+import { API_URL } from "@/constants/application";
 
 import { radarSchema } from "@/schemas/radar";
 

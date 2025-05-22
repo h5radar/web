@@ -2,7 +2,7 @@ import { GalleryVerticalEnd } from "lucide-react";
 
 import { SidebarHeader } from "@/ui/sidebar";
 
-import { APP_NAME } from "@/constants/application.ts";
+import { APP_NAME } from "@/constants/application";
 
 const company = {
   name: `${APP_NAME}`,
