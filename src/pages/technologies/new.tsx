@@ -8,7 +8,7 @@ import { API_URL } from "@/constants/application.ts";
 
 import { technologySchema } from "@/schemas/technology";
 
-import TechnologyForm from "@/components/technologies/form";
+import TechnologyForm from "@/pages/technologies/form";
 
 export default function NewTechnologyPage() {
   const auth = useAuth();
