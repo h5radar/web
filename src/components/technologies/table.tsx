@@ -320,6 +320,13 @@ export const TechnologyTable = ({
     }
   }
 
+  const handleDeleteSelectedTechnologies = () => {
+    const deleteArr = Object.keys(rowSelection);
+    for (const item of deleteArr) {
+      deleteTechnology(item);
+    }
+  };
+
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
@@ -400,12 +407,12 @@ export const TechnologyTable = ({
                       return (
                         <TableHead key={header.id} colSpan={header.colSpan}>
                           {header.isPlaceholder ? null : (
-                            <div className="flex align-middle ">
+                            <div className={header.id === "select" ? "flex justify-center" : "flex align-middle"}>
                               <div
                                 className={
                                   header.column.getCanSort()
                                     ? "cursor-pointer select-none flex self-center leading-[1.5rem]"
-                                    : " flex align-middle "
+                                    : " flex align-middle"
                                 }
                                 onClick={header.column.getToggleSortingHandler()}
                                 title={
@@ -430,6 +437,27 @@ export const TechnologyTable = ({
                                 <div>
                                   <ServerTextFilter column={header.column} onFilterChange={handleFilter} />
                                 </div>
+                              ) : null}
+                              {header.id === "actions" ? (
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
+                                      size="icon"
+                                    >
+                                      <IconDotsVertical />
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  <DropdownMenuContent align="end" className="w-32">
+                                    <DropdownMenuItem
+                                      variant="destructive"
+                                      onClick={() => handleDeleteSelectedTechnologies()}
+                                    >
+                                      Delete selected
+                                    </DropdownMenuItem>
+                                  </DropdownMenuContent>
+                                </DropdownMenu>
                               ) : null}
                             </div>
                           )}
