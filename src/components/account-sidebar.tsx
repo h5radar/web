@@ -19,7 +19,6 @@ import { accountNavItems } from "@/constants/sidebar";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
-import { Icons } from "@/components/icons";
 
 const AccountSidebar = () => {
   const location = useLocation();
@@ -33,13 +32,12 @@ const AccountSidebar = () => {
         <SidebarGroup>
           <SidebarMenu>
             {accountNavItems.map((item) => {
-              const Icon = item.icon ? Icons[item.icon] : Icons.logo;
               return item?.items && item?.items?.length > 0 ? (
                 <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton tooltip={item.title} isActive={location.pathname === item.url}>
-                        {item.icon && <Icon />}
+                        {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                       </SidebarMenuButton>
@@ -63,7 +61,7 @@ const AccountSidebar = () => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title} isActive={location.pathname === item.url}>
                     <Link to={item.url}>
-                      <Icon />
+                      {item.icon && <item.icon />}
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
