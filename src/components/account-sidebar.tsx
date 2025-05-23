@@ -21,14 +21,6 @@ import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
 import { Icons } from "@/components/icons";
 
-/*
- * TODO:
- *  1.add signOut actions
-   <DropdownMenuItem onClick={() => signOut()}>
-    <LogOut />
-    Log out
-  </DropdownMenuItem>
- */
 const AccountSidebar = () => {
   const location = useLocation();
 
