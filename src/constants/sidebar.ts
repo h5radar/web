@@ -1,15 +1,19 @@
-import { NavItem } from "@/types/nav-item";
 import {
   Activity,
   Barcode,
   Copyright,
-  Cpu, Handshake,
+  Cpu,
+  Handshake,
   LayoutDashboard,
   LogIn,
   LucideShoppingBag,
-  Ruler, Settings,
-  UserPen, Wallet
+  Ruler,
+  Settings,
+  UserPen,
+  Wallet,
 } from "lucide-react";
+
+import { NavItem } from "@/types/nav-item";
 
 /*
  * The data for account sidebar and cmd k bar.

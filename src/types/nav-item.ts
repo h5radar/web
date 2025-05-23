@@ -1,11 +1,10 @@
-
 export interface NavItem {
   title: string;
   url: string;
   disabled?: boolean;
   external?: boolean;
   shortcut?: [string, string];
-  icon?: React.ElementType
+  icon?: React.ElementType;
   label?: string;
   description?: string;
   isActive?: boolean;
