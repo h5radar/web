@@ -24,7 +24,6 @@ import { Icons } from "@/components/icons";
 
 const RadarSidebar = () => {
   const location = useLocation();
-
   // const { state, isMobile } = useSidebar();
 
   return (
