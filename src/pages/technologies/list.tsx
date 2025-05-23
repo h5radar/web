@@ -4,11 +4,11 @@ import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
 import { API_URL } from "@/constants/application";
+import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { createQueryParams } from "@/lib/params";
 
 import { TechnologyTable } from "@/components/technologies/table";
-import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();

@@ -4,11 +4,11 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
+import { GET_TECHNOLOGIES, GET_TECHNOLOGY, UPDATE_TECHNOLOGY } from "@/constants/query-keys";
 
 import { technologySchema } from "@/schemas/technology";
 
 import TechnologyForm from "@/pages/technologies/form";
-import { GET_TECHNOLOGIES, GET_TECHNOLOGY,UPDATE_TECHNOLOGY } from "@/constants/query-keys";
 
 export default function EditTechnologyPage() {
   const auth = useAuth();

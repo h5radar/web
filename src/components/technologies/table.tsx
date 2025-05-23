@@ -63,11 +63,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
 import { API_URL } from "@/constants/application";
+import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { technologySchema } from "@/schemas/technology";
 
 import { ServerTextFilter } from "@/components/server-filter";
-import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {

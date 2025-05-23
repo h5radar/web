@@ -5,11 +5,11 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
+import { CREATE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { technologySchema } from "@/schemas/technology";
 
 import TechnologyForm from "@/pages/technologies/form";
-import { CREATE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 export default function NewTechnologyPage() {
   const auth = useAuth();
