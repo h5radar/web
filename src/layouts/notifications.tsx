@@ -23,7 +23,7 @@ export default function BulletinLayout() {
             <SidebarInset>
               <AppNavbar />
               <div className="flex">
-                <div className="p-5 w-full">
+                <div className="p-5 w-full md:max-w-[1440px]">
                   <Outlet />
                 </div>
               </div>
