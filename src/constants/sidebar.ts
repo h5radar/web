@@ -1,4 +1,15 @@
 import { NavItem } from "@/types/nav-item";
+import {
+  Activity,
+  Barcode,
+  Copyright,
+  Cpu, Handshake,
+  LayoutDashboard,
+  LogIn,
+  LucideShoppingBag,
+  Ruler, Settings,
+  UserPen, Wallet
+} from "lucide-react";
 
 /*
  * The data for account sidebar and cmd k bar.
@@ -7,7 +18,7 @@ export const accountNavItems: NavItem[] = [
   {
     title: "Account",
     url: "/account",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
@@ -15,7 +26,7 @@ export const accountNavItems: NavItem[] = [
   {
     title: "Profile",
     url: "/profile",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: false,
     shortcut: ["d", "d"],
     items: [],
@@ -29,7 +40,7 @@ export const billingNavItems: NavItem[] = [
   {
     title: "Billing",
     url: "/billing",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
@@ -37,7 +48,7 @@ export const billingNavItems: NavItem[] = [
   {
     title: "Invoices",
     url: "/invoices",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: false,
     shortcut: ["d", "d"],
     items: [],
@@ -51,7 +62,7 @@ export const notificationsNavItems: NavItem[] = [
   {
     title: "Notifications",
     url: "/notifications",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
@@ -65,7 +76,7 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Dashboard",
     url: "/",
-    icon: "dashboard",
+    icon: LayoutDashboard,
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
@@ -73,7 +84,7 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Products",
     url: "/products",
-    icon: "barcode",
+    icon: Barcode,
     shortcut: ["p", "p"],
     isActive: false,
     items: [],
@@ -81,31 +92,31 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Contributions",
     url: "#",
-    icon: "activity",
+    icon: Activity,
     isActive: false,
     items: [
       {
         title: "Git repos",
         url: "/repositories",
-        icon: "userPen",
+        icon: UserPen,
         shortcut: ["m", "m"],
       },
       {
         title: "Platforms",
         url: "/platforms",
-        icon: "login",
+        icon: LogIn,
         shortcut: ["l", "l"],
       },
       {
         title: "Teams",
         url: "/teams",
-        icon: "login",
+        icon: LogIn,
         shortcut: ["l", "l"],
       },
       {
         title: "Authors",
         url: "/authors",
-        icon: "login",
+        icon: LogIn,
         shortcut: ["l", "l"],
       },
     ],
@@ -113,13 +124,13 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Technologies",
     url: "#",
-    icon: "cpu",
+    icon: Cpu,
     isActive: false,
     items: [
       {
         title: "Radars",
         url: "/radars",
-        icon: "product",
+        icon: LucideShoppingBag,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -127,7 +138,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Rings",
         url: "/rings",
-        icon: "product",
+        icon: LucideShoppingBag,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -135,7 +146,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Segments",
         url: "/segments",
-        icon: "product",
+        icon: LucideShoppingBag,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -143,7 +154,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Technologies",
         url: "/technologies",
-        icon: "product",
+        icon: LucideShoppingBag,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -151,7 +162,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Technology blips",
         url: "/technology-blips",
-        icon: "product",
+        icon: LucideShoppingBag,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -161,13 +172,13 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Practices",
     url: "#",
-    icon: "ruler",
+    icon: Ruler,
     isActive: false,
     items: [
       {
         title: "Cobwebs",
         url: "/cobwebs",
-        icon: "product",
+        icon: Ruler,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -175,7 +186,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Rays",
         url: "/rays",
-        icon: "product",
+        icon: Ruler,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -183,7 +194,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Practices",
         url: "/practices",
-        icon: "product",
+        icon: Ruler,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -193,13 +204,13 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Licenses",
     url: "#",
-    icon: "copyright",
+    icon: Copyright,
     isActive: false,
     items: [
       {
         title: "Pie charts",
         url: "/pies",
-        icon: "product",
+        icon: Copyright,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -207,7 +218,7 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Licenses",
         url: "/licenses",
-        icon: "product",
+        icon: Copyright,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
@@ -217,19 +228,19 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Communications",
     url: "#",
-    icon: "handshake",
+    icon: Handshake,
     isActive: false,
     items: [
       {
         title: "Channels",
         url: "/channels",
-        icon: "userPen",
+        icon: Handshake,
         shortcut: ["m", "m"],
       },
       {
         title: "Participants",
         url: "/participants",
-        icon: "login",
+        icon: Handshake,
         shortcut: ["l", "l"],
       },
     ],
@@ -237,13 +248,13 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Finances",
     url: "#",
-    icon: "wallet",
+    icon: Wallet,
     isActive: false,
     items: [
       {
         title: "BI systems",
         url: "/bi-systems",
-        icon: "userPen",
+        icon: Wallet,
         shortcut: ["m", "m"],
       },
     ],
@@ -251,13 +262,13 @@ export const radarNavItems: NavItem[] = [
   {
     title: "Settings",
     url: "#",
-    icon: "settings",
+    icon: Settings,
     isActive: false,
     items: [
       {
         title: "Adapters",
         url: "/adapters",
-        icon: "product",
+        icon: Settings,
         shortcut: ["p", "p"],
         isActive: false,
         items: [],
