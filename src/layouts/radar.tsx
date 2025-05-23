@@ -23,7 +23,7 @@ export default function RadarLayout() {
             <SidebarInset>
               <AppNavbar />
               <div className="flex">
-                <div className="p-5 w-full md:max-w-[1140px]">
+                <div className="p-5 w-full md:max-w-[1440px]">
                   <Outlet />
                 </div>
               </div>
