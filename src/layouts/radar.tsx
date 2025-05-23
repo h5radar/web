@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
@@ -10,9 +11,7 @@ import RadarSidebar from "@/components/radar-sidebar";
 
 export default function RadarLayout() {
   // Persisting the sidebar state in the cookie.
-  // const cookieStore = await cookies();
-  const defaultOpen = true;
-  // const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
+  const defaultOpen = Cookies.get("sidebar_state") !== "false";
 
   return (
     <>

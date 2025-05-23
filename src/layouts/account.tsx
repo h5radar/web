@@ -7,12 +7,11 @@ import { Toaster } from "@/ui/sonner.tsx";
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
 import KBar from "@/components/kbar";
+import Cookies from "js-cookie";
 
 export default function AccountLayout() {
   // Persisting the sidebar state in the cookie.
-  // const cookieStore = await cookies();
-  const defaultOpen = true;
-  // const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
+  const defaultOpen = Cookies.get("sidebar_state") !== "false";
 
   return (
     <>
