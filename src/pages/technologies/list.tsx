@@ -8,6 +8,7 @@ import { API_URL } from "@/constants/application";
 import { createQueryParams } from "@/lib/params";
 
 import { TechnologyTable } from "@/components/technologies/table";
+import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -23,7 +24,7 @@ export const TechnologiesPage = () => {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technologies", queryParams],
+    queryKey: [GET_TECHNOLOGIES, queryParams],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",

@@ -67,6 +67,7 @@ import { API_URL } from "@/constants/application";
 import { technologySchema } from "@/schemas/technology";
 
 import { ServerTextFilter } from "@/components/server-filter";
+import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -251,9 +252,9 @@ export const TechnologyTable = ({
         },
       });
     },
-    mutationKey: ["delete technology"],
+    mutationKey: [DELETE_TECHNOLOGY],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
       toast.success("Technology has been deleted successfully");
     },
     onError(error) {

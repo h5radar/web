@@ -8,6 +8,7 @@ import { API_URL } from "@/constants/application";
 import { technologySchema } from "@/schemas/technology";
 
 import TechnologyForm from "@/pages/technologies/form";
+import { GET_TECHNOLOGIES, GET_TECHNOLOGY,UPDATE_TECHNOLOGY } from "@/constants/query-keys";
 
 export default function EditTechnologyPage() {
   const auth = useAuth();
@@ -50,10 +51,10 @@ export default function EditTechnologyPage() {
       });
       return await response.json();
     },
-    mutationKey: ["create technology"],
+    mutationKey: [UPDATE_TECHNOLOGY],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
-      queryClient.invalidateQueries({ queryKey: ["get technology", id] });
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGY, id] });
       toast.success("Technology has been updated successfully");
     },
     onError(error) {
