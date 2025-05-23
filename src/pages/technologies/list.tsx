@@ -4,6 +4,7 @@ import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
 import { API_URL } from "@/constants/application";
+import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { createQueryParams } from "@/lib/params";
 
@@ -23,7 +24,7 @@ export const TechnologiesPage = () => {
     isError: isErrorDataList,
     error: errorDataList,
   } = useQuery({
-    queryKey: ["get technologies", queryParams],
+    queryKey: [GET_TECHNOLOGIES, queryParams],
     queryFn: async () => {
       const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",

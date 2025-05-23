@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
+import { CREATE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { technologySchema } from "@/schemas/technology";
 
@@ -31,9 +32,9 @@ export default function NewTechnologyPage() {
       });
       return await response.json();
     },
-    mutationKey: ["create technology"],
+    mutationKey: [CREATE_TECHNOLOGY],
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["get technologies"] });
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
       toast.success("Technology has been created successfully");
       navigate("/technologies");
     },

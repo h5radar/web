@@ -3,6 +3,8 @@ import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
 import { hasAuthParams, useAuth } from "react-oidc-context";
 
+import { GET_AUTH_HEALTH } from "@/constants/query-keys";
+
 import WelcomePage from "@/pages/welcome";
 
 const getAuthHealth = async () => {
@@ -22,7 +24,7 @@ export const PrivateProvider: FC<IPrivateProvider> = (props) => {
   const auth = useAuth();
 
   const { isPending: getAuthHealthIsPending, error: getAuthHealthError } = useQuery({
-    queryKey: ["get auth health"],
+    queryKey: [GET_AUTH_HEALTH],
     queryFn: getAuthHealth,
     retry: false,
   });
