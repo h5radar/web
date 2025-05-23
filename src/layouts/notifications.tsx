@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { ThemeProvider } from "next-themes";
 import { Outlet } from "react-router";
 
@@ -7,7 +8,6 @@ import { Toaster } from "@/ui/sonner.tsx";
 import AppNavbar from "@/components/app-navbar";
 import KBar from "@/components/kbar";
 import NotificationsSidebar from "@/components/notifications-sidebar";
-import Cookies from "js-cookie";
 
 export default function BulletinLayout() {
   // Persisting the sidebar state in the cookie.
