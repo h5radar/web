@@ -66,7 +66,7 @@ import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { technologySchema } from "@/schemas/technology";
 
-import { ServerFilter } from "@/components/server-filter";
+import { FilterInput } from "@/components/filter-input";
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -325,7 +325,7 @@ export const TechnologyTable = ({
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
-        <div>{handleFilter ? <ServerFilter handleFilter={handleFilter} /> : null}</div>
+        <div>{handleFilter ? <FilterInput handleFilter={handleFilter} /> : null}</div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
