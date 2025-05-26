@@ -30,6 +30,6 @@ export const FilterInput = ({ handleFilter }: ISearchInput) => {
   }, []);
 
   return (
-    <Input placeholder="Filter, for example Java%..." onChange={(event) => debouncedHandleFilter(event.target.value)} />
+    <Input id="global-filter" placeholder="Filter, for example Java%..." onChange={(event) => debouncedHandleFilter(event.target.value)} />
   );
 };
