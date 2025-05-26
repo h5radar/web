@@ -5,7 +5,11 @@ import { FilterInput } from "@/components/filter-input";
 
 test("FilterInput", () => {
   render(
-    <FilterInput handleFilter={(value: string) => { console.log(value) }} />
+    <FilterInput
+      handleFilter={(value: string) => {
+        console.log(value);
+      }}
+    />,
   );
-  expect(screen.getByText("Java")).toBeDefined();
+  expect(screen.getByPlaceholderText("Filter, for example Java%...")).toBeDefined();
 });
