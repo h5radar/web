@@ -142,9 +142,6 @@ export const TechnologyTable = ({
     moved: false,
     active: false,
   });
-  console.log("isMobile:", isMobile);
-  console.log("isVisible:", !isMobile);
-  console.log("fuck3:", columnVisibility);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: pageIndex,
@@ -152,6 +149,20 @@ export const TechnologyTable = ({
   });
   const sortableId = React.useId();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
+
+  // only for log, remove before merge
+  React.useEffect(() => {
+    console.log("compl isMobile:", isMobile);
+    console.log("compl isVisible:", !isMobile);
+    console.log("compl fuck3:", columnVisibility);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnVisibility]);
+  //
+
+  React.useEffect(() => {
+    console.log("isMobile only:", isMobile); //
+    setColumnVisibility((prev) => ({ ...prev, website: !isMobile }));
+  }, [isMobile]);
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
