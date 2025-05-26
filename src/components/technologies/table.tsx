@@ -137,7 +137,14 @@ export const TechnologyTable = ({
   const queryClient = useQueryClient();
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({ website: !isMobile, moved: !isMobile });
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
+    website: !isMobile,
+    moved: false,
+    active: false,
+  });
+  console.log("isMobile:", isMobile);
+  console.log("isVisible:", !isMobile);
+  console.log("fuck3:", columnVisibility);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: pageIndex,
