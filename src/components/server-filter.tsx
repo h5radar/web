@@ -7,6 +7,7 @@ import { DEBOUNCE_TIME } from "@/constants/application";
 interface ISerachInput {
   handleFilter: (value: string) => void;
 }
+
 export const ServerFilter = ({ handleFilter }: ISerachInput) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -30,9 +31,9 @@ export const ServerFilter = ({ handleFilter }: ISerachInput) => {
 
   return (
     <Input
-      placeholder="Filter title or website..."
+      placeholder="Filter, for example AWS%..."
       onChange={(event) => debouncedHandleFilter(event.target.value)}
       className="max-w-72 w-72"
     />
-  );
+  )
 };
