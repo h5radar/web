@@ -68,6 +68,8 @@ import { technologySchema } from "@/schemas/technology";
 
 import { FilterInput } from "@/components/filter-input";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
@@ -131,10 +133,11 @@ export const TechnologyTable = ({
   pageIndex: number;
 }) => {
   const auth = useAuth();
+  const isMobile = useIsMobile();
   const queryClient = useQueryClient();
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({ website: !isMobile, moved: !isMobile });
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: pageIndex,
