@@ -335,14 +335,13 @@ export const TechnologyTable = ({
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
-        <div>{handleFilter ? <FilterInput handleFilter={handleFilter} /> : null}</div>
+        <div className="pr-2 max-w-72 w-72">{handleFilter ? <FilterInput handleFilter={handleFilter} /> : null}</div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
                 <IconLayoutColumns />
-                <span className="hidden lg:inline">Customize Columns</span>
-                <span className="lg:hidden">Columns</span>
+                <span className="hidden lg:inline">Columns</span>
                 <IconChevronDown />
               </Button>
             </DropdownMenuTrigger>
