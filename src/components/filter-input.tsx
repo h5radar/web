@@ -33,7 +33,6 @@ export const FilterInput = ({ handleFilter }: ISearchInput) => {
     <Input
       placeholder="Filter, for example Java%..."
       onChange={(event) => debouncedHandleFilter(event.target.value)}
-      className="max-w-72 w-72"
     />
   );
 };

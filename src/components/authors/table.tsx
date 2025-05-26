@@ -244,8 +244,7 @@ export function AuthorTable({ data: initialData }: { data: z.infer<typeof author
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
                 <IconLayoutColumns />
-                <span className="hidden lg:inline">Customize Columns</span>
-                <span className="lg:hidden">Columns</span>
+                <span className="hidden lg:inline">Columns</span>
                 <IconChevronDown />
               </Button>
             </DropdownMenuTrigger>
