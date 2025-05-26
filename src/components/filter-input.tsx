@@ -35,5 +35,5 @@ export const FilterInput = ({ handleFilter }: ISearchInput) => {
       onChange={(event) => debouncedHandleFilter(event.target.value)}
       className="max-w-72 w-72"
     />
-  )
+  );
 };
