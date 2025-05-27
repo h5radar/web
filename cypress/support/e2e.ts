@@ -12,5 +12,9 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+
+// cypress/support/e2e.js
+import "@cypress/code-coverage/support"
+
 // Import commands.js using ES2015 syntax:
 import "./commands";
