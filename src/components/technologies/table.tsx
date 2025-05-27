@@ -68,6 +68,8 @@ import { technologySchema } from "@/schemas/technology";
 
 import { FilterInput } from "@/components/filter-input";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
@@ -131,10 +133,12 @@ export const TechnologyTable = ({
   pageIndex: number;
 }) => {
   const auth = useAuth();
+  const isMobile = useIsMobile();
   const queryClient = useQueryClient();
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: pageIndex,
@@ -142,7 +146,6 @@ export const TechnologyTable = ({
   });
   const sortableId = React.useId();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}), useSensor(KeyboardSensor, {}));
-
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
   const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
@@ -261,6 +264,10 @@ export const TechnologyTable = ({
   });
 
   const defaultData = React.useMemo(() => [], []);
+
+  React.useEffect(() => {
+    setColumnVisibility((prev) => ({ ...prev, website: !isMobile, moved: !isMobile, active: !isMobile }));
+  }, [isMobile]);
 
   React.useEffect(() => {
     if (!isLoading && data) setLocalData(data);
