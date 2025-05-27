@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 
-import HomePage from "@/pages/home";
+import PlatformsPage from "@/pages/platforms";
 
-test("HomePage", () => {
-  render(<HomePage />);
-  expect(screen.getByText("Home")).toBeDefined();
+test("PlatformsPage", () => {
+  render(<PlatformsPage />);
+  expect(screen.getByText("Platforms")).toBeDefined();
 });
