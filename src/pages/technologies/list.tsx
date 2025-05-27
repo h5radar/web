@@ -7,10 +7,11 @@ import { z } from "zod";
 import { API_URL } from "@/constants/application";
 import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
+import { technologySchema } from "@/schemas/technology";
+
 import { createQueryParams } from "@/lib/params";
 
 import { TechnologyTable } from "@/components/technologies/table";
-import { technologySchema } from "@/schemas/technology.tsx";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -36,8 +37,8 @@ export const TechnologiesPage = () => {
         },
       });
       // return await response.json();
-      const data  = await response.json();
-      const technologiesSchema = z.array(technologySchema)
+      const data = await response.json();
+      const technologiesSchema = z.array(technologySchema);
       technologiesSchema.parse(data.content);
       return data;
     },
