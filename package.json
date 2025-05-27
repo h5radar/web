@@ -73,7 +73,7 @@
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@faker-js/faker": "^9.8.0",
-    "@stylistic/eslint-plugin-ts": "^4.4.0",
+    "@stylistic/eslint-plugin": "^4.4.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
