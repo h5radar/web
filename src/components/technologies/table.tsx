@@ -266,7 +266,7 @@ export const TechnologyTable = ({
   const defaultData = React.useMemo(() => [], []);
 
   React.useEffect(() => {
-    setColumnVisibility((prev) => ({ ...prev, website: !isMobile,  moved: !isMobile, active: !isMobile }));
+    setColumnVisibility((prev) => ({ ...prev, website: !isMobile, moved: !isMobile, active: !isMobile }));
   }, [isMobile]);
 
   React.useEffect(() => {
