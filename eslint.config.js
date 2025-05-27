@@ -1,6 +1,5 @@
 import js from "@eslint/js";
-import stylistic from '@stylistic/eslint-plugin'
-// fuck import stylisticTs from "@stylistic/eslint-plugin-ts";
+import stylistic from "@stylistic/eslint-plugin";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tsdoceslint from "eslint-plugin-tsdoc";
@@ -19,7 +18,6 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      // fuck "@stylistic/ts": stylisticTs,
       "@stylistic": stylistic,
       tsdoc: tsdoceslint,
     },
