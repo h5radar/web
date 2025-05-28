@@ -19,14 +19,12 @@ import {
   IconChevronUp,
   IconChevronsLeft,
   IconChevronsRight,
-  IconCircleCheckFilled,
   IconDotsVertical,
   IconGripVertical,
   IconLayoutColumns,
   IconLoader,
   IconPlus,
 } from "@tabler/icons-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -41,10 +39,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as React from "react";
-import { useAuth } from "react-oidc-context";
 import { Link } from "react-router";
-import { toast } from "sonner";
-import { z } from "zod";
 
 import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
@@ -54,7 +49,6 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 import { Label } from "@/ui/label";
@@ -62,19 +56,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
 
-import { API_URL } from "@/constants/application";
-import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
-
-import { technologySchema } from "@/schemas/technology";
-
 import { ServerTextFilter } from "@/components/server-filter";
 
 // Create a separate component for the drag handle
+
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
     id,
   });
-
   return (
     <Button
       {...attributes}
@@ -89,7 +78,7 @@ function DragHandle({ id }: { id: number }) {
   );
 }
 
-function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
+function DraggableRow<T extends { id: number }>({ row }: { row: Row<T> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
     id: row.original.id,
   });
@@ -112,17 +101,10 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof technologySchema>> }) {
   );
 }
 
-export const TechnologyTable = ({
-  data,
-  handlePagination,
-  handleSorting,
-  handleFilter,
-  isLoading = false,
-  pageSize,
-  rowCount,
-  pageIndex,
-}: {
-  data: z.infer<typeof technologySchema>[];
+interface ITableProps<T> {
+  data: T[];
+  columns: ColumnDef<T>[];
+  handleDelete: (id: string) => void;
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
   handleFilter?: (columnId: string, value: string) => void;
@@ -130,9 +112,20 @@ export const TechnologyTable = ({
   isLoading: boolean;
   rowCount: number;
   pageIndex: number;
-}) => {
-  const auth = useAuth();
-  const queryClient = useQueryClient();
+}
+
+export const TechnologyTable = <T extends { id: number }>({
+  data,
+  columns,
+  handlePagination,
+  handleSorting,
+  handleFilter,
+  handleDelete,
+  isLoading = false,
+  pageSize,
+  rowCount,
+  pageIndex,
+}: ITableProps<T>) => {
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -147,7 +140,13 @@ export const TechnologyTable = ({
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id) || [], [data]);
 
-  const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
+  const defaultData = React.useMemo(() => [], []);
+
+  React.useEffect(() => {
+    if (!isLoading && data) setLocalData(data);
+  }, [isLoading, data]);
+
+  const fullColumns: ColumnDef<T>[] = [
     {
       id: "drag",
       header: () => null,
@@ -176,103 +175,12 @@ export const TechnologyTable = ({
       enableSorting: false,
       enableHiding: false,
     },
-    {
-      accessorKey: "title",
-      header: "Title",
-      cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
-      enableHiding: false,
-    },
-    {
-      accessorKey: "website",
-      header: "Website",
-      cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
-    },
-    {
-      accessorKey: "moved",
-      header: "Moved",
-      cell: ({ row }) => (
-        <div className="w-32">
-          <Badge variant="outline" className="text-muted-foreground px-1.5">
-            {row.original.moved}
-          </Badge>
-        </div>
-      ),
-      enableColumnFilter: false,
-    },
-    {
-      accessorKey: "active",
-      header: "Active",
-      cell: ({ row }) => (
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.active ? (
-            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-          ) : (
-            <IconLoader />
-          )}
-          {row.original.active}
-        </Badge>
-      ),
-      enableColumnFilter: false,
-    },
-    {
-      id: "actions",
-      cell: ({ row }) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
-              size="icon"
-            >
-              <IconDotsVertical />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-32">
-            <Link to={`/technologies/edit/${row.id}`}>
-              <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
-            </Link>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" onClick={() => deleteTechnology(row.id)}>
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ),
-    },
+    ...columns,
   ];
-
-  const { mutate: deleteTechnology } = useMutation({
-    mutationFn: async (rowId: string) => {
-      await fetch(`${API_URL}/technologies/${rowId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: [DELETE_TECHNOLOGY],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
-      toast.success("Technology has been deleted successfully");
-    },
-    onError(error) {
-      toast.error("Error deleting technology", {
-        description: error.message,
-      });
-    },
-  });
-
-  const defaultData = React.useMemo(() => [], []);
-
-  React.useEffect(() => {
-    if (!isLoading && data) setLocalData(data);
-  }, [isLoading, data]);
 
   const table = useReactTable({
     data: localData ?? defaultData,
-    columns,
+    columns: fullColumns,
     state: {
       sorting,
       columnVisibility,
@@ -321,10 +229,10 @@ export const TechnologyTable = ({
     }
   }
 
-  const handleDeleteSelectedTechnologies = () => {
+  const handleDeleteSelectedRow = () => {
     const deleteArr = Object.keys(rowSelection);
     for (const item of deleteArr) {
-      deleteTechnology(item);
+      handleDelete(item);
     }
   };
 
@@ -451,10 +359,7 @@ export const TechnologyTable = ({
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="end" className="w-32">
-                                    <DropdownMenuItem
-                                      variant="destructive"
-                                      onClick={() => handleDeleteSelectedTechnologies()}
-                                    >
+                                    <DropdownMenuItem variant="destructive" onClick={() => handleDeleteSelectedRow()}>
                                       Delete selected
                                     </DropdownMenuItem>
                                   </DropdownMenuContent>
