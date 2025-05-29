@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -13,7 +13,7 @@ export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  const { mutate: createRadarUser} = useMutation<
+  const { mutate: createRadarUser, isPending: isPending } = useMutation<
     z.infer<typeof userSchema>,
     Error,
     z.infer<typeof userSchema>
@@ -42,8 +42,14 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    createRadarUser(userSchema.parse({id: 0, sub: auth.user?.profile.sub, username: auth.user?.profile.preferred_username}));
-  }, [createRadarUser, auth])
+    createRadarUser(
+      userSchema.parse({ id: 0, sub: auth.user?.profile.sub, username: auth.user?.profile.preferred_username }),
+    );
+  }, [createRadarUser, auth]);
+
+  if (isPending) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
