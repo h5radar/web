@@ -5,9 +5,7 @@ import ProfilePage from "@/pages/profile";
 
 describe("ProfilePage", () => {
   it("show profile page", () => {
-    render(
-      <ProfilePage />
-    );
+    render(<ProfilePage />);
     expect(screen.getByText("Profile")).toBeDefined();
   });
 });

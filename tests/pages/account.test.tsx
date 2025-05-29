@@ -5,9 +5,7 @@ import AccountPage from "@/pages/account";
 
 describe("AccountPage", () => {
   it("show account page", () => {
-    render(
-      <AccountPage />
-    );
+    render(<AccountPage />);
     expect(screen.getByText("Account")).toBeDefined();
   });
 });
