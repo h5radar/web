@@ -13,8 +13,8 @@ export const GET_TECHNOLOGY = "Get technology";
 export const GET_TECHNOLOGIES = "Get technologies";
 
 /*
- * TanStack query keys for users
+ * TanStack query keys for radar users
  */
-export const CREATE_USER = "Create user";
-export const GET_USER = "Get technology";
-export const GET_USERS = "Get users";
+export const CREATE_RADAR_USER = "Create radar user";
+export const GET_RADAR_USER = "Get radar user";
+export const GET_RADAR_USERS = "Get radar users";
