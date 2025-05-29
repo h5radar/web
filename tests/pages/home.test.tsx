@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it} from "vitest";
 
 import HomePage from "@/pages/home";
 
@@ -12,12 +12,7 @@ const queryClient = new QueryClient({
   },
 });
 
-
 describe("HomePage", () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   it("show home page", () => {
     render(
       <QueryClientProvider client={queryClient}>

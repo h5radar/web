@@ -1,6 +1,5 @@
 import { vi } from "vitest";
 
-
 vi.mock("react-oidc-context", () => ({
   useAuth() {
     const { isLoading, isAuthenticated } = {
@@ -18,4 +17,3 @@ vi.mock("react-oidc-context", () => ({
   },
   hasAuthParams: vi.fn(() => true),
 }));
-
