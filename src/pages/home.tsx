@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
-import { CREATE_ACCOUNT_USER, GET_ACCOUNT_USERS, CREATE_RADAR_USER, GET_RADAR_USERS } from "@/constants/query-keys";
+import { CREATE_ACCOUNT_USER, CREATE_RADAR_USER, GET_ACCOUNT_USERS, GET_RADAR_USERS } from "@/constants/query-keys";
 
 import { userSchema } from "@/schemas/user";
 
@@ -40,7 +40,6 @@ export default function HomePage() {
       });
     },
   });
-
 
   const { mutate: createRadarUser, isPending: isPendingRadar } = useMutation<
     z.infer<typeof userSchema>,
