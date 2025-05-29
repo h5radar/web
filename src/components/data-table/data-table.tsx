@@ -101,7 +101,7 @@ function DraggableRow<T extends { id: number }>({ row }: { row: Row<T> }) {
   );
 }
 
-interface ITableProps<T> {
+interface IDataTableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   handleDelete: (id: string) => void;
@@ -114,7 +114,7 @@ interface ITableProps<T> {
   pageIndex: number;
 }
 
-export const TechnologyTable = <T extends { id: number }>({
+export const DataTable = <T extends { id: number }>({
   data,
   columns,
   handlePagination,
@@ -125,7 +125,7 @@ export const TechnologyTable = <T extends { id: number }>({
   pageSize,
   rowCount,
   pageIndex,
-}: ITableProps<T>) => {
+}: IDataTableProps<T>) => {
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});

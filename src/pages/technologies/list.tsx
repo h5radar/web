@@ -1,4 +1,4 @@
-import { IconCircleCheckFilled, IconDotsVertical, IconLoader } from "@tabler/icons-react";
+import { IconDotsVertical } from "@tabler/icons-react";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useState } from "react";
@@ -7,7 +7,6 @@ import { Link } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import {
   DropdownMenu,
@@ -24,7 +23,8 @@ import { technologySchema } from "@/schemas/technology";
 
 import { createQueryParams } from "@/lib/params";
 
-import { TechnologyTable } from "@/components/technologies/table";
+import { technologyColumns } from "@/components/columns/technology-columns";
+import { DataTable } from "@/components/data-table/data-table";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -36,48 +36,7 @@ export const TechnologiesPage = () => {
   });
 
   const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
-    {
-      accessorKey: "title",
-      header: "Title",
-      cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
-      enableHiding: false,
-    },
-    {
-      accessorKey: "website",
-      header: "Website",
-      cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
-    },
-    {
-      accessorKey: "moved",
-      header: "Moved",
-      cell: ({ row }) => (
-        <div className="w-32">
-          <Badge variant="outline" className="text-muted-foreground px-1.5">
-            {row.original.moved}
-          </Badge>
-        </div>
-      ),
-      enableColumnFilter: false,
-    },
-    {
-      accessorKey: "active",
-      header: "Active",
-      cell: ({ row }) => (
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.active ? (
-            <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-          ) : (
-            <IconLoader />
-          )}
-          {row.original.active}
-        </Badge>
-      ),
-      enableColumnFilter: false,
-    },
-  ];
-
-  const columnsTech: ColumnDef<z.infer<typeof technologySchema>>[] = [
-    ...columns,
+    ...technologyColumns,
     {
       id: "actions",
       cell: ({ row }) => (
@@ -146,7 +105,6 @@ export const TechnologiesPage = () => {
       });
     },
   });
-
   if (isErrorDataList) {
     toast.error("Error getting technologies", {
       description: errorDataList.message,
@@ -171,9 +129,9 @@ export const TechnologiesPage = () => {
 
   return (
     <>
-      <TechnologyTable
+      <DataTable
         data={technologiesData.content}
-        columns={columnsTech}
+        columns={columns}
         handlePagination={handlePaginationParams}
         handleSorting={handleSortingParams}
         handleFilter={handleFilterParams}
