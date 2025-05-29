@@ -1,9 +1,46 @@
 import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import AccountPage from "@/pages/account";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-test("AccountPage", () => {
-  render(<AccountPage />);
-  expect(screen.getByText("Account")).toBeDefined();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 15,
+    },
+  },
+});
+
+vi.mock("react-oidc-context", () => ({
+  useAuth() {
+    const { isLoading, isAuthenticated } = {
+      isLoading: false,
+      isAuthenticated: true,
+    };
+    return {
+      isLoading,
+      isAuthenticated,
+      signinRedirect: vi.fn(),
+      removeUser: vi.fn(),
+      settings: {},
+      user: { profile: { sub: "5483cbe8-15cd-4bf5-911e-6ca455e533c9", preferred_username: "alice" } },
+    };
+  },
+  hasAuthParams: vi.fn(() => true),
+}));
+
+describe("AccountPage", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("show account page", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AccountPage />
+      </QueryClientProvider>,
+    );
+    expect(screen.getByText("Account")).toBeDefined();
+  });
 });

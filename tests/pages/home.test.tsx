@@ -1,9 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
-import { AuthProvider } from "react-oidc-context";
 import { afterEach, describe, expect, it, vi } from "vitest";
-
-import { userManager } from "@/auth-config";
 
 import HomePage from "@/pages/home";
 
@@ -20,31 +17,29 @@ vi.mock("react-oidc-context", () => ({
     const { isLoading, isAuthenticated } = {
       isLoading: false,
       isAuthenticated: true,
-    }
+    };
     return {
       isLoading,
       isAuthenticated,
       signinRedirect: vi.fn(),
       removeUser: vi.fn(),
       settings: {},
-      user: { profile: { sub: "5483cbe8-15cd-4bf5-911e-6ca455e533c9", preferred_username: "alice"}},
-    }
+      user: { profile: { sub: "5483cbe8-15cd-4bf5-911e-6ca455e533c9", preferred_username: "alice" } },
+    };
   },
   hasAuthParams: vi.fn(() => true),
-}))
+}));
 
 describe("HomePage", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  it("Show home page", () => {
+  it("show home page", () => {
     render(
-      <AuthProvider userManager={userManager}>
-        <QueryClientProvider client={queryClient}>
-          <HomePage />
-        </QueryClientProvider>
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <HomePage />
+      </QueryClientProvider>,
     );
     expect(screen.getByText("Home")).toBeDefined();
   });
