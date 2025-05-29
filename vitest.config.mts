@@ -12,6 +12,7 @@ export default defineConfig({
     environment: "jsdom",
     outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
     reporters: ["default", "junit", "html"],
+    setupFiles: ["./tests/setup.mts","./tests/mocks.ts",],
     coverage: {
       include: ["src/**"],
       exclude: ["src/ui/**"],
