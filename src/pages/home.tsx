@@ -7,6 +7,9 @@ import { z } from "zod";
 import { API_URL } from "@/constants/application";
 import { CREATE_ACCOUNT_USER, CREATE_RADAR_USER, GET_ACCOUNT_USERS, GET_RADAR_USERS } from "@/constants/query-keys";
 
+import {} from "@/queries/account-user"
+import {} from "@/queries/radar-user"
+
 import { userSchema } from "@/schemas/user";
 
 export default function HomePage() {
