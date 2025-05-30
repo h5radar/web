@@ -1,10 +1,19 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { BrowserRouter } from "react-router";
+import { describe, expect, it } from "vitest";
 
 import TechnologiesPage from "@/pages/technologies/list";
 
-test("TechnologiesPage", () => {
-  return;
-  render(<TechnologiesPage />);
-  expect(screen.getByText("Home")).toBeDefined();
+describe("TechnologiesPage", () => {
+  it("get technologies page", () => {
+    render(
+      <BrowserRouter>
+        <QueryClientProvider client={new QueryClient()}>
+          <TechnologiesPage />
+        </QueryClientProvider>
+      </BrowserRouter>,
+    );
+    expect(screen.getByText("Columns")).toBeDefined();
+  });
 });
