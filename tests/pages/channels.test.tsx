@@ -1,9 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import ChannelsPage from "@/pages/channels";
 
-test("ChannelsPage", () => {
-  render(<ChannelsPage />);
-  expect(screen.getByText("Channels")).toBeDefined();
+describe("ChannelsPage", () => {
+  it("get channels page", () => {
+    render(<ChannelsPage />);
+    expect(screen.getByText("Channels")).toBeDefined();
+  });
 });

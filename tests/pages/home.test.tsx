@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import HomePage from "@/pages/home";
 
 describe("HomePage", () => {
-  it("show home page", () => {
+  it("get home page", () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
         <HomePage />
