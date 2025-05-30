@@ -12,6 +12,7 @@ export default defineConfig({
     environment: "jsdom",
     outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
     reporters: ["default", "junit", "html"],
+    setupFiles: ["./tests/setup.ts", "./tests/mocks.ts"],
     coverage: {
       include: ["src/**"],
       exclude: ["src/ui/**"],
@@ -19,10 +20,10 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
       reportsDirectory: "./tests/coverage",
       thresholds: {
-        statements: 3.29,
-        branches: 34.65,
-        functions: 32.38,
-        lines: 3.29,
+        statements: 4.59,
+        branches: 38.18,
+        functions: 34.23,
+        lines: 4.59,
         autoUpdate: false,
       },
     },

@@ -1,9 +1,24 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
-import { expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import HomePage from "@/pages/home";
 
-test("HomePage", () => {
-  render(<HomePage />);
-  expect(screen.getByText("Home")).toBeDefined();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 15,
+    },
+  },
+});
+
+describe("HomePage", () => {
+  it("show home page", () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <HomePage />
+      </QueryClientProvider>,
+    );
+    expect(screen.getByText("Home")).toBeDefined();
+  });
 });
