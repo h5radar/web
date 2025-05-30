@@ -28,7 +28,6 @@ export const technologyColumns: ColumnDef<z.infer<typeof technologySchema>>[] = 
         </Badge>
       </div>
     ),
-    enableColumnFilter: false,
   },
   {
     accessorKey: "active",
@@ -43,6 +42,5 @@ export const technologyColumns: ColumnDef<z.infer<typeof technologySchema>>[] = 
         {row.original.active}
       </Badge>
     ),
-    enableColumnFilter: false,
   },
 ];

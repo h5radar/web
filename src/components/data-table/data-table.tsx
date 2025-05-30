@@ -27,7 +27,6 @@ import {
 } from "@tabler/icons-react";
 import {
   ColumnDef,
-  ColumnFiltersState,
   Row,
   SortingState,
   VisibilityState,
@@ -41,7 +40,6 @@ import {
 import * as React from "react";
 import { Link } from "react-router";
 
-import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import { Checkbox } from "@/ui/checkbox";
 import {
@@ -54,9 +52,9 @@ import {
 import { Label } from "@/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/ui/tabs";
+import { Tabs, TabsContent } from "@/ui/tabs";
 
-import { ServerTextFilter } from "@/components/server-filter";
+import { FilterInput } from "@/components/filter-input";
 
 // Create a separate component for the drag handle
 
@@ -107,7 +105,7 @@ interface IDataTableProps<T> {
   handleDelete: (id: string) => void;
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
-  handleFilter?: (columnId: string, value: string) => void;
+  handleFilter?: (value: string) => void;
   pageSize: number;
   isLoading: boolean;
   rowCount: number;
@@ -129,7 +127,6 @@ export const DataTable = <T extends { id: number }>({
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: pageIndex,
@@ -185,7 +182,6 @@ export const DataTable = <T extends { id: number }>({
       sorting,
       columnVisibility,
       rowSelection,
-      columnFilters,
       pagination,
     },
     rowCount: rowCount,
@@ -203,7 +199,6 @@ export const DataTable = <T extends { id: number }>({
       }
       return setSorting(newSorting);
     },
-    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: (updaterOrValue) => {
       const newPagination = typeof updaterOrValue === "function" ? updaterOrValue(pagination) : updaterOrValue;
@@ -239,30 +234,7 @@ export const DataTable = <T extends { id: number }>({
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
-        <Label htmlFor="view-selector" className="sr-only">
-          View
-        </Label>
-        <Select defaultValue="outline">
-          <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
-            <SelectValue placeholder="Select a view" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="outline">Outline</SelectItem>
-            <SelectItem value="past-performance">Past Performance</SelectItem>
-            <SelectItem value="key-personnel">Key Personnel</SelectItem>
-            <SelectItem value="focus-documents">Focus Documents</SelectItem>
-          </SelectContent>
-        </Select>
-        <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="outline">Outline</TabsTrigger>
-          <TabsTrigger value="past-performance">
-            Past Performance <Badge variant="secondary">3</Badge>
-          </TabsTrigger>
-          <TabsTrigger value="key-personnel">
-            Key Personnel <Badge variant="secondary">2</Badge>
-          </TabsTrigger>
-          <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
-        </TabsList>
+        <div>{handleFilter ? <FilterInput handleFilter={handleFilter} /> : null}</div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -342,11 +314,6 @@ export const DataTable = <T extends { id: number }>({
                                   }[header.column.getIsSorted() as string] ?? null}
                                 </div>
                               </div>
-                              {header.column.getCanFilter() ? (
-                                <div>
-                                  <ServerTextFilter column={header.column} onFilterChange={handleFilter} />
-                                </div>
-                              ) : null}
                               {header.id === "actions" ? (
                                 <DropdownMenu>
                                   <DropdownMenuTrigger asChild>
