@@ -1,16 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it} from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter} from "react-router";
 
 import TechnologiesPage from "@/pages/technologies/list";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 describe("TechnologiesPage", () => {
-  it.skip("show technologies page", () => {
+  it("get technologies page", () => {
     render(
-      <QueryClientProvider client={new QueryClient()}>
-        <TechnologiesPage />
-      </QueryClientProvider>,
+      <BrowserRouter>
+        <QueryClientProvider client={new QueryClient()}>
+          <TechnologiesPage />
+        </QueryClientProvider>
+      </BrowserRouter>
     );
-    expect(screen.getByText("Home")).toBeDefined();
+    expect(screen.getByText("Columns")).toBeDefined();
   });
 });
