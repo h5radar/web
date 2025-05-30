@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it} from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter} from "react-router";
+import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router";
+import { describe, expect, it } from "vitest";
 
 import TechnologiesPage from "@/pages/technologies/list";
 
@@ -12,7 +12,7 @@ describe("TechnologiesPage", () => {
         <QueryClientProvider client={new QueryClient()}>
           <TechnologiesPage />
         </QueryClientProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     expect(screen.getByText("Columns")).toBeDefined();
   });
