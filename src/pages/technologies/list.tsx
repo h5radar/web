@@ -1,14 +1,9 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
-import { API_URL } from "@/constants/application";
-import { GET_TECHNOLOGIES } from "@/constants/query-keys";
-
-import { createQueryParams } from "@/lib/params";
-
 import { TechnologyTable } from "@/components/technologies/table";
+import { useGetTechnologies } from "@/queries/technology.ts";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -17,7 +12,14 @@ export const TechnologiesPage = () => {
     size: 10,
     sort: ["title", "asc"],
   });
+  const {
+    data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
+    isLoading: isLoading,
+    isError: isError,
+    error: error,
+  } = useGetTechnologies(auth, queryParams);
 
+  /*
   const {
     data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
     isLoading: isLoading,
@@ -37,6 +39,7 @@ export const TechnologiesPage = () => {
     },
     placeholderData: keepPreviousData,
   });
+   */
 
   if (isError) {
     toast.error("Error getting technologies", {
