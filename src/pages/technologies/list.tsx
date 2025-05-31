@@ -20,27 +20,6 @@ export const TechnologiesPage = () => {
     error: error,
   } = useGetTechnologies(auth, queryParams);
 
-  /*
-  const {
-    data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
-    isLoading: isLoading,
-    isError: isError,
-    error: error,
-  } = useQuery({
-    queryKey: [GET_TECHNOLOGIES, queryParams],
-    queryFn: async () => {
-      const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-      return await response.json();
-    },
-    placeholderData: keepPreviousData,
-  });
-   */
 
   if (isError) {
     toast.error("Error getting technologies", {
