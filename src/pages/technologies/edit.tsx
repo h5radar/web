@@ -74,7 +74,7 @@ export default function EditTechnologyPage() {
     updateTechnology(values);
   }
 
-  if (isFetching){
+  if (isFetching) {
     return <h1>Loading...</h1>;
   }
 
