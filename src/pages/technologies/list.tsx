@@ -20,9 +20,9 @@ export const TechnologiesPage = () => {
 
   const {
     data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
-    isLoading: isFetchingTechnologiesData,
-    isError: isErrorDataList,
-    error: errorDataList,
+    isLoading: isLoading,
+    isError: isError,
+    error: error,
   } = useQuery({
     queryKey: [GET_TECHNOLOGIES, queryParams],
     queryFn: async () => {
@@ -38,9 +38,9 @@ export const TechnologiesPage = () => {
     placeholderData: keepPreviousData,
   });
 
-  if (isErrorDataList) {
+  if (isError) {
     toast.error("Error getting technologies", {
-      description: errorDataList.message,
+      description: error.message,
     });
   }
 
@@ -63,14 +63,14 @@ export const TechnologiesPage = () => {
   return (
     <>
       <TechnologyTable
+        isLoading={isLoading}
         data={technologiesData.content}
-        handlePagination={handlePaginationParams}
         rowCount={technologiesData.totalElements}
-        isLoading={isFetchingTechnologiesData}
-        handleSorting={handleSortingParams}
-        handleFilter={handleFilterParams}
         pageSize={technologiesData.pageable.pageSize}
         pageIndex={technologiesData.pageable.pageNumber}
+        handlePagination={handlePaginationParams}
+        handleSorting={handleSortingParams}
+        handleFilter={handleFilterParams}
       />
     </>
   );
