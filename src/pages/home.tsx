@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
 import { CREATE_RADAR_USER, GET_RADAR_USERS } from "@/constants/query-keys";
+
 // import { CREATE_ACCOUNT_USER, CREATE_RADAR_USER, GET_ACCOUNT_USERS, GET_RADAR_USERS } from "@/constants/query-keys";
 
 import { userSchema } from "@/schemas/user";
@@ -15,8 +16,7 @@ import { useCreateAccountUser } from "@/queries/account-user";
 export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const {mutate: createAccountUser, isPending: isPendingAccount } = useCreateAccountUser(auth, queryClient);
-
+  const { mutate: createAccountUser, isPending: isPendingAccount } = useCreateAccountUser(auth, queryClient);
 
   /*
   const { mutate: createAccountUser, isPending: isPendingAccount } = useMutation<
@@ -84,7 +84,6 @@ export default function HomePage() {
     createRadarUser(
       userSchema.parse({ id: 0, sub: auth.user?.profile.sub, username: auth.user?.profile.preferred_username }),
     );
-
   }, [auth, createAccountUser, createRadarUser]);
 
   if (isPendingAccount || isPendingRadar) {
