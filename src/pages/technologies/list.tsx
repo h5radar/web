@@ -3,7 +3,8 @@ import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
 
 import { TechnologyTable } from "@/components/technologies/table";
-import { useGetTechnologies } from "@/queries/technology.ts";
+
+import { useGetTechnologies } from "@/queries/technology";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();

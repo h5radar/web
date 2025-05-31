@@ -4,9 +4,9 @@ import { AuthContextProps } from "react-oidc-context";
 import { API_URL } from "@/constants/application";
 import { GET_TECHNOLOGIES } from "@/constants/query-keys";
 
-import { createQueryParams } from "@/lib/params";
-
 import { QueryParams } from "@/types/query-params";
+
+import { createQueryParams } from "@/lib/query-params";
 
 export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryParams) => {
   return useQuery({
@@ -22,4 +22,5 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
       return await response.json();
     },
     placeholderData: keepPreviousData,
-  });};
+  });
+};
