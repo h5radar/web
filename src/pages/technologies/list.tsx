@@ -20,7 +20,6 @@ export const TechnologiesPage = () => {
     error: error,
   } = useGetTechnologies(auth, queryParams);
 
-
   if (isError) {
     toast.error("Error getting technologies", {
       description: error.message,
