@@ -98,29 +98,29 @@ function DraggableRow<T extends { id: number }>({ row }: { row: Row<T> }) {
 }
 
 interface IDataTableProps<T> {
-  data: T[];
+  isLoading: boolean;
   columns: ColumnDef<T>[];
+  data: T[];
+  pageSize: number;
+  rowCount: number;
+  pageIndex: number;
   handleDelete: (id: string) => void;
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
   handleFilter?: (value: string) => void;
-  pageSize: number;
-  isLoading: boolean;
-  rowCount: number;
-  pageIndex: number;
 }
 
 export const DataTable = <T extends { id: number }>({
-  data,
-  columns,
-  handlePagination,
-  handleSorting,
-  handleFilter,
-  handleDelete,
   isLoading = false,
+  columns,
+  data,
   pageSize,
   rowCount,
   pageIndex,
+  handleDelete,
+  handlePagination,
+  handleSorting,
+  handleFilter,
 }: IDataTableProps<T>) => {
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});

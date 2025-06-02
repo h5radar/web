@@ -131,16 +131,16 @@ export const TechnologiesPage = () => {
   return (
     <>
       <DataTable
-        data={technologiesData.content}
+        isLoading={isFetchingTechnologiesData}
         columns={columns}
+        data={technologiesData.content}
+        rowCount={technologiesData.totalElements}
+        pageSize={technologiesData.pageable.pageSize}
+        pageIndex={technologiesData.pageable.pageNumber}
         handlePagination={handlePaginationParams}
         handleSorting={handleSortingParams}
         handleFilter={handleFilterParams}
         handleDelete={deleteTechnology}
-        rowCount={technologiesData.totalElements}
-        isLoading={isFetchingTechnologiesData}
-        pageSize={technologiesData.pageable.pageSize}
-        pageIndex={technologiesData.pageable.pageNumber}
       />
     </>
   );
