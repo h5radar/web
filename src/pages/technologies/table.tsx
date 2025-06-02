@@ -27,7 +27,6 @@ import { DataTable } from "@/components/data-table";
 
 import { technologyColumns } from "@/pages/technologies/columns";
 
-
 export const TechnologiesPage = () => {
   const auth = useAuth();
   const queryClient = useQueryClient();
