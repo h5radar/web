@@ -1,9 +1,10 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
@@ -66,12 +67,21 @@ import "@/index.css";
  * Create and configure query client. Default value for stale time is 0.
  * Here is stale time is equal 15 sec (= 1000 ms * 15).
  */
-export const queryClient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 15,
     },
   },
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (query.meta?.errorMessage) {
+        toast.error(query.meta.errorMessage.toString(), {
+          description: error.message,
+        });
+      }
+    },
+  }),
 });
 
 createRoot(document.getElementById("root")!).render(
