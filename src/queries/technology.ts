@@ -110,6 +110,9 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
       });
       return await response.json();
     },
+    meta: {
+      errorMessage: "Error getting technology",
+    },
   });
 };
 
@@ -125,6 +128,9 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       return await response.json();
+    },
+    meta: {
+      errorMessage: "Error getting technologies",
     },
     placeholderData: keepPreviousData,
   });

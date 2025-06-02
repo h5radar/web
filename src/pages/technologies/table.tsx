@@ -4,7 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { Link } from "react-router";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/ui/button";
@@ -91,9 +90,12 @@ export const TechnologiesPage = () => {
   }, []);
 
   if (isError) {
-    toast.error("Error getting technologies", {
-      description: error.message,
-    });
+    return (
+      <div>
+        <h1>Error getting technologies</h1>
+        <div>{error.message}</div>
+      </div>
+    );
   }
 
   return (
