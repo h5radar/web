@@ -1,12 +1,14 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import { AuthContextProps } from "react-oidc-context";
 
 import { API_URL } from "@/constants/application";
-import { GET_TECHNOLOGIES } from "@/constants/query-keys";
+import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
 import { createQueryParams } from "@/lib/query-params";
+import type { QueryClient } from "@tanstack/query-core";
+import { toast } from "sonner";
 
 export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryParams) => {
   return useQuery({
@@ -22,5 +24,29 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
       return await response.json();
     },
     placeholderData: keepPreviousData,
+  });
+};
+
+export const useDeleteTechnology = (auth: AuthContextProps, queryClient: QueryClient) => {
+  return useMutation({
+    mutationFn: async (rowId: string) => {
+      await fetch(`${API_URL}/technologies/${rowId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: [DELETE_TECHNOLOGY],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
+      toast.success("Technology has been deleted successfully");
+    },
+    onError(error) {
+      toast.error("Error deleting technology", {
+        description: error.message,
+      });
+    },
   });
 };
