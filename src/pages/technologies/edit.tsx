@@ -1,8 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "react-oidc-context";
-import { z } from "zod";
-
-import { technologySchema } from "@/schemas/technology";
 
 import { useGetTechnology, useUpdateTechnology } from "@/queries/technology.ts";
 
@@ -16,10 +13,6 @@ export default function EditTechnologyPage() {
 
   const { data: technology, isLoading: isLoading, isError: isError, error: error } = useGetTechnology(auth, id);
   const { mutate: updateTechnology, isPending: isPending } = useUpdateTechnology(auth, queryClient, id);
-
-  function onSubmit(values: z.infer<typeof technologySchema>) {
-    updateTechnology(values);
-  }
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -36,7 +29,7 @@ export default function EditTechnologyPage() {
 
   return (
     <>
-      <TechnologyForm defaultDataForm={technology} onSubmit={onSubmit} disabled={isPending} />
+      <TechnologyForm defaultDataForm={technology} onSubmit={updateTechnology} disabled={isPending} />
     </>
   );
 }
