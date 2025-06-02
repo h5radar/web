@@ -10,6 +10,7 @@ import {
   CREATE_TECHNOLOGY,
   DELETE_TECHNOLOGY,
   GET_TECHNOLOGIES,
+  SEED_TECHNOLOGIES,
   GET_TECHNOLOGY,
   UPDATE_TECHNOLOGY,
 } from "@/constants/query-keys";
@@ -133,5 +134,30 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
       errorMessage: "Error getting technologies",
     },
     placeholderData: keepPreviousData,
+  });
+};
+
+export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryClient) => {
+  return useMutation({
+    mutationFn: async() => {
+      const response = await fetch(`${API_URL}/technologies/seed`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
+    mutationKey: [SEED_TECHNOLOGIES],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
+      toast.success("Technologies has been seed successfully");
+    },
+    onError(error) {
+      toast.error("Error seeding technologies", {
+        description: error.message,
+      });
+    },
   });
 };
