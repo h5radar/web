@@ -23,8 +23,9 @@ import { technologySchema } from "@/schemas/technology";
 
 import { DataTable } from "@/components/data-table";
 
-import { technologyColumns } from "@/pages/technologies/columns";
 import { useGetTechnologies } from "@/queries/technology.ts";
+
+import { technologyColumns } from "@/pages/technologies/columns";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
