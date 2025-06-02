@@ -54,7 +54,7 @@ import RingsPage from "@/pages/rings/list";
 import SegmentsPage from "@/pages/segments/list";
 import TeamsPage from "@/pages/teams/list";
 import EditTechnologyPage from "@/pages/technologies/edit";
-import { TechnologiesPage } from "@/pages/technologies/list";
+import { TechnologiesPage } from "@/pages/technologies/table";
 // Include technology resource pages at alphabet
 import NewTechnologyPage from "@/pages/technologies/new";
 import TechnologyBlipsPage from "@/pages/technology-blips/list";
