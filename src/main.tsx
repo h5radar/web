@@ -68,7 +68,7 @@ import "@/index.css";
  * Here is stale time is equal 15 sec (= 1000 ms * 15).
  */
 const queryClient = new QueryClient({
-  defaultOptions:{
+  defaultOptions: {
     queries: {
       staleTime: 1000 * 15,
     },
@@ -77,13 +77,12 @@ const queryClient = new QueryClient({
     onError: (error, query) => {
       if (query.meta?.errorMessage) {
         toast.error(query.meta.errorMessage.toString(), {
-          description: error.message
-        })
+          description: error.message,
+        });
       }
     },
   }),
-})
-
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
