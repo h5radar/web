@@ -23,8 +23,10 @@ import { technologySchema } from "@/schemas/technology";
 
 import { createQueryParams } from "@/lib/params";
 
-import { technologyColumns } from "@/components/columns/technology-columns";
 import { DataTable } from "@/components/data-table";
+
+import { technologyColumns } from "@/pages/technologies/columns";
+
 
 export const TechnologiesPage = () => {
   const auth = useAuth();

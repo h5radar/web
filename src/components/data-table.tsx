@@ -56,8 +56,6 @@ import { Tabs, TabsContent } from "@/ui/tabs";
 
 import { FilterInput } from "@/components/filter-input";
 
-// Create a separate component for the drag handle
-
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
     id,
