@@ -107,7 +107,7 @@ interface IDataTableProps<T> {
   handleDelete: (id: string) => void;
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
-  handleFilter?: (value: string) => void;
+  handleFiltering?: (value: string) => void;
 }
 
 export const DataTable = <T extends { id: number }>({
@@ -120,7 +120,7 @@ export const DataTable = <T extends { id: number }>({
   handleDelete,
   handlePagination,
   handleSorting,
-  handleFilter,
+  handleFiltering,
 }: IDataTableProps<T>) => {
   const [localData, setLocalData] = React.useState(data);
   const [rowSelection, setRowSelection] = React.useState({});
@@ -232,7 +232,7 @@ export const DataTable = <T extends { id: number }>({
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
-        <div>{handleFilter ? <FilterInput handleFilter={handleFilter} /> : null}</div>
+        <div>{handleFiltering ? <FilterInput handleFilter={handleFiltering} /> : null}</div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

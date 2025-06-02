@@ -1,10 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
-import { z } from "zod";
-
-import { technologySchema } from "@/schemas/technology";
-
 import { useGetTechnology, useUpdateTechnology } from "@/queries/technology.ts";
 
 import TechnologyForm from "@/pages/technologies/form";
@@ -24,17 +20,13 @@ export default function EditTechnologyPage() {
     });
   }
 
-  function onSubmit(values: z.infer<typeof technologySchema>) {
-    updateTechnology(values);
-  }
-
   if (isFetching) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <>
-      <TechnologyForm defaultDataForm={technology} onSubmit={onSubmit} disabled={isPending} />
+      <TechnologyForm defaultDataForm={technology} onSubmit={updateTechnology} disabled={isPending} />
     </>
   );
 }

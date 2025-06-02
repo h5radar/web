@@ -72,23 +72,24 @@ export const TechnologiesPage = () => {
 
   const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient);
 
-  const handleFilterParams = useCallback((value: string) => {
-    return setQueryParams((prev) => {
-      return { ...prev, title: value, page: 1 };
+  const handlePagination = useCallback((page: number, size: number) => {
+    setQueryParams((prev) => {
+      return { ...prev, page: page + 1, size: size };
     });
   }, []);
 
-  const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
+  const handleSorting = useCallback((id: string, desc: "asc" | "desc") => {
     return setQueryParams((prev) => {
       return { ...prev, sort: [id, desc], page: 1 };
     });
   }, []);
 
-  const handlePaginationParams = useCallback((page: number, size: number) => {
-    setQueryParams((prev) => {
-      return { ...prev, page: page + 1, size: size };
+  const handleFiltering = useCallback((value: string) => {
+    return setQueryParams((prev) => {
+      return { ...prev, title: value, page: 1 };
     });
   }, []);
+
 
   if (isError) {
     toast.error("Error getting technologies", {
@@ -105,9 +106,9 @@ export const TechnologiesPage = () => {
         rowCount={technologies.totalElements}
         pageSize={technologies.pageable.pageSize}
         pageIndex={technologies.pageable.pageNumber}
-        handlePagination={handlePaginationParams}
-        handleSorting={handleSortingParams}
-        handleFilter={handleFilterParams}
+        handlePagination={handlePagination}
+        handleSorting={handleSorting}
+        handleFiltering={handleFiltering}
         handleDelete={deleteTechnology}
       />
     </>
