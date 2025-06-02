@@ -1,3 +1,7 @@
+/**
+ * NavItem is a type for left sidebar
+ *
+ */
 export interface NavItem {
   title: string;
   url: string;
@@ -11,6 +15,7 @@ export interface NavItem {
   items?: NavItem[];
 }
 
+/*
 export interface NavItemWithChildren extends NavItem {
   items: NavItemWithChildren[];
 }
@@ -30,3 +35,4 @@ export interface FooterItem {
 
 export type MainNavItem = NavItemWithOptionalChildren;
 export type SidebarNavItem = NavItemWithChildren;
+*/
