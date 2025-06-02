@@ -70,7 +70,7 @@ export const TechnologiesPage = () => {
     error: error,
   } = useGetTechnologies(auth, queryParams);
 
-  const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient)
+  const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient);
 
   const handleFilterParams = useCallback((value: string) => {
     return setQueryParams((prev) => {
