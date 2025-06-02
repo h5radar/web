@@ -77,11 +77,13 @@ export const TechnologiesPage = () => {
       return { ...prev, title: value, page: 1 };
     });
   }, []);
+
   const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
     return setQueryParams((prev) => {
       return { ...prev, sort: [id, desc], page: 1 };
     });
   }, []);
+
   const handlePaginationParams = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
       return { ...prev, page: page + 1, size: size };

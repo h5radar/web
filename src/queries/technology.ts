@@ -11,7 +11,7 @@ import {
   DELETE_TECHNOLOGY,
   GET_TECHNOLOGIES,
   GET_TECHNOLOGY,
-  UPDATE_TECHNOLOGY
+  UPDATE_TECHNOLOGY,
 } from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
@@ -48,11 +48,7 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
 };
 
 export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryClient, id: string) => {
-  return useMutation<
-    z.infer<typeof technologySchema>,
-    Error,
-    z.infer<typeof technologySchema>
-  >({
+  return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
       const response = await fetch(`${API_URL}/technologies/${id}`, {
         method: "PUT",

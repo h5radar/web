@@ -5,8 +5,9 @@ import { z } from "zod";
 
 import { technologySchema } from "@/schemas/technology";
 
-import TechnologyForm from "@/pages/technologies/form";
 import { useGetTechnology, useUpdateTechnology } from "@/queries/technology.ts";
+
+import TechnologyForm from "@/pages/technologies/form";
 
 export default function EditTechnologyPage() {
   const auth = useAuth();
@@ -14,9 +15,8 @@ export default function EditTechnologyPage() {
   const url = new URL(window.location.href);
   const id = url.pathname.split("/")[3];
 
-  const { data: technology, isFetching: isFetching, isError: isError, error: error} = useGetTechnology(auth, id);
+  const { data: technology, isFetching: isFetching, isError: isError, error: error } = useGetTechnology(auth, id);
   const { mutate: updateTechnology, isPending: isPending } = useUpdateTechnology(auth, queryClient, id);
-
 
   if (isError) {
     toast("Load error", {
