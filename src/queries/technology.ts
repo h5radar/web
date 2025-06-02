@@ -152,7 +152,7 @@ export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryCl
     mutationKey: [SEED_TECHNOLOGIES],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
-      toast.success("Technologies has been seed successfully");
+      toast.success("Technologies has been seeded successfully");
     },
     onError(error) {
       toast.error("Error seeding technologies", {

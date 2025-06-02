@@ -21,7 +21,7 @@ export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient
     mutationKey: [SEED_LICENSES],
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [GET_LICENSES] });
-      toast.success("Licenses has been seed successfully");
+      toast.success("Licenses has been seeded successfully");
     },
     onError(error) {
       toast.error("Error seeding licenses", {
