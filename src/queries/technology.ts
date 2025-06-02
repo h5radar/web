@@ -1,26 +1,27 @@
 import type { QueryClient } from "@tanstack/query-core";
 import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import { AuthContextProps } from "react-oidc-context";
-import { toast } from "sonner";
-
 import { NavigateFunction } from "react-router";
-
+import { toast } from "sonner";
+import { z } from "zod";
 
 import { API_URL } from "@/constants/application";
-import { CREATE_TECHNOLOGY, DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
+import {
+  CREATE_TECHNOLOGY,
+  DELETE_TECHNOLOGY,
+  GET_TECHNOLOGIES,
+  GET_TECHNOLOGY,
+  UPDATE_TECHNOLOGY
+} from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
-import { createQueryParams } from "@/lib/query-params";
-import { z } from "zod";
 import { technologySchema } from "@/schemas/technology.ts";
 
+import { createQueryParams } from "@/lib/query-params";
+
 export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryClient, navigate: NavigateFunction) => {
-  return useMutation<
-    z.infer<typeof technologySchema>,
-    Error,
-    z.infer<typeof technologySchema>
-  >({
+  return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
       const response = await fetch(`${API_URL}/technologies`, {
         method: "POST",
@@ -46,6 +47,36 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
   });
 };
 
+export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryClient, id: string) => {
+  return useMutation<
+    z.infer<typeof technologySchema>,
+    Error,
+    z.infer<typeof technologySchema>
+  >({
+    mutationFn: async (values: z.infer<typeof technologySchema>) => {
+      const response = await fetch(`${API_URL}/technologies/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
+    mutationKey: [UPDATE_TECHNOLOGY],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
+      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGY, id] });
+      toast.success("Technology has been updated successfully");
+    },
+    onError(error) {
+      toast.error("Error updating technology", {
+        description: error.message,
+      });
+    },
+  });
+};
 export const useDeleteTechnology = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async (rowId: string) => {
@@ -70,6 +101,22 @@ export const useDeleteTechnology = (auth: AuthContextProps, queryClient: QueryCl
   });
 };
 
+export const useGetTechnology = (auth: AuthContextProps, id: string) => {
+  return useQuery({
+    queryKey: ["get technology", id],
+    queryFn: async () => {
+      const response = await fetch(`${API_URL}/technologies/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      return await response.json();
+    },
+  });
+};
+
 export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryParams) => {
   return useQuery({
     queryKey: [GET_TECHNOLOGIES, queryParams],
@@ -86,4 +133,3 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
     placeholderData: keepPreviousData,
   });
 };
-
