@@ -4,11 +4,7 @@ import { AuthContextProps } from "react-oidc-context";
 import { toast } from "sonner";
 
 import { API_URL } from "@/constants/application";
-import {
-  GET_LICENSES,
-  SEED_LICENSES,
-} from "@/constants/query-keys";
-
+import { GET_LICENSES, SEED_LICENSES } from "@/constants/query-keys";
 
 export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({

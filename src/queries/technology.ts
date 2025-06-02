@@ -10,8 +10,8 @@ import {
   CREATE_TECHNOLOGY,
   DELETE_TECHNOLOGY,
   GET_TECHNOLOGIES,
-  SEED_TECHNOLOGIES,
   GET_TECHNOLOGY,
+  SEED_TECHNOLOGIES,
   UPDATE_TECHNOLOGY,
 } from "@/constants/query-keys";
 
@@ -139,7 +139,7 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
 
 export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
-    mutationFn: async() => {
+    mutationFn: async () => {
       const response = await fetch(`${API_URL}/technologies/seed`, {
         method: "POST",
         headers: {

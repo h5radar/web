@@ -5,8 +5,8 @@ import { useAuth } from "react-oidc-context";
 import { userSchema } from "@/schemas/user";
 
 import { useCreateAccountUser } from "@/queries/account-user";
-import { useCreateRadarUser } from "@/queries/radar-user";
 import { useSeedLicenses } from "@/queries/license";
+import { useCreateRadarUser } from "@/queries/radar-user";
 import { useSeedTechnologies } from "@/queries/technology";
 
 export default function HomePage() {
@@ -18,19 +18,20 @@ export default function HomePage() {
   const { mutate: seedTechnologies, isPending: isPending4 } = useSeedTechnologies(auth, queryClient);
 
   useEffect(() => {
-    const user  =  userSchema.parse({ id: 0,
+    const user = userSchema.parse({
+      id: 0,
       sub: auth.user?.profile.sub,
-      username: auth.user?.profile.preferred_username });
+      username: auth.user?.profile.preferred_username,
+    });
 
-    createAccountUser( user );
-    createRadarUser( user );
+    createAccountUser(user);
+    createRadarUser(user);
 
     seedLicenses();
     seedTechnologies();
-
   }, [auth, createAccountUser, createRadarUser, seedLicenses, seedTechnologies]);
 
-  if (isPending1 || isPending2  || isPending3 || isPending4) {
+  if (isPending1 || isPending2 || isPending3 || isPending4) {
     return <h1>Loading...</h1>;
   }
 

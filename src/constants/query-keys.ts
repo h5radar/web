@@ -36,4 +36,3 @@ export const DELETE_TECHNOLOGY = "Delete technology";
 export const GET_TECHNOLOGY = "Get technology";
 export const GET_TECHNOLOGIES = "Get technologies";
 export const SEED_TECHNOLOGIES = "Seed technologies";
-
