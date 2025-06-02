@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "react-oidc-context";
 import { toast } from "sonner";
+
 import { useGetTechnology, useUpdateTechnology } from "@/queries/technology.ts";
 
 import TechnologyForm from "@/pages/technologies/form";

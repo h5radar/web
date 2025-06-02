@@ -90,7 +90,6 @@ export const TechnologiesPage = () => {
     });
   }, []);
 
-
   if (isError) {
     toast.error("Error getting technologies", {
       description: error.message,
