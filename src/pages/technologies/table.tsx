@@ -1,5 +1,5 @@
 import { IconDotsVertical } from "@tabler/icons-react";
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
@@ -16,14 +16,11 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { API_URL } from "@/constants/application";
-import { DELETE_TECHNOLOGY, GET_TECHNOLOGIES } from "@/constants/query-keys";
-
 import { technologySchema } from "@/schemas/technology";
 
-import { createQueryParams } from "@/lib/params";
-
 import { DataTable } from "@/components/data-table";
+
+import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology.ts";
 
 import { technologyColumns } from "@/pages/technologies/columns";
 
@@ -65,78 +62,49 @@ export const TechnologiesPage = () => {
       ),
     },
   ];
-  const {
-    data: technologiesData = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
-    isLoading: isFetchingTechnologiesData,
-    isError: isErrorDataList,
-    error: errorDataList,
-  } = useQuery({
-    queryKey: [GET_TECHNOLOGIES, queryParams],
-    queryFn: async () => {
-      const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-      return await response.json();
-    },
-    placeholderData: keepPreviousData,
-  });
 
-  const { mutate: deleteTechnology } = useMutation({
-    mutationFn: async (rowId: string) => {
-      await fetch(`${API_URL}/technologies/${rowId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: [DELETE_TECHNOLOGY],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
-      toast.success("Technology has been deleted successfully");
-    },
-    onError(error) {
-      toast.error("Error deleting technology", {
-        description: error.message,
-      });
-    },
-  });
-  if (isErrorDataList) {
-    toast.error("Error getting technologies", {
-      description: errorDataList.message,
-    });
-  }
+  const {
+    data: technologies = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
+    isLoading: isLoading,
+    isError: isError,
+    error: error,
+  } = useGetTechnologies(auth, queryParams);
+
+  const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient);
 
   const handleFilterParams = useCallback((value: string) => {
     return setQueryParams((prev) => {
       return { ...prev, title: value, page: 1 };
     });
   }, []);
+
   const handleSortingParams = useCallback((id: string, desc: "asc" | "desc") => {
     return setQueryParams((prev) => {
       return { ...prev, sort: [id, desc], page: 1 };
     });
   }, []);
+
   const handlePaginationParams = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
       return { ...prev, page: page + 1, size: size };
     });
   }, []);
 
+  if (isError) {
+    toast.error("Error getting technologies", {
+      description: error.message,
+    });
+  }
+
   return (
     <>
       <DataTable
-        isLoading={isFetchingTechnologiesData}
+        isLoading={isLoading}
         columns={columns}
-        data={technologiesData.content}
-        rowCount={technologiesData.totalElements}
-        pageSize={technologiesData.pageable.pageSize}
-        pageIndex={technologiesData.pageable.pageNumber}
+        data={technologies.content}
+        rowCount={technologies.totalElements}
+        pageSize={technologies.pageable.pageSize}
+        pageIndex={technologies.pageable.pageNumber}
         handlePagination={handlePaginationParams}
         handleSorting={handleSortingParams}
         handleFilter={handleFilterParams}
