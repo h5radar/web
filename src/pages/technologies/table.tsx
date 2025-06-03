@@ -1,27 +1,12 @@
-import { IconDotsVertical } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
-import { Link } from "react-router";
-import { z } from "zod";
-
-import { Button } from "@/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/ui/dropdown-menu";
-
-import { technologySchema } from "@/schemas/technology";
 
 import { DataTable } from "@/components/data-table";
 
 import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology.ts";
 
-import { technologyColumns } from "@/pages/technologies/columns";
+import { useTechnologyColumns } from "@/pages/technologies/columns";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
@@ -32,36 +17,6 @@ export const TechnologiesPage = () => {
     sort: ["title", "asc"],
   });
 
-  const columns: ColumnDef<z.infer<typeof technologySchema>>[] = [
-    ...technologyColumns,
-    {
-      id: "actions",
-      cell: ({ row }) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
-              size="icon"
-            >
-              <IconDotsVertical />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-32">
-            <Link to={`/technologies/edit/${row.id}`}>
-              <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
-            </Link>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" onClick={() => deleteTechnology(row.id)}>
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ),
-    },
-  ];
-
   const {
     data: technologies = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
     isLoading: isLoading,
@@ -70,6 +25,8 @@ export const TechnologiesPage = () => {
   } = useGetTechnologies(auth, queryParams);
 
   const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient);
+
+  const columns = useTechnologyColumns(deleteTechnology);
 
   const handlePagination = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
