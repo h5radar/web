@@ -24,6 +24,9 @@
 # docs
 /docs
 
+# instrumented app
+/instrumented
+
 # dependencies
 /node_modules
 
