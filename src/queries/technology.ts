@@ -128,7 +128,10 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      const technologiesSchema = z.array(technologySchema);
+      technologiesSchema.parse(data.content);
+      return data;
     },
     meta: {
       errorMessage: "Error getting technologies",
