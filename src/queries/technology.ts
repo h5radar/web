@@ -17,7 +17,7 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { technologySchema } from "@/schemas/technology.ts";
+import { createPaginatedSchema, technologySchema } from "@/schemas/technology.ts";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -32,7 +32,8 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
     },
     mutationKey: [CREATE_TECHNOLOGY],
     onSuccess() {
@@ -59,7 +60,8 @@ export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryCl
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
     },
     mutationKey: [UPDATE_TECHNOLOGY],
     onSuccess() {
@@ -109,7 +111,9 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
+      // return data;
     },
     meta: {
       errorMessage: "Error getting technology",
@@ -129,9 +133,7 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       const data = await response.json();
-      const technologiesSchema = z.array(technologySchema);
-      technologiesSchema.parse(data.content);
-      return data;
+      return createPaginatedSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",
