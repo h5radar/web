@@ -19,7 +19,11 @@ interface TechnologyFormProps {
 /**
  * TechnologyForm is ... .
  */
-export const TechnologyForm: React.FC<TechnologyFormProps> = ({ defaultDataForm, onSubmit, disabled }: TechnologyFormProps) => {
+export const TechnologyForm: React.FC<TechnologyFormProps> = ({
+  defaultDataForm,
+  onSubmit,
+  disabled,
+}: TechnologyFormProps) => {
   const form = useForm<z.infer<typeof technologySchema>>({
     resolver: zodResolver(technologySchema),
     defaultValues: defaultDataForm || {
