@@ -55,7 +55,7 @@ export default tseslint.config(
       "react/no-unescaped-entities": ["error"],
       "react/no-unknown-property": ["error"],
       "react/no-unsafe": ["error"],
-      // "react/prop-types": ["error"],
+      "react/prop-types": ["error"],
       "react/require-render-return": ["error"],
       "jsx-a11y/alt-text": ["error"],
       "jsx-a11y/lang": ["error"],
