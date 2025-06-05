@@ -51,6 +51,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "d3": "^7.9.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "input-otp": "^1.4.2",
     "js-cookie": "^3.0.5",
     "kbar": "^0.1.0-beta.45",
