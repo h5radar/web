@@ -3,7 +3,7 @@ import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import { AuthContextProps } from "react-oidc-context";
 import { NavigateFunction } from "react-router";
 import { toast } from "sonner";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 
 import { API_URL } from "@/constants/application";
 import {
@@ -133,13 +133,16 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       const data = await response.json();
-      return responseSchema(technologySchema).parse(data);
+      const validation = responseSchema(technologySchema).safeParse(data);
+      if (!validation.success) throw validation.error;
+      return validation.data;
       // return createPaginatedSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",
     },
     placeholderData: keepPreviousData,
+    retry: (count, error) => count < 3 && !(error instanceof ZodError),
   });
 };
 

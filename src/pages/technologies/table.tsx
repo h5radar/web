@@ -45,12 +45,15 @@ export const TechnologiesPage = () => {
       return { ...prev, title: value, page: 1 };
     });
   }, []);
-
   if (isError) {
     return (
       <div>
         <h1>Error getting technologies</h1>
-        <div>{error.message}</div>
+        {JSON.parse(error.message).map((item: { message: string; path: string[] }, key: number) => (
+          <div key={key}>
+            in dataset item №{item.path[1]} error: {item.message}
+          </div>
+        ))}
       </div>
     );
   }
