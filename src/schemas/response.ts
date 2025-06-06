@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 const sortSchema = z.object({
   empty: z.boolean(),
   sorted: z.boolean(),
