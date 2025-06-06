@@ -4,11 +4,11 @@ import { Input } from "@/ui/input";
 
 import { DEBOUNCE_TIME } from "@/constants/application";
 
-interface ISearchInput {
+interface FilterInputProps {
   handleFilter: (value: string) => void;
 }
 
-export const FilterInput = ({ handleFilter }: ISearchInput) => {
+export const FilterInput = ({ handleFilter }: FilterInputProps) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const debouncedHandleFilter = useCallback(
