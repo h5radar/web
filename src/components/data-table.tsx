@@ -297,6 +297,7 @@ export const DataTable = <T extends { id: number }>({
                                     : " flex align-middle"
                                 }
                                 onClick={header.column.getToggleSortingHandler()}
+                                onKeyDown={header.column.getToggleSortingHandler()}
                                 title={
                                   header.column.getCanSort()
                                     ? header.column.getNextSortingOrder() === "asc"
