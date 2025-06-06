@@ -3,7 +3,7 @@ interface PageHeadingProps {
   description: string;
 }
 
-export const PageHeading: React.FC<PageHeadingProps> = ({ title, description }) => {
+export const PageHeading: React.FC<PageHeadingProps> = ({ title, description }: PageHeadingProps) => {
   return (
     <div>
       <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
