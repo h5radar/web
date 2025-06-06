@@ -118,6 +118,7 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
     meta: {
       errorMessage: "Error getting technology",
     },
+    retry: (count, error) => count < 3 && !(error instanceof ZodError),
   });
 };
 
@@ -133,10 +134,7 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       const data = await response.json();
-      const validation = responseSchema(technologySchema).safeParse(data);
-      if (!validation.success) throw validation.error;
-      return validation.data;
-      // return createPaginatedSchema(technologySchema).parse(data);
+      return responseSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",
