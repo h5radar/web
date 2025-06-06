@@ -290,7 +290,7 @@ export const DataTable = <T extends { id: number }>({
                         <TableHead key={header.id} colSpan={header.colSpan}>
                           {header.isPlaceholder ? null : (
                             <div className={header.id === "select" ? "flex justify-center" : "flex align-middle"}>
-                              <div role="link" tabIndex={0}
+                              <div
                                 className={
                                   header.column.getCanSort()
                                     ? "cursor-pointer select-none flex self-center leading-[1.5rem]"
@@ -306,6 +306,8 @@ export const DataTable = <T extends { id: number }>({
                                         : "Clear sort"
                                     : undefined
                                 }
+                                role="link"
+                                tabIndex={0}
                               >
                                 {flexRender(header.column.columnDef.header, header.getContext())}
                                 <div>
