@@ -17,7 +17,8 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { createPaginatedSchema, technologySchema } from "@/schemas/technology.ts";
+import { responseSchema } from "@/schemas/response";
+import { technologySchema } from "@/schemas/technology";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -113,7 +114,6 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
       });
       const data = await response.json();
       return technologySchema.parse(data);
-      // return data;
     },
     meta: {
       errorMessage: "Error getting technology",
@@ -133,7 +133,8 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       const data = await response.json();
-      return createPaginatedSchema(technologySchema).parse(data);
+      return responseSchema(technologySchema).parse(data);
+      // return createPaginatedSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",
