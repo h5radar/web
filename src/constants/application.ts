@@ -20,3 +20,4 @@ export const NOTIFICATIONS_ENABLED = import.meta.env.VITE_NOTIFICATIONS_ENABLED 
  * Settings
  */
 export const DEBOUNCE_TIME = 400;
+export const QUERY_RETRY_COUNT = 3;
