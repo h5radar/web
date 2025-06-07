@@ -29,21 +29,3 @@ export const responseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
     totalElements: z.number(),
     totalPages: z.number(),
   });
-
-/*
-export function createPaginatedSchema<T extends z.ZodTypeAny>(itemSchema: T) {
-  return z.object({
-    content: z.array(itemSchema),
-    empty: z.boolean(),
-    first: z.boolean(),
-    last: z.boolean(),
-    number: z.number(),
-    numberOfElements: z.number(),
-    pageable: pageableSchema,
-    size: z.number(),
-    sort: sortSchema,
-    totalElements: z.number(),
-    totalPages: z.number(),
-  });
-}
-*/
