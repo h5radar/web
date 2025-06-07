@@ -5,7 +5,6 @@ import { createRoot } from "react-dom/client";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { toast } from "sonner";
-import { ZodError } from "zod";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
@@ -76,18 +75,9 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error, query) => {
-      if (!(error instanceof ZodError) && query.meta?.errorMessage) {
+      if (query.meta?.errorMessage) {
         toast.error(query.meta.errorMessage.toString(), {
           description: error.message,
-        });
-      }
-      if (error instanceof ZodError && query.meta?.errorMessage) {
-        toast.error(query.meta.errorMessage.toString(), {
-          description: JSON.parse(error.message).map((item: { message: string; path: string[] }, key: number) => (
-            <div key={key}>
-              in dataset item №{item.path[1]} error: {item.message}
-            </div>
-          )),
         });
       }
     },
