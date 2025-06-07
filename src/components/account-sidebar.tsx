@@ -23,8 +23,6 @@ import AppSidebarHeader from "@/components/app-sidebar-header";
 const AccountSidebar = () => {
   const location = useLocation();
 
-  // const { state, isMobile } = useSidebar();
-
   return (
     <Sidebar collapsible="icon">
       <AppSidebarHeader />
