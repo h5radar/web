@@ -7,7 +7,8 @@ import { Toaster } from "@/ui/sonner.tsx";
 
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
-import KBar from "@/components/kbar";
+
+import { SearchProvider } from "@/providers/search-provider";
 
 export default function AccountLayout() {
   // Persisting the sidebar state in the cookie.
@@ -16,7 +17,7 @@ export default function AccountLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <KBar>
+        <SearchProvider>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AccountSidebar />
             <SidebarInset>
@@ -28,7 +29,7 @@ export default function AccountLayout() {
               </div>
             </SidebarInset>
           </SidebarProvider>
-        </KBar>
+        </SearchProvider>
         <Toaster />
       </ThemeProvider>
     </>

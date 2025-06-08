@@ -6,7 +6,6 @@ import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
 import AppNavbar from "@/components/app-navbar";
-// import KBar from "@/components/kbar";
 import RadarSidebar from "@/components/radar-sidebar";
 
 import { SearchProvider } from "@/providers/search-provider";
@@ -22,7 +21,6 @@ export default function RadarLayout() {
           <SidebarProvider defaultOpen={defaultOpen}>
             <RadarSidebar />
             <SidebarInset>
-              {/* TODO сюда допистаь компонеент */}
               <AppNavbar />
               <div className="flex">
                 <div className="p-5 w-full md:max-w-[1440px]">

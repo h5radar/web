@@ -7,7 +7,8 @@ import { Toaster } from "@/ui/sonner.tsx";
 
 import AppNavbar from "@/components/app-navbar";
 import BillingSidebar from "@/components/billing-sidebar";
-import KBar from "@/components/kbar";
+
+import { SearchProvider } from "@/providers/search-provider";
 
 export default function BillingLayout() {
   // Persisting the sidebar state in the cookie.
@@ -16,7 +17,7 @@ export default function BillingLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <KBar>
+        <SearchProvider>
           <SidebarProvider defaultOpen={defaultOpen}>
             <BillingSidebar />
             <SidebarInset>
@@ -28,7 +29,7 @@ export default function BillingLayout() {
               </div>
             </SidebarInset>
           </SidebarProvider>
-        </KBar>
+        </SearchProvider>
         <Toaster />
       </ThemeProvider>
     </>
