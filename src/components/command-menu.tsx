@@ -15,6 +15,8 @@ import {
 
 import { radarNavItems } from "@/constants/sidebar";
 
+import { ScrollArea } from "@/components/scroll-area";
+
 import { useSearch } from "@/hooks/useSearch";
 
 export function CommandMenu() {
@@ -34,60 +36,65 @@ export function CommandMenu() {
     <CommandDialog modal open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
-        {/* <ScrollArea type="hover" className="h-72 pr-1"> */}
-        <CommandEmpty>No results found.</CommandEmpty>
-        {radarNavItems.map((group) => (
-          <CommandGroup key={group.title} heading={group.title}>
-            {group.items &&
-              group.items.map((navItem, i) => {
-                if (navItem.url)
-                  return (
-                    <CommandItem
-                      key={`${navItem.url}-${i}`}
-                      value={navItem.title}
-                      onSelect={() => {
-                        runCommand(() => navigate(navItem.url));
-                      }}
-                    >
-                      <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                        <IconArrowRight className="text-muted-foreground/80 size-2" />
-                      </div>
-                      {navItem.title}
-                    </CommandItem>
-                  );
-
-                return navItem.items?.map((subItem, i) => (
+        <ScrollArea type="hover" className="h-72 pr-1">
+          <CommandEmpty>No results found.</CommandEmpty>
+          {radarNavItems.map((group, keyGroup) => {
+            if (group.url !== "#") {
+              return (
+                <CommandGroup key={group.title} heading={group.title}>
                   <CommandItem
-                    key={`${navItem.title}-${subItem.url}-${i}`}
-                    value={`${navItem.title}-${subItem.url}`}
+                    key={`${group.url}-${keyGroup}`}
+                    value={group.title}
                     onSelect={() => {
-                      runCommand(() => navigate(subItem.url));
+                      runCommand(() => navigate(group.url));
                     }}
                   >
                     <div className="mr-2 flex h-4 w-4 items-center justify-center">
                       <IconArrowRight className="text-muted-foreground/80 size-2" />
                     </div>
-                    {navItem.title} <IconChevronRight /> {subItem.title}
+
+                    {group.title}
                   </CommandItem>
-                ));
-              })}
+                </CommandGroup>
+              );
+            }
+            return (
+              <CommandGroup key={group.title} heading={group.title}>
+                {group.items &&
+                  group.items.map((navItem, keyNavItem) => {
+                    return (
+                      <CommandItem
+                        key={`${navItem.url}-${keyNavItem}`}
+                        value={navItem.title}
+                        onSelect={() => {
+                          runCommand(() => navigate(navItem.url));
+                        }}
+                      >
+                        <div className="mr-2 flex h-4 w-4 items-center justify-center">
+                          <IconArrowRight className="text-muted-foreground/80 size-2" />
+                        </div>
+                        {group.title} <IconChevronRight /> {navItem.title}
+                      </CommandItem>
+                    );
+                  })}
+              </CommandGroup>
+            );
+          })}
+          <CommandSeparator />
+          <CommandGroup heading="Theme">
+            <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
+              <IconSun /> <span>Light</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
+              <IconMoon className="scale-90" />
+              <span>Dark</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
+              <IconDeviceLaptop />
+              <span>System</span>
+            </CommandItem>
           </CommandGroup>
-        ))}
-        <CommandSeparator />
-        <CommandGroup heading="Theme">
-          <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
-            <IconSun /> <span>Light</span>
-          </CommandItem>
-          <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
-            <IconMoon className="scale-90" />
-            <span>Dark</span>
-          </CommandItem>
-          <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
-            <IconDeviceLaptop />
-            <span>System</span>
-          </CommandItem>
-        </CommandGroup>
-        {/* </ScrollArea> */}
+        </ScrollArea>
       </CommandList>
     </CommandDialog>
   );
