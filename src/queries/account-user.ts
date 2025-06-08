@@ -12,7 +12,7 @@ import { userSchema } from "@/schemas/user.tsx";
 export const useCreateAccountUser = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation<z.infer<typeof userSchema>, Error, z.infer<typeof userSchema>>({
     mutationFn: async (values: z.infer<typeof userSchema>) => {
-      const response = await fetch(`${API_URL}/account_users`, {
+      const response = await fetch(`${API_URL}/account-users`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
