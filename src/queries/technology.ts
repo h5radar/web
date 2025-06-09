@@ -5,7 +5,7 @@ import { NavigateFunction } from "react-router";
 import { toast } from "sonner";
 import { ZodError, z } from "zod";
 
-import { RADAR_API_URL, QUERY_RETRY_COUNT } from "@/constants/application";
+import { QUERY_RETRY_COUNT, RADAR_API_URL } from "@/constants/application";
 import {
   CREATE_TECHNOLOGY,
   DELETE_TECHNOLOGY,
