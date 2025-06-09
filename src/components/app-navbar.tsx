@@ -1,7 +1,6 @@
-import { Search } from "./search";
-
 import { SidebarTrigger } from "@/ui/sidebar";
 
+import { Search } from "@/components/search";
 import { TenantSwitcher } from "@/components/tenant-switcher";
 import ThemeToggler from "@/components/theme-toggler";
 import { UserDropdown } from "@/components/user-dropdown.tsx";
