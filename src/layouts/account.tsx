@@ -8,7 +8,7 @@ import { Toaster } from "@/ui/sonner.tsx";
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
 
-import { SearchProvider } from "@/providers/search-provider";
+import { SearchProvider } from "@/providers/search";
 
 export default function AccountLayout() {
   // Persisting the sidebar state in the cookie.

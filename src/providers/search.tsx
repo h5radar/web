@@ -4,13 +4,13 @@ import { useNavigate } from "react-router";
 
 import { CommandMenu } from "@/components/command-menu";
 
-import { SearchContext } from "@/context/search-context";
+import { SearchContext } from "@/contexts/search";
 
-interface Props {
+interface SearchProviderProps {
   children: React.ReactNode;
 }
 
-export function SearchProvider({ children }: Props) {
+export function SearchProvider({ children }: SearchProviderProps) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const auth = useAuth();

@@ -8,7 +8,7 @@ import { Toaster } from "@/ui/sonner.tsx";
 import AppNavbar from "@/components/app-navbar";
 import NotificationsSidebar from "@/components/notifications-sidebar";
 
-import { SearchProvider } from "@/providers/search-provider";
+import { SearchProvider } from "@/providers/search";
 
 export default function BulletinLayout() {
   // Persisting the sidebar state in the cookie.

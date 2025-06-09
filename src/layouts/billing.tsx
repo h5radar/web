@@ -8,7 +8,7 @@ import { Toaster } from "@/ui/sonner.tsx";
 import AppNavbar from "@/components/app-navbar";
 import BillingSidebar from "@/components/billing-sidebar";
 
-import { SearchProvider } from "@/providers/search-provider";
+import { SearchProvider } from "@/providers/search";
 
 export default function BillingLayout() {
   // Persisting the sidebar state in the cookie.

@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 
 import { Toaster } from "@/ui/sonner.tsx";
 
-import { SearchProvider } from "@/providers/search-provider";
+import { SearchProvider } from "@/providers/search";
 
 export default function AppLayout() {
   return (
