@@ -113,7 +113,18 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({
             <FormItem>
               <FormLabel>Moved</FormLabel>
               <FormControl>
-                <Input id="moved" type="number" min={-1} max={1} placeholder="0" {...field} value={field.value ?? 0} />
+                <Input
+                  id="moved"
+                  type="number"
+                  min={-1}
+                  max={1}
+                  placeholder="0"
+                  {...field}
+                  value={field.value ?? 0}
+                  {...form.register("moved", {
+                    setValueAs: (v) => Number(v),
+                  })}
+                />
               </FormControl>
               <FormDescription>This is technology moved</FormDescription>
               <FormMessage />

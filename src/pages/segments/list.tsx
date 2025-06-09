@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { segmentSchema } from "@/schemas/segment";
 
@@ -12,7 +12,7 @@ export default function SegmentsPage() {
   const auth = useAuth();
   const [segments, setSegments] = useState<z.infer<typeof segmentSchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/segments`, {
+    fetch(`${RADAR_API_URL}/segments`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

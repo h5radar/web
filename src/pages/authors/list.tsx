@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { authorSchema } from "@/schemas/author";
 
@@ -12,7 +12,7 @@ export default function AuthorsPage() {
   const auth = useAuth();
   const [authors, setAuthors] = useState<z.infer<typeof authorSchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/authors`, {
+    fetch(`${RADAR_API_URL}/authors`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

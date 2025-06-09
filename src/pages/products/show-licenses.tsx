@@ -1,7 +1,7 @@
 // import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import {z} from 'zod';
-// import {API_URL} from '@/constants';
+// import {RADAR_API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductLicenseDiffView from '@/components/products/license-diff-view';
 // import './styles.css';
@@ -70,7 +70,7 @@ export default function ShowProductLicensesPage() {
 
   const [radar, setRadar] = useState<z.infer<typeof radarSchema>>();
   useEffect(() => {
-    fetch(`${API_URL}/radars/${id}`).then((res) => {
+    fetch(`${RADAR_API_URL}/radars/${id}`).then((res) => {
       return res.json();
     }).then((data) => {
       setRadar(data);

@@ -4,7 +4,7 @@ import { AuthContextProps } from "react-oidc-context";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 import { CREATE_RADAR_USER, GET_RADAR_USERS } from "@/constants/query-keys";
 
 import { userSchema } from "@/schemas/user.tsx";
@@ -12,7 +12,7 @@ import { userSchema } from "@/schemas/user.tsx";
 export const useCreateRadarUser = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation<z.infer<typeof userSchema>, Error, z.infer<typeof userSchema>>({
     mutationFn: async (values: z.infer<typeof userSchema>) => {
-      const response = await fetch(`${API_URL}/radar_users`, {
+      const response = await fetch(`${RADAR_API_URL}/radar-users`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {

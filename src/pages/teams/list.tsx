@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { teamSchema } from "@/schemas/team";
 
@@ -12,7 +12,7 @@ export default function TeamsPage() {
   const auth = useAuth();
   const [teams, setTeams] = useState<z.infer<typeof teamSchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/teams`, {
+    fetch(`${RADAR_API_URL}/teams`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { ringSchema } from "@/schemas/ring";
 
@@ -12,7 +12,7 @@ export default function RingsPage() {
   const auth = useAuth();
   const [rings, setRings] = useState<z.infer<typeof ringSchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/rings`, {
+    fetch(`${RADAR_API_URL}/rings`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

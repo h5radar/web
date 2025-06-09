@@ -3,9 +3,9 @@ import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import { AuthContextProps } from "react-oidc-context";
 import { NavigateFunction } from "react-router";
 import { toast } from "sonner";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { QUERY_RETRY_COUNT, RADAR_API_URL } from "@/constants/application";
 import {
   CREATE_TECHNOLOGY,
   DELETE_TECHNOLOGY,
@@ -17,14 +17,15 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { technologySchema } from "@/schemas/technology.ts";
+import { responseSchema } from "@/schemas/response";
+import { technologySchema } from "@/schemas/technology";
 
 import { createQueryParams } from "@/lib/query-params";
 
 export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryClient, navigate: NavigateFunction) => {
   return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
-      const response = await fetch(`${API_URL}/technologies`, {
+      const response = await fetch(`${RADAR_API_URL}/technologies`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
@@ -32,7 +33,8 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
     },
     mutationKey: [CREATE_TECHNOLOGY],
     onSuccess() {
@@ -51,7 +53,7 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
 export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryClient, id: string) => {
   return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
-      const response = await fetch(`${API_URL}/technologies/${id}`, {
+      const response = await fetch(`${RADAR_API_URL}/technologies/${id}`, {
         method: "PUT",
         body: JSON.stringify(values),
         headers: {
@@ -59,7 +61,8 @@ export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryCl
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
     },
     mutationKey: [UPDATE_TECHNOLOGY],
     onSuccess() {
@@ -77,7 +80,7 @@ export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryCl
 export const useDeleteTechnology = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async (rowId: string) => {
-      await fetch(`${API_URL}/technologies/${rowId}`, {
+      await fetch(`${RADAR_API_URL}/technologies/${rowId}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -102,18 +105,20 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
   return useQuery({
     queryKey: ["get technology", id],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/technologies/${id}`, {
+      const response = await fetch(`${RADAR_API_URL}/technologies/${id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return technologySchema.parse(data);
     },
     meta: {
       errorMessage: "Error getting technology",
     },
+    retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
   });
 };
 
@@ -121,26 +126,28 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
   return useQuery({
     queryKey: [GET_TECHNOLOGIES, queryParams],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
+      const response = await fetch(`${RADAR_API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return responseSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",
     },
     placeholderData: keepPreviousData,
+    retry: (count, error) => count < 3 && !(error instanceof ZodError),
   });
 };
 
 export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${API_URL}/technologies/seed`, {
+      const response = await fetch(`${RADAR_API_URL}/technologies/seed`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

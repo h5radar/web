@@ -3,7 +3,7 @@ import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { radarSchema } from "@/schemas/radar";
 
@@ -14,7 +14,7 @@ export default function ShowRadarPage() {
   const auth = useAuth();
   const [radar, setRadar] = useState<z.infer<typeof radarSchema>>();
   useEffect(() => {
-    fetch(`${API_URL}/radars/${id}`, {
+    fetch(`${RADAR_API_URL}/radars/${id}`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
