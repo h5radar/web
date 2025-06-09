@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { productSchema } from "@/schemas/product";
 
@@ -12,7 +12,7 @@ export default function ProductsPage() {
   const auth = useAuth();
   const [products, setProducts] = useState<z.infer<typeof productSchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/products`, {
+    fetch(`${RADAR_API_URL}/products`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

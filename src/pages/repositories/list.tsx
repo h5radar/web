@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { z } from "zod";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 
 import { repositorySchema } from "@/schemas/repository";
 
@@ -12,7 +12,7 @@ export default function RepositoriesPage() {
   const auth = useAuth();
   const [repositories, setRepositories] = useState<z.infer<typeof repositorySchema>[]>([]);
   useEffect(() => {
-    fetch(`${API_URL}/repositories`, {
+    fetch(`${RADAR_API_URL}/repositories`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },

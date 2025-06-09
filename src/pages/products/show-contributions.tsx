@@ -1,7 +1,7 @@
 // import { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import {z} from 'zod';
-// import {API_URL} from '@/constants';
+// import {RADAR_API_URL} from '@/constants';
 // import {radarSchema} from '@/schemas/radar';
 // import ProductHeatmapView from '@/components/products/heatmap-view';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
@@ -80,7 +80,7 @@ export default function ShowProductContributionsPage() {
 
   const [radar, setRadar] = useState<z.infer<typeof radarSchema>>();
   useEffect(() => {
-    fetch(`${API_URL}/radars/${id}`).then((res) => {
+    fetch(`${RADAR_API_URL}/radars/${id}`).then((res) => {
       return res.json();
     }).then((data) => {
       setRadar(data);

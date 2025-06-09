@@ -3,13 +3,13 @@ import { useMutation } from "@tanstack/react-query";
 import { AuthContextProps } from "react-oidc-context";
 import { toast } from "sonner";
 
-import { API_URL } from "@/constants/application";
+import { RADAR_API_URL } from "@/constants/application";
 import { GET_LICENSES, SEED_LICENSES } from "@/constants/query-keys";
 
 export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${API_URL}/licenses/seed`, {
+      const response = await fetch(`${RADAR_API_URL}/licenses/seed`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

@@ -8,7 +8,8 @@ export const APP_VERSION = "0.0.1";
 /*
  * Endpoints settings
  */
-export const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8080";
+export const ACCOUNT_API_URL = import.meta.env.VITE_ACCOUNT_API_URL || "http://127.0.0.1:8070";
+export const RADAR_API_URL = import.meta.env.VITE_RADAR_API_URL || "http://127.0.0.1:8080";
 
 /*
  * Feature toggles
