@@ -6,13 +6,13 @@ import { cn } from "@/lib/utils";
 
 import { useSearch } from "@/hooks/useSearch";
 
-interface Props {
+interface SearchInputProps {
   className?: string;
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
 }
 
-export function Search({ className = "", placeholder = "Search" }: Props) {
+export function SearchInput({ className = "", placeholder = "Search" }: SearchInputProps) {
   const { setOpen } = useSearch();
   return (
     <Button
