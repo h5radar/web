@@ -5,6 +5,8 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
+import { accountSearchItem } from "@/constants/sidebar";
+
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
 
@@ -17,7 +19,7 @@ export default function AccountLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <SearchProvider>
+        <SearchProvider navItemList={accountSearchItem}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AccountSidebar />
             <SidebarInset>

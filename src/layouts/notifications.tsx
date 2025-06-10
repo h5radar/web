@@ -5,6 +5,8 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
+import { notificationSearchItem } from "@/constants/sidebar";
+
 import AppNavbar from "@/components/app-navbar";
 import NotificationsSidebar from "@/components/notifications-sidebar";
 
@@ -17,7 +19,7 @@ export default function BulletinLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <SearchProvider>
+        <SearchProvider navItemList={notificationSearchItem}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <NotificationsSidebar />
             <SidebarInset>

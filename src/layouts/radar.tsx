@@ -5,6 +5,8 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
+import { radarSearchItem } from "@/constants/sidebar";
+
 import AppNavbar from "@/components/app-navbar";
 import RadarSidebar from "@/components/radar-sidebar";
 
@@ -17,7 +19,7 @@ export default function RadarLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <SearchProvider>
+        <SearchProvider navItemList={radarSearchItem}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <RadarSidebar />
             <SidebarInset>
