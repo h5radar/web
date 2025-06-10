@@ -50,7 +50,29 @@ export function SearchProvider({ children }: SearchProviderProps) {
 
   React.useEffect(() => {
     const downRadar = (e: KeyboardEvent) => {
-      if ((e.key === "q" || e.key === "Q") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+      if ((e.key === "b" || e.key === "B") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+        e.preventDefault();
+        navigate("/billing");
+      }
+    };
+    document.addEventListener("keydown", downRadar);
+    return () => document.removeEventListener("keydown", downRadar);
+  }, [navigate]);
+
+  React.useEffect(() => {
+    const downRadar = (e: KeyboardEvent) => {
+      if ((e.key === "o" || e.key === "O") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+        e.preventDefault();
+        navigate("/notifications");
+      }
+    };
+    document.addEventListener("keydown", downRadar);
+    return () => document.removeEventListener("keydown", downRadar);
+  }, [navigate]);
+
+  React.useEffect(() => {
+    const downRadar = (e: KeyboardEvent) => {
+      if ((e.key === "u" || e.key === "U") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
         e.preventDefault();
         auth.signoutRedirect();
       }
