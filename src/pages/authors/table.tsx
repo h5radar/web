@@ -4,15 +4,13 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { teamSchema } from "@/schemas/team";
+import { authorSchema } from "@/schemas/author";
 
-import { TeamTable } from "@/components/teams/table";
-
-export default function TeamsPage() {
+export default function AuthorsPage() {
   const auth = useAuth();
-  const [teams, setTeams] = useState<z.infer<typeof teamSchema>[]>([]);
+  const [authors, setAuthors] = useState<z.infer<typeof authorSchema>[]>([]);
   useEffect(() => {
-    fetch(`${RADAR_API_URL}/teams`, {
+    fetch(`${RADAR_API_URL}/authors`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
@@ -21,14 +19,14 @@ export default function TeamsPage() {
         return res.json();
       })
       .then((data) => {
-        setTeams(data);
+        setAuthors(data);
       });
   }, [auth]);
 
-  if (!teams.length) return <h1>Loading...</h1>;
   return (
     <>
-      <TeamTable data={teams} />
+      <h1 className="text-3xl font-bold underline">Authors</h1>
+      <div>{authors.length}</div>
     </>
   );
 }

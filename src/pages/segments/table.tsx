@@ -4,15 +4,13 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { authorSchema } from "@/schemas/author";
+import { segmentSchema } from "@/schemas/segment";
 
-import { AuthorTable } from "@/components/authors/table";
-
-export default function AuthorsPage() {
+export default function SegmentsPage() {
   const auth = useAuth();
-  const [authors, setAuthors] = useState<z.infer<typeof authorSchema>[]>([]);
+  const [segments, setSegments] = useState<z.infer<typeof segmentSchema>[]>([]);
   useEffect(() => {
-    fetch(`${RADAR_API_URL}/authors`, {
+    fetch(`${RADAR_API_URL}/segments`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
@@ -21,14 +19,14 @@ export default function AuthorsPage() {
         return res.json();
       })
       .then((data) => {
-        setAuthors(data);
+        setSegments(data);
       });
   }, [auth]);
 
-  if (!authors.length) return <h1>Loading...</h1>;
   return (
     <>
-      <AuthorTable data={authors} />
+      <h1 className="text-3xl font-bold underline">Segments</h1>
+      <div>{segments.length}</div>
     </>
   );
 }

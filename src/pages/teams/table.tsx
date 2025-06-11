@@ -4,15 +4,13 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { repositorySchema } from "@/schemas/repository";
+import { teamSchema } from "@/schemas/team";
 
-import { RepositoryTable } from "@/components/repositories/table";
-
-export default function RepositoriesPage() {
+export default function TeamsPage() {
   const auth = useAuth();
-  const [repositories, setRepositories] = useState<z.infer<typeof repositorySchema>[]>([]);
+  const [teams, setTeams] = useState<z.infer<typeof teamSchema>[]>([]);
   useEffect(() => {
-    fetch(`${RADAR_API_URL}/repositories`, {
+    fetch(`${RADAR_API_URL}/teams`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
@@ -21,14 +19,14 @@ export default function RepositoriesPage() {
         return res.json();
       })
       .then((data) => {
-        setRepositories(data);
+        setTeams(data);
       });
   }, [auth]);
 
-  if (!repositories.length) return <h1>Loading...</h1>;
   return (
     <>
-      <RepositoryTable data={repositories} />
+      <h1 className="text-3xl font-bold underline">Teams</h1>
+      <div>{teams.length}</div>
     </>
   );
 }

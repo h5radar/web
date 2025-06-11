@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { radarSchema } from "@/schemas/radar";
 
-import { RadarTable } from "@/components/radars/table";
-
 export default function RadarsPage() {
   const auth = useAuth();
   const [radars, setRadars] = useState<z.infer<typeof radarSchema>[]>([]);
@@ -25,10 +23,10 @@ export default function RadarsPage() {
       });
   }, [auth]);
 
-  if (!radars.length) return <h1>Loading...</h1>;
   return (
     <>
-      <RadarTable data={radars} />
+      <h1 className="text-3xl font-bold underline">Radars</h1>
+      <div>{radars.length}</div>
     </>
   );
 }

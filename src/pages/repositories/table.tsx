@@ -4,15 +4,13 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { segmentSchema } from "@/schemas/segment";
+import { repositorySchema } from "@/schemas/repository";
 
-import { SegmentTable } from "@/components/segments/table";
-
-export default function SegmentsPage() {
+export default function RepositoriesPage() {
   const auth = useAuth();
-  const [segments, setSegments] = useState<z.infer<typeof segmentSchema>[]>([]);
+  const [repositories, setRepositories] = useState<z.infer<typeof repositorySchema>[]>([]);
   useEffect(() => {
-    fetch(`${RADAR_API_URL}/segments`, {
+    fetch(`${RADAR_API_URL}/repositories`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
@@ -21,14 +19,14 @@ export default function SegmentsPage() {
         return res.json();
       })
       .then((data) => {
-        setSegments(data);
+        setRepositories(data);
       });
   }, [auth]);
 
-  if (!segments.length) return <h1>Loading...</h1>;
   return (
     <>
-      <SegmentTable data={segments} />
+      <h1 className="text-3xl font-bold underline">Repositories</h1>
+      <div>{repositories.length}</div>
     </>
   );
 }

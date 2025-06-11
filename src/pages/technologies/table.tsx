@@ -4,7 +4,7 @@ import { useAuth } from "react-oidc-context";
 
 import { DataTable } from "@/components/data-table";
 
-import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology.ts";
+import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology";
 
 import { useTechnologyColumns } from "@/pages/technologies/columns";
 
@@ -50,7 +50,7 @@ export const TechnologiesPage = () => {
     return (
       <div>
         <h1>Error getting technologies</h1>
-        <div>{error.message}</div>
+        <p>{error.message}</p>
       </div>
     );
   }

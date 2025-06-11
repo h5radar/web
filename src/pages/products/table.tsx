@@ -4,15 +4,13 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { technologyBlipSchema } from "@/schemas/technology-blip";
-
-import { TechnologyBlipTable } from "@/components/technology-blips/table";
+import { productSchema } from "@/schemas/product";
 
 export default function ProductsPage() {
   const auth = useAuth();
-  const [technologyBlips, setProducts] = useState<z.infer<typeof technologyBlipSchema>[]>([]);
+  const [products, setProducts] = useState<z.infer<typeof productSchema>[]>([]);
   useEffect(() => {
-    fetch(`${RADAR_API_URL}/technology-blips`, {
+    fetch(`${RADAR_API_URL}/products`, {
       headers: {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
@@ -25,10 +23,10 @@ export default function ProductsPage() {
       });
   }, [auth]);
 
-  if (!technologyBlips.length) return <h1>Loading...</h1>;
   return (
     <>
-      <TechnologyBlipTable data={technologyBlips} />
+      <h1 className="text-3xl font-bold underline">Products</h1>
+      <div>{products.length}</div>
     </>
   );
 }

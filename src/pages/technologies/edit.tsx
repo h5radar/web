@@ -22,7 +22,7 @@ export default function EditTechnologyPage() {
     return (
       <>
         <h1>Error getting technology</h1>
-        <div>{error.message}</div>
+        <p>{error.message}</p>
       </>
     );
   }

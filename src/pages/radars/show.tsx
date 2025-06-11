@@ -7,8 +7,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { radarSchema } from "@/schemas/radar";
 
-import RadarView from "@/components/radars/view";
-
 export default function ShowRadarPage() {
   const { id } = useParams();
   const auth = useAuth();
@@ -30,7 +28,7 @@ export default function ShowRadarPage() {
   if (!radar) return <h1>Loading...</h1>;
   return (
     <>
-      <RadarView data={radar} />
+      <h1 className="text-3xl font-bold underline">Show radar</h1>
     </>
   );
 }
