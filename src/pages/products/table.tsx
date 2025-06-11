@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { productSchema } from "@/schemas/product";
 
-import { ProductTable } from "@/components/products/table";
-
 export default function ProductsPage() {
   const auth = useAuth();
   const [products, setProducts] = useState<z.infer<typeof productSchema>[]>([]);
@@ -28,7 +26,7 @@ export default function ProductsPage() {
   if (!products.length) return <h1>Loading...</h1>;
   return (
     <>
-      <ProductTable data={products} />
+      <h1 className="text-3xl font-bold underline">Products</h1>
     </>
   );
 }

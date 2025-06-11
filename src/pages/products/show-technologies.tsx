@@ -7,8 +7,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { radarSchema } from "@/schemas/radar";
 
-import ProductRadarDiffView from "@/components/products/technologies-view";
-
 export default function ShowProductTechnologiesPage() {
   const auth = useAuth();
   const { id } = useParams();
@@ -30,7 +28,7 @@ export default function ShowProductTechnologiesPage() {
   if (!radar) return <h1>Loading...</h1>;
   return (
     <>
-      <ProductRadarDiffView data={radar} />
+      <h1 className="text-3xl font-bold underline">Show technolgies</h1>
     </>
   );
 }

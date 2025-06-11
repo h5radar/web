@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { teamSchema } from "@/schemas/team";
 
-import { TeamTable } from "@/components/teams/table";
-
 export default function TeamsPage() {
   const auth = useAuth();
   const [teams, setTeams] = useState<z.infer<typeof teamSchema>[]>([]);
@@ -28,7 +26,7 @@ export default function TeamsPage() {
   if (!teams.length) return <h1>Loading...</h1>;
   return (
     <>
-      <TeamTable data={teams} />
+      <h1 className="text-3xl font-bold underline">Teams</h1>
     </>
   );
 }

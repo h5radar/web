@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { repositorySchema } from "@/schemas/repository";
 
-import { RepositoryTable } from "@/components/repositories/table";
-
 export default function RepositoriesPage() {
   const auth = useAuth();
   const [repositories, setRepositories] = useState<z.infer<typeof repositorySchema>[]>([]);
@@ -28,7 +26,7 @@ export default function RepositoriesPage() {
   if (!repositories.length) return <h1>Loading...</h1>;
   return (
     <>
-      <RepositoryTable data={repositories} />
+      <h1 className="text-3xl font-bold underline">Repositories</h1>
     </>
   );
 }

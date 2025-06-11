@@ -35,7 +35,6 @@ import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
 import PracticesPage from "@/pages/practices";
-import ProductsPage from "@/pages/products/table";
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
 import ShowProductContributionsPage from "@/pages/products/show-contributions";
@@ -43,12 +42,13 @@ import ShowProductFinancesPage from "@/pages/products/show-finances";
 import ShowProductLicensesPage from "@/pages/products/show-licenses";
 import ShowProductPracticesPage from "@/pages/products/show-practices";
 import ShowProductTechnologiesPage from "@/pages/products/show-technologies";
+import ProductsPage from "@/pages/products/table";
 import ProfilePage from "@/pages/profile";
 import EditRadarPage from "@/pages/radars/edit";
-import RadarsPage from "@/pages/radars/table";
 // Include radar resource pages at alphabet
 import NewRadarPage from "@/pages/radars/new";
 import ShowRadarPage from "@/pages/radars/show";
+import RadarsPage from "@/pages/radars/table";
 import RaysPage from "@/pages/rays";
 import RepositoriesPage from "@/pages/repositories/table";
 import RingsPage from "@/pages/rings/table";

@@ -4,7 +4,7 @@ import { useAuth } from "react-oidc-context";
 
 import { DataTable } from "@/components/data-table";
 
-import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology.ts";
+import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology";
 
 import { useTechnologyColumns } from "@/pages/technologies/columns";
 

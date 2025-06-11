@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { segmentSchema } from "@/schemas/segment";
 
-import { SegmentTable } from "@/components/segments/table";
-
 export default function SegmentsPage() {
   const auth = useAuth();
   const [segments, setSegments] = useState<z.infer<typeof segmentSchema>[]>([]);
@@ -28,7 +26,7 @@ export default function SegmentsPage() {
   if (!segments.length) return <h1>Loading...</h1>;
   return (
     <>
-      <SegmentTable data={segments} />
+      <h1 className="text-3xl font-bold underline">Segments</h1>
     </>
   );
 }

@@ -6,8 +6,6 @@ import { RADAR_API_URL } from "@/constants/application";
 
 import { authorSchema } from "@/schemas/author";
 
-import { AuthorTable } from "@/components/authors/table";
-
 export default function AuthorsPage() {
   const auth = useAuth();
   const [authors, setAuthors] = useState<z.infer<typeof authorSchema>[]>([]);
@@ -28,7 +26,7 @@ export default function AuthorsPage() {
   if (!authors.length) return <h1>Loading...</h1>;
   return (
     <>
-      <AuthorTable data={authors} />
+      <h1 className="text-3xl font-bold underline">Authors</h1>
     </>
   );
 }
