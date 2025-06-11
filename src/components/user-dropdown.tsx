@@ -50,7 +50,7 @@ export function UserDropdown() {
             {BILLING_ENABLED === "true" && (
               <DropdownMenuItem onClick={() => navigate("/billing")}>
                 Billing
-                <DropdownMenuShortcut>⇧⌘B</DropdownMenuShortcut>
+                <DropdownMenuShortcut>⇧⌘L</DropdownMenuShortcut>
               </DropdownMenuItem>
             )}
             {NOTIFICATIONS_ENABLED === "true" && (

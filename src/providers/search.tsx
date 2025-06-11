@@ -53,7 +53,7 @@ export function SearchProvider({ children, navItemList }: SearchProviderProps) {
 
   React.useEffect(() => {
     const downRadar = (e: KeyboardEvent) => {
-      if ((e.key === "b" || e.key === "B") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+      if ((e.key === "l" || e.key === "L") && (e.metaKey || e.ctrlKey) && e.shiftKey) {
         e.preventDefault();
         navigate("/billing");
       }
