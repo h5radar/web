@@ -1,15 +1,15 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
 import { BrowserRouter } from "react-router";
-
-import { SearchProvider } from "@/providers/search";
-import { SearchInput } from "@/components/search-input";
+import { describe, expect, it } from "vitest";
 
 import { accountSearchItem } from "@/constants/search";
 import { billingSearchItem } from "@/constants/search";
 import { notificationSearchItem } from "@/constants/search";
 import { radarSearchItem } from "@/constants/search";
 
+import { SearchInput } from "@/components/search-input";
+
+import { SearchProvider } from "@/providers/search";
 
 describe("SearchInput", () => {
   it("get search input for empty nav items", () => {
@@ -66,5 +66,4 @@ describe("SearchInput", () => {
     );
     expect(screen.getByText("Search")).toBeDefined();
   });
-
 });
