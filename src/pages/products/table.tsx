@@ -23,10 +23,10 @@ export default function ProductsPage() {
       });
   }, [auth]);
 
-  if (!products.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Products</h1>
+      <div>{products.length}</div>
     </>
   );
 }

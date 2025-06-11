@@ -23,10 +23,10 @@ export default function ProductsPage() {
       });
   }, [auth]);
 
-  if (!technologyBlips.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Technologies blips</h1>
+      <div>{technologyBlips.length}</div>
     </>
   );
 }

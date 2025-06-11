@@ -23,10 +23,10 @@ export default function TeamsPage() {
       });
   }, [auth]);
 
-  if (!teams.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Teams</h1>
+      <div>{teams.length}</div>
     </>
   );
 }

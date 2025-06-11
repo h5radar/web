@@ -23,10 +23,10 @@ export default function RepositoriesPage() {
       });
   }, [auth]);
 
-  if (!repositories.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Repositories</h1>
+      <div>{repositories.length}</div>
     </>
   );
 }

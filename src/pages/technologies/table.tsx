@@ -50,7 +50,7 @@ export const TechnologiesPage = () => {
     return (
       <div>
         <h1>Error getting technologies</h1>
-        <div>{error.message}</div>
+        <p>{error.message}</p>
       </div>
     );
   }

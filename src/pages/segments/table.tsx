@@ -23,10 +23,10 @@ export default function SegmentsPage() {
       });
   }, [auth]);
 
-  if (!segments.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Segments</h1>
+      <div>{segments.length}</div>
     </>
   );
 }

@@ -23,10 +23,10 @@ export default function AuthorsPage() {
       });
   }, [auth]);
 
-  if (!authors.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Authors</h1>
+      <div>{authors.length}</div>
     </>
   );
 }

@@ -23,10 +23,10 @@ export default function RingsPage() {
       });
   }, [auth]);
 
-  if (!rings.length) return <h1>Loading...</h1>;
   return (
     <>
       <h1 className="text-3xl font-bold underline">Rings</h1>
+      <div>{rings.length}</div>
     </>
   );
 }
