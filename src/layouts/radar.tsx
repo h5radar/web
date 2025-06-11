@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
-import { radarSearchItem } from "@/constants/sidebar";
+import { radarSearchItem } from "@/constants/search";
 
 import AppNavbar from "@/components/app-navbar";
 import RadarSidebar from "@/components/radar-sidebar";

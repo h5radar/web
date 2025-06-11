@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
-import { notificationSearchItem } from "@/constants/sidebar";
+import { notificationSearchItem } from "@/constants/search";
 
 import AppNavbar from "@/components/app-navbar";
 import NotificationsSidebar from "@/components/notifications-sidebar";

@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
-import { billingSearchItem } from "@/constants/sidebar";
+import { billingSearchItem } from "@/constants/search";
 
 import AppNavbar from "@/components/app-navbar";
 import BillingSidebar from "@/components/billing-sidebar";

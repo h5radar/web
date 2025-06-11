@@ -14,7 +14,7 @@ import {
 } from "@/ui/command";
 import { ScrollArea } from "@/ui/scroll-area";
 
-import { globalNavItems } from "@/constants/sidebar";
+import { globalNavItems } from "@/constants/search";
 
 import { NavItem } from "@/types/nav-item";
 
