@@ -38,11 +38,11 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
 
   return (
     <CommandDialog modal open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search for menu items or commands..." />
+      <CommandInput placeholder="Search for pages or commands..." />
       <CommandList>
         <ScrollArea type="hover" className="h-72 pr-1">
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Menu items">
+          <CommandGroup heading="Pages">
             {navItemList.map((item, key) => {
               return (
                 <CommandItem
