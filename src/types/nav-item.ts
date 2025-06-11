@@ -14,3 +14,7 @@ export interface NavItem {
   isActive?: boolean;
   items?: NavItem[];
 }
+
+export interface GlobalNavItem extends NavItem {
+  showSearch: boolean;
+}

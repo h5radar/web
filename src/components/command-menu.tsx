@@ -62,20 +62,23 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Services">
-            {globalNavItems.map((item, key) => (
-              <CommandItem
-                key={`${item.url}-${key}`}
-                value={item.title}
-                onSelect={() => {
-                  runCommand(() => navigate(item.url));
-                }}
-              >
-                <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                  <IconArrowRight className="text-muted-foreground/80 size-2" />
-                </div>
-                {item.title}
-              </CommandItem>
-            ))}
+            {globalNavItems.map(
+              (item, key) =>
+                item.showSearch && (
+                  <CommandItem
+                    key={`${item.url}-${key}`}
+                    value={item.title}
+                    onSelect={() => {
+                      runCommand(() => navigate(item.url));
+                    }}
+                  >
+                    <div className="mr-2 flex h-4 w-4 items-center justify-center">
+                      <IconArrowRight className="text-muted-foreground/80 size-2" />
+                    </div>
+                    {item.title}
+                  </CommandItem>
+                ),
+            )}
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Theme">

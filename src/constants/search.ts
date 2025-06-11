@@ -1,11 +1,16 @@
 import { Barcode, LayoutDashboard } from "lucide-react";
 
-import { NavItem } from "@/types/nav-item";
+import { GlobalNavItem, NavItem } from "@/types/nav-item";
 
 /*
  * The data for cmd k bar.
  */
-export const globalNavItems: NavItem[] = [
+
+const toBoolean = (value: unknown): boolean => {
+  return value === "true" || value === true;
+};
+
+export const globalNavItems: GlobalNavItem[] = [
   {
     title: "Radar",
     url: "/",
@@ -13,6 +18,7 @@ export const globalNavItems: NavItem[] = [
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
+    showSearch: true,
   },
   {
     title: "Account",
@@ -21,6 +27,7 @@ export const globalNavItems: NavItem[] = [
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
+    showSearch: true,
   },
   {
     title: "Notifications",
@@ -29,6 +36,7 @@ export const globalNavItems: NavItem[] = [
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
+    showSearch: toBoolean(import.meta.env.VITE_NOTIFICATIONS_ENABLED),
   },
   {
     title: "Billing",
@@ -37,6 +45,7 @@ export const globalNavItems: NavItem[] = [
     isActive: true,
     shortcut: ["d", "d"],
     items: [],
+    showSearch: toBoolean(import.meta.env.VITE_BIILLIG_ENABLED),
   },
 ];
 
