@@ -1,9 +1,9 @@
 import { SidebarTrigger } from "@/ui/sidebar";
 
-import SearchInput from "@/components/search-input";
+import { SearchInput } from "@/components/search-input";
 import { TenantSwitcher } from "@/components/tenant-switcher";
 import ThemeToggler from "@/components/theme-toggler";
-import { UserDropdown } from "@/components/user-dropdown.tsx";
+import { UserDropdown } from "@/components/user-dropdown";
 
 const AppNavbar = () => {
   return (

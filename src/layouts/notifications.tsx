@@ -5,9 +5,12 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
+import { notificationSearchItem } from "@/constants/search";
+
 import AppNavbar from "@/components/app-navbar";
-import KBar from "@/components/kbar";
 import NotificationsSidebar from "@/components/notifications-sidebar";
+
+import { SearchProvider } from "@/providers/search";
 
 export default function BulletinLayout() {
   // Persisting the sidebar state in the cookie.
@@ -16,7 +19,7 @@ export default function BulletinLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <KBar>
+        <SearchProvider navItemList={notificationSearchItem}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <NotificationsSidebar />
             <SidebarInset>
@@ -28,7 +31,7 @@ export default function BulletinLayout() {
               </div>
             </SidebarInset>
           </SidebarProvider>
-        </KBar>
+        </SearchProvider>
         <Toaster />
       </ThemeProvider>
     </>

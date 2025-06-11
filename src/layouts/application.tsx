@@ -3,15 +3,11 @@ import { Outlet } from "react-router";
 
 import { Toaster } from "@/ui/sonner.tsx";
 
-import KBar from "@/components/kbar";
-
 export default function AppLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <KBar>
-          <Outlet />
-        </KBar>
+        <Outlet />
         <Toaster />
       </ThemeProvider>
     </>

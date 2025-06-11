@@ -5,9 +5,12 @@ import { Outlet } from "react-router";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 import { Toaster } from "@/ui/sonner.tsx";
 
+import { accountSearchItem } from "@/constants/search";
+
 import AccountSidebar from "@/components/account-sidebar";
 import AppNavbar from "@/components/app-navbar";
-import KBar from "@/components/kbar";
+
+import { SearchProvider } from "@/providers/search";
 
 export default function AccountLayout() {
   // Persisting the sidebar state in the cookie.
@@ -16,7 +19,7 @@ export default function AccountLayout() {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="dashboard-theme">
-        <KBar>
+        <SearchProvider navItemList={accountSearchItem}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AccountSidebar />
             <SidebarInset>
@@ -28,7 +31,7 @@ export default function AccountLayout() {
               </div>
             </SidebarInset>
           </SidebarProvider>
-        </KBar>
+        </SearchProvider>
         <Toaster />
       </ThemeProvider>
     </>

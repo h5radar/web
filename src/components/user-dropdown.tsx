@@ -47,23 +47,23 @@ export function UserDropdown() {
               Account
               <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {BILLING_ENABLED === "true" && (
-              <DropdownMenuItem onClick={() => navigate("/billing")}>
-                Billing
-                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            )}
             {NOTIFICATIONS_ENABLED === "true" && (
               <DropdownMenuItem onClick={() => navigate("/notifications")}>
                 Notifications
-                <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+                <DropdownMenuShortcut>⇧⌘O</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            )}
+            {BILLING_ENABLED === "true" && (
+              <DropdownMenuItem onClick={() => navigate("/billing")}>
+                Billing
+                <DropdownMenuShortcut>⇧⌘L</DropdownMenuShortcut>
               </DropdownMenuItem>
             )}
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => auth.signoutRedirect()}>
             Log out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            <DropdownMenuShortcut>⇧⌘U</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
