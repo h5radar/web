@@ -22,7 +22,7 @@ import RadarLayout from "@/layouts/radar";
 import AboutPage from "@/pages/about";
 import AccountPage from "@/pages/account";
 import AdaptersPage from "@/pages/adapters";
-import AuthorsPage from "@/pages/authors/list";
+import AuthorsPage from "@/pages/authors/table";
 import BiSystemsPage from "@/pages/bi-systems";
 import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
@@ -35,7 +35,7 @@ import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
 import PracticesPage from "@/pages/practices";
-import ProductsPage from "@/pages/products/list";
+import ProductsPage from "@/pages/products/table";
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
 import ShowProductContributionsPage from "@/pages/products/show-contributions";
@@ -45,20 +45,20 @@ import ShowProductPracticesPage from "@/pages/products/show-practices";
 import ShowProductTechnologiesPage from "@/pages/products/show-technologies";
 import ProfilePage from "@/pages/profile";
 import EditRadarPage from "@/pages/radars/edit";
-import RadarsPage from "@/pages/radars/list";
+import RadarsPage from "@/pages/radars/table";
 // Include radar resource pages at alphabet
 import NewRadarPage from "@/pages/radars/new";
 import ShowRadarPage from "@/pages/radars/show";
 import RaysPage from "@/pages/rays";
-import RepositoriesPage from "@/pages/repositories/list";
-import RingsPage from "@/pages/rings/list";
-import SegmentsPage from "@/pages/segments/list";
-import TeamsPage from "@/pages/teams/list";
+import RepositoriesPage from "@/pages/repositories/table";
+import RingsPage from "@/pages/rings/table";
+import SegmentsPage from "@/pages/segments/table";
+import TeamsPage from "@/pages/teams/table";
 import EditTechnologyPage from "@/pages/technologies/edit";
 // Include technology resource pages at alphabet
 import NewTechnologyPage from "@/pages/technologies/new";
 import { TechnologiesPage } from "@/pages/technologies/table";
-import TechnologyBlipsPage from "@/pages/technology-blips/list";
+import TechnologyBlipsPage from "@/pages/technology-blips/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
