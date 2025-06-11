@@ -85,8 +85,8 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
             );
           })}
           <CommandSeparator />
-          {globalNavItems.map((group, keyGroup) => (
-            <CommandGroup key={group.title}>
+          <CommandGroup heading="Services">
+            {globalNavItems.map((group, keyGroup) => (
               <CommandItem
                 key={`${group.url}-${keyGroup}`}
                 value={group.title}
@@ -99,8 +99,8 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
                 </div>
                 {group.title}
               </CommandItem>
-            </CommandGroup>
-          ))}
+            ))}
+          </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Theme">
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
