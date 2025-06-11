@@ -1,7 +1,4 @@
-import {
-  Barcode,
-  LayoutDashboard,
-} from "lucide-react";
+import { Barcode, LayoutDashboard } from "lucide-react";
 
 import { NavItem } from "@/types/nav-item";
 
