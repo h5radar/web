@@ -47,16 +47,16 @@ export function UserDropdown() {
               Account
               <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {BILLING_ENABLED === "true" && (
-              <DropdownMenuItem onClick={() => navigate("/billing")}>
-                Billing
-                <DropdownMenuShortcut>⇧⌘L</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            )}
             {NOTIFICATIONS_ENABLED === "true" && (
               <DropdownMenuItem onClick={() => navigate("/notifications")}>
                 Notifications
                 <DropdownMenuShortcut>⇧⌘O</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            )}
+            {BILLING_ENABLED === "true" && (
+              <DropdownMenuItem onClick={() => navigate("/billing")}>
+                Billing
+                <DropdownMenuShortcut>⇧⌘L</DropdownMenuShortcut>
               </DropdownMenuItem>
             )}
           </DropdownMenuGroup>
