@@ -20,7 +20,7 @@ import { NavItem } from "@/types/nav-item";
  */
 export const accountNavItems: NavItem[] = [
   {
-    title: "Account",
+    title: "Dashboard",
     url: "/account",
     icon: LayoutDashboard,
     isActive: true,
@@ -42,7 +42,7 @@ export const accountNavItems: NavItem[] = [
  */
 export const billingNavItems: NavItem[] = [
   {
-    title: "Billing",
+    title: "Dashboard",
     url: "/billing",
     icon: LayoutDashboard,
     isActive: true,
@@ -64,7 +64,7 @@ export const billingNavItems: NavItem[] = [
  */
 export const notificationsNavItems: NavItem[] = [
   {
-    title: "Notifications",
+    title: "Dashboard",
     url: "/notifications",
     icon: LayoutDashboard,
     isActive: true,

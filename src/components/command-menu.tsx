@@ -1,4 +1,4 @@
-import { IconArrowRight, IconChevronRight, IconDeviceLaptop, IconMoon, IconSun } from "@tabler/icons-react";
+import { IconArrowRight, IconDeviceLaptop, IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import React from "react";
 import { useNavigate } from "react-router";
@@ -38,52 +38,28 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
 
   return (
     <CommandDialog modal open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder="Search for menu items or commands..." />
       <CommandList>
         <ScrollArea type="hover" className="h-72 pr-1">
           <CommandEmpty>No results found.</CommandEmpty>
-          {navItemList.map((group, keyGroup) => {
-            if (group.url !== "#") {
+          <CommandGroup heading="Menu items">
+            {navItemList.map((item, key) => {
               return (
-                <CommandGroup key={group.title} heading={group.title}>
-                  <CommandItem
-                    key={`${group.url}-${keyGroup}`}
-                    value={group.title}
-                    onSelect={() => {
-                      runCommand(() => navigate(group.url));
-                    }}
-                  >
-                    <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                      <IconArrowRight className="text-muted-foreground/80 size-2" />
-                    </div>
-
-                    {group.title}
-                  </CommandItem>
-                </CommandGroup>
+                <CommandItem
+                  key={`${item.url}-${key}`}
+                  value={item.title}
+                  onSelect={() => {
+                    runCommand(() => navigate(item.url));
+                  }}
+                >
+                  <div className="mr-2 flex h-4 w-4 items-center justify-center">
+                    <IconArrowRight className="text-muted-foreground/80 size-2" />
+                  </div>
+                  {item.title}
+                </CommandItem>
               );
-            }
-            return (
-              <CommandGroup key={group.title} heading={group.title}>
-                {group.items &&
-                  group.items.map((navItem, keyNavItem) => {
-                    return (
-                      <CommandItem
-                        key={`${navItem.url}-${keyNavItem}`}
-                        value={navItem.title}
-                        onSelect={() => {
-                          runCommand(() => navigate(navItem.url));
-                        }}
-                      >
-                        <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                          <IconArrowRight className="text-muted-foreground/80 size-2" />
-                        </div>
-                        {group.title} <IconChevronRight /> {navItem.title}
-                      </CommandItem>
-                    );
-                  })}
-              </CommandGroup>
-            );
-          })}
+            })}
+          </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Services">
             {globalNavItems.map((item, key) => (

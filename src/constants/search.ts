@@ -42,7 +42,7 @@ export const globalNavItems: NavItem[] = [
 
 export const accountSearchItem: NavItem[] = [
   {
-    title: "Account",
+    title: "Dashboard",
     url: "/account",
     icon: LayoutDashboard,
     isActive: true,
@@ -53,7 +53,7 @@ export const accountSearchItem: NavItem[] = [
 
 export const billingSearchItem: NavItem[] = [
   {
-    title: "Billing",
+    title: "Dashboard",
     url: "/billing",
     icon: LayoutDashboard,
     isActive: true,
@@ -64,7 +64,7 @@ export const billingSearchItem: NavItem[] = [
 
 export const notificationSearchItem: NavItem[] = [
   {
-    title: "Notifications",
+    title: "Dashboard",
     url: "/notifications",
     icon: LayoutDashboard,
     isActive: true,
