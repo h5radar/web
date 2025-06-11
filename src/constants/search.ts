@@ -67,8 +67,6 @@ export const notificationSearchItem: NavItem[] = [
     title: "Dashboard",
     url: "/notifications",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
   },
 ];
@@ -78,16 +76,12 @@ export const radarSearchItem: NavItem[] = [
     title: "Dashboard",
     url: "/",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
   },
   {
     title: "Products",
     url: "/products",
     icon: Barcode,
-    shortcut: ["p", "p"],
-    isActive: false,
     items: [],
   },
 ];
