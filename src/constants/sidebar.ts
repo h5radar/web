@@ -23,14 +23,12 @@ export const accountNavItems: NavItem[] = [
     title: "Dashboard",
     url: "/account",
     icon: LayoutDashboard,
-    isActive: true,
     items: [],
   },
   {
     title: "Profile",
     url: "/profile",
     icon: LayoutDashboard,
-    isActive: false,
     items: [],
   },
 ];
@@ -43,14 +41,12 @@ export const billingNavItems: NavItem[] = [
     title: "Dashboard",
     url: "/billing",
     icon: LayoutDashboard,
-    isActive: true,
     items: [],
   },
   {
     title: "Invoices",
     url: "/invoices",
     icon: LayoutDashboard,
-    isActive: false,
     items: [],
   },
 ];
@@ -63,7 +59,6 @@ export const notificationsNavItems: NavItem[] = [
     title: "Dashboard",
     url: "/notifications",
     icon: LayoutDashboard,
-    isActive: true,
     items: [],
   },
 ];
@@ -76,21 +71,18 @@ export const radarNavItems: NavItem[] = [
     title: "Dashboard",
     url: "/",
     icon: LayoutDashboard,
-    isActive: true,
     items: [],
   },
   {
     title: "Products",
     url: "/products",
     icon: Barcode,
-    isActive: false,
     items: [],
   },
   {
     title: "Contributions",
     url: "#",
     icon: Activity,
-    isActive: false,
     items: [
       {
         title: "Git repos",
@@ -118,41 +110,35 @@ export const radarNavItems: NavItem[] = [
     title: "Technologies",
     url: "#",
     icon: Cpu,
-    isActive: false,
     items: [
       {
         title: "Radars",
         url: "/radars",
         icon: LucideShoppingBag,
-        isActive: false,
         items: [],
       },
       {
         title: "Rings",
         url: "/rings",
         icon: LucideShoppingBag,
-        isActive: false,
         items: [],
       },
       {
         title: "Segments",
         url: "/segments",
         icon: LucideShoppingBag,
-        isActive: false,
         items: [],
       },
       {
         title: "Technologies",
         url: "/technologies",
         icon: LucideShoppingBag,
-        isActive: false,
         items: [],
       },
       {
         title: "Technology blips",
         url: "/technology-blips",
         icon: LucideShoppingBag,
-        isActive: false,
         items: [],
       },
     ],
@@ -161,27 +147,23 @@ export const radarNavItems: NavItem[] = [
     title: "Practices",
     url: "#",
     icon: Ruler,
-    isActive: false,
     items: [
       {
         title: "Cobwebs",
         url: "/cobwebs",
         icon: Ruler,
-        isActive: false,
         items: [],
       },
       {
         title: "Rays",
         url: "/rays",
         icon: Ruler,
-        isActive: false,
         items: [],
       },
       {
         title: "Practices",
         url: "/practices",
         icon: Ruler,
-        isActive: false,
         items: [],
       },
     ],
@@ -190,20 +172,17 @@ export const radarNavItems: NavItem[] = [
     title: "Licenses",
     url: "#",
     icon: Copyright,
-    isActive: false,
     items: [
       {
         title: "Pie charts",
         url: "/pies",
         icon: Copyright,
-        isActive: false,
         items: [],
       },
       {
         title: "Licenses",
         url: "/licenses",
         icon: Copyright,
-        isActive: false,
         items: [],
       },
     ],
@@ -212,7 +191,6 @@ export const radarNavItems: NavItem[] = [
     title: "Communications",
     url: "#",
     icon: Handshake,
-    isActive: false,
     items: [
       {
         title: "Channels",
@@ -230,7 +208,6 @@ export const radarNavItems: NavItem[] = [
     title: "Finances",
     url: "#",
     icon: Wallet,
-    isActive: false,
     items: [
       {
         title: "BI systems",
@@ -243,7 +220,6 @@ export const radarNavItems: NavItem[] = [
     title: "Settings",
     url: "#",
     icon: Settings,
-    isActive: false,
     items: [
       {
         title: "Adapters",
