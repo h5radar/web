@@ -2,14 +2,11 @@ import { Barcode, LayoutDashboard } from "lucide-react";
 
 import { GlobalNavItem, NavItem } from "@/types/nav-item";
 
+import {toBoolean} from "@/lib/castings"
+
 /*
  * The data for cmd k bar.
  */
-
-const toBoolean = (value: unknown): boolean => {
-  return value === "true" || value === true;
-};
-
 export const globalNavItems: GlobalNavItem[] = [
   {
     title: "Radar",
