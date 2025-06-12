@@ -2,7 +2,7 @@ import { Barcode, LayoutDashboard } from "lucide-react";
 
 import { GlobalNavItem, NavItem } from "@/types/nav-item";
 
-import {toBoolean} from "@/lib/castings"
+import {toBoolean} from "@/lib/converters"
 
 /*
  * The data for cmd k bar.
@@ -12,8 +12,6 @@ export const globalNavItems: GlobalNavItem[] = [
     title: "Radar",
     url: "/",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
     showSearch: true,
   },
@@ -21,8 +19,6 @@ export const globalNavItems: GlobalNavItem[] = [
     title: "Account",
     url: "/account",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
     showSearch: true,
   },
@@ -30,8 +26,6 @@ export const globalNavItems: GlobalNavItem[] = [
     title: "Notifications",
     url: "/notifications",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
     showSearch: toBoolean(import.meta.env.VITE_NOTIFICATIONS_ENABLED),
   },
@@ -39,8 +33,6 @@ export const globalNavItems: GlobalNavItem[] = [
     title: "Billing",
     url: "/billing",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
     showSearch: toBoolean(import.meta.env.VITE_BIILLIG_ENABLED),
   },
@@ -51,8 +43,6 @@ export const accountSearchItem: NavItem[] = [
     title: "Dashboard",
     url: "/account",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
   },
 ];
@@ -62,8 +52,6 @@ export const billingSearchItem: NavItem[] = [
     title: "Dashboard",
     url: "/billing",
     icon: LayoutDashboard,
-    isActive: true,
-    shortcut: ["d", "d"],
     items: [],
   },
 ];

@@ -31,7 +31,7 @@ const BillingSidebar = () => {
           <SidebarMenu>
             {billingNavItems.map((item) => {
               return item?.items && item?.items?.length > 0 ? (
-                <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
+                <Collapsible key={item.title} asChild className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton tooltip={item.title} isActive={location.pathname === item.url}>
