@@ -64,7 +64,7 @@ export function CommandMenu({ navItemList }: CommandMenuProps) {
           <CommandGroup heading="Services">
             {globalNavItems.map(
               (item, key) =>
-                item.showSearch && (
+                item.show && (
                   <CommandItem
                     key={`${item.url}-${key}`}
                     value={item.title}

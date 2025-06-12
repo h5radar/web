@@ -5,10 +5,7 @@
 export interface NavItem {
   title: string;
   url: string;
+  show?: boolean;
   icon?: React.ElementType;
   items?: NavItem[];
-}
-
-export interface GlobalNavItem extends NavItem {
-  showSearch: boolean;
 }
