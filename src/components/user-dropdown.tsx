@@ -45,7 +45,7 @@ export function UserDropdown() {
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate("/account")}>
               Account
-              <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
+              <DropdownMenuShortcut>⇧⌘C</DropdownMenuShortcut>
             </DropdownMenuItem>
             {NOTIFICATIONS_ENABLED === "true" && (
               <DropdownMenuItem onClick={() => navigate("/notifications")}>

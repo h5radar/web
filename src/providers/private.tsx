@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import { hasAuthParams, useAuth } from "react-oidc-context";
 
 import { GET_AUTH_HEALTH } from "@/constants/query-keys";
@@ -23,7 +22,6 @@ interface PrivateProviderProps {
 export const PrivateProvider: FC<PrivateProviderProps> = (props) => {
   const { children } = props;
   const auth = useAuth();
-  useHotkeys("ctrl+shift+u, meta+shift+u", () => auth.signoutRedirect(), [auth]);
 
   const { isPending: getAuthHealthIsPending, error: getAuthHealthError } = useQuery({
     queryKey: [GET_AUTH_HEALTH],
