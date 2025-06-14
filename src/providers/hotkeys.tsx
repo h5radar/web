@@ -1,8 +1,7 @@
-import { useHotkeys } from "react-hotkeys-hook";
-import { useNavigate } from "react-router";
 import { FC } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { useAuth } from "react-oidc-context";
-
+import { useNavigate } from "react-router";
 
 interface HotkeysProviderProps {
   children: React.ReactNode;

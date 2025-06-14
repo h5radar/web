@@ -8,8 +8,8 @@ import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
-import PrivateProvider from "@/providers/private";
 import HotkeysProvider from "@/providers/hotkeys";
+import PrivateProvider from "@/providers/private";
 
 // Include layout
 import AccountLayout from "@/layouts/account";
