@@ -28,6 +28,16 @@ export const GET_LICENSES = "Get licenses";
 export const SEED_LICENSES = "Seed licenses";
 
 /*
+ * TanStack query keys for practices
+ */
+export const CREATE_PRACTICE = "Create practice";
+export const UPDATE_PRACTICE = "Update practice";
+export const DELETE_PRACTICE = "Delete practice";
+export const GET_PRACTICE = "Get practice";
+export const GET_PRACTICES = "Get practices";
+export const SEED_PRACTICES = "Seed practices";
+
+/*
  * TanStack query keys for technology
  */
 export const CREATE_TECHNOLOGY = "Create technology";

@@ -6,6 +6,7 @@ import { userSchema } from "@/schemas/user";
 
 import { useCreateAccountUser } from "@/queries/account-user";
 import { useSeedLicenses } from "@/queries/license";
+import { useSeedPractices } from "@/queries/practice";
 import { useCreateRadarUser } from "@/queries/radar-user";
 import { useSeedTechnologies } from "@/queries/technology";
 
@@ -15,7 +16,8 @@ export default function HomePage() {
   const { mutate: createAccountUser, isPending: isPending1 } = useCreateAccountUser(auth, queryClient);
   const { mutate: createRadarUser, isPending: isPending2 } = useCreateRadarUser(auth, queryClient);
   const { mutate: seedLicenses, isPending: isPending3 } = useSeedLicenses(auth, queryClient);
-  const { mutate: seedTechnologies, isPending: isPending4 } = useSeedTechnologies(auth, queryClient);
+  const { mutate: seedPractices, isPending: isPending4 } = useSeedPractices(auth, queryClient);
+  const { mutate: seedTechnologies, isPending: isPending5 } = useSeedTechnologies(auth, queryClient);
 
   useEffect(() => {
     const user = userSchema.parse({
@@ -28,10 +30,11 @@ export default function HomePage() {
     createRadarUser(user);
 
     seedLicenses();
+    seedPractices();
     seedTechnologies();
-  }, [auth, createAccountUser, createRadarUser, seedLicenses, seedTechnologies]);
+  }, [auth, createAccountUser, createRadarUser, seedLicenses, seedPractices, seedTechnologies]);
 
-  if (isPending1 || isPending2 || isPending3 || isPending4) {
+  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5) {
     return <h1>Loading...</h1>;
   }
 
