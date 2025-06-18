@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthContextProps } from "react-oidc-context";
 import { z } from "zod";
 
-import { RADAR_API_URL } from "@/constants/application";
+import { ACCOUNT_API_URL } from "@/constants/application";
 
 import { IUserState } from "@/types/redux-types";
 
@@ -14,15 +14,15 @@ const initialState: IUserState = {
   error: null,
 };
 
-type CreateRadarUserArgs = {
+type CreateAccountUserArgs = {
   user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
 };
 
-export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, CreateRadarUserArgs>(
-  "radarUser/fetchRadarUser",
+export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, CreateAccountUserArgs>(
+  "accountUser/fetchAccountUser",
   async ({ user, auth }) => {
-    const res = await fetch(`${RADAR_API_URL}/radar-users`, {
+    const res = await fetch(`${ACCOUNT_API_URL}/account-users`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -35,33 +35,33 @@ export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, Creat
   },
 );
 
-const radarUserSlice = createSlice({
-  name: "radarUser",
+const AccountUserSlice = createSlice({
+  name: "AccountUser",
   initialState,
   reducers: {
-    setRadarUser(state, action: PayloadAction<z.infer<typeof userSchema>>) {
+    setAccountUser(state, action: PayloadAction<z.infer<typeof userSchema>>) {
       state.user = action.payload;
     },
-    clearRadarUser(state) {
+    clearAccountUser(state) {
       state.user = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRadarUser.pending, (state) => {
+      .addCase(fetchAccountUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchRadarUser.fulfilled, (state, action) => {
+      .addCase(fetchAccountUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
       })
-      .addCase(fetchRadarUser.rejected, (state, action) => {
+      .addCase(fetchAccountUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Unknown error";
       });
   },
 });
 
-export const { setRadarUser, clearRadarUser } = radarUserSlice.actions;
-export const radarUserReducer = radarUserSlice.reducer;
+export const { setAccountUser, clearAccountUser } = AccountUserSlice.actions;
+export const AccountUserReducer = AccountUserSlice.reducer;

@@ -6,36 +6,28 @@ import { userSchema } from "@/schemas/user";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/use-redux";
 
-import { useCreateAccountUser } from "@/queries/account-user";
 import { useSeedLicenses } from "@/queries/license";
 import { useSeedPractices } from "@/queries/practice";
-import { useCreateRadarUser } from "@/queries/radar-user";
 import { useSeedTechnologies } from "@/queries/technology";
 
+import { fetchAccountUser } from "@/features/account-slice";
 import { fetchRadarUser } from "@/features/user-slice";
 
 export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const { mutate: createAccountUser, isPending: isPending1 } = useCreateAccountUser(auth, queryClient);
-  const { mutate: createRadarUser, isPending: isPending2 } = useCreateRadarUser(auth, queryClient);
   const { mutate: seedLicenses, isPending: isPending3 } = useSeedLicenses(auth, queryClient);
   const { mutate: seedPractices, isPending: isPending4 } = useSeedPractices(auth, queryClient);
   const { mutate: seedTechnologies, isPending: isPending5 } = useSeedTechnologies(auth, queryClient);
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.radarUser.user);
-  const loading = useAppSelector((state) => state.radarUser.loading);
-  const error = useAppSelector((state) => state.radarUser.error);
+  const userRadar = useAppSelector((state) => state.radarUser.user);
+  const loadingRadar = useAppSelector((state) => state.radarUser.loading);
+  const errorRadar = useAppSelector((state) => state.radarUser.error);
 
-  useEffect(() => {
-    const user = userSchema.parse({
-      id: 0,
-      sub: auth.user?.profile.sub + "asdasd",
-      username: auth.user?.profile.preferred_username + "asdasd",
-    });
-    dispatch(fetchRadarUser({ user, auth }));
-  }, [dispatch, auth]);
+  const userAccount = useAppSelector((state) => state.accountUser.user);
+  const loadingAccount = useAppSelector((state) => state.accountUser.loading);
+  const errorAccount = useAppSelector((state) => state.accountUser.error);
 
   useEffect(() => {
     const user = userSchema.parse({
@@ -43,16 +35,17 @@ export default function HomePage() {
       sub: auth.user?.profile.sub,
       username: auth.user?.profile.preferred_username,
     });
+    dispatch(fetchRadarUser({ user, auth }));
+    dispatch(fetchAccountUser({ user, auth }));
+  }, [dispatch, auth]);
 
-    createAccountUser(user);
-    createRadarUser(user);
-
+  useEffect(() => {
     seedLicenses();
     seedPractices();
     seedTechnologies();
-  }, [auth, createAccountUser, createRadarUser, seedLicenses, seedPractices, seedTechnologies]);
+  }, [auth, seedLicenses, seedPractices, seedTechnologies]);
 
-  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5) {
+  if (isPending3 || isPending4 || isPending5) {
     return <h1>Loading...</h1>;
   }
 
@@ -61,9 +54,21 @@ export default function HomePage() {
       <h1 className="text-3xl font-bold underline">Home</h1>
       <div>
         <h1>Radar User</h1>
-        {loading && <p>Загрузка...</p>}
-        {error && <p>Ошибка: {error}</p>}
-        {user && <pre>{JSON.stringify(user, null, 2)}</pre>}
+        {loadingRadar && <p>Загрузка...</p>}
+        {errorRadar && <p>Ошибка: {errorRadar}</p>}
+        {userRadar && (
+          <p>
+            {userRadar.id} {userRadar.username} {userRadar.sub}
+          </p>
+        )}
+        <h1>Account User</h1>
+        {loadingAccount && <p>Загрузка...</p>}
+        {errorAccount && <p>Ошибка: {errorAccount}</p>}
+        {userAccount && (
+          <p>
+            {userAccount.id} {userAccount.username} {userAccount.sub}
+          </p>
+        )}
       </div>
     </>
   );
