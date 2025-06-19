@@ -4,22 +4,22 @@ import { z } from "zod";
 
 import { ACCOUNT_API_URL } from "@/constants/application";
 
-import { IUserState } from "@/types/redux-types";
+import { UserState } from "@/types/redux-types";
 
 import { userSchema } from "@/schemas/user";
 
-const initialState: IUserState = {
+const initialState: UserState = {
   user: null,
   loading: false,
   error: null,
 };
 
-type CreateAccountUserArgs = {
+type AccountUserArgs = {
   user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
 };
 
-export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, CreateAccountUserArgs>(
+export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, AccountUserArgs>(
   "accountUser/fetchAccountUser",
   async ({ user, auth }) => {
     const res = await fetch(`${ACCOUNT_API_URL}/account-users`, {
@@ -35,8 +35,8 @@ export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, Cre
   },
 );
 
-const AccountUserSlice = createSlice({
-  name: "AccountUser",
+const accountUserSlice = createSlice({
+  name: "accountUser",
   initialState,
   reducers: {
     setAccountUser(state, action: PayloadAction<z.infer<typeof userSchema>>) {
@@ -63,5 +63,5 @@ const AccountUserSlice = createSlice({
   },
 });
 
-export const { setAccountUser, clearAccountUser } = AccountUserSlice.actions;
-export const AccountUserReducer = AccountUserSlice.reducer;
+export const { setAccountUser, clearAccountUser } = accountUserSlice.actions;
+export const accountUserReducer = accountUserSlice.reducer;

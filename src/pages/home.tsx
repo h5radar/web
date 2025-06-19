@@ -16,18 +16,14 @@ import { fetchRadarUser } from "@/features/user-slice";
 export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const { mutate: seedLicenses, isPending: isPending3 } = useSeedLicenses(auth, queryClient);
-  const { mutate: seedPractices, isPending: isPending4 } = useSeedPractices(auth, queryClient);
-  const { mutate: seedTechnologies, isPending: isPending5 } = useSeedTechnologies(auth, queryClient);
-
   const dispatch = useAppDispatch();
   const userRadar = useAppSelector((state) => state.radarUser.user);
   const loadingRadar = useAppSelector((state) => state.radarUser.loading);
   const errorRadar = useAppSelector((state) => state.radarUser.error);
 
-  const userAccount = useAppSelector((state) => state.accountUser.user);
-  const loadingAccount = useAppSelector((state) => state.accountUser.loading);
-  const errorAccount = useAppSelector((state) => state.accountUser.error);
+  const { mutate: seedLicenses, isPending: isPending3 } = useSeedLicenses(auth, queryClient, userRadar);
+  const { mutate: seedPractices, isPending: isPending4 } = useSeedPractices(auth, queryClient, userRadar);
+  const { mutate: seedTechnologies, isPending: isPending5 } = useSeedTechnologies(auth, queryClient, userRadar);
 
   useEffect(() => {
     const user = userSchema.parse({
@@ -45,7 +41,7 @@ export default function HomePage() {
     seedTechnologies();
   }, [auth, seedLicenses, seedPractices, seedTechnologies]);
 
-  if (isPending3 || isPending4 || isPending5) {
+  if (loadingRadar || isPending3 || isPending4 || isPending5) {
     return <h1>Loading...</h1>;
   }
 
@@ -54,21 +50,7 @@ export default function HomePage() {
       <h1 className="text-3xl font-bold underline">Home</h1>
       <div>
         <h1>Radar User</h1>
-        {loadingRadar && <p>Загрузка...</p>}
-        {errorRadar && <p>Ошибка: {errorRadar}</p>}
-        {userRadar && (
-          <p>
-            {userRadar.id} {userRadar.username} {userRadar.sub}
-          </p>
-        )}
-        <h1>Account User</h1>
-        {loadingAccount && <p>Загрузка...</p>}
-        {errorAccount && <p>Ошибка: {errorAccount}</p>}
-        {userAccount && (
-          <p>
-            {userAccount.id} {userAccount.username} {userAccount.sub}
-          </p>
-        )}
+        {!loadingRadar && errorRadar && <p>Ошибка: {errorRadar}</p>}
       </div>
     </>
   );

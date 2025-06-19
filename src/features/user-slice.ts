@@ -4,22 +4,22 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { IUserState } from "@/types/redux-types";
+import { UserState } from "@/types/redux-types";
 
 import { userSchema } from "@/schemas/user";
 
-const initialState: IUserState = {
+const initialState: UserState = {
   user: null,
   loading: false,
   error: null,
 };
 
-type CreateRadarUserArgs = {
+type RadarUserArgs = {
   user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
 };
 
-export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, CreateRadarUserArgs>(
+export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, RadarUserArgs>(
   "radarUser/fetchRadarUser",
   async ({ user, auth }) => {
     const res = await fetch(`${RADAR_API_URL}/radar-users`, {
