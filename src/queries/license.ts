@@ -9,7 +9,8 @@ import { GET_LICENSES, SEED_LICENSES } from "@/constants/query-keys";
 export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/licenses/seed`, {
+      // TODO: change 1 to radar_user_id
+      const response = await fetch(`${RADAR_API_URL}/licenses/seed/1`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

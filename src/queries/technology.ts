@@ -147,7 +147,8 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
 export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/technologies/seed`, {
+      // TODO: change 1 to radar_user_id
+      const response = await fetch(`${RADAR_API_URL}/technologies/seed/1`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

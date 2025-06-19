@@ -9,7 +9,8 @@ import { GET_PRACTICES, SEED_PRACTICES } from "@/constants/query-keys";
 export const useSeedPractices = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/practices/seed`, {
+      // TODO: change 1 to radar_user_id
+      const response = await fetch(`${RADAR_API_URL}/practices/seed/1`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
