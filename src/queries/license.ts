@@ -12,14 +12,14 @@ import { userSchema } from "@/schemas/user";
 export const useSeedLicenses = (
   auth: AuthContextProps,
   queryClient: QueryClient,
-  userRadar: z.infer<typeof userSchema> | null,
+  radarUser: z.infer<typeof userSchema> | null,
 ) => {
   return useMutation({
     mutationFn: async () => {
-      if (!userRadar?.id) {
-        throw new Error("Radar user ID is missing");
+      if (!radarUser?.id) {
+        throw new Error("Radar user id is missing");
       }
-      await fetch(`${RADAR_API_URL}/licenses/seed/${userRadar.id}`, {
+      await fetch(`${RADAR_API_URL}/licenses/seed/${radarUser.id}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

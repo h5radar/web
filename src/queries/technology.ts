@@ -148,14 +148,14 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
 export const useSeedTechnologies = (
   auth: AuthContextProps,
   queryClient: QueryClient,
-  userRadar: z.infer<typeof userSchema> | null,
+  radarUser: z.infer<typeof userSchema> | null,
 ) => {
   return useMutation({
     mutationFn: async () => {
-      if (!userRadar?.id) {
-        throw new Error("Radar user ID is missing");
+      if (!radarUser?.id) {
+        throw new Error("Radar user id is missing");
       }
-      await fetch(`${RADAR_API_URL}/technologies/seed/${userRadar.id}`, {
+      await fetch(`${RADAR_API_URL}/technologies/seed/${radarUser.id}`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

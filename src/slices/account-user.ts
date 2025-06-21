@@ -14,7 +14,7 @@ const initialState: UserState = {
   error: null,
 };
 
-type AccountUserArgs = {
+interface AccountUserArgs {
   user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
 };
@@ -30,7 +30,7 @@ export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, Acc
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
     });
-    if (!res.ok) throw new Error("Failed to fetch user");
+    if (!res.ok) throw new Error("Failed to create account user");
     return (await res.json()) as z.infer<typeof userSchema>;
   },
 );

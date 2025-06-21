@@ -17,13 +17,18 @@ export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  const userRadar = useAppSelector((state) => state.radarUser.user);
+
+  // const accountUser = useAppSelector((state) => state.accountUser.user);
+  const loadingAccount = useAppSelector((state) => state.accountUser.loading);
+  const errorAccount = useAppSelector((state) => state.accountUser.error);
+
+  const radarUser = useAppSelector((state) => state.radarUser.user);
   const loadingRadar = useAppSelector((state) => state.radarUser.loading);
   const errorRadar = useAppSelector((state) => state.radarUser.error);
 
-  const { mutate: seedLicenses, isPending: isPending3 } = useSeedLicenses(auth, queryClient, userRadar);
-  const { mutate: seedPractices, isPending: isPending4 } = useSeedPractices(auth, queryClient, userRadar);
-  const { mutate: seedTechnologies, isPending: isPending5 } = useSeedTechnologies(auth, queryClient, userRadar);
+  const { mutate: seedLicenses, isPending: isPending1 } = useSeedLicenses(auth, queryClient, radarUser);
+  const { mutate: seedPractices, isPending: isPending2 } = useSeedPractices(auth, queryClient, radarUser);
+  const { mutate: seedTechnologies, isPending: isPending3 } = useSeedTechnologies(auth, queryClient, radarUser);
 
   useEffect(() => {
     const user = userSchema.parse({
@@ -41,16 +46,25 @@ export default function HomePage() {
     seedTechnologies();
   }, [auth, seedLicenses, seedPractices, seedTechnologies]);
 
-  if (loadingRadar || isPending3 || isPending4 || isPending5) {
+  if (loadingAccount || loadingRadar || isPending1 || isPending2 || isPending3) {
     return <h1>Loading...</h1>;
+  }
+
+  if (errorAccount || errorRadar) {
+    return (
+      <div>
+        <h1>Error getting technologies</h1>
+        <p>{errorAccount}</p>
+        <p>{errorRadar}</p>
+      </div>
+    );
   }
 
   return (
     <>
       <h1 className="text-3xl font-bold underline">Home</h1>
       <div>
-        <h1>Radar User</h1>
-        {!loadingRadar && errorRadar && <p>Ошибка: {errorRadar}</p>}
+        <h2>TODO</h2>
       </div>
     </>
   );
