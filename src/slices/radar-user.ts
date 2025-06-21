@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { RADAR_API_URL } from "@/constants/application";
 
-import { UserState } from "@/types/redux-types";
+import { UserState } from "@/types/user-state";
 
 import { userSchema } from "@/schemas/user";
 
