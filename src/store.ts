@@ -1,7 +1,7 @@
-import { accountUserReducer } from "./features/account-slice";
 import { configureStore } from "@reduxjs/toolkit";
 
-import { radarUserReducer } from "@/features/user-slice";
+import { accountUserReducer } from "@/slices/account-user";
+import { radarUserReducer } from "@/slices/radar-user";
 
 export const store = configureStore({
   reducer: {

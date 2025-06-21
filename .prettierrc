@@ -15,10 +15,11 @@
     "^@/types/(.*)$",
     "^@/schemas/(.*)$",
     "^@/lib/(.*)$",
-    "^@/components/(.*)$",
     "^@/providers/(.*)$",
     "^@/hooks/(.*)$",
     "^@/queries/(.*)$",
+    "^@/slices/(.*)$",
+    "^@/components/(.*)$",
     "^@/layouts/(.*)$",
     "^@/pages/(.*)$",
     "^@/(.*)"

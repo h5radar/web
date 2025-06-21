@@ -10,8 +10,8 @@ import { useSeedLicenses } from "@/queries/license";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
 
-import { fetchAccountUser } from "@/features/account-slice";
-import { fetchRadarUser } from "@/features/user-slice";
+import { fetchAccountUser } from "@/slices/account-user";
+import { fetchRadarUser } from "@/slices/radar-user";
 
 export default function HomePage() {
   const auth = useAuth();
