@@ -5,8 +5,8 @@ import { radarUserReducer } from "@/slices/radar-user";
 
 export const store = configureStore({
   reducer: {
-    radarUser: radarUserReducer,
     accountUser: accountUserReducer,
+    radarUser: radarUserReducer,
   },
 });
 
