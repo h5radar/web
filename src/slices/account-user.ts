@@ -17,7 +17,7 @@ const initialState: UserState = {
 interface AccountUserArgs {
   user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
-};
+}
 
 export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, AccountUserArgs>(
   "accountUser/fetchAccountUser",
