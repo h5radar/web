@@ -15,8 +15,8 @@ const initialState: UserState = {
 };
 
 interface RadarUserArgs {
-  user: z.infer<typeof userSchema>;
   auth: AuthContextProps;
+  user: z.infer<typeof userSchema>;
 }
 
 export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, RadarUserArgs>(
