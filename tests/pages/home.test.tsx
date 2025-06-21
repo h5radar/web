@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { describe, expect, it } from "vitest";
 
 import HomePage from "@/pages/home";
+
 import { store } from "@/store";
 
 describe("HomePage", () => {
@@ -12,8 +13,9 @@ describe("HomePage", () => {
       <Provider store={store}>
         <QueryClientProvider client={new QueryClient()}>
           <HomePage />
-        </QueryClientProvider>,
-      </Provider>
+        </QueryClientProvider>
+        ,
+      </Provider>,
     );
     // TODO: fixme
     expect(screen.getByText("Loading...")).toBeDefined();
