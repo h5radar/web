@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { describe, expect, it } from "vitest";
 
-import HomePage from "@/pages/home";
-
 import { store } from "@/store";
+
+import HomePage from "@/pages/home";
 
 describe("HomePage", () => {
   it("get home page", () => {

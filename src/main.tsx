@@ -9,6 +9,8 @@ import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
+import { store } from "@/store";
+
 import HotkeysProvider from "@/providers/hotkeys";
 import PrivateProvider from "@/providers/private";
 
@@ -64,7 +66,6 @@ import TechnologyBlipsPage from "@/pages/technology-blips/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
-import { store } from "@/store";
 
 /*
  * Create and configure query client. Default value for stale time is 0.
