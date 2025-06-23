@@ -56,13 +56,13 @@ export default function HomePage() {
   }
 
   if (errorRadar) {
-    toast.error("Error seeding practices", {
+    toast.error("Error redux radar", {
       description: errorRadar,
     });
   }
 
   if (errorAccount) {
-    toast.error("Error seeding practices", {
+    toast.error("Error redux radar", {
       description: errorAccount,
     });
   }
