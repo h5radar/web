@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuth } from "react-oidc-context";
+import { toast } from "sonner";
 
 import { userSchema } from "@/schemas/user";
 
@@ -18,7 +19,8 @@ export default function HomePage() {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
 
-  // const accountUser = useAppSelector((state) => state.accountUser.user);
+  const refRadar = useRef(false);
+
   const loadingAccount = useAppSelector((state) => state.accountUser.loading);
   const errorAccount = useAppSelector((state) => state.accountUser.error);
 
@@ -41,31 +43,33 @@ export default function HomePage() {
   }, [dispatch, auth]);
 
   useEffect(() => {
-    seedLicenses();
-    seedPractices();
-    seedTechnologies();
-  }, [auth, seedLicenses, seedPractices, seedTechnologies]);
+    if (radarUser && !refRadar.current) {
+      refRadar.current = true;
+      seedLicenses();
+      seedPractices();
+      seedTechnologies();
+    }
+  }, [auth, seedLicenses, seedPractices, seedTechnologies, radarUser]);
 
-  if (loadingAccount || loadingRadar || isPending1 || isPending2 || isPending3) {
+  if (loadingRadar || loadingAccount || isPending1 || isPending2 || isPending3) {
     return <h1>Loading...</h1>;
   }
 
-  if (errorAccount || errorRadar) {
-    return (
-      <div>
-        <h1>Error getting technologies</h1>
-        <p>{errorAccount}</p>
-        <p>{errorRadar}</p>
-      </div>
-    );
+  if (errorRadar) {
+    toast.error("Error seeding practices", {
+      description: errorRadar,
+    });
+  }
+
+  if (errorAccount) {
+    toast.error("Error seeding practices", {
+      description: errorAccount,
+    });
   }
 
   return (
     <>
       <h1 className="text-3xl font-bold underline">Home</h1>
-      <div>
-        <h2>TODO</h2>
-      </div>
     </>
   );
 }
