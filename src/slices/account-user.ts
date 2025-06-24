@@ -30,7 +30,7 @@ export const fetchAccountUser = createAsyncThunk<z.infer<typeof userSchema>, Acc
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
     });
-    if (!res.ok) throw new Error("Failed to create account user");
+    if (!res.ok) throw new Error("Error creating account user, http code is not ok.");
     return (await res.json()) as z.infer<typeof userSchema>;
   },
 );

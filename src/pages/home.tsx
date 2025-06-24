@@ -51,19 +51,19 @@ export default function HomePage() {
     }
   }, [auth, seedLicenses, seedPractices, seedTechnologies, radarUser]);
 
-  if (loadingRadar || loadingAccount || isPending1 || isPending2 || isPending3) {
+  if (loadingAccount || loadingRadar || isPending1 || isPending2 || isPending3) {
     return <h1>Loading...</h1>;
   }
 
-  if (errorRadar) {
-    toast.error("Error redux radar", {
-      description: errorRadar,
+  if (errorAccount) {
+    toast.error("Error creating account user", {
+      description: errorAccount,
     });
   }
 
-  if (errorAccount) {
-    toast.error("Error redux radar", {
-      description: errorAccount,
+  if (errorRadar) {
+    toast.error("Error creating account user", {
+      description: errorRadar,
     });
   }
 

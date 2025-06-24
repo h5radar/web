@@ -30,7 +30,7 @@ export const fetchRadarUser = createAsyncThunk<z.infer<typeof userSchema>, Radar
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
     });
-    if (!res.ok) throw new Error("Failed to create radar user");
+    if (!res.ok) throw new Error("Error creating radar user, http code is not ok.");
     return (await res.json()) as z.infer<typeof userSchema>;
   },
 );
