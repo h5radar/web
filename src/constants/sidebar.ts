@@ -80,6 +80,43 @@ export const radarNavItems: NavItem[] = [
     items: [],
   },
   {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
+    items: [
+      {
+        title: "Practices",
+        url: "/practices",
+        icon: Ruler,
+        items: [],
+      },
+      {
+        title: "Licenses",
+        url: "/licenses",
+        icon: Copyright,
+        items: [],
+      },
+      {
+        title: "Technologies",
+        url: "/technologies",
+        icon: LucideShoppingBag,
+        items: [],
+      },
+      {
+        title: "Rings",
+        url: "/rings",
+        icon: LucideShoppingBag,
+        items: [],
+      },
+      {
+        title: "Segments",
+        url: "/segments",
+        icon: LucideShoppingBag,
+        items: [],
+      },
+    ],
+  },
+  {
     title: "Contributions",
     url: "#",
     icon: Activity,
@@ -130,12 +167,6 @@ export const radarNavItems: NavItem[] = [
         items: [],
       },
       {
-        title: "Technologies",
-        url: "/technologies",
-        icon: LucideShoppingBag,
-        items: [],
-      },
-      {
         title: "Technology blips",
         url: "/technology-blips",
         icon: LucideShoppingBag,
@@ -160,12 +191,6 @@ export const radarNavItems: NavItem[] = [
         icon: Ruler,
         items: [],
       },
-      {
-        title: "Practices",
-        url: "/practices",
-        icon: Ruler,
-        items: [],
-      },
     ],
   },
   {
@@ -176,12 +201,6 @@ export const radarNavItems: NavItem[] = [
       {
         title: "Pie charts",
         url: "/pies",
-        icon: Copyright,
-        items: [],
-      },
-      {
-        title: "Licenses",
-        url: "/licenses",
         icon: Copyright,
         items: [],
       },
@@ -217,15 +236,8 @@ export const radarNavItems: NavItem[] = [
     ],
   },
   {
-    title: "Settings",
-    url: "#",
+    title: "Adapters",
+    url: "/adapters",
     icon: Settings,
-    items: [
-      {
-        title: "Adapters",
-        url: "/adapters",
-        icon: Settings,
-      },
-    ],
   },
 ];
