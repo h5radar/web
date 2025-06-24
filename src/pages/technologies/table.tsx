@@ -1,8 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
+import { toast } from "sonner";
+
+import { userSchema } from "@/schemas/user";
+
+import { useAppDispatch, useAppSelector } from "@/hooks/use-redux";
 
 import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology";
+
+import { fetchRadarUser } from "@/slices/radar-user";
 
 import { DataTable } from "@/components/data-table";
 
@@ -10,19 +17,41 @@ import { useTechnologyColumns } from "@/pages/technologies/columns";
 
 export const TechnologiesPage = () => {
   const auth = useAuth();
+  const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const [queryParams, setQueryParams] = useState({
     page: 1,
     size: 10,
     sort: ["title", "asc"],
   });
+  const radarUser = useAppSelector((state) => state.radarUser.user);
+  const loadingRadar = useAppSelector((state) => state.radarUser.loading);
+  const errorRadar = useAppSelector((state) => state.radarUser.error);
+
+  useEffect(() => {
+    if (!auth.user) return;
+    const user = userSchema.parse({
+      id: 0,
+      sub: auth.user?.profile.sub,
+      username: auth.user?.profile.preferred_username,
+    });
+    dispatch(fetchRadarUser({ user, auth }));
+  }, [dispatch, auth]);
+
+  useEffect(() => {
+    if (errorRadar) {
+      toast.error("Error get radar user", {
+        description: errorRadar,
+      });
+    }
+  }, [errorRadar]);
 
   const {
     data: technologies = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
     isLoading: isLoading,
     isError: isError,
     error: error,
-  } = useGetTechnologies(auth, queryParams);
+  } = useGetTechnologies(auth, queryParams, radarUser);
 
   const { mutate: deleteTechnology } = useDeleteTechnology(auth, queryClient);
 
@@ -58,7 +87,7 @@ export const TechnologiesPage = () => {
   return (
     <>
       <DataTable
-        isLoading={isLoading}
+        isLoading={isLoading || loadingRadar}
         columns={columns}
         data={technologies.content}
         rowCount={technologies.totalElements}

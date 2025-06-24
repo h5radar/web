@@ -23,12 +23,20 @@ import { userSchema } from "@/schemas/user";
 
 import { createQueryParams } from "@/lib/query-params";
 
-export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryClient, navigate: NavigateFunction) => {
+export const useCreateTechnology = (
+  auth: AuthContextProps,
+  queryClient: QueryClient,
+  navigate: NavigateFunction,
+  radarUser: z.infer<typeof userSchema> | null,
+) => {
   return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
+      if (!radarUser?.id) {
+        throw new Error("Radar user id is missing");
+      }
       const response = await fetch(`${RADAR_API_URL}/technologies`, {
         method: "POST",
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, radar_user_id: radarUser?.id }),
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
@@ -51,12 +59,20 @@ export const useCreateTechnology = (auth: AuthContextProps, queryClient: QueryCl
   });
 };
 
-export const useUpdateTechnology = (auth: AuthContextProps, queryClient: QueryClient, id: string) => {
+export const useUpdateTechnology = (
+  auth: AuthContextProps,
+  queryClient: QueryClient,
+  id: string,
+  radarUser: z.infer<typeof userSchema> | null,
+) => {
   return useMutation<z.infer<typeof technologySchema>, Error, z.infer<typeof technologySchema>>({
     mutationFn: async (values: z.infer<typeof technologySchema>) => {
+      if (!radarUser?.id) {
+        throw new Error("Radar user id is missing");
+      }
       const response = await fetch(`${RADAR_API_URL}/technologies/${id}`, {
         method: "PUT",
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, radar_user_id: radarUser?.id }),
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
@@ -123,17 +139,27 @@ export const useGetTechnology = (auth: AuthContextProps, id: string) => {
   });
 };
 
-export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryParams) => {
+export const useGetTechnologies = (
+  auth: AuthContextProps,
+  queryParams: QueryParams,
+  radarUser: z.infer<typeof userSchema> | null,
+) => {
   return useQuery({
     queryKey: [GET_TECHNOLOGIES, queryParams],
     queryFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/technologies?${createQueryParams({ ...queryParams })}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
+      if (!radarUser?.id) {
+        throw new Error("Radar user id is missing");
+      }
+      const response = await fetch(
+        `${RADAR_API_URL}/technologies?${createQueryParams({ ...queryParams, radar_user_id: radarUser.id })}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${auth.user?.access_token}`,
+          },
         },
-      });
+      );
       const data = await response.json();
       return responseSchema(technologySchema).parse(data);
     },
@@ -141,6 +167,7 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
       errorMessage: "Error getting technologies",
     },
     placeholderData: keepPreviousData,
+    enabled: !!radarUser,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
   });
 };
