@@ -39,6 +39,8 @@ import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
 import PracticesPage from "@/pages/practices";
+import EditProductPage from "@/pages/products/edit";
+import NewProductPage from "@/pages/products/new";
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
 import ShowProductContributionsPage from "@/pages/products/show-contributions";
@@ -180,6 +182,8 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/technologies/new" element={<NewTechnologyPage />} />
                   <Route path="/technologies/edit/:id" element={<EditTechnologyPage />} />
                   <Route path="/technology-blips" element={<TechnologyBlipsPage />} />
+                  <Route path="/products/new" element={<NewProductPage />} />
+                  <Route path="/products/edit/:id" element={<EditProductPage />} />
                 </Route>
               </Routes>
             </HotkeysProvider>

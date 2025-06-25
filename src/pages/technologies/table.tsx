@@ -60,6 +60,7 @@ export const TechnologiesPage = () => {
       <DataTable
         isLoading={isLoading}
         columns={columns}
+        pageLink={"technologies"}
         data={technologies.content}
         rowCount={technologies.totalElements}
         pageSize={technologies.pageable.pageSize}

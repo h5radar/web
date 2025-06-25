@@ -104,7 +104,7 @@ export const useDeleteTechnology = (auth: AuthContextProps, queryClient: QueryCl
 
 export const useGetTechnology = (auth: AuthContextProps, id: string) => {
   return useQuery({
-    queryKey: ["get technology", id],
+    queryKey: [GET_TECHNOLOGY, id],
     queryFn: async () => {
       const response = await fetch(`${RADAR_API_URL}/technologies/${id}`, {
         method: "GET",
