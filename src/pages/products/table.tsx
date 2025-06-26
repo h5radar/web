@@ -8,7 +8,7 @@ import { DataTable } from "@/components/data-table";
 
 import { useProductColumns } from "@/pages/products/columns";
 
-export default function ProductsPage() {
+export function ProductsPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const [queryParams, setQueryParams] = useState({
