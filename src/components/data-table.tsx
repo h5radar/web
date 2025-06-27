@@ -104,6 +104,7 @@ interface DataTableProps<T> {
   pageSize: number;
   rowCount: number;
   pageIndex: number;
+  pageLink: string;
   handleDelete: (id: string) => void;
   handlePagination?: (page: number, size: number) => void;
   handleSorting?: (id: string, desc: "asc" | "desc") => void;
@@ -117,6 +118,7 @@ export const DataTable = <T extends { id: number }>({
   pageSize,
   rowCount,
   pageIndex,
+  pageLink,
   handleDelete,
   handlePagination,
   handleSorting,
@@ -265,7 +267,7 @@ export const DataTable = <T extends { id: number }>({
             </DropdownMenuContent>
           </DropdownMenu>
           <Button asChild variant="outline" size="sm">
-            <Link to="/technologies/new">
+            <Link to={`/${pageLink}/new`}>
               <IconPlus />
               <span className="hidden lg:inline">Add Section</span>
             </Link>

@@ -39,6 +39,8 @@ import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
 import PracticesPage from "@/pages/practices";
+import EditProductPage from "@/pages/products/edit";
+import NewProductPage from "@/pages/products/new";
 // Include product resource pages at alphabet
 import ShowProductCommunicationsPage from "@/pages/products/show-communications";
 import ShowProductContributionsPage from "@/pages/products/show-contributions";
@@ -46,7 +48,7 @@ import ShowProductFinancesPage from "@/pages/products/show-finances";
 import ShowProductLicensesPage from "@/pages/products/show-licenses";
 import ShowProductPracticesPage from "@/pages/products/show-practices";
 import ShowProductTechnologiesPage from "@/pages/products/show-technologies";
-import ProductsPage from "@/pages/products/table";
+import { ProductsPage } from "@/pages/products/table";
 import ProfilePage from "@/pages/profile";
 import EditRadarPage from "@/pages/radars/edit";
 // Include radar resource pages at alphabet
@@ -160,7 +162,6 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/pies" element={<PiesPage />} />
                   <Route path="/platforms" element={<PlatformsPage />} />
                   <Route path="/practices" element={<PracticesPage />} />
-                  <Route path="/products" element={<ProductsPage />} />
                   <Route path="/products/show-communications/:id" element={<ShowProductCommunicationsPage />} />
                   <Route path="/products/show-contributions/:id" element={<ShowProductContributionsPage />} />
                   <Route path="/products/show-finances/:id" element={<ShowProductFinancesPage />} />
@@ -180,6 +181,9 @@ createRoot(document.getElementById("root")!).render(
                   <Route path="/technologies/new" element={<NewTechnologyPage />} />
                   <Route path="/technologies/edit/:id" element={<EditTechnologyPage />} />
                   <Route path="/technology-blips" element={<TechnologyBlipsPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/products/new" element={<NewProductPage />} />
+                  <Route path="/products/edit/:id" element={<EditProductPage />} />
                 </Route>
               </Routes>
             </HotkeysProvider>

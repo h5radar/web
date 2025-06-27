@@ -1,32 +1,74 @@
-import { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
-import { z } from "zod";
 
-import { RADAR_API_URL } from "@/constants/application";
+import { useDeleteProduct, useGetProducts } from "@/queries/products";
 
-import { productSchema } from "@/schemas/product";
+import { DataTable } from "@/components/data-table";
 
-export default function ProductsPage() {
+import { useProductColumns } from "@/pages/products/columns";
+
+export function ProductsPage() {
   const auth = useAuth();
-  const [products, setProducts] = useState<z.infer<typeof productSchema>[]>([]);
-  useEffect(() => {
-    fetch(`${RADAR_API_URL}/products`, {
-      headers: {
-        Authorization: `Bearer ${auth.user?.access_token}`,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-      });
-  }, [auth]);
+  const queryClient = useQueryClient();
+  const [queryParams, setQueryParams] = useState({
+    page: 1,
+    size: 10,
+    sort: ["title", "asc"],
+  });
 
+  const {
+    data: products = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
+    isLoading: isLoading,
+    isError: isError,
+    error: error,
+  } = useGetProducts(auth, queryParams);
+
+  const { mutate: deleteTechnology } = useDeleteProduct(auth, queryClient);
+  const columns = useProductColumns(deleteTechnology);
+
+  const handlePagination = useCallback((page: number, size: number) => {
+    setQueryParams((prev) => {
+      return { ...prev, page: page + 1, size: size };
+    });
+  }, []);
+
+  const handleSorting = useCallback((id: string, desc: "asc" | "desc") => {
+    return setQueryParams((prev) => {
+      return { ...prev, sort: [id, desc], page: 1 };
+    });
+  }, []);
+
+  const handleFiltering = useCallback((value: string) => {
+    return setQueryParams((prev) => {
+      return { ...prev, title: value, page: 1 };
+    });
+  }, []);
+
+  if (isError) {
+    return (
+      <div>
+        <h1>Error getting products</h1>
+        <p>{error.message}</p>
+      </div>
+    );
+  }
   return (
     <>
       <h1 className="text-3xl font-bold underline">Products</h1>
-      <div>{products.length}</div>
+      <DataTable
+        isLoading={isLoading}
+        pageLink={"products"}
+        columns={columns}
+        data={products.content}
+        rowCount={products.totalElements}
+        pageSize={products.pageable.pageSize}
+        pageIndex={products.pageable.pageNumber}
+        handlePagination={handlePagination}
+        handleSorting={handleSorting}
+        handleFiltering={handleFiltering}
+        handleDelete={deleteTechnology}
+      />
     </>
   );
 }

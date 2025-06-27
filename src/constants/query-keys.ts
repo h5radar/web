@@ -46,3 +46,13 @@ export const DELETE_TECHNOLOGY = "Delete technology";
 export const GET_TECHNOLOGY = "Get technology";
 export const GET_TECHNOLOGIES = "Get technologies";
 export const SEED_TECHNOLOGIES = "Seed technologies";
+
+/*
+ * TanStack query keys for products
+ */
+export const CREATE_PRODUCT = "Create product";
+export const UPDATE_PRODUCT = "Update product";
+export const DELETE_PRODUCT = "Delete product";
+export const GET_PRODUCT = "Get product";
+export const GET_PRODUCTS = "Get products";
+export const SEED_PRODUCTS = "Seed products";
