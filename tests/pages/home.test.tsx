@@ -11,8 +11,6 @@ describe("HomePage", () => {
         <HomePage />
       </QueryClientProvider>,
     );
-    // TODO: fixme
-    expect(screen.getByText("Loading...")).toBeDefined();
-    // expect(screen.getByText("Home")).toBeDefined();
+    expect(screen.getByText("Home")).toBeDefined();
   });
 });
