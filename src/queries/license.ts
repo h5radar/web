@@ -19,7 +19,6 @@ import { QueryParams } from "@/types/query-params";
 
 import { licenseSchema } from "@/schemas/license";
 import { responseSchema } from "@/schemas/response";
-import { userSchema } from "@/schemas/user";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -146,17 +145,10 @@ export const useGetLicenses = (auth: AuthContextProps, queryParams: QueryParams)
   });
 };
 
-export const useSeedLicenses = (
-  auth: AuthContextProps,
-  queryClient: QueryClient,
-  radarUser: z.infer<typeof userSchema> | null,
-) => {
+export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
-      if (!radarUser?.id) {
-        throw new Error("Radar user id is missing");
-      }
-      await fetch(`${RADAR_API_URL}/licenses/seed/${radarUser.id}`, {
+      await fetch(`${RADAR_API_URL}/licenses/seed`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
