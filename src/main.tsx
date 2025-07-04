@@ -30,7 +30,9 @@ import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
 import HomePage from "@/pages/home";
 import InvoicesPage from "@/pages/invoices";
-import LicensesPage from "@/pages/licenses";
+import EditLicensesPage from "@/pages/license/edit";
+import NewLicensesPage from "@/pages/license/new";
+import { LicensesPage } from "@/pages/license/table";
 import NotificationsPage from "@/pages/notifications";
 import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
@@ -153,7 +155,6 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/bi-systems" element={<BiSystemsPage />} />
                 <Route path="/cobwebs" element={<CobwebsPage />} />
                 <Route path="/channels" element={<ChannelsPage />} />
-                <Route path="/licenses" element={<LicensesPage />} />
                 <Route path="/participants" element={<ParticipantsPage />} />
                 <Route path="/pies" element={<PiesPage />} />
                 <Route path="/platforms" element={<PlatformsPage />} />
@@ -180,6 +181,9 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/products/new" element={<NewProductPage />} />
                 <Route path="/products/edit/:id" element={<EditProductPage />} />
+                <Route path="/licenses" element={<LicensesPage />} />
+                <Route path="/licenses/new" element={<NewLicensesPage />} />
+                <Route path="/licenses/edit/:id" element={<EditLicensesPage />} />
               </Route>
             </Routes>
           </HotkeysProvider>
