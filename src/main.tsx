@@ -190,7 +190,6 @@ createRoot(document.getElementById("root")!).render(
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </AuthProvider>
-
     </BrowserRouter>
   </StrictMode>,
 );
