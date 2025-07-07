@@ -2,13 +2,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { useDeleteLicense, useGetLicenses } from "@/queries/license";
+import { useDeletePractice, useGetPractices } from "@/queries/practice";
 
 import { DataTable } from "@/components/data-table";
 
-import { useLicenseColumns } from "@/pages/license/columns";
+import { usePracticeColumns } from "@/pages/practices/columns";
 
-export const LicensesPage = () => {
+export const PracticesPage = () => {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const [queryParams, setQueryParams] = useState({
@@ -18,15 +18,15 @@ export const LicensesPage = () => {
   });
 
   const {
-    data: licenses = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
+    data: practices = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
     isLoading: isLoading,
     isError: isError,
     error: error,
-  } = useGetLicenses(auth, queryParams);
+  } = useGetPractices(auth, queryParams);
 
-  const { mutate: deleteLicense } = useDeleteLicense(auth, queryClient);
+  const { mutate: deletePractice } = useDeletePractice(auth, queryClient);
 
-  const columns = useLicenseColumns(deleteLicense);
+  const columns = usePracticeColumns(deletePractice);
 
   const handlePagination = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
@@ -49,7 +49,7 @@ export const LicensesPage = () => {
   if (isError) {
     return (
       <div>
-        <h1>Error getting technologies</h1>
+        <h1>Error getting practices</h1>
         <p>{error.message}</p>
       </div>
     );
@@ -60,15 +60,15 @@ export const LicensesPage = () => {
       <DataTable
         isLoading={isLoading}
         columns={columns}
-        pageLink={"licenses"}
-        data={licenses.content}
-        rowCount={licenses.totalElements}
-        pageSize={licenses.pageable.pageSize}
-        pageIndex={licenses.pageable.pageNumber}
+        pageLink={"practices"}
+        data={practices.content}
+        rowCount={practices.totalElements}
+        pageSize={practices.pageable.pageSize}
+        pageIndex={practices.pageable.pageNumber}
         handlePagination={handlePagination}
         handleSorting={handleSorting}
         handleFiltering={handleFiltering}
-        handleDelete={deleteLicense}
+        handleDelete={deletePractice}
       />
     </>
   );

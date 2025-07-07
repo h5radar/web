@@ -37,7 +37,9 @@ import NotificationsPage from "@/pages/notifications";
 import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
 import PlatformsPage from "@/pages/platforms";
-import PracticesPage from "@/pages/practices";
+import EditPracticePage from "@/pages/practices/edit";
+import NewPracticesPage from "@/pages/practices/new";
+import { PracticesPage } from "@/pages/practices/table";
 import EditProductPage from "@/pages/products/edit";
 import NewProductPage from "@/pages/products/new";
 // Include product resource pages at alphabet
@@ -158,7 +160,6 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/participants" element={<ParticipantsPage />} />
                 <Route path="/pies" element={<PiesPage />} />
                 <Route path="/platforms" element={<PlatformsPage />} />
-                <Route path="/practices" element={<PracticesPage />} />
                 <Route path="/products/show-communications/:id" element={<ShowProductCommunicationsPage />} />
                 <Route path="/products/show-contributions/:id" element={<ShowProductContributionsPage />} />
                 <Route path="/products/show-finances/:id" element={<ShowProductFinancesPage />} />
@@ -184,6 +185,9 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/licenses" element={<LicensesPage />} />
                 <Route path="/licenses/new" element={<NewLicensesPage />} />
                 <Route path="/licenses/edit/:id" element={<EditLicensesPage />} />
+                <Route path="/practices" element={<PracticesPage />} />
+                <Route path="/practices/new" element={<NewPracticesPage />} />
+                <Route path="/practices/edit/:id" element={<EditPracticePage />} />
               </Route>
             </Routes>
           </HotkeysProvider>
