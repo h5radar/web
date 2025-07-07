@@ -6,9 +6,10 @@ import { DEBOUNCE_TIME } from "@/constants/application";
 
 interface FilterInputProps {
   handleFilter: (value: string) => void;
+  placeholder?: string;
 }
 
-export const FilterInput = ({ handleFilter }: FilterInputProps) => {
+export const FilterInput = ({ handleFilter, placeholder = "Filter, for example Text%..." }: FilterInputProps) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const debouncedHandleFilter = useCallback(
@@ -31,7 +32,7 @@ export const FilterInput = ({ handleFilter }: FilterInputProps) => {
 
   return (
     <Input
-      placeholder="Filter, for example Java%..."
+      placeholder={placeholder}
       onChange={(event) => debouncedHandleFilter(event.target.value)}
       className="max-w-72 w-72"
     />
