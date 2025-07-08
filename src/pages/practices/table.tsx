@@ -60,7 +60,7 @@ export const PracticesPage = () => {
       <DataTable
         isLoading={isLoading}
         columns={columns}
-        filterPlaceholder="Filter, for example Unit tests%..."
+        filterPlaceholder="Filter, for example: Unit tests%..."
         pageLink={"practices"}
         data={practices.content}
         rowCount={practices.totalElements}

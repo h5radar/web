@@ -58,7 +58,7 @@ export function ProductsPage() {
       <DataTable
         isLoading={isLoading}
         pageLink={"products"}
-        filterPlaceholder="Filter, for example Linux%..."
+        filterPlaceholder="Filter, for example: My product%..."
         columns={columns}
         data={products.content}
         rowCount={products.totalElements}

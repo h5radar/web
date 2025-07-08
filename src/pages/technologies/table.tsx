@@ -61,7 +61,7 @@ export const TechnologiesPage = () => {
         isLoading={isLoading}
         columns={columns}
         pageLink={"technologies"}
-        filterPlaceholder="Filter, for example Java%..."
+        filterPlaceholder="Filter, for example: Java%..."
         data={technologies.content}
         rowCount={technologies.totalElements}
         pageSize={technologies.pageable.pageSize}

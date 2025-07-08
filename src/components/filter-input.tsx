@@ -9,7 +9,7 @@ interface FilterInputProps {
   placeholder?: string;
 }
 
-export const FilterInput = ({ handleFilter, placeholder = "Filter, for example Text%..." }: FilterInputProps) => {
+export const FilterInput = ({ handleFilter, placeholder = "Filter, for example: Text%..." }: FilterInputProps) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const debouncedHandleFilter = useCallback(

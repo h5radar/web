@@ -61,7 +61,7 @@ export const LicensesPage = () => {
         isLoading={isLoading}
         columns={columns}
         pageLink={"licenses"}
-        filterPlaceholder="Filter, for example MIT%..."
+        filterPlaceholder="Filter, for example: MIT%..."
         data={licenses.content}
         rowCount={licenses.totalElements}
         pageSize={licenses.pageable.pageSize}
