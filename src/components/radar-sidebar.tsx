@@ -37,7 +37,6 @@ function checkIsActive(href: string, item: NavItem, mainNav = false) {
 
 const RadarSidebar = () => {
   const location = useLocation();
-
   return (
     <Sidebar collapsible="icon">
       <AppSidebarHeader />
@@ -47,7 +46,12 @@ const RadarSidebar = () => {
           <SidebarMenu>
             {radarNavItems.map((item) => {
               return item?.items && item?.items?.length > 0 ? (
-                <Collapsible key={item.title} asChild className="group/collapsible">
+                <Collapsible
+                  key={item.title}
+                  asChild
+                  defaultOpen={checkIsActive(location.pathname, item, true)}
+                  className="group/collapsible"
+                >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton tooltip={item.title} isActive={checkIsActive(location.pathname, item, true)}>
