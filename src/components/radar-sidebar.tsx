@@ -18,22 +18,10 @@ import {
 
 import { radarNavItems } from "@/constants/sidebar";
 
-import { NavItem } from "@/types/nav-item";
+import checkOpenNavItem from "@/lib/check-open-nav-item";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
-
-function checkIsActive(href: string, item: NavItem, mainNav = false) {
-  return (
-    href === item.url ||
-    href.split("?")[0] === item.url ||
-    !!item?.items?.filter((i) => i.url === href).length ||
-    (href.split("/")[1] !== "" && href.split("/")[1] === item?.url?.split("/")[1]) ||
-    (mainNav &&
-      href.split("/")[1] !== "" &&
-      !!item?.items?.filter((i) => i.url.split("/")[1] === href.split("/")[1]).length)
-  );
-}
 
 const RadarSidebar = () => {
   const location = useLocation();
@@ -49,12 +37,15 @@ const RadarSidebar = () => {
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={checkIsActive(location.pathname, item, true)}
+                  defaultOpen={checkOpenNavItem(location.pathname, item, true)}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title} isActive={checkIsActive(location.pathname, item, true)}>
+                      <SidebarMenuButton
+                        tooltip={item.title}
+                        isActive={checkOpenNavItem(location.pathname, item, true)}
+                      >
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -64,7 +55,7 @@ const RadarSidebar = () => {
                       <SidebarMenuSub>
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild isActive={checkIsActive(location.pathname, subItem)}>
+                            <SidebarMenuSubButton asChild isActive={checkOpenNavItem(location.pathname, subItem)}>
                               <Link to={subItem.url}>
                                 <span>{subItem.title}</span>
                               </Link>
