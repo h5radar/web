@@ -18,7 +18,7 @@ import {
 
 import { radarNavItems } from "@/constants/sidebar";
 
-import checkOpenNavItem from "@/lib/check-open-nav-item";
+import checkOpenNavItem from "@/lib/nav-item";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
