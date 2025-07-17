@@ -18,7 +18,7 @@ import {
 
 import { radarNavItems } from "@/constants/sidebar";
 
-import checkOpenNavItem from "@/lib/nav-item";
+import isActiveNavItem from "@/lib/nav-item";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
@@ -37,14 +37,14 @@ const RadarSidebar = () => {
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={checkOpenNavItem(location.pathname, item, true)}
+                  defaultOpen={isActiveNavItem(location.pathname, item, true)}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton
                         tooltip={item.title}
-                        isActive={checkOpenNavItem(location.pathname, item, true)}
+                        isActive={isActiveNavItem(location.pathname, item, true)}
                       >
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
@@ -55,7 +55,7 @@ const RadarSidebar = () => {
                       <SidebarMenuSub>
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild isActive={checkOpenNavItem(location.pathname, subItem)}>
+                            <SidebarMenuSubButton asChild isActive={isActiveNavItem(location.pathname, subItem)}>
                               <Link to={subItem.url}>
                                 <span>{subItem.title}</span>
                               </Link>

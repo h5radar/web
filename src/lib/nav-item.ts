@@ -1,6 +1,6 @@
 import { NavItem } from "@/types/nav-item";
 
-export default function checkOpenNavItem(href: string, item: NavItem, mainNav = false) {
+export default function isActiveNavItem(href: string, item: NavItem, mainNav = false) {
   return (
     href === item.url ||
     href.split("?")[0] === item.url ||
