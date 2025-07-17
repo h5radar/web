@@ -37,12 +37,12 @@ const RadarSidebar = () => {
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={isActiveNavItem(location.pathname, item, true)}
+                  defaultOpen={isActiveNavItem(location.pathname, item)}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title} isActive={isActiveNavItem(location.pathname, item, true)}>
+                      <SidebarMenuButton tooltip={item.title} isActive={isActiveNavItem(location.pathname, item)}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -65,7 +65,7 @@ const RadarSidebar = () => {
                 </Collapsible>
               ) : (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild tooltip={item.title} isActive={location.pathname === item.url}>
+                  <SidebarMenuButton asChild tooltip={item.title} isActive={isActiveNavItem(location.pathname, item)}>
                     <Link to={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
