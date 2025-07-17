@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { complianceSchema } from "@/schemas/compliances";
+import { complianceSchema } from "@/schemas/compliance";
 
 export const useComplianceColumns = (
   handleDelete: (id: string) => void,

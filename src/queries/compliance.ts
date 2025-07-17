@@ -16,7 +16,7 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { complianceSchema } from "@/schemas/compliances";
+import { complianceSchema } from "@/schemas/compliance";
 import { responseSchema } from "@/schemas/response";
 
 import { createQueryParams } from "@/lib/query-params";

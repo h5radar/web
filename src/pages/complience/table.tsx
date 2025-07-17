@@ -60,7 +60,7 @@ export const CompliancesPage = () => {
         isLoading={isLoading}
         columns={columns}
         pageLink={"compliances"}
-        filterPlaceholder="Filter, for example: MIT%..."
+        filterPlaceholder="Filter, for example: Low%..."
         data={compliance.content}
         rowCount={compliance.totalElements}
         pageSize={compliance.pageable.pageSize}

@@ -8,7 +8,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
-import { complianceSchema } from "@/schemas/compliances";
+import { complianceSchema } from "@/schemas/compliance";
 
 interface Compliancerops {
   defaultDataForm?: z.infer<typeof complianceSchema>;

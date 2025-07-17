@@ -5,8 +5,8 @@ import { describe, expect, it } from "vitest";
 
 import { CompliancesPage } from "@/pages/complience/table";
 
-describe("LicensesPage", () => {
-  it("get licenses page", () => {
+describe("CompliancesPage", () => {
+  it("get compliances page", () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
