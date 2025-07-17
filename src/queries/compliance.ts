@@ -11,6 +11,7 @@ import {
   DELETE_COMPLIANCE,
   GET_COMPLIANCE,
   GET_COMPLIANCES,
+  SEED_COMPLIANCES,
   UPDATE_COMPLIANCE,
 } from "@/constants/query-keys";
 
@@ -143,5 +144,29 @@ export const useGetCompliances = (auth: AuthContextProps, queryParams: QueryPara
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
+  });
+};
+
+export const useSeedCompliances = (auth: AuthContextProps, queryClient: QueryClient) => {
+  return useMutation({
+    mutationFn: async () => {
+      await fetch(`${RADAR_API_URL}/compliances/seed`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: [SEED_COMPLIANCES],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_COMPLIANCES] });
+      toast.success("Compliances has been seeded successfully");
+    },
+    onError(error) {
+      toast.error("Error seeding compliances", {
+        description: error.message,
+      });
+    },
   });
 };

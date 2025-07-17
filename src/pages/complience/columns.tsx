@@ -1,4 +1,4 @@
-import { IconCircleCheckFilled, IconDotsVertical, IconLoader } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconDotsVertical } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { Link } from "react-router";
@@ -36,11 +36,17 @@ export const useComplianceColumns = (
         accessorKey: "active",
         header: "Active",
         cell: ({ row }) => (
-          <Badge variant="outline" className="text-muted-foreground px-1.5">
+          <Badge variant="outline" className="text-muted-foreground px-1.5 text-sm">
             {row.original.active ? (
-              <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+              <>
+                <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+                Yes
+              </>
             ) : (
-              <IconLoader />
+              <>
+                <IconCircleCheckFilled className="fill-grey-500 dark:fill-grey-400" />
+                No
+              </>
             )}
             {row.original.active}
           </Badge>
