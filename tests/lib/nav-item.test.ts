@@ -10,6 +10,7 @@ describe("NavItem", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/radar", navItem)).toBeTruthy();
   });
+
   it("index url false", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/", navItem)).toBeFalsy();
@@ -19,6 +20,7 @@ describe("NavItem", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/radar?name=JS", navItem)).toBeTruthy();
   });
+
   it("index url with filter false", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/technologies?name=JS", navItem)).toBeFalsy();
@@ -28,6 +30,7 @@ describe("NavItem", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/radar/new", navItem)).toBeTruthy();
   });
+
   it("new url false", () => {
     const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
@@ -55,6 +58,7 @@ describe("NavItem", () => {
     };
     expect(isActiveNavItem("/radar", navItem)).toBeTruthy();
   });
+
   it("entry url false", () => {
     const navItem: NavItem = {
       title: "Settings",
@@ -100,6 +104,7 @@ describe("NavItem", () => {
     };
     expect(isActiveNavItem("/radar/new", navItem)).toBeTruthy();
   });
+
   it("entry new url false", () => {
     const navItem: NavItem = {
       title: "Settings",
