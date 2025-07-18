@@ -42,3 +42,12 @@ export const DELETE_PRODUCT = "Delete product";
 export const GET_PRODUCT = "Get product";
 export const GET_PRODUCTS = "Get products";
 export const SEED_PRODUCTS = "Seed products";
+/*
+ * TanStack query keys for compliances
+ */
+export const CREATE_COMPLIANCE = "Create compliance";
+export const UPDATE_COMPLIANCE = "Update compliance";
+export const DELETE_COMPLIANCE = "Delete compliance";
+export const GET_COMPLIANCE = "Get compliance";
+export const GET_COMPLIANCES = "Get compliances";
+export const SEED_COMPLIANCES = "Seed compliances";

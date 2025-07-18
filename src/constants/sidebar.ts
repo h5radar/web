@@ -97,6 +97,12 @@ export const radarNavItems: NavItem[] = [
         items: [],
       },
       {
+        title: "Compliances",
+        url: "/compliances",
+        icon: Copyright,
+        items: [],
+      },
+      {
         title: "Technologies",
         url: "/technologies",
         icon: LucideShoppingBag,

@@ -12,6 +12,6 @@ describe("FilterInput", () => {
         }}
       />,
     );
-    expect(screen.getByPlaceholderText("Filter, for example Java%...")).toBeDefined();
+    expect(screen.getByPlaceholderText("Filter, for example: Text%...")).toBeDefined();
   });
 });

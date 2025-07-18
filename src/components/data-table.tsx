@@ -101,6 +101,7 @@ interface DataTableProps<T> {
   isLoading: boolean;
   columns: ColumnDef<T>[];
   data: T[];
+  filterPlaceholder?: string;
   pageSize: number;
   rowCount: number;
   pageIndex: number;
@@ -119,6 +120,7 @@ export const DataTable = <T extends { id: number }>({
   rowCount,
   pageIndex,
   pageLink,
+  filterPlaceholder,
   handleDelete,
   handlePagination,
   handleSorting,
@@ -237,7 +239,9 @@ export const DataTable = <T extends { id: number }>({
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
-        <div>{handleFiltering ? <FilterInput handleFilter={handleFiltering} /> : null}</div>
+        <div>
+          {handleFiltering ? <FilterInput placeholder={filterPlaceholder} handleFilter={handleFiltering} /> : null}
+        </div>
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
