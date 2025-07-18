@@ -18,7 +18,7 @@ import {
 
 import { radarNavItems } from "@/constants/sidebar";
 
-import isActiveNavItem from "@/lib/nav-item";
+import { isActiveNavItem, isOpenNavItem } from "@/lib/nav-item";
 
 import AppSidebarFooter from "@/components/app-sidebar-footer";
 import AppSidebarHeader from "@/components/app-sidebar-header";
@@ -37,12 +37,12 @@ const RadarSidebar = () => {
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={isActiveNavItem(location.pathname, item)}
+                  defaultOpen={isOpenNavItem(location.pathname, item)}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title} isActive={isActiveNavItem(location.pathname, item)}>
+                      <SidebarMenuButton tooltip={item.title}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />

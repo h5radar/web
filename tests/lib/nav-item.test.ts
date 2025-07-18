@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { NavItem } from "@/types/nav-item";
 
-import isActiveNavItem from "@/lib/nav-item";
+import { isActiveNavItem, isOpenNavItem } from "@/lib/nav-item";
 
 describe("NavItem", () => {
   it("index url true", () => {
@@ -56,7 +56,7 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/radar", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/radar", navItem)).toBeTruthy();
   });
 
   it("entry url false", () => {
@@ -79,7 +79,7 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/technologies", navItem)).toBeFalsy();
+    expect(isOpenNavItem("/technologies", navItem)).toBeFalsy();
   });
 
   it("entry new url true", () => {
@@ -102,7 +102,7 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/radar/new", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/radar/new", navItem)).toBeTruthy();
   });
 
   it("entry new url false", () => {
@@ -125,7 +125,7 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
+    expect(isOpenNavItem("/technologies/new", navItem)).toBeFalsy();
   });
 
   it("entry new query url true", () => {
@@ -148,7 +148,7 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/radar/new?name=JS", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/radar/new?name=JS", navItem)).toBeTruthy();
   });
   it("entry new query url false", () => {
     const navItem: NavItem = {
@@ -170,6 +170,6 @@ describe("NavItem", () => {
         },
       ],
     };
-    expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
+    expect(isOpenNavItem("/technologies/new?name=JS", navItem)).toBeFalsy();
   });
 });

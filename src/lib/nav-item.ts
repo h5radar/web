@@ -8,7 +8,7 @@ import { NavItem } from "@/types/nav-item";
  * @param item - current nav item at sidebar
  * @returns true if sidebar menu is active, otherwise false
  */
-export default function isActiveNavItem(href: string, item: NavItem) {
+export function isActiveNavItem(href: string, item: NavItem) {
   /*
   // Pseudocode
   if(href == "/"){
@@ -27,7 +27,11 @@ export default function isActiveNavItem(href: string, item: NavItem) {
   return (
     href === item.url ||
     href.split("?")[0] === item.url ||
-    (href.split("/")[1] !== "" && href.split("/")[1] === item?.url?.split("/")[1]) ||
-    (href.split("/")[1] !== "" && !!item?.items?.filter((i) => i.url.split("/")[1] === href.split("/")[1]).length)
+    href.split("?")[0].split("/")[1] === item.url ||
+    (href.split("/")[1] !== "" && href.split("/")[1] === item?.url?.split("/")[1])
   );
+}
+
+export function isOpenNavItem(href: string, item: NavItem) {
+  return href.split("/")[1] !== "" && !!item?.items?.filter((i) => i.url.split("/")[1] === href.split("/")[1]).length;
 }
