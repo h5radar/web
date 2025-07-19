@@ -36,7 +36,7 @@ describe("NavItem", () => {
     expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
   });
 
-  it("entry url true", () => {
+  it("get open menu item", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
@@ -59,7 +59,7 @@ describe("NavItem", () => {
     expect(isOpenNavItem("/practice", navItem)).toBeTruthy();
   });
 
-  it("entry url false", () => {
+  it("get not open menu item", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
@@ -82,7 +82,7 @@ describe("NavItem", () => {
     expect(isOpenNavItem("/technologies", navItem)).toBeFalsy();
   });
 
-  it("entry new url true", () => {
+  it("get open menu item for url with extra path", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
@@ -105,7 +105,7 @@ describe("NavItem", () => {
     expect(isOpenNavItem("/practice/new", navItem)).toBeTruthy();
   });
 
-  it("entry new url false", () => {
+  it("get not open menu item for url with extra path", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
@@ -128,7 +128,7 @@ describe("NavItem", () => {
     expect(isOpenNavItem("/technologies/new", navItem)).toBeFalsy();
   });
 
-  it("entry new query url true", () => {
+  it("get open menu item for url with extra path and query", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
@@ -150,7 +150,8 @@ describe("NavItem", () => {
     };
     expect(isOpenNavItem("/practice/new?name=JS", navItem)).toBeTruthy();
   });
-  it("entry new query url false", () => {
+
+  it("get not open menu item for url with extra path and query", () => {
     const navItem: NavItem = {
       title: "Settings",
       url: "#",
