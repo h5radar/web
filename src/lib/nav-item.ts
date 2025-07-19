@@ -1,4 +1,5 @@
 import { NavItem } from "@/types/nav-item";
+
 /**
  * Check is sidebar menu item is active or not.
  *
@@ -6,7 +7,7 @@ import { NavItem } from "@/types/nav-item";
  * @param item - current nav item at sidebar
  */
 export function isActiveNavItem(href: string, item: NavItem) {
-  if(item.url === "/"){
+  if (item.url === "/") {
     return href == item.url;
   } else {
     return href.startsWith(item.url);
@@ -20,5 +21,5 @@ export function isActiveNavItem(href: string, item: NavItem) {
  * @param item - current nav item at sidebar. It item has a child items.
  */
 export function isOpenNavItem(href: string, item: NavItem) {
-  return item?.items?.filter((i) => href.startsWith(i.url)).length;
+  return !!item?.items?.filter((i) => href.startsWith(i.url)).length;
 }
