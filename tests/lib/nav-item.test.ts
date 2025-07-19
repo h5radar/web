@@ -17,27 +17,52 @@ describe("NavItem", () => {
   });
 
   it("get active menu item", () => {
-    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = {
+      title: "Practice",
+      url: "/practice",
+      icon: LayoutDashboard,
+      items: [],
+    };
     expect(isActiveNavItem("/practice", navItem)).toBeTruthy();
   });
 
   it("get active menu item for url with filter", () => {
-    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = {
+      title: "Practice",
+      url: "/practice",
+      icon: LayoutDashboard,
+      items: [],
+    };
     expect(isActiveNavItem("/practice?name=JS", navItem)).toBeTruthy();
   });
 
   it("get not active menu item for url with filter", () => {
-    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = {
+      title: "Practice",
+      url: "/practice",
+      icon: LayoutDashboard,
+      items: [],
+    };
     expect(isActiveNavItem("/technologies?name=JS", navItem)).toBeFalsy();
   });
 
   it("get active menu item for url with extra path", () => {
-    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = {
+      title: "Practice",
+      url: "/practice",
+      icon: LayoutDashboard,
+      items: [],
+    };
     expect(isActiveNavItem("/practice/new", navItem)).toBeTruthy();
   });
 
   it("get not active menu item for url with extra path", () => {
-    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = {
+      title: "Practice",
+      url: "/practice",
+      icon: LayoutDashboard,
+      items: [],
+    };
     expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
   });
 
