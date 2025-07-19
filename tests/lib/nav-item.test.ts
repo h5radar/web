@@ -6,33 +6,33 @@ import { NavItem } from "@/types/nav-item";
 import { isActiveNavItem, isOpenNavItem } from "@/lib/nav-item";
 
 describe("NavItem", () => {
-  it("index url true", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
-    expect(isActiveNavItem("/radar", navItem)).toBeTruthy();
-  });
-
   it("index url false", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/", navItem)).toBeFalsy();
   });
 
+  it("index url true", () => {
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    expect(isActiveNavItem("/practice", navItem)).toBeTruthy();
+  });
+
   it("index url with filter true", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
-    expect(isActiveNavItem("/radar?name=JS", navItem)).toBeTruthy();
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    expect(isActiveNavItem("/practice?name=JS", navItem)).toBeTruthy();
   });
 
   it("index url with filter false", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/technologies?name=JS", navItem)).toBeFalsy();
   });
 
   it("new url true", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
-    expect(isActiveNavItem("/radar/new", navItem)).toBeTruthy();
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
+    expect(isActiveNavItem("/practice/new", navItem)).toBeTruthy();
   });
 
   it("new url false", () => {
-    const navItem: NavItem = { title: "Radar", url: "/radar", icon: LayoutDashboard, items: [] };
+    const navItem: NavItem = { title: "Practice", url: "/practice", icon: LayoutDashboard, items: [] };
     expect(isActiveNavItem("/technologies/new", navItem)).toBeFalsy();
   });
 
@@ -49,14 +49,14 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
       ],
     };
-    expect(isOpenNavItem("/radar", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/practice", navItem)).toBeTruthy();
   });
 
   it("entry url false", () => {
@@ -72,8 +72,8 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
@@ -95,14 +95,14 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
       ],
     };
-    expect(isOpenNavItem("/radar/new", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/practice/new", navItem)).toBeTruthy();
   });
 
   it("entry new url false", () => {
@@ -118,8 +118,8 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
@@ -141,14 +141,14 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
       ],
     };
-    expect(isOpenNavItem("/radar/new?name=JS", navItem)).toBeTruthy();
+    expect(isOpenNavItem("/practice/new?name=JS", navItem)).toBeTruthy();
   });
   it("entry new query url false", () => {
     const navItem: NavItem = {
@@ -163,8 +163,8 @@ describe("NavItem", () => {
           items: [],
         },
         {
-          title: "Radar",
-          url: "/radar",
+          title: "Practice",
+          url: "/practice",
           icon: LayoutDashboard,
           items: [],
         },
