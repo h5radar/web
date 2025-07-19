@@ -18,7 +18,7 @@ export function isActiveNavItem(href: string, item: NavItem) {
  * Check is sidebar menu should be open or not
  *
  * @param href - current URL
- * @param item - current nav item at sidebar. It item has a child items.
+ * @param item - current nav item at sidebar. It has a child items.
  */
 export function isOpenNavItem(href: string, item: NavItem) {
   return !!item?.items?.filter((i) => href.startsWith(i.url)).length;
