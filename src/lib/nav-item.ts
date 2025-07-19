@@ -6,7 +6,6 @@ import { NavItem } from "@/types/nav-item";
  *
  * @param href - current URL
  * @param item - current nav item at sidebar
- * @returns true if sidebar menu is active, otherwise false
  */
 export function isActiveNavItem(href: string, item: NavItem) {
   /*
@@ -32,6 +31,13 @@ export function isActiveNavItem(href: string, item: NavItem) {
   );
 }
 
+/**
+ * Check is sidebar menu should be open or not
+ * TODO: put logic here
+ *
+ * @param href - current URL
+ * @param item - current nav item at sidebar
+ */
 export function isOpenNavItem(href: string, item: NavItem) {
   return href.split("/")[1] !== "" && !!item?.items?.filter((i) => i.url.split("/")[1] === href.split("/")[1]).length;
 }
