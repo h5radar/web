@@ -1,5 +1,27 @@
-# H5Radar
-Technical and business radar. Demo available at https://app.h5radar.com.
+# H5Radar Web UI
+
+This repository contains the web interface for the H5Radar platform, providing interactive visualization of the technology radar and license compliance data.
+
+H5Radar application consists of several modules. For an overview of the entire platform and its repositories, please see the [organization-level README](https://github.com/h5radar).
+
+## Features
+
+- Interactive technology radar charts
+- License compliance dashboards
+- User-friendly interface for browsing and filtering technologies
+- Integration with backend APIs
+
+## Getting Started
+
+To run the web UI locally or in production, please follow the installation and deployment instructions provided in the [documentation](https://docs.h5radar.com/).
+
+## Contributing
+
+Contributions and issues are welcome. Please open pull requests or issues in this repository. For general discussions, roadmap input, and questions, please join our [organization Discussions](https://github.com/orgs/h5radar/discussions). We appreciate community involvement in shaping H5Radar!
+
+## License
+
+This repository is part of the H5Radar project and is licensed under the MIT License.
 
 # Setup environment
 ## Windows environment
