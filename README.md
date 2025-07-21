@@ -11,10 +11,6 @@ H5Radar application consists of several modules. For an overview of the entire p
 - User-friendly interface for browsing and filtering technologies
 - Integration with backend APIs
 
-## Getting Started
-
-To run the web UI locally or in production, please follow the installation and deployment instructions provided in the [documentation](https://docs.h5radar.com/).
-
 ## Contributing
 
 Contributions and issues are welcome. Please open pull requests or issues in this repository. For general discussions, roadmap input, and questions, please join our [organization Discussions](https://github.com/orgs/h5radar/discussions). We appreciate community involvement in shaping H5Radar!
