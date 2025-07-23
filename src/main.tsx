@@ -5,6 +5,7 @@ import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-qu
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import ReactGA from "react-ga4";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { toast } from "sonner";
@@ -93,7 +94,7 @@ const queryClient = new QueryClient({
     },
   }),
 });
-
+ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_TOKEN);
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
