@@ -94,7 +94,7 @@ const queryClient = new QueryClient({
     },
   }),
 });
-ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_TOKEN);
+ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS);
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
