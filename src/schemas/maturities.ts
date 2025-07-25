@@ -4,6 +4,7 @@ export const maturitiesSchema = z.object({
   id: z.number(),
   title: z
     .string()
+    .uppercase()
     .min(1, { message: "Title must be at least 3 characters" })
     .max(64, { message: "Title must be less than 64 characters" }),
   description: z

@@ -69,7 +69,12 @@ export const MaturityForm: React.FC<MaturityFormProps> = ({
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input id="title" placeholder="title" {...field} />
+                <Input
+                  id="title"
+                  placeholder="title"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value.toUpperCase())}
+                />
               </FormControl>
               <FormDescription>This is maturity title</FormDescription>
               <FormMessage />
@@ -122,7 +127,15 @@ export const MaturityForm: React.FC<MaturityFormProps> = ({
             <FormItem>
               <FormLabel>Color</FormLabel>
               <FormControl>
-                <Textarea id="color" placeholder="color" {...field} />
+                <div className="z-5 relative w-16 h-16 rounded-full border border-input cursor-pointer overflow-hidden">
+                  <input
+                    id="color"
+                    type="color"
+                    placeholder="color"
+                    {...field}
+                    className="z-1 absolute w-20 h-20 cursor-pointer -top-2 -left-2 "
+                  />
+                </div>
               </FormControl>
               <FormDescription>This is maturity color</FormDescription>
               <FormMessage />
