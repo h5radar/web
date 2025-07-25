@@ -17,7 +17,7 @@ export default function HomePage() {
   const { mutate: seedTechnologies, isPending: isPending3 } = useSeedTechnologies(auth, queryClient);
   const { mutate: seedMaturities, isPending: isPending4 } = useSeedMaturities(auth, queryClient);
   const { mutate: seedCompliances, isPending: isPending5 } = useSeedCompliances(auth, queryClient);
-  
+
   useEffect(() => {
     seedCompliances();
     seedLicenses();
