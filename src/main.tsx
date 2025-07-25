@@ -1,3 +1,6 @@
+import EditCompliancesPage from "./pages/complience/edit";
+import NewCompliancesPage from "./pages/complience/new";
+import { CompliancesPage } from "./pages/complience/table";
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
@@ -194,6 +197,9 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/maturities" element={<MaturitiesPage />} />
                 <Route path="/maturities/new" element={<NewMaturitiesPage />} />
                 <Route path="/maturities/edit/:id" element={<EditMaturityPage />} />
+                <Route path="/compliances" element={<CompliancesPage />} />
+                <Route path="/compliances/new" element={<NewCompliancesPage />} />
+                <Route path="/compliances/edit/:id" element={<EditCompliancesPage />} />
               </Route>
             </Routes>
           </HotkeysProvider>

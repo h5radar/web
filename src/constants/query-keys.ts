@@ -52,3 +52,12 @@ export const DELETE_MATURITY = "Delete maturity";
 export const GET_MATURITY = "Get maturity";
 export const GET_MATURITIES = "Get maturities";
 export const SEED_MATURITIES = "Seed maturities";
+/*
+ * TanStack query keys for compliances
+ */
+export const CREATE_COMPLIANCE = "Create compliance";
+export const UPDATE_COMPLIANCE = "Update compliance";
+export const DELETE_COMPLIANCE = "Delete compliance";
+export const GET_COMPLIANCE = "Get compliance";
+export const GET_COMPLIANCES = "Get compliances";
+export const SEED_COMPLIANCES = "Seed compliances";

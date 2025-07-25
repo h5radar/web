@@ -14,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { licenseSchema } from "@/schemas/license";
+import { complianceSchema } from "@/schemas/compliance";
 
-export const useLicenseColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof licenseSchema>>[] =>
+export const useComplianceColumns = (
+  handleDelete: (id: string) => void,
+): ColumnDef<z.infer<typeof complianceSchema>>[] =>
   useMemo(
     () => [
       {
@@ -65,7 +67,7 @@ export const useLicenseColumns = (handleDelete: (id: string) => void): ColumnDef
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
-              <Link to={`/licenses/edit/${row.id}`}>
+              <Link to={`/compliances/edit/${row.id}`}>
                 <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
