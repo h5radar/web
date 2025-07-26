@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { useDeleteMaturity, useGetMaturities } from "@/queries/maturities";
+import { useDeleteMaturity, useGetMaturities } from "@/queries/maturity";
 
 import { DataTable } from "@/components/data-table";
 

@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { maturitiesSchema } from "@/schemas/maturities";
+import { maturitiesSchema } from "@/schemas/maturity";
 
 export const useMaturityColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof maturitiesSchema>>[] =>
   useMemo(

@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { useDeleteProduct, useGetProducts } from "@/queries/products";
+import { useDeleteProduct, useGetProducts } from "@/queries/product";
 
 import { DataTable } from "@/components/data-table";
 

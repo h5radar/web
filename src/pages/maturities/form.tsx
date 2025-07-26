@@ -7,7 +7,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
-import { maturitiesSchema } from "@/schemas/maturities";
+import { maturitiesSchema } from "@/schemas/maturity";
 
 interface MaturityFormProps {
   defaultDataForm?: z.infer<typeof maturitiesSchema>;

@@ -6,7 +6,7 @@ import { useDeleteLicense, useGetLicenses } from "@/queries/license";
 
 import { DataTable } from "@/components/data-table";
 
-import { useLicenseColumns } from "@/pages/license/columns";
+import { useLicenseColumns } from "@/pages/licenses/columns";
 
 export const LicensesPage = () => {
   const auth = useAuth();

@@ -18,7 +18,7 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { maturitiesSchema } from "@/schemas/maturities";
+import { maturitiesSchema } from "@/schemas/maturity";
 import { responseSchema } from "@/schemas/response";
 
 import { createQueryParams } from "@/lib/query-params";

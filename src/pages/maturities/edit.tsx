@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "react-oidc-context";
 
-import { useGetMaturity, useUpdateMaturity } from "@/queries/maturities";
+import { useGetMaturity, useUpdateMaturity } from "@/queries/maturity";
 
 import MaturityForm from "@/pages/maturities/form";
 

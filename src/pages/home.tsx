@@ -4,7 +4,7 @@ import { useAuth } from "react-oidc-context";
 
 import { useSeedCompliances } from "@/queries/compliance";
 import { useSeedLicenses } from "@/queries/license";
-import { useSeedMaturities } from "@/queries/maturities";
+import { useSeedMaturities } from "@/queries/maturity";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
 

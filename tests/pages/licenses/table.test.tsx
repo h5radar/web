@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import { LicensesPage } from "@/pages/license/table";
+import { LicensesPage } from "@/pages/licenses/table";
 
 describe("LicensesPage", () => {
   it("get licenses page", () => {
