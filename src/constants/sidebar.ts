@@ -1,11 +1,4 @@
-import {
-  Barcode,
-  Copyright,
-  LayoutDashboard,
-  LucideShoppingBag,
-  Ruler,
-  Settings,
-} from "lucide-react";
+import { Barcode, Copyright, LayoutDashboard, LucideShoppingBag, Ruler, Settings } from "lucide-react";
 
 import { NavItem } from "@/types/nav-item";
 
