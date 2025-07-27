@@ -102,8 +102,8 @@ export const radarNavItems: NavItem[] = [
         items: [],
       },
       {
-        title: "Segments",
-        url: "/segments",
+        title: "Domain",
+        url: "/domains",
         icon: LucideShoppingBag,
         items: [],
       },

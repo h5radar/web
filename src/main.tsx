@@ -31,6 +31,9 @@ import CobwebsPage from "@/pages/cobwebs";
 import EditCompliancesPage from "@/pages/complience/edit";
 import NewCompliancesPage from "@/pages/complience/new";
 import { CompliancesPage } from "@/pages/complience/table";
+import EditDomainsPage from "@/pages/domain/edit";
+import NewDomainsPage from "@/pages/domain/new";
+import { DomainsPage } from "@/pages/domain/table";
 import HomePage from "@/pages/home";
 import InvoicesPage from "@/pages/invoices";
 import EditLicensesPage from "@/pages/license/edit";
@@ -62,7 +65,6 @@ import RadarsPage from "@/pages/radars/table";
 import RaysPage from "@/pages/rays";
 import RepositoriesPage from "@/pages/repositories/table";
 import RingsPage from "@/pages/rings/table";
-import SegmentsPage from "@/pages/segments/table";
 import TeamsPage from "@/pages/teams/table";
 import EditTechnologyPage from "@/pages/technologies/edit";
 // Include technology resource pages at alphabet
@@ -176,7 +178,6 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/rays" element={<RaysPage />} />
                 <Route path="/repositories" element={<RepositoriesPage />} />
                 <Route path="/rings" element={<RingsPage />} />
-                <Route path="/segments" element={<SegmentsPage />} />
                 <Route path="/teams" element={<TeamsPage />} />
                 <Route path="/technologies" element={<TechnologiesPage />} />
                 <Route path="/technologies/new" element={<NewTechnologyPage />} />
@@ -194,6 +195,9 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/compliances" element={<CompliancesPage />} />
                 <Route path="/compliances/new" element={<NewCompliancesPage />} />
                 <Route path="/compliances/edit/:id" element={<EditCompliancesPage />} />
+                <Route path="/domains" element={<DomainsPage />} />
+                <Route path="/domains/new" element={<NewDomainsPage />} />
+                <Route path="/domains/edit/:id" element={<EditDomainsPage />} />
               </Route>
             </Routes>
           </HotkeysProvider>

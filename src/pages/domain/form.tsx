@@ -3,30 +3,29 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/ui/button";
-import { Checkbox } from "@/ui/checkbox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
-import { complianceSchema } from "@/schemas/compliance";
+import { domainSchema } from "@/schemas/domain";
 
-interface ComplianceProps {
-  defaultDataForm?: z.infer<typeof complianceSchema>;
-  onSubmit: (values: z.infer<typeof complianceSchema>) => void;
+interface DomainProps {
+  defaultDataForm?: z.infer<typeof domainSchema>;
+  onSubmit: (values: z.infer<typeof domainSchema>) => void;
   disabled: boolean;
 }
 
 /**
- * ComplianceForm is ... .
+ * DomainForm is ... .
  */
-export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onSubmit, disabled }: ComplianceProps) => {
-  const form = useForm<z.infer<typeof complianceSchema>>({
-    resolver: zodResolver(complianceSchema),
+export const DomainForm: React.FC<DomainProps> = ({ defaultDataForm, onSubmit, disabled }: DomainProps) => {
+  const form = useForm<z.infer<typeof domainSchema>>({
+    resolver: zodResolver(domainSchema),
     defaultValues: defaultDataForm || {
       id: 0,
       title: "",
       description: "",
-      active: true,
+      position: 0,
     },
   });
 
@@ -86,18 +85,29 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="active"
+          name="position"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+            <FormItem>
+              <FormLabel>Position</FormLabel>
               <FormControl>
-                <Checkbox id="active" checked={field.value} onCheckedChange={field.onChange} />
+                <Input
+                  id="position"
+                  type="number"
+                  min={0}
+                  max={3}
+                  placeholder="0"
+                  {...field}
+                  value={field.value ?? 0}
+                  {...form.register("position", {
+                    setValueAs: (v) => Number(v),
+                  })}
+                />
               </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>Active</FormLabel>
-                <FormDescription>Is license active or not</FormDescription>
-              </div>
+              <FormDescription>This is maturity position</FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -109,4 +119,4 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
   );
 };
 
-export default ComplianceForm;
+export default DomainForm;
