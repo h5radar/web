@@ -1,6 +1,3 @@
-import EditCompliancesPage from "./pages/complience/edit";
-import NewCompliancesPage from "./pages/complience/new";
-import { CompliancesPage } from "./pages/complience/table";
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
@@ -33,6 +30,9 @@ import BiSystemsPage from "@/pages/bi-systems";
 import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
+import EditCompliancesPage from "@/pages/complience/edit";
+import NewCompliancesPage from "@/pages/complience/new";
+import { CompliancesPage } from "@/pages/complience/table";
 import HomePage from "@/pages/home";
 import InvoicesPage from "@/pages/invoices";
 import EditLicensesPage from "@/pages/license/edit";
