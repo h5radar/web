@@ -61,3 +61,12 @@ export const DELETE_COMPLIANCE = "Delete compliance";
 export const GET_COMPLIANCE = "Get compliance";
 export const GET_COMPLIANCES = "Get compliances";
 export const SEED_COMPLIANCES = "Seed compliances";
+/*
+ * TanStack query keys for domains
+ */
+export const CREATE_DOMAIN = "Create domain";
+export const UPDATE_DOMAIN = "Update domain";
+export const DELETE_DOMAIN = "Delete domain";
+export const GET_DOMAIN = "Get domain";
+export const GET_DOMAINS = "Get domains";
+export const SEED_DOMAINS = "Seed domains";

@@ -28,9 +28,12 @@ import BiSystemsPage from "@/pages/bi-systems";
 import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
-import EditCompliancesPage from "@/pages/compliences/edit";
-import NewCompliancesPage from "@/pages/compliences/new";
-import { CompliancesPage } from "@/pages/compliences/table";
+import EditCompliancesPage from "@/pages/compliances/edit";
+import NewCompliancesPage from "@/pages/compliances/new";
+import { CompliancesPage } from "@/pages/compliances/table";
+import EditDomainsPage from "@/pages/domains/edit";
+import NewDomainsPage from "@/pages/domains/new";
+import { DomainsPage } from "@/pages/domains/table";
 import HomePage from "@/pages/home";
 import InvoicesPage from "@/pages/invoices";
 import EditLicensesPage from "@/pages/licenses/edit";
@@ -64,7 +67,6 @@ import ShowRadarPage from "@/pages/radars/show";
 import RadarsPage from "@/pages/radars/table";
 import RaysPage from "@/pages/rays";
 import RepositoriesPage from "@/pages/repositories/table";
-import SegmentsPage from "@/pages/segments/table";
 import TeamsPage from "@/pages/teams/table";
 import EditTechnologyPage from "@/pages/technologies/edit";
 // Include technology resource pages at alphabet
@@ -177,7 +179,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/radars/show/:id" element={<ShowRadarPage />} />
                 <Route path="/rays" element={<RaysPage />} />
                 <Route path="/repositories" element={<RepositoriesPage />} />
-                <Route path="/segments" element={<SegmentsPage />} />
+                <Route path="/segments" element={<DomainsPage />} />
                 <Route path="/teams" element={<TeamsPage />} />
                 <Route path="/technologies" element={<TechnologiesPage />} />
                 <Route path="/technologies/new" element={<NewTechnologyPage />} />
@@ -198,6 +200,9 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/compliances" element={<CompliancesPage />} />
                 <Route path="/compliances/new" element={<NewCompliancesPage />} />
                 <Route path="/compliances/edit/:id" element={<EditCompliancesPage />} />
+                <Route path="/domains" element={<DomainsPage />} />
+                <Route path="/domains/new" element={<NewDomainsPage />} />
+                <Route path="/domains/edit/:id" element={<EditDomainsPage />} />
               </Route>
             </Routes>
           </HotkeysProvider>
