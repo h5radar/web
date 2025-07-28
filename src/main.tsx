@@ -72,7 +72,6 @@ import EditTechnologyPage from "@/pages/technologies/edit";
 // Include technology resource pages at alphabet
 import NewTechnologyPage from "@/pages/technologies/new";
 import { TechnologiesPage } from "@/pages/technologies/table";
-import TechnologyBlipsPage from "@/pages/technology-blips/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
@@ -184,7 +183,6 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/technologies" element={<TechnologiesPage />} />
                 <Route path="/technologies/new" element={<NewTechnologyPage />} />
                 <Route path="/technologies/edit/:id" element={<EditTechnologyPage />} />
-                <Route path="/technology-blips" element={<TechnologyBlipsPage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/products/new" element={<NewProductPage />} />
                 <Route path="/products/edit/:id" element={<EditProductPage />} />
