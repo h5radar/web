@@ -6,7 +6,7 @@ import { useDeleteDomain, useGetDomains } from "@/queries/domain";
 
 import { DataTable } from "@/components/data-table";
 
-import { useDomainColumns } from "@/pages/domain/columns";
+import { useDomainColumns } from "@/pages/domains/columns";
 
 export const DomainsPage = () => {
   const auth = useAuth();

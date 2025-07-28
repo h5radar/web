@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 import { useCreateDomain } from "@/queries/domain";
 
-import DomainForm from "@/pages/domain/form";
+import DomainForm from "@/pages/domains/form";
 
 export default function NewDomainsPage() {
   const auth = useAuth();

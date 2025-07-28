@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import { DomainsPage } from "@/pages/domain/table";
+import { DomainsPage } from "@/pages/domains/table";
 
 describe("DomainsPage", () => {
   it("get compliances page", () => {

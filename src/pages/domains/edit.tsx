@@ -3,7 +3,7 @@ import { useAuth } from "react-oidc-context";
 
 import { useGetDomain, useUpdateDomain } from "@/queries/domain";
 
-import DomainForm from "@/pages/domain/form";
+import DomainForm from "@/pages/domains/form";
 
 export default function EditDomainsPage() {
   const auth = useAuth();

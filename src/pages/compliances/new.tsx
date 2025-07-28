@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 import { useCreateCompliance } from "@/queries/compliance";
 
-import ComplianceForm from "@/pages/compliences/form";
+import ComplianceForm from "@/pages/compliances/form";
 
 export default function NewCompliancesPage() {
   const auth = useAuth();
