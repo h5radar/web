@@ -72,12 +72,6 @@ export const radarNavItems: NavItem[] = [
     icon: Settings,
     items: [
       {
-        title: "Practices",
-        url: "/practices",
-        icon: Ruler,
-        items: [],
-      },
-      {
         title: "Licenses",
         url: "/licenses",
         icon: Copyright,
@@ -102,9 +96,15 @@ export const radarNavItems: NavItem[] = [
         items: [],
       },
       {
-        title: "Domain",
+        title: "Domains",
         url: "/domains",
         icon: LucideShoppingBag,
+        items: [],
+      },
+      {
+        title: "Practices",
+        url: "/practices",
+        icon: Ruler,
         items: [],
       },
     ],

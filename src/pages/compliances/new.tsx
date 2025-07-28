@@ -6,7 +6,7 @@ import { useCreateCompliance } from "@/queries/compliance";
 
 import ComplianceForm from "@/pages/compliances/form";
 
-export default function NewCompliancesPage() {
+export default function CompliancesNewPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();

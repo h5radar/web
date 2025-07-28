@@ -5,7 +5,7 @@ import { useGetMaturity, useUpdateMaturity } from "@/queries/maturity";
 
 import MaturityForm from "@/pages/maturities/form";
 
-export default function EditMaturityPage() {
+export default function MaturitiesEditPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const url = new URL(window.location.href);

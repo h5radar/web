@@ -5,7 +5,7 @@ import { useGetLicense, useUpdateLicense } from "@/queries/license";
 
 import LicenseForm from "@/pages/licenses/form";
 
-export default function EditLicensesPage() {
+export default function LicensesEditPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const url = new URL(window.location.href);
