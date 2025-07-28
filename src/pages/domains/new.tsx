@@ -6,7 +6,7 @@ import { useCreateDomain } from "@/queries/domain";
 
 import DomainForm from "@/pages/domains/form";
 
-export default function NewDomainsPage() {
+export default function DomainsNewPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
