@@ -59,7 +59,7 @@ export const MaturitiesPage = () => {
       <DataTable
         isLoading={isLoading}
         columns={columns}
-        filterPlaceholder="Filter, for example: Unit tests%..."
+        filterPlaceholder="Filter, for example: ADOPT%..."
         pageLink={"maturities"}
         data={maturities.content}
         rowCount={maturities.totalElements}
