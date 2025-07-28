@@ -29,7 +29,6 @@ export default function HomePage() {
     seedTechnologies();
   }, [auth, seedCompliances, seedLicenses, seedPractices, seedMaturities, seedDomains, seedTechnologies]);
 
-
   if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6) {
     return <h1>Loading...</h1>;
   }

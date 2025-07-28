@@ -28,12 +28,9 @@ import BiSystemsPage from "@/pages/bi-systems";
 import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
-
 import EditCompliancesPage from "@/pages/compliences/edit";
 import NewCompliancesPage from "@/pages/compliences/new";
 import { CompliancesPage } from "@/pages/compliences/table";
-
-
 import EditDomainsPage from "@/pages/domain/edit";
 import NewDomainsPage from "@/pages/domain/new";
 import { DomainsPage } from "@/pages/domain/table";
