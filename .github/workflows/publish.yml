@@ -25,7 +25,7 @@ jobs:
       - name: Make GHCR image public
         run: |
           PACKAGE_NAME=app
-          curl -X PATCH https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${PACKAGE_NAME}/visibility \
+          curl -X PATCH https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/app/visibility \
             -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
             -H "Accept: application/vnd.github+json" \
             -d '{"visibility":"public"}'
