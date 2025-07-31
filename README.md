@@ -58,5 +58,5 @@ This repository is part of the H5Radar project and is licensed under the MIT Lic
 * run bundler analyzer by command: npx vite-bundle-visualizer
 * list package to update by command: npx npm-check-updates
 * build docker by command: docker build -t h5radar/app:latest .
-* run docker by command: docker run -p 8080:80 h5radar/app:latest
+* run docker by command: docker run -p 80:80 h5radar/app:latest
 
