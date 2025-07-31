@@ -18,10 +18,21 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
-      - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository_owner }}/app:latest .
-      - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository_owner }}/app:latest
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push multi-arch Docker image
+        run: |
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            -t ghcr.io/${{ github.repository_owner }}/app:latest \
+            --push .
+
+      - name: List all container packages in organization
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
+             -H "Accept: application/vnd.github+json" \
+             https://api.github.com/orgs/${{ github.repository_owner }}/packages?package_type=container
+
       - name: Make GHCR image public
         run: |
           curl -X PUT https://api.github.com/orgs/h5radar/packages/container/app/visibility \
