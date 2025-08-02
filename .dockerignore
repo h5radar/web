@@ -1,0 +1,50 @@
+# IDE configuration files
+.idea/
+*.iml
+
+# Git repository files
+.git/
+.gitignore
+
+# macOS system files
+.DS_Store
+
+# Other local config or documentation files (optional)
+components.json
+README.md
+LICENSE
+
+# Docker-related files that shouldn't be copied
+docker-compose*.yml
+Dockerfile
+
+# Various TypeScript config files
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+typedoc.json
+vite.config.ts
+vitest.config.mts
+
+# Log files
+*.log
+
+# Cypress tests and config (not needed in container)
+cypress/
+cypress.config.js
+
+# Build output directory (bundled app)
+dist/
+
+# Local docker config folder (optional)
+docker/
+
+# Node modules directory (heavy, installed at container build time)
+node_modules/
+
+# Test source code (optional to exclude in prod)
+tests/
+
+# Temporary or cache files
+tmp/
+*.tmp
