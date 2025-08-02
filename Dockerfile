@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN cp .env.docker .env
 RUN npm run build
 
 # Stage 2: Serve with nginx
