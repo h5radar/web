@@ -26,7 +26,7 @@ Contributions and issues are welcome. Please open pull requests or issues in thi
 
 This repository is part of the H5Radar project and is licensed under the MIT License.
 
-# Appendix 1: Useful commands
+## Appendix 1: Useful commands
 
 - run server by command: npx http-server ./dist -o -c-1
 - run cypress to e2e tests from cmd by command: npx cypress run
