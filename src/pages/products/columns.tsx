@@ -21,13 +21,13 @@ export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef
       {
         accessorKey: "title",
         header: "Title",
-        cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
+        cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.title}</div>,
         enableHiding: false,
       },
       {
         accessorKey: "description",
         header: "Description",
-        cell: ({ row }) => <div className="w-32">{row.original.description}</div>,
+        cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.description}</div>,
       },
       {
         id: "actions",
