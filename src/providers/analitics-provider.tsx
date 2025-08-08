@@ -7,13 +7,19 @@ interface AnaliticsProviderProps {
   children: React.ReactNode;
 }
 
+const PageTracking = () => {
+  usePageTracking();
+  return null;
+};
+
 const AnaliticsProvider: FC<AnaliticsProviderProps> = (props) => {
   const { children } = props;
-  usePageTracking();
-
   return (
     <>
-      <YMInitializer accounts={[parseInt(import.meta.env.VITE_YANDEX_METRICA)]} />
+      {import.meta.env.VITE_YANDEX_METRICA && (
+        <YMInitializer accounts={[parseInt(import.meta.env.VITE_YANDEX_METRICA)]} />
+      )}
+      {import.meta.env.VITE_GOOGLE_ANALYTICS && <PageTracking />}
       {children}
     </>
   );
