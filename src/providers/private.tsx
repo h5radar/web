@@ -8,7 +8,7 @@ import { GET_AUTH_HEALTH } from "@/constants/query-keys";
 import WelcomePage from "@/pages/welcome";
 
 const getAuthHealth = async () => {
-  const response = await fetch(import.meta.env.VITE_AUTHORITY);
+  const response = await fetch(import.meta.env.VITE_AUTHORITY || "http://localhost:8180/realms/h5radar");
   if (!response.ok) {
     throw new Error("Please confirm your auth server is up");
   }
