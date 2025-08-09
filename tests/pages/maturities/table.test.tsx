@@ -3,14 +3,14 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import { CompliancesPage } from "@/pages/compliances/table";
+import { MaturitiesPage } from "@/pages/maturities/table";
 
-describe("CompliancesPage", () => {
-  it("get compliances page", () => {
+describe("MaturitiesPage", () => {
+  it("get maturities page", () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <CompliancesPage />
+          <MaturitiesPage />
         </QueryClientProvider>
       </BrowserRouter>,
     );

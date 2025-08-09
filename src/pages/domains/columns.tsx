@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Link } from "react-router";
 import { z } from "zod";
 
+import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import {
   DropdownMenu,
@@ -13,9 +14,9 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { productSchema } from "@/schemas/product";
+import { domainSchema } from "@/schemas/domain";
 
-export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof productSchema>>[] =>
+export const useDomainColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof domainSchema>>[] =>
   useMemo(
     () => [
       {
@@ -28,6 +29,17 @@ export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef
         accessorKey: "description",
         header: "Description",
         cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.description}</div>,
+      },
+      {
+        accessorKey: "position",
+        header: "Position",
+        cell: ({ row }) => (
+          <div className="w-32">
+            <Badge variant="outline" className="text-muted-foreground px-1.5">
+              {row.original.position}
+            </Badge>
+          </div>
+        ),
       },
       {
         id: "actions",
@@ -44,7 +56,7 @@ export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
-              <Link to={`/products/edit/${row.id}`}>
+              <Link to={`/domains/edit/${row.id}`}>
                 <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />

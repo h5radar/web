@@ -10,7 +10,7 @@ import { Textarea } from "@/ui/textarea";
 
 import { complianceSchema } from "@/schemas/compliance";
 
-interface Compliancerops {
+interface ComplianceProps {
   defaultDataForm?: z.infer<typeof complianceSchema>;
   onSubmit: (values: z.infer<typeof complianceSchema>) => void;
   disabled: boolean;
@@ -19,7 +19,7 @@ interface Compliancerops {
 /**
  * ComplianceForm is ... .
  */
-export const ComplianceForm: React.FC<Compliancerops> = ({ defaultDataForm, onSubmit, disabled }: Compliancerops) => {
+export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onSubmit, disabled }: ComplianceProps) => {
   const form = useForm<z.infer<typeof complianceSchema>>({
     resolver: zodResolver(complianceSchema),
     defaultValues: defaultDataForm || {

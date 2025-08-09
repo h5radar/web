@@ -1,9 +1,10 @@
-import { IconDotsVertical } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconDotsVertical } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { Link } from "react-router";
 import { z } from "zod";
 
+import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import {
   DropdownMenu,
@@ -13,9 +14,9 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-import { productSchema } from "@/schemas/product";
+import { licenseSchema } from "@/schemas/license";
 
-export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof productSchema>>[] =>
+export const useLicenseColumns = (handleDelete: (id: string) => void): ColumnDef<z.infer<typeof licenseSchema>>[] =>
   useMemo(
     () => [
       {
@@ -28,6 +29,26 @@ export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef
         accessorKey: "description",
         header: "Description",
         cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.description}</div>,
+      },
+      {
+        accessorKey: "active",
+        header: "Active",
+        cell: ({ row }) => (
+          <Badge variant="outline" className="text-muted-foreground px-1.5 text-sm">
+            {row.original.active ? (
+              <>
+                <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+                Yes
+              </>
+            ) : (
+              <>
+                <IconCircleCheckFilled className="fill-grey-500 dark:fill-grey-400" />
+                No
+              </>
+            )}
+            {row.original.active}
+          </Badge>
+        ),
       },
       {
         id: "actions",
@@ -44,7 +65,7 @@ export const useProductColumns = (handleDelete: (id: string) => void): ColumnDef
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
-              <Link to={`/products/edit/${row.id}`}>
+              <Link to={`/licenses/edit/${row.id}`}>
                 <DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />

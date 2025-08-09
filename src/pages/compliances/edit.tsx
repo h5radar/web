@@ -3,9 +3,9 @@ import { useAuth } from "react-oidc-context";
 
 import { useGetCompliance, useUpdateCompliance } from "@/queries/compliance";
 
-import ComplianceForm from "@/pages/complience/form";
+import ComplianceForm from "@/pages/compliances/form";
 
-export default function EditCompliancesPage() {
+export default function CompliancesEditPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const url = new URL(window.location.href);

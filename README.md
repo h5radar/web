@@ -26,34 +26,12 @@ Contributions and issues are welcome. Please open pull requests or issues in thi
 
 This repository is part of the H5Radar project and is licensed under the MIT License.
 
-# Setup environment
-## Windows environment
-* download and setup nodeJS, at least v22.14.0
-* install all npm packages by command: npm install
-* setup GitHub account and add ssh keys to GitHub profile
+## Appendix 1: Useful commands
 
-## Idea configuration
-### JavaScript checkstyle
-* setup ident 2 at JavaScript code style
-
-### HTML checkstyle
-* setup ident 2 at html code style
-* remove all items from "do not indent child of" field
-
-# Conventions
-## Git conventions
-* the first letter of the commit should be written in upper case
-* the simple perfect should be used for commit message
-* the title and description should be provided, for example by command: git commit -m "title" -m "description"
-
-# Keycloak configuration
-* download keycloack, uppack it and start by command: kc.sh start-dev --http-port=8180
-* login to console at http://127.0.0.1:8180 and click create realm button
-* select json file realm.json at docker folder to create a new realm
-
-# Useful commands:
-* run server by command: npx http-server ./dist -o -c-1
-* run cypress to e2e tests from cmd by command: npx cypress run
-* open cypress e2e tests environment by command: npx cypress open
-* run bundler analyzer by command: npx vite-bundle-visualizer
-* list package to update by command: npx npm-check-updates
+- run server by command: npx http-server ./dist -o -c-1
+- run cypress to e2e tests from cmd by command: npx cypress run
+- open cypress e2e tests environment by command: npx cypress open
+- run bundler analyzer by command: npx vite-bundle-visualizer
+- list package to update by command: npx npm-check-updates
+- build docker by command: docker build -t h5radar/app:latest .
+- run docker by command: docker run -p 80:80 h5radar/app:latest

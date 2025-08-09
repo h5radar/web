@@ -2,14 +2,12 @@ import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-qu
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import ReactGA from "react-ga4";
 import { AuthProvider } from "react-oidc-context";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
-import AnalyticsProvider from "@/providers/analytics";
 import HotkeysProvider from "@/providers/hotkeys";
 import PrivateProvider from "@/providers/private";
 
@@ -30,14 +28,20 @@ import BiSystemsPage from "@/pages/bi-systems";
 import BillingPage from "@/pages/billing";
 import ChannelsPage from "@/pages/channels";
 import CobwebsPage from "@/pages/cobwebs";
-import EditCompliancesPage from "@/pages/complience/edit";
-import NewCompliancesPage from "@/pages/complience/new";
-import { CompliancesPage } from "@/pages/complience/table";
+import CompliancesEditPage from "@/pages/compliances/edit";
+import CompliancesNewPage from "@/pages/compliances/new";
+import { CompliancesPage } from "@/pages/compliances/table";
+import DomainsEditPage from "@/pages/domains/edit";
+import DomainsNewPage from "@/pages/domains/new";
+import { DomainsPage } from "@/pages/domains/table";
 import HomePage from "@/pages/home";
 import InvoicesPage from "@/pages/invoices";
-import EditLicensesPage from "@/pages/license/edit";
-import NewLicensesPage from "@/pages/license/new";
-import { LicensesPage } from "@/pages/license/table";
+import LicensesEditPage from "@/pages/licenses/edit";
+import LicensesNewPage from "@/pages/licenses/new";
+import { LicensesPage } from "@/pages/licenses/table";
+import MaturitiesEditPage from "@/pages/maturities/edit";
+import MaturitiesNewPage from "@/pages/maturities/new";
+import { MaturitiesPage } from "@/pages/maturities/table";
 import NotificationsPage from "@/pages/notifications";
 import ParticipantsPage from "@/pages/participants";
 import PiesPage from "@/pages/pies";
@@ -45,32 +49,26 @@ import PlatformsPage from "@/pages/platforms";
 import EditPracticePage from "@/pages/practices/edit";
 import NewPracticesPage from "@/pages/practices/new";
 import { PracticesPage } from "@/pages/practices/table";
-import EditProductPage from "@/pages/products/edit";
-import NewProductPage from "@/pages/products/new";
-// Include product resource pages at alphabet
-import ShowProductCommunicationsPage from "@/pages/products/show-communications";
-import ShowProductContributionsPage from "@/pages/products/show-contributions";
-import ShowProductFinancesPage from "@/pages/products/show-finances";
-import ShowProductLicensesPage from "@/pages/products/show-licenses";
-import ShowProductPracticesPage from "@/pages/products/show-practices";
-import ShowProductTechnologiesPage from "@/pages/products/show-technologies";
+import ProductsCommunicationsPage from "@/pages/products/communications";
+import ProductsContributionsPage from "@/pages/products/contributions";
+import ProductsEditPage from "@/pages/products/edit";
+import ProductsFinancesPage from "@/pages/products/finances";
+import ProductsLicensesPage from "@/pages/products/licenses";
+import ProductsNewPage from "@/pages/products/new";
+import ProductsPracticesPage from "@/pages/products/practices";
 import { ProductsPage } from "@/pages/products/table";
+import ProductsTechnologiesPage from "@/pages/products/technologies";
 import ProfilePage from "@/pages/profile";
-import EditRadarPage from "@/pages/radars/edit";
-// Include radar resource pages at alphabet
-import NewRadarPage from "@/pages/radars/new";
-import ShowRadarPage from "@/pages/radars/show";
+import RadarsEditPage from "@/pages/radars/edit";
+import RadarsNewPage from "@/pages/radars/new";
+import RadarsShowPage from "@/pages/radars/show";
 import RadarsPage from "@/pages/radars/table";
 import RaysPage from "@/pages/rays";
 import RepositoriesPage from "@/pages/repositories/table";
-import RingsPage from "@/pages/rings/table";
-import SegmentsPage from "@/pages/segments/table";
 import TeamsPage from "@/pages/teams/table";
-import EditTechnologyPage from "@/pages/technologies/edit";
-// Include technology resource pages at alphabet
-import NewTechnologyPage from "@/pages/technologies/new";
+import TechnologiesEditPage from "@/pages/technologies/edit";
+import TechnologiesNewPage from "@/pages/technologies/new";
 import { TechnologiesPage } from "@/pages/technologies/table";
-import TechnologyBlipsPage from "@/pages/technology-blips/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
@@ -96,116 +94,114 @@ const queryClient = new QueryClient({
   }),
 });
 
-if (import.meta.env.VITE_GOOGLE_ANALYTICS) {
-  ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS);
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider userManager={userManager} onSigninCallback={onSigninCallback}>
         <QueryClientProvider client={queryClient}>
-          <AnalyticsProvider>
-            <HotkeysProvider>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <PrivateProvider>
-                      <AccountLayout />
-                    </PrivateProvider>
-                  }
-                >
-                  <Route path="/account" element={<AccountPage />} />
-                  <Route path="/profile" element={<ProfilePage />} />
-                </Route>
-                <Route path="/" element={<ApplicationLayout />}>
-                  <Route path="/welcome" element={<WelcomePage />} />
-                </Route>
-                <Route
-                  path="/"
-                  element={
-                    <PrivateProvider>
-                      <BillingLayout />
-                    </PrivateProvider>
-                  }
-                >
-                  <Route path="/billing" element={<BillingPage />} />
-                  <Route path="/invoices" element={<InvoicesPage />} />
-                </Route>
-                <Route
-                  path="/"
-                  element={
-                    <PrivateProvider>
-                      <NotificationsLayout />
-                    </PrivateProvider>
-                  }
-                >
-                  <Route path="/notifications" element={<NotificationsPage />} />
-                </Route>
-                <Route
-                  path="/"
-                  element={
-                    <PrivateProvider>
-                      <LegalLayout />
-                    </PrivateProvider>
-                  }
-                >
-                  <Route path="/about" element={<AboutPage />} />
-                </Route>
-                <Route
-                  path="/"
-                  element={
-                    <PrivateProvider>
-                      <RadarLayout />
-                    </PrivateProvider>
-                  }
-                >
-                  <Route index element={<HomePage />} />
-                  <Route path="/adapters" element={<AdaptersPage />} />
-                  <Route path="/authors" element={<AuthorsPage />} />
-                  <Route path="/bi-systems" element={<BiSystemsPage />} />
-                  <Route path="/cobwebs" element={<CobwebsPage />} />
-                  <Route path="/channels" element={<ChannelsPage />} />
-                  <Route path="/participants" element={<ParticipantsPage />} />
-                  <Route path="/pies" element={<PiesPage />} />
-                  <Route path="/platforms" element={<PlatformsPage />} />
-                  <Route path="/products/show-communications/:id" element={<ShowProductCommunicationsPage />} />
-                  <Route path="/products/show-contributions/:id" element={<ShowProductContributionsPage />} />
-                  <Route path="/products/show-finances/:id" element={<ShowProductFinancesPage />} />
-                  <Route path="/products/show-licenses/:id" element={<ShowProductLicensesPage />} />
-                  <Route path="/products/show-practices/:id" element={<ShowProductPracticesPage />} />
-                  <Route path="/products/show-technologies/:id" element={<ShowProductTechnologiesPage />} />
-                  <Route path="/radars" element={<RadarsPage />} />
-                  <Route path="/radars/new" element={<NewRadarPage />} />
-                  <Route path="/radars/edit/:id" element={<EditRadarPage />} />
-                  <Route path="/radars/show/:id" element={<ShowRadarPage />} />
-                  <Route path="/rays" element={<RaysPage />} />
-                  <Route path="/repositories" element={<RepositoriesPage />} />
-                  <Route path="/rings" element={<RingsPage />} />
-                  <Route path="/segments" element={<SegmentsPage />} />
-                  <Route path="/teams" element={<TeamsPage />} />
-                  <Route path="/technologies" element={<TechnologiesPage />} />
-                  <Route path="/technologies/new" element={<NewTechnologyPage />} />
-                  <Route path="/technologies/edit/:id" element={<EditTechnologyPage />} />
-                  <Route path="/technology-blips" element={<TechnologyBlipsPage />} />
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/products/new" element={<NewProductPage />} />
-                  <Route path="/products/edit/:id" element={<EditProductPage />} />
-                  <Route path="/licenses" element={<LicensesPage />} />
-                  <Route path="/licenses/new" element={<NewLicensesPage />} />
-                  <Route path="/licenses/edit/:id" element={<EditLicensesPage />} />
-                  <Route path="/practices" element={<PracticesPage />} />
-                  <Route path="/practices/new" element={<NewPracticesPage />} />
-                  <Route path="/practices/edit/:id" element={<EditPracticePage />} />
-                  <Route path="/compliances" element={<CompliancesPage />} />
-                  <Route path="/compliances/new" element={<NewCompliancesPage />} />
-                  <Route path="/compliances/edit/:id" element={<EditCompliancesPage />} />
-                </Route>
-              </Routes>
-            </HotkeysProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </AnalyticsProvider>
+          <HotkeysProvider>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PrivateProvider>
+                    <AccountLayout />
+                  </PrivateProvider>
+                }
+              >
+                <Route path="/account" element={<AccountPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Route>
+              <Route path="/" element={<ApplicationLayout />}>
+                <Route path="/welcome" element={<WelcomePage />} />
+              </Route>
+              <Route
+                path="/"
+                element={
+                  <PrivateProvider>
+                    <BillingLayout />
+                  </PrivateProvider>
+                }
+              >
+                <Route path="/billing" element={<BillingPage />} />
+                <Route path="/invoices" element={<InvoicesPage />} />
+              </Route>
+              <Route
+                path="/"
+                element={
+                  <PrivateProvider>
+                    <NotificationsLayout />
+                  </PrivateProvider>
+                }
+              >
+                <Route path="/notifications" element={<NotificationsPage />} />
+              </Route>
+              <Route
+                path="/"
+                element={
+                  <PrivateProvider>
+                    <LegalLayout />
+                  </PrivateProvider>
+                }
+              >
+                <Route path="/about" element={<AboutPage />} />
+              </Route>
+              <Route
+                path="/"
+                element={
+                  <PrivateProvider>
+                    <RadarLayout />
+                  </PrivateProvider>
+                }
+              >
+                <Route index element={<HomePage />} />
+                <Route path="/adapters" element={<AdaptersPage />} />
+                <Route path="/authors" element={<AuthorsPage />} />
+                <Route path="/bi-systems" element={<BiSystemsPage />} />
+                <Route path="/channels" element={<ChannelsPage />} />
+                <Route path="/cobwebs" element={<CobwebsPage />} />
+                <Route path="/compliances" element={<CompliancesPage />} />
+                <Route path="/compliances/edit/:id" element={<CompliancesEditPage />} />
+                <Route path="/compliances/new" element={<CompliancesNewPage />} />
+                <Route path="/domains" element={<DomainsPage />} />
+                <Route path="/domains/edit/:id" element={<DomainsEditPage />} />
+                <Route path="/domains/new" element={<DomainsNewPage />} />
+                <Route path="/licenses" element={<LicensesPage />} />
+                <Route path="/licenses/edit/:id" element={<LicensesEditPage />} />
+                <Route path="/licenses/new" element={<LicensesNewPage />} />
+                <Route path="/maturities" element={<MaturitiesPage />} />
+                <Route path="/maturities/edit/:id" element={<MaturitiesEditPage />} />
+                <Route path="/maturities/new" element={<MaturitiesNewPage />} />
+                <Route path="/participants" element={<ParticipantsPage />} />
+                <Route path="/pies" element={<PiesPage />} />
+                <Route path="/platforms" element={<PlatformsPage />} />
+                <Route path="/practices" element={<PracticesPage />} />
+                <Route path="/practices/edit/:id" element={<EditPracticePage />} />
+                <Route path="/practices/new" element={<NewPracticesPage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/edit/:id" element={<ProductsEditPage />} />
+                <Route path="/products/new" element={<ProductsNewPage />} />
+                <Route path="/products/show-communications/:id" element={<ProductsCommunicationsPage />} />
+                <Route path="/products/show-contributions/:id" element={<ProductsContributionsPage />} />
+                <Route path="/products/show-finances/:id" element={<ProductsFinancesPage />} />
+                <Route path="/products/show-licenses/:id" element={<ProductsLicensesPage />} />
+                <Route path="/products/show-practices/:id" element={<ProductsPracticesPage />} />
+                <Route path="/products/show-technologies/:id" element={<ProductsTechnologiesPage />} />
+                <Route path="/radars" element={<RadarsPage />} />
+                <Route path="/radars/edit/:id" element={<RadarsEditPage />} />
+                <Route path="/radars/new" element={<RadarsNewPage />} />
+                <Route path="/radars/show/:id" element={<RadarsShowPage />} />
+                <Route path="/rays" element={<RaysPage />} />
+                <Route path="/repositories" element={<RepositoriesPage />} />
+                <Route path="/segments" element={<DomainsPage />} />
+                <Route path="/teams" element={<TeamsPage />} />
+                <Route path="/technologies" element={<TechnologiesPage />} />
+                <Route path="/technologies/edit/:id" element={<TechnologiesEditPage />} />
+                <Route path="/technologies/new" element={<TechnologiesNewPage />} />
+              </Route>
+            </Routes>
+          </HotkeysProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>

@@ -2,13 +2,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { useDeleteProduct, useGetProducts } from "@/queries/product";
+import { useDeleteDomain, useGetDomains } from "@/queries/domain";
 
 import { DataTable } from "@/components/data-table";
 
-import { useProductColumns } from "@/pages/products/columns";
+import { useDomainColumns } from "@/pages/domains/columns";
 
-export function ProductsPage() {
+export const DomainsPage = () => {
   const auth = useAuth();
   const queryClient = useQueryClient();
   const [queryParams, setQueryParams] = useState({
@@ -18,14 +18,15 @@ export function ProductsPage() {
   });
 
   const {
-    data: products = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
+    data: domain = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },
     isLoading: isLoading,
     isError: isError,
     error: error,
-  } = useGetProducts(auth, queryParams);
+  } = useGetDomains(auth, queryParams);
 
-  const { mutate: deleteTechnology } = useDeleteProduct(auth, queryClient);
-  const columns = useProductColumns(deleteTechnology);
+  const { mutate: deleteDomain } = useDeleteDomain(auth, queryClient);
+
+  const columns = useDomainColumns(deleteDomain);
 
   const handlePagination = useCallback((page: number, size: number) => {
     setQueryParams((prev) => {
@@ -48,27 +49,28 @@ export function ProductsPage() {
   if (isError) {
     return (
       <div>
-        <h1>Error getting products</h1>
+        <h1>Error getting domains</h1>
         <p>{error.message}</p>
       </div>
     );
   }
+
   return (
     <>
       <DataTable
         isLoading={isLoading}
-        pageLink={"products"}
-        filterPlaceholder="Filter, for example: My product%..."
         columns={columns}
-        data={products.content}
-        rowCount={products.totalElements}
-        pageSize={products.pageable.pageSize}
-        pageIndex={products.pageable.pageNumber}
+        pageLink={"domains"}
+        filterPlaceholder="Filter, for example: Languages%..."
+        data={domain.content}
+        rowCount={domain.totalElements}
+        pageSize={domain.pageable.pageSize}
+        pageIndex={domain.pageable.pageNumber}
         handlePagination={handlePagination}
         handleSorting={handleSorting}
         handleFiltering={handleFiltering}
-        handleDelete={deleteTechnology}
+        handleDelete={deleteDomain}
       />
     </>
   );
-}
+};
