@@ -72,6 +72,7 @@ import { TechnologiesPage } from "@/pages/technologies/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
+import AnalyticsProvider from "@/providers/analytics.tsx";
 
 /*
  * Create and configure query client. Default value for stale time is 0.
@@ -99,108 +100,110 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <AuthProvider userManager={userManager} onSigninCallback={onSigninCallback}>
         <QueryClientProvider client={queryClient}>
-          <HotkeysProvider>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PrivateProvider>
-                    <AccountLayout />
-                  </PrivateProvider>
-                }
-              >
-                <Route path="/account" element={<AccountPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-              </Route>
-              <Route path="/" element={<ApplicationLayout />}>
-                <Route path="/welcome" element={<WelcomePage />} />
-              </Route>
-              <Route
-                path="/"
-                element={
-                  <PrivateProvider>
-                    <BillingLayout />
-                  </PrivateProvider>
-                }
-              >
-                <Route path="/billing" element={<BillingPage />} />
-                <Route path="/invoices" element={<InvoicesPage />} />
-              </Route>
-              <Route
-                path="/"
-                element={
-                  <PrivateProvider>
-                    <NotificationsLayout />
-                  </PrivateProvider>
-                }
-              >
-                <Route path="/notifications" element={<NotificationsPage />} />
-              </Route>
-              <Route
-                path="/"
-                element={
-                  <PrivateProvider>
-                    <LegalLayout />
-                  </PrivateProvider>
-                }
-              >
-                <Route path="/about" element={<AboutPage />} />
-              </Route>
-              <Route
-                path="/"
-                element={
-                  <PrivateProvider>
-                    <RadarLayout />
-                  </PrivateProvider>
-                }
-              >
-                <Route index element={<HomePage />} />
-                <Route path="/adapters" element={<AdaptersPage />} />
-                <Route path="/authors" element={<AuthorsPage />} />
-                <Route path="/bi-systems" element={<BiSystemsPage />} />
-                <Route path="/channels" element={<ChannelsPage />} />
-                <Route path="/cobwebs" element={<CobwebsPage />} />
-                <Route path="/compliances" element={<CompliancesPage />} />
-                <Route path="/compliances/edit/:id" element={<CompliancesEditPage />} />
-                <Route path="/compliances/new" element={<CompliancesNewPage />} />
-                <Route path="/domains" element={<DomainsPage />} />
-                <Route path="/domains/edit/:id" element={<DomainsEditPage />} />
-                <Route path="/domains/new" element={<DomainsNewPage />} />
-                <Route path="/licenses" element={<LicensesPage />} />
-                <Route path="/licenses/edit/:id" element={<LicensesEditPage />} />
-                <Route path="/licenses/new" element={<LicensesNewPage />} />
-                <Route path="/maturities" element={<MaturitiesPage />} />
-                <Route path="/maturities/edit/:id" element={<MaturitiesEditPage />} />
-                <Route path="/maturities/new" element={<MaturitiesNewPage />} />
-                <Route path="/participants" element={<ParticipantsPage />} />
-                <Route path="/pies" element={<PiesPage />} />
-                <Route path="/platforms" element={<PlatformsPage />} />
-                <Route path="/practices" element={<PracticesPage />} />
-                <Route path="/practices/edit/:id" element={<EditPracticePage />} />
-                <Route path="/practices/new" element={<NewPracticesPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/edit/:id" element={<ProductsEditPage />} />
-                <Route path="/products/new" element={<ProductsNewPage />} />
-                <Route path="/products/show-communications/:id" element={<ProductsCommunicationsPage />} />
-                <Route path="/products/show-contributions/:id" element={<ProductsContributionsPage />} />
-                <Route path="/products/show-finances/:id" element={<ProductsFinancesPage />} />
-                <Route path="/products/show-licenses/:id" element={<ProductsLicensesPage />} />
-                <Route path="/products/show-practices/:id" element={<ProductsPracticesPage />} />
-                <Route path="/products/show-technologies/:id" element={<ProductsTechnologiesPage />} />
-                <Route path="/radars" element={<RadarsPage />} />
-                <Route path="/radars/edit/:id" element={<RadarsEditPage />} />
-                <Route path="/radars/new" element={<RadarsNewPage />} />
-                <Route path="/radars/show/:id" element={<RadarsShowPage />} />
-                <Route path="/rays" element={<RaysPage />} />
-                <Route path="/repositories" element={<RepositoriesPage />} />
-                <Route path="/segments" element={<DomainsPage />} />
-                <Route path="/teams" element={<TeamsPage />} />
-                <Route path="/technologies" element={<TechnologiesPage />} />
-                <Route path="/technologies/edit/:id" element={<TechnologiesEditPage />} />
-                <Route path="/technologies/new" element={<TechnologiesNewPage />} />
-              </Route>
-            </Routes>
-          </HotkeysProvider>
+          <AnalyticsProvider>
+            <HotkeysProvider>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <PrivateProvider>
+                      <AccountLayout />
+                    </PrivateProvider>
+                  }
+                >
+                  <Route path="/account" element={<AccountPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                </Route>
+                <Route path="/" element={<ApplicationLayout />}>
+                  <Route path="/welcome" element={<WelcomePage />} />
+                </Route>
+                <Route
+                  path="/"
+                  element={
+                    <PrivateProvider>
+                      <BillingLayout />
+                    </PrivateProvider>
+                  }
+                >
+                  <Route path="/billing" element={<BillingPage />} />
+                  <Route path="/invoices" element={<InvoicesPage />} />
+                </Route>
+                <Route
+                  path="/"
+                  element={
+                    <PrivateProvider>
+                      <NotificationsLayout />
+                    </PrivateProvider>
+                  }
+                >
+                  <Route path="/notifications" element={<NotificationsPage />} />
+                </Route>
+                <Route
+                  path="/"
+                  element={
+                    <PrivateProvider>
+                      <LegalLayout />
+                    </PrivateProvider>
+                  }
+                >
+                  <Route path="/about" element={<AboutPage />} />
+                </Route>
+                <Route
+                  path="/"
+                  element={
+                    <PrivateProvider>
+                      <RadarLayout />
+                    </PrivateProvider>
+                  }
+                >
+                  <Route index element={<HomePage />} />
+                  <Route path="/adapters" element={<AdaptersPage />} />
+                  <Route path="/authors" element={<AuthorsPage />} />
+                  <Route path="/bi-systems" element={<BiSystemsPage />} />
+                  <Route path="/channels" element={<ChannelsPage />} />
+                  <Route path="/cobwebs" element={<CobwebsPage />} />
+                  <Route path="/compliances" element={<CompliancesPage />} />
+                  <Route path="/compliances/edit/:id" element={<CompliancesEditPage />} />
+                  <Route path="/compliances/new" element={<CompliancesNewPage />} />
+                  <Route path="/domains" element={<DomainsPage />} />
+                  <Route path="/domains/edit/:id" element={<DomainsEditPage />} />
+                  <Route path="/domains/new" element={<DomainsNewPage />} />
+                  <Route path="/licenses" element={<LicensesPage />} />
+                  <Route path="/licenses/edit/:id" element={<LicensesEditPage />} />
+                  <Route path="/licenses/new" element={<LicensesNewPage />} />
+                  <Route path="/maturities" element={<MaturitiesPage />} />
+                  <Route path="/maturities/edit/:id" element={<MaturitiesEditPage />} />
+                  <Route path="/maturities/new" element={<MaturitiesNewPage />} />
+                  <Route path="/participants" element={<ParticipantsPage />} />
+                  <Route path="/pies" element={<PiesPage />} />
+                  <Route path="/platforms" element={<PlatformsPage />} />
+                  <Route path="/practices" element={<PracticesPage />} />
+                  <Route path="/practices/edit/:id" element={<EditPracticePage />} />
+                  <Route path="/practices/new" element={<NewPracticesPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
+                  <Route path="/products/edit/:id" element={<ProductsEditPage />} />
+                  <Route path="/products/new" element={<ProductsNewPage />} />
+                  <Route path="/products/show-communications/:id" element={<ProductsCommunicationsPage />} />
+                  <Route path="/products/show-contributions/:id" element={<ProductsContributionsPage />} />
+                  <Route path="/products/show-finances/:id" element={<ProductsFinancesPage />} />
+                  <Route path="/products/show-licenses/:id" element={<ProductsLicensesPage />} />
+                  <Route path="/products/show-practices/:id" element={<ProductsPracticesPage />} />
+                  <Route path="/products/show-technologies/:id" element={<ProductsTechnologiesPage />} />
+                  <Route path="/radars" element={<RadarsPage />} />
+                  <Route path="/radars/edit/:id" element={<RadarsEditPage />} />
+                  <Route path="/radars/new" element={<RadarsNewPage />} />
+                  <Route path="/radars/show/:id" element={<RadarsShowPage />} />
+                  <Route path="/rays" element={<RaysPage />} />
+                  <Route path="/repositories" element={<RepositoriesPage />} />
+                  <Route path="/segments" element={<DomainsPage />} />
+                  <Route path="/teams" element={<TeamsPage />} />
+                  <Route path="/technologies" element={<TechnologiesPage />} />
+                  <Route path="/technologies/edit/:id" element={<TechnologiesEditPage />} />
+                  <Route path="/technologies/new" element={<TechnologiesNewPage />} />
+                </Route>
+              </Routes>
+            </HotkeysProvider>
+          </AnalyticsProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </AuthProvider>
