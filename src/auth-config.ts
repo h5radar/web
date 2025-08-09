@@ -1,9 +1,10 @@
 import { UserManager, WebStorageStateStore } from "oidc-client-ts";
 
-export const userManager = new UserManager({
-  authority: import.meta.env.VITE_AUTHORITY || "http://localhost:8180/realms/h5radar",
-  client_id: import.meta.env.VITE_CLIENT_ID || "web",
+import { AUTHORITY, CLIENT_ID } from "@/constants/application";
 
+export const userManager = new UserManager({
+  authority: AUTHORITY,
+  client_id: CLIENT_ID,
   redirect_uri: `${window.location.origin}`,
   post_logout_redirect_uri: `${window.location.origin}/welcome`,
   userStore: new WebStorageStateStore({ store: window.sessionStorage }),

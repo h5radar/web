@@ -6,6 +6,12 @@ export const APP_DESCRIPTION = "No terra incognita!";
 export const APP_VERSION = "0.0.1";
 
 /*
+ * Auth settings
+ */
+export const AUTHORITY = import.meta.env.VITE_AUTHORITY || "http://localhost:8180/realms/h5radar";
+export const CLIENT_ID = import.meta.env.VITE_CLIENT_ID || "web";
+
+/*
  * Endpoints settings
  */
 export const ACCOUNT_API_URL = import.meta.env.VITE_ACCOUNT_API_URL || "http://127.0.0.1:8070";
