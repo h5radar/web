@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
+import AnalyticsProvider from "@/providers/analytics";
 import HotkeysProvider from "@/providers/hotkeys";
 import PrivateProvider from "@/providers/private";
 
@@ -72,7 +73,6 @@ import { TechnologiesPage } from "@/pages/technologies/table";
 import WelcomePage from "@/pages/welcome";
 
 import "@/index.css";
-import AnalyticsProvider from "@/providers/analytics.tsx";
 
 /*
  * Create and configure query client. Default value for stale time is 0.
