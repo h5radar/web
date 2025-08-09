@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 import { onSigninCallback, userManager } from "@/auth-config";
 
-import AnaliticsProvider from "@/providers/analitics";
+import AnalyticsProvider from "@/providers/analytics";
 import HotkeysProvider from "@/providers/hotkeys";
 import PrivateProvider from "@/providers/private";
 
@@ -105,7 +105,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <AuthProvider userManager={userManager} onSigninCallback={onSigninCallback}>
         <QueryClientProvider client={queryClient}>
-          <AnaliticsProvider>
+          <AnalyticsProvider>
             <HotkeysProvider>
               <Routes>
                 <Route
@@ -205,7 +205,7 @@ createRoot(document.getElementById("root")!).render(
               </Routes>
             </HotkeysProvider>
             <ReactQueryDevtools initialIsOpen={false} />
-          </AnaliticsProvider>
+          </AnalyticsProvider>
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>

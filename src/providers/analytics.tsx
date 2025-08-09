@@ -3,7 +3,7 @@ import { YMInitializer } from "react-yandex-metrika";
 
 import usePageTracking from "@/hooks/use-page-tracking";
 
-interface AnaliticsProviderProps {
+interface AnalyticsProviderProps {
   children: React.ReactNode;
 }
 
@@ -12,7 +12,7 @@ const PageTracking = () => {
   return null;
 };
 
-const AnaliticsProvider: FC<AnaliticsProviderProps> = (props) => {
+const AnalyticsProvider: FC<AnalyticsProviderProps> = (props) => {
   const { children } = props;
   return (
     <>
@@ -24,4 +24,4 @@ const AnaliticsProvider: FC<AnaliticsProviderProps> = (props) => {
     </>
   );
 };
-export default AnaliticsProvider;
+export default AnalyticsProvider;
