@@ -1,27 +1,12 @@
+import { mockLicensesQueries } from "./licenses";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import LicensesEditPage from "@/pages/licenses/edit";
 
-vi.mock("@/queries/license", () => ({
-  useGetLicense: vi.fn(() => ({
-    data: {
-      id: "1",
-      title: "MIT license",
-      description: "MIT license description",
-      active: true,
-    },
-    isLoading: false,
-    isError: false,
-    error: null,
-  })),
-  useUpdateLicense: vi.fn(() => ({
-    mutate: vi.fn(),
-    isPending: false,
-  })),
-}));
+mockLicensesQueries();
 
 describe("LicensesEditPage", () => {
   it("get licenses edit page", async () => {
