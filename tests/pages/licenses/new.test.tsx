@@ -5,17 +5,20 @@ import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
 
-import { LicensesPage } from "@/pages/licenses/table";
+import LicensesNewPage from "@/pages/licenses/new";
 
-describe("LicensesPage", () => {
-  it("get licenses page", () => {
+describe("LicensesNewPage", () => {
+  it("get licenses new page", () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <LicensesPage />
+          <LicensesNewPage />
         </QueryClientProvider>
       </BrowserRouter>,
     );
-    expect(screen.getByText("Columns")).toBeDefined();
+    expect(screen.getByPlaceholderText("id")).toBeDefined();
+    expect(screen.getByPlaceholderText("title")).toBeDefined();
+    expect(screen.getByPlaceholderText("description")).toBeDefined();
+    expect(screen.getByText("Active")).toBeDefined();
   });
 });

@@ -6,13 +6,16 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   resolve: {
-    alias: [{ find: "@", replacement: resolve(__dirname, "./src") }],
+    alias: [
+      { find: "@", replacement: resolve(__dirname, "./src") },
+      { find: "@tests", replacement: resolve(__dirname, "./tests") },
+    ],
   },
   test: {
     environment: "jsdom",
     outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
     reporters: ["default", "junit", "html"],
-    setupFiles: ["./tests/setup.ts", "./tests/mocks.ts"],
+    setupFiles: ["./tests/setup.ts"],
     coverage: {
       include: ["src/**"],
       exclude: ["src/ui/**"],
