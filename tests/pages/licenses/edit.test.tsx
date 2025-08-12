@@ -1,10 +1,11 @@
-import { mockLicensesQueries } from "@/../tests/mocks/licenses";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import LicensesEditPage from "@/pages/licenses/edit";
+
+import { mockLicensesQueries } from "@/../tests/mocks/licenses";
 
 mockLicensesQueries();
 
