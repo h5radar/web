@@ -9,6 +9,7 @@
   "endOfLine": "auto",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
+    "^@tests/mocks/(.*)",
     "^@/ui/(.*)$",
     "^@/(auth-config.*)",
     "^@/(store.*)",
@@ -24,7 +25,6 @@
     "^@/layouts/(.*)$",
     "^@/pages/(.*)$",
     "^@/(.*)",
-    "^@tests/mocks/(.*)",
     "^@tests/(.*)"
   ],
   "importOrderSeparation": true,
