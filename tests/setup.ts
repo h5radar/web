@@ -10,7 +10,6 @@ afterAll(() => {
   vi.restoreAllMocks();
 });
 
-
 class ResizeObserver {
   observe() {}
   unobserve() {}

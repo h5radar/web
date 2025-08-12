@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
+import "@tests/mocks/auth";
+
 import { CompliancesPage } from "@/pages/compliances/table";
 
 describe("CompliancesPage", () => {
