@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 
-export const mockLicensesQueries = () => {
+export const mockLicenseQueries = () => {
   vi.mock("@/queries/license", () => ({
     useGetLicense: vi.fn(() => ({
       data: {

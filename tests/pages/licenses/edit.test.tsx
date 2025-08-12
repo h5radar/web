@@ -5,9 +5,9 @@ import { describe, expect, it } from "vitest";
 
 import LicensesEditPage from "@/pages/licenses/edit";
 
-import { mockLicensesQueries } from "@/../tests/mocks/licenses";
+import { mockLicenseQueries } from "@/../tests/mocks/license";
 
-mockLicensesQueries();
+mockLicenseQueries();
 
 describe("LicensesEditPage", () => {
   it("get licenses edit page", async () => {
