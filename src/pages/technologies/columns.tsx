@@ -24,13 +24,13 @@ export const useTechnologyColumns = (
       {
         accessorKey: "title",
         header: "Title",
-        cell: ({ row }) => <div className="w-32">{row.original.title}</div>,
+        cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.title}</div>,
         enableHiding: false,
       },
       {
         accessorKey: "website",
         header: "Website",
-        cell: ({ row }) => <div className="w-32">{row.original.website}</div>,
+        cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.website}</div>,
       },
       {
         accessorKey: "moved",

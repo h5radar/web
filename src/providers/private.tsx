@@ -3,12 +3,13 @@ import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
 import { hasAuthParams, useAuth } from "react-oidc-context";
 
+import { AUTHORITY } from "@/constants/application";
 import { GET_AUTH_HEALTH } from "@/constants/query-keys";
 
 import WelcomePage from "@/pages/welcome";
 
 const getAuthHealth = async () => {
-  const response = await fetch(import.meta.env.VITE_AUTHORITY);
+  const response = await fetch(AUTHORITY);
   if (!response.ok) {
     throw new Error("Please confirm your auth server is up");
   }
