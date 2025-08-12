@@ -23,7 +23,9 @@
     "^@/components/(.*)$",
     "^@/layouts/(.*)$",
     "^@/pages/(.*)$",
-    "^@/(.*)"
+    "^@/(.*)",
+    "^@tests/mocks/(.*)",
+    "^@tests/(.*)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
