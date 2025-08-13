@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import { useLocation } from "react-router";
+import ym from "react-yandex-metrika";
 
-const usePageTracking = () => {
+export const usePageTrackingGoogle = () => {
   const location = useLocation();
 
   useEffect(() => {
@@ -10,4 +11,10 @@ const usePageTracking = () => {
   }, [location]);
 };
 
-export default usePageTracking;
+export const usePageTrackingYandex = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    ym("hit", location.pathname);
+  }, [location]);
+};
