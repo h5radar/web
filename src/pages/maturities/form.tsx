@@ -88,9 +88,9 @@ export const MaturityForm: React.FC<MaturityFormProps> = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea id="description" placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is maturity descripton</FormDescription>
+              <FormDescription>This is maturity description</FormDescription>
               <FormMessage />
             </FormItem>
           )}

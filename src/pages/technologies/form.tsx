@@ -85,9 +85,9 @@ export const TechnologyForm: React.FC<TechnologyFormProps> = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea id="description" placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is technology descripton</FormDescription>
+              <FormDescription>This is technology description</FormDescription>
               <FormMessage />
             </FormItem>
           )}
