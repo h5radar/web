@@ -77,9 +77,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ defaultDataForm, onSub
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea id="description" placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is product descripton</FormDescription>
+              <FormDescription>This is product description</FormDescription>
               <FormMessage />
             </FormItem>
           )}
