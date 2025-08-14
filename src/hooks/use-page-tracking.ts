@@ -3,7 +3,7 @@ import ReactGA from "react-ga4";
 import { useLocation } from "react-router";
 import ym from "react-yandex-metrika";
 
-export const usePageTrackingGoogle = () => {
+export const useGooglePageTracking = () => {
   const location = useLocation();
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export const usePageTrackingGoogle = () => {
   }, [location]);
 };
 
-export const usePageTrackingYandex = () => {
+export const useYandexPageTracking = () => {
   const location = useLocation();
 
   useEffect(() => {

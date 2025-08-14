@@ -1,18 +1,18 @@
 import { FC } from "react";
 import { YMInitializer } from "react-yandex-metrika";
 
-import { usePageTrackingGoogle, usePageTrackingYandex } from "@/hooks/use-page-tracking";
+import { useGooglePageTracking, useYandexPageTracking } from "@/hooks/use-page-tracking";
 
 interface AnalyticsProviderProps {
   children: React.ReactNode;
 }
 
-const PageTrackingGoogle = () => {
-  usePageTrackingGoogle();
+const GooglePageTracking = () => {
+  useGooglePageTracking();
   return null;
 };
-const PageTrackingYandex = () => {
-  usePageTrackingYandex();
+const YandexPageTracking = () => {
+  useYandexPageTracking();
   return null;
 };
 
@@ -23,12 +23,13 @@ const AnalyticsProvider: FC<AnalyticsProviderProps> = (props) => {
       {import.meta.env.VITE_YANDEX_METRICA && (
         <>
           <YMInitializer accounts={[parseInt(import.meta.env.VITE_YANDEX_METRICA)]} />
-          <PageTrackingYandex />
+          <YandexPageTracking />
         </>
       )}
-      {import.meta.env.VITE_GOOGLE_ANALYTICS && <PageTrackingGoogle />}
+      {import.meta.env.VITE_GOOGLE_ANALYTICS && <GooglePageTracking />}
       {children}
     </>
   );
 };
+
 export default AnalyticsProvider;
