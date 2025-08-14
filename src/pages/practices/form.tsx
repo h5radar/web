@@ -83,9 +83,9 @@ export const PracticeForm: React.FC<PracticeFormProps> = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea id="description" placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is practice descripton</FormDescription>
+              <FormDescription>This is practice description</FormDescription>
               <FormMessage />
             </FormItem>
           )}

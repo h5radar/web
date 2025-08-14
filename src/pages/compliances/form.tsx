@@ -53,7 +53,7 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
               <FormControl>
                 <Input id="id" type="hidden" placeholder="id" {...field} />
               </FormControl>
-              <FormDescription>This is license id</FormDescription>
+              <FormDescription>This is compliance id</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -67,7 +67,7 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
               <FormControl>
                 <Input id="title" placeholder="title" {...field} />
               </FormControl>
-              <FormDescription>This is license title</FormDescription>
+              <FormDescription>This is compliance title</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -79,9 +79,9 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea id="description" placeholder="descripton" {...field} />
+                <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is license descripton</FormDescription>
+              <FormDescription>This is compliance description</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -96,7 +96,7 @@ export const ComplianceForm: React.FC<ComplianceProps> = ({ defaultDataForm, onS
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel>Active</FormLabel>
-                <FormDescription>Is license active or not</FormDescription>
+                <FormDescription>Is compliance active or not</FormDescription>
               </div>
             </FormItem>
           )}
