@@ -20,13 +20,13 @@ describe("LicensesEditPage", () => {
     window.history.pushState({}, "Edit License", "/licenses/edit/1");
     await waitFor(() => {
       expect(screen.getByPlaceholderText("id")).toBeDefined();
-      expect(screen.getByDisplayValue("1"));
+      expect(screen.getByDisplayValue("1")).toBeTruthy();
       expect(screen.getByPlaceholderText("title")).toBeDefined();
-      expect(screen.getByDisplayValue("MIT license"));
+      expect(screen.getByDisplayValue("MIT license")).toBeTruthy();
       expect(screen.getByPlaceholderText("description")).toBeDefined();
-      expect(screen.getByDisplayValue("MIT license description"));
+      expect(screen.getByDisplayValue("MIT license description")).toBeTruthy();
       expect(screen.getByText("Active")).toBeDefined();
-      expect(screen.getByDisplayValue("on"));
+      expect(screen.getByDisplayValue("on")).toBeTruthy();
     });
   });
 });

@@ -4,29 +4,27 @@ import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
-import "@tests/mocks/queries/compliance";
+import "@tests/mocks/queries/product";
 
-import CompliancesEditPage from "@/pages/compliances/edit";
+import EditProductPage from "@/pages/products/edit";
 
-describe("CompliancesEditPage", () => {
+describe("EditProductPage", () => {
   it("get compliances edit page", async () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <CompliancesEditPage />
+          <EditProductPage />
         </QueryClientProvider>
       </BrowserRouter>,
     );
-    window.history.pushState({}, "Edit Compliance", "/compliances/edit/1");
+    window.history.pushState({}, "Edit Compliance", "/products/edit/1");
     await waitFor(() => {
       expect(screen.getByPlaceholderText("id")).toBeDefined();
       expect(screen.getByDisplayValue("1")).toBeTruthy();
       expect(screen.getByPlaceholderText("title")).toBeDefined();
-      expect(screen.getByDisplayValue("High")).toBeTruthy();
+      expect(screen.getByDisplayValue("Title product")).toBeTruthy();
       expect(screen.getByPlaceholderText("description")).toBeDefined();
-      expect(screen.getByDisplayValue("High compliance level")).toBeTruthy();
-      expect(screen.getByText("Active")).toBeDefined();
-      expect(screen.getByDisplayValue("on")).toBeTruthy();
+      expect(screen.getByDisplayValue("Description product")).toBeTruthy();
     });
   });
 });

@@ -4,27 +4,31 @@ import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
-import "@tests/mocks/queries/compliance";
+import "@tests/mocks/queries/technologies";
 
-import CompliancesEditPage from "@/pages/compliances/edit";
+import EditTechnologyPage from "@/pages/technologies/edit";
 
-describe("CompliancesEditPage", () => {
-  it("get compliances edit page", async () => {
+describe("EditTechnologyPage", () => {
+  it("get technologies edit page", async () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <CompliancesEditPage />
+          <EditTechnologyPage />
         </QueryClientProvider>
       </BrowserRouter>,
     );
-    window.history.pushState({}, "Edit Compliance", "/compliances/edit/1");
+    window.history.pushState({}, "Edit Technology", "/technologies/edit/1");
     await waitFor(() => {
       expect(screen.getByPlaceholderText("id")).toBeDefined();
       expect(screen.getByDisplayValue("1")).toBeTruthy();
       expect(screen.getByPlaceholderText("title")).toBeDefined();
-      expect(screen.getByDisplayValue("High")).toBeTruthy();
+      expect(screen.getByDisplayValue("AWS Athena")).toBeTruthy();
       expect(screen.getByPlaceholderText("description")).toBeDefined();
-      expect(screen.getByDisplayValue("High compliance level")).toBeTruthy();
+      expect(screen.getByDisplayValue("AWS Athena description")).toBeTruthy();
+      expect(screen.getByPlaceholderText("website")).toBeDefined();
+      expect(screen.getByDisplayValue("")).toBeTruthy();
+      expect(screen.getByText("Moved")).toBeDefined();
+      expect(screen.getByDisplayValue("0")).toBeTruthy();
       expect(screen.getByText("Active")).toBeDefined();
       expect(screen.getByDisplayValue("on")).toBeTruthy();
     });
