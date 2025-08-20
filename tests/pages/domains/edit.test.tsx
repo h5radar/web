@@ -4,29 +4,29 @@ import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
-import "@tests/mocks/queries/compliance";
+import "@tests/mocks/queries/domains";
 
-import CompliancesEditPage from "@/pages/compliances/edit";
+import EditDomainsPage from "@/pages/domains/edit";
 
-describe("CompliancesEditPage", () => {
-  it("get compliances edit page", async () => {
+describe("EditDomainsPage", () => {
+  it("get domains edit page", async () => {
     render(
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <CompliancesEditPage />
+          <EditDomainsPage />
         </QueryClientProvider>
       </BrowserRouter>,
     );
-    window.history.pushState({}, "Edit Compliance", "/compliances/edit/1");
+    window.history.pushState({}, "Edit Domains", "/domains/edit/1");
     await waitFor(() => {
       expect(screen.getByPlaceholderText("id")).toBeDefined();
       expect(screen.getByDisplayValue("1")).toBeTruthy();
       expect(screen.getByPlaceholderText("title")).toBeDefined();
-      expect(screen.getByDisplayValue("High")).toBeTruthy();
+      expect(screen.getByDisplayValue("Languages")).toBeTruthy();
       expect(screen.getByPlaceholderText("description")).toBeDefined();
-      expect(screen.getByDisplayValue("High compliance level")).toBeTruthy();
-      expect(screen.getByText("Active")).toBeDefined();
-      expect(screen.getByDisplayValue("on")).toBeTruthy();
+      expect(screen.getByDisplayValue("Programming languages we use")).toBeTruthy();
+      expect(screen.getByText("Position")).toBeDefined();
+      expect(screen.getByDisplayValue("0")).toBeTruthy();
     });
   });
 });

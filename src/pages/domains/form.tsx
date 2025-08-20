@@ -52,7 +52,7 @@ export const DomainForm: React.FC<DomainProps> = ({ defaultDataForm, onSubmit, d
               <FormControl>
                 <Input id="id" type="hidden" placeholder="id" {...field} />
               </FormControl>
-              <FormDescription>This is license id</FormDescription>
+              <FormDescription>This is domains id</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -66,7 +66,7 @@ export const DomainForm: React.FC<DomainProps> = ({ defaultDataForm, onSubmit, d
               <FormControl>
                 <Input id="title" placeholder="title" {...field} />
               </FormControl>
-              <FormDescription>This is license title</FormDescription>
+              <FormDescription>This is domains title</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -80,7 +80,7 @@ export const DomainForm: React.FC<DomainProps> = ({ defaultDataForm, onSubmit, d
               <FormControl>
                 <Textarea id="description" placeholder="description" {...field} />
               </FormControl>
-              <FormDescription>This is license description</FormDescription>
+              <FormDescription>This is domains description</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -106,7 +106,7 @@ export const DomainForm: React.FC<DomainProps> = ({ defaultDataForm, onSubmit, d
                   })}
                 />
               </FormControl>
-              <FormDescription>This is maturity position</FormDescription>
+              <FormDescription>This is domains position</FormDescription>
               <FormMessage />
             </FormItem>
           )}
