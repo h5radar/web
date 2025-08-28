@@ -1,25 +1,36 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContextProps } from "react-oidc-context";
 import { z } from "zod";
 
 import { Button } from "@/ui/button";
 import { Checkbox } from "@/ui/checkbox";
+import { Combobox } from "@/ui/combobox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
 import { licenseSchema } from "@/schemas/license";
 
+import { useGetCompliances } from "@/queries/compliance";
+
 interface LicenseFormProps {
   defaultDataForm?: z.infer<typeof licenseSchema>;
   onSubmit: (values: z.infer<typeof licenseSchema>) => void;
   disabled: boolean;
+  auth: AuthContextProps;
 }
 
 /**
  * LicenseForm is ... .
  */
-export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSubmit, disabled }: LicenseFormProps) => {
+export const LicenseForm: React.FC<LicenseFormProps> = ({
+  defaultDataForm,
+  onSubmit,
+  disabled,
+  auth,
+}: LicenseFormProps) => {
   const form = useForm<z.infer<typeof licenseSchema>>({
     resolver: zodResolver(licenseSchema),
     defaultValues: defaultDataForm || {
@@ -27,9 +38,14 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
       title: "",
       description: "",
       active: true,
+      // complinance: {},
     },
   });
-
+  const [queryParams, setQueryParams] = useState({
+    page: 1,
+    size: 10,
+    sort: ["title", "asc"],
+  });
   /**
    * Function to handle submit. Important to prevent the default action
    * before execute onSubmit handler.
@@ -40,6 +56,22 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
       onSubmit(data);
     })();
   };
+
+  /**
+   * Function to load complinance.
+   */
+  const {
+    data: compliance,
+    isLoading: isLoading,
+    isError: isError,
+    error: error,
+  } = useGetCompliances(auth, queryParams);
+
+  const handleFiltering = useCallback((value: string) => {
+    return setQueryParams((prev) => {
+      return { ...prev, title: "%" + value + "%", page: 1 };
+    });
+  }, []);
 
   return (
     <Form {...form}>
@@ -101,6 +133,17 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
             </FormItem>
           )}
         />
+        <div>
+          {compliance?.content && <Combobox options={compliance?.content} searchValueUpdate={handleFiltering} />}
+          {isLoading && <h1>...isLoading</h1>}
+          {isError && (
+            <div>
+              <h1>Error getting compliances</h1>
+              <p>{error.message}</p>
+            </div>
+          )}
+        </div>
+        {/* <FormField control={form.control} name="complinance" render={({ field }) => <Combobox />} /> */}
         <Button type="submit" className={disabled ? "cursor-progress" : "cursor-pointer"} disabled={disabled}>
           Submit
         </Button>

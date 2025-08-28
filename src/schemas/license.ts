@@ -1,3 +1,4 @@
+// import { complianceSchema } from "./compliance";
 import { z } from "zod";
 
 export const licenseSchema = z.object({
@@ -11,4 +12,5 @@ export const licenseSchema = z.object({
     .min(1, { message: "Description must be at least 3 characters" })
     .max(512, { message: "Description must be less than 512 characters" }),
   active: z.boolean(),
+  // complinance: complianceSchema,
 });
