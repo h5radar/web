@@ -38,12 +38,12 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
       title: "",
       description: "",
       active: true,
-      // complinance: {},
+      compliance: { id: 0, title: "", description: "", active: true },
     },
   });
   const [queryParams, setQueryParams] = useState({
     page: 1,
-    size: 10,
+    size: 30,
     sort: ["title", "asc"],
   });
   /**
@@ -58,7 +58,7 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
   };
 
   /**
-   * Function to load complinance.
+  //  * Function to load compliance.
    */
   const {
     data: compliance,
@@ -118,6 +118,32 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
             </FormItem>
           )}
         />
+        {compliance?.content && (
+          <FormField
+            control={form.control}
+            name="compliance"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Compliance</FormLabel>
+                <FormControl>
+                  {!isLoading && (
+                    <Combobox
+                      options={compliance?.content}
+                      searchValueUpdate={handleFiltering}
+                      defaultValues={field.value}
+                      onChangeValue={(value) => field.onChange(value)}
+                      {...field}
+                    />
+                  )}
+                </FormControl>
+                <FormDescription>This is license compliance</FormDescription>
+                <FormMessage>
+                  {isError && error.message} {fieldState.error && fieldState.error.message}
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name="active"
@@ -133,17 +159,7 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
             </FormItem>
           )}
         />
-        <div>
-          {compliance?.content && <Combobox options={compliance?.content} searchValueUpdate={handleFiltering} />}
-          {isLoading && <h1>...isLoading</h1>}
-          {isError && (
-            <div>
-              <h1>Error getting compliances</h1>
-              <p>{error.message}</p>
-            </div>
-          )}
-        </div>
-        {/* <FormField control={form.control} name="complinance" render={({ field }) => <Combobox />} /> */}
+
         <Button type="submit" className={disabled ? "cursor-progress" : "cursor-pointer"} disabled={disabled}>
           Submit
         </Button>
