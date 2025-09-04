@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconLoader } from "@tabler/icons-react";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContextProps } from "react-oidc-context";
@@ -10,6 +11,8 @@ import { Combobox } from "@/ui/combobox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
+
+import { DEFAULT_QUERY_PARAM } from "@/constants/default-values";
 
 import { licenseSchema } from "@/schemas/license";
 
@@ -38,14 +41,10 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
       title: "",
       description: "",
       active: true,
-      compliance: { id: 0, title: "", description: "", active: true },
+      compliance: null,
     },
   });
-  const [queryParams, setQueryParams] = useState({
-    page: 1,
-    size: 30,
-    sort: ["title", "asc"],
-  });
+  const [queryParams, setQueryParams] = useState(DEFAULT_QUERY_PARAM);
   /**
    * Function to handle submit. Important to prevent the default action
    * before execute onSubmit handler.
@@ -60,16 +59,11 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
   /**
   //  * Function to load compliance.
    */
-  const {
-    data: compliance,
-    isLoading: isLoading,
-    isError: isError,
-    error: error,
-  } = useGetCompliances(auth, queryParams);
+  const { data: compliance, isLoading: isLoading } = useGetCompliances(auth, queryParams);
 
   const handleFiltering = useCallback((value: string) => {
     return setQueryParams((prev) => {
-      return { ...prev, title: "%" + value + "%", page: 1 };
+      return { ...prev, title: value, page: 1 };
     });
   }, []);
 
@@ -118,32 +112,29 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
             </FormItem>
           )}
         />
-        {compliance?.content && (
-          <FormField
-            control={form.control}
-            name="compliance"
-            render={({ field, fieldState }) => (
-              <FormItem>
-                <FormLabel>Compliance</FormLabel>
-                <FormControl>
-                  {!isLoading && (
-                    <Combobox
-                      options={compliance?.content}
-                      searchValueUpdate={handleFiltering}
-                      defaultValues={field.value}
-                      onChangeValue={(value) => field.onChange(value)}
-                      {...field}
-                    />
-                  )}
-                </FormControl>
-                <FormDescription>This is license compliance</FormDescription>
-                <FormMessage>
-                  {isError && error.message} {fieldState.error && fieldState.error.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-        )}
+        <FormField
+          control={form.control}
+          name="compliance"
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Compliance</FormLabel>
+              <FormControl>
+                {isLoading ? (
+                  <IconLoader className="animate-spin" />
+                ) : (
+                  <Combobox
+                    options={compliance?.content ?? []}
+                    searchValueUpdate={handleFiltering}
+                    defaultValues={field.value}
+                    onChangeValue={field.onChange}
+                  />
+                )}
+              </FormControl>
+              <FormDescription>This is license compliance</FormDescription>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="active"
