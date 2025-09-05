@@ -1,5 +1,6 @@
-import { complianceSchema } from "@/schemas/compliance";
 import { z } from "zod";
+
+import { complianceSchema } from "@/schemas/compliance";
 
 export const licenseSchema = z.object({
   id: z.number(),
