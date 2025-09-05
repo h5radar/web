@@ -14,7 +14,7 @@ export default function NewLicensesPage() {
 
   return (
     <>
-      <LicenseForm onSubmit={createLicense} disabled={isPending} auth={auth} />
+      <LicenseForm onSubmit={createLicense} auth={auth} disabled={isPending} />
     </>
   );
 }
