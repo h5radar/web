@@ -15,29 +15,27 @@ export function Combobox<T extends ComboboxOptions>({
   defaultValues,
   searchValueUpdate,
   onChangeValue,
+  placeholder,
 }: {
   options: T[];
   defaultValues: T;
   searchValueUpdate: (value: string) => void;
   onChangeValue: (value: T | null) => void;
+  placeholder: string;
 }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<T | null>(defaultValues ?? null);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
           {value && value.title.length > 0 ? value.title : "Select options..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput
-            placeholder="Search framework..."
-            className="h-9"
-            onValueChange={(value) => searchValueUpdate(value)}
-          />
+      <PopoverContent className="p-0 w-[var(--radix-popper-anchor-width)] !min-w-0 max-w-[var(--radix-popper-anchor-width)]">
+        <Command className="w-full ">
+          <CommandInput placeholder={placeholder} className="h-9" onValueChange={(value) => searchValueUpdate(value)} />
           <CommandList>
             <CommandEmpty>No options found.</CommandEmpty>
             <CommandGroup>

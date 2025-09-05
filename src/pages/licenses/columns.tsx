@@ -31,6 +31,11 @@ export const useLicenseColumns = (handleDelete: (id: string) => void): ColumnDef
         cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.description}</div>,
       },
       {
+        accessorKey: "compliance",
+        header: "Compliance",
+        cell: ({ row }) => <div className="w-64 overflow-hidden text-ellipsis">{row.original.compliance?.title}</div>,
+      },
+      {
         accessorKey: "active",
         header: "Active",
         cell: ({ row }) => (

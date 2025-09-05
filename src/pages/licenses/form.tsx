@@ -7,7 +7,6 @@ import { z } from "zod";
 
 import { Button } from "@/ui/button";
 import { Checkbox } from "@/ui/checkbox";
-import { Combobox } from "@/ui/combobox";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/ui/form";
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
@@ -17,6 +16,8 @@ import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
 import { licenseSchema } from "@/schemas/license";
 
 import { useGetCompliances } from "@/queries/compliance";
+
+import { Combobox } from "@/components/combobox";
 
 interface LicenseFormProps {
   defaultDataForm?: z.infer<typeof licenseSchema>;
@@ -129,6 +130,7 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
                     searchValueUpdate={handleFiltering}
                     defaultValues={field.value}
                     onChangeValue={field.onChange}
+                    placeholder="Search compliance..."
                   />
                 )}
               </FormControl>
