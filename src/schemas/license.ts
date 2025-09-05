@@ -1,4 +1,4 @@
-import { complianceSchema } from "./compliance";
+import { complianceSchema } from "@/schemas/compliance";
 import { z } from "zod";
 
 export const licenseSchema = z.object({

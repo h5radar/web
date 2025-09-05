@@ -12,7 +12,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
-import { DEFAULT_QUERY_PARAM } from "@/constants/default-values";
+import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
 
 import { licenseSchema } from "@/schemas/license";
 

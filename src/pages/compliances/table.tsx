@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { DEFAULT_QUERY_PARAM } from "@/constants/default-values";
+import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
 
 import { useDeleteCompliance, useGetCompliances } from "@/queries/compliance";
 
