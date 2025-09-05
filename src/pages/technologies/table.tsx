@@ -2,6 +2,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
+import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
+
 import { useDeleteTechnology, useGetTechnologies } from "@/queries/technology";
 
 import { DataTable } from "@/components/data-table";
@@ -11,11 +13,7 @@ import { useTechnologyColumns } from "@/pages/technologies/columns";
 export const TechnologiesPage = () => {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const [queryParams, setQueryParams] = useState({
-    page: 1,
-    size: 10,
-    sort: ["title", "asc"],
-  });
+  const [queryParams, setQueryParams] = useState(DEFAULT_QUERY_PARAM);
 
   const {
     data: technologies = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },

@@ -1,5 +1,8 @@
-/*
- * The function converts string or boolean to boolean
+/**
+ * Default query parameters for list requests (pagination + sorting).
+ * - page: 1-based page index
+ * - size: items per page
+ * - sort: [field, direction]
  */
 export const DEFAULT_QUERY_PARAM = {
   page: 1,

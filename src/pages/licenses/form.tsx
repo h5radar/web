@@ -21,8 +21,8 @@ import { useGetCompliances } from "@/queries/compliance";
 interface LicenseFormProps {
   defaultDataForm?: z.infer<typeof licenseSchema>;
   onSubmit: (values: z.infer<typeof licenseSchema>) => void;
-  disabled: boolean;
   auth: AuthContextProps;
+  disabled: boolean;
 }
 
 /**
@@ -31,8 +31,8 @@ interface LicenseFormProps {
 export const LicenseForm: React.FC<LicenseFormProps> = ({
   defaultDataForm,
   onSubmit,
-  disabled,
   auth,
+  disabled,
 }: LicenseFormProps) => {
   const form = useForm<z.infer<typeof licenseSchema>>({
     resolver: zodResolver(licenseSchema),
@@ -44,7 +44,11 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
       compliance: null,
     },
   });
+
   const [queryParams, setQueryParams] = useState(DEFAULT_QUERY_PARAM);
+
+  const { data: compliance, isLoading: isLoading } = useGetCompliances(auth, queryParams);
+
   /**
    * Function to handle submit. Important to prevent the default action
    * before execute onSubmit handler.
@@ -57,10 +61,8 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({
   };
 
   /**
-  //  * Function to load compliance.
+   * Function to handle filtering at compliance combobox.
    */
-  const { data: compliance, isLoading: isLoading } = useGetCompliances(auth, queryParams);
-
   const handleFiltering = useCallback((value: string) => {
     return setQueryParams((prev) => {
       return { ...prev, title: value, page: 1 };
