@@ -1,5 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconLoader } from "@tabler/icons-react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContextProps } from "react-oidc-context";
 import { z } from "zod";
 
 import { Button } from "@/ui/button";
@@ -8,18 +11,30 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
 
+import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
+
 import { licenseSchema } from "@/schemas/license";
+
+import { useGetCompliances } from "@/queries/compliance";
+
+import { Combobox } from "@/components/combobox";
 
 interface LicenseFormProps {
   defaultDataForm?: z.infer<typeof licenseSchema>;
   onSubmit: (values: z.infer<typeof licenseSchema>) => void;
+  auth: AuthContextProps;
   disabled: boolean;
 }
 
 /**
  * LicenseForm is ... .
  */
-export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSubmit, disabled }: LicenseFormProps) => {
+export const LicenseForm: React.FC<LicenseFormProps> = ({
+  defaultDataForm,
+  onSubmit,
+  auth,
+  disabled,
+}: LicenseFormProps) => {
   const form = useForm<z.infer<typeof licenseSchema>>({
     resolver: zodResolver(licenseSchema),
     defaultValues: defaultDataForm || {
@@ -27,8 +42,13 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
       title: "",
       description: "",
       active: true,
+      compliance: null,
     },
   });
+
+  const [queryParams, setQueryParams] = useState(DEFAULT_QUERY_PARAM);
+
+  const { data: compliance, isLoading: isLoading } = useGetCompliances(auth, queryParams);
 
   /**
    * Function to handle submit. Important to prevent the default action
@@ -40,6 +60,15 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
       onSubmit(data);
     })();
   };
+
+  /**
+   * Function to handle filtering at compliance combobox.
+   */
+  const handleFiltering = useCallback((value: string) => {
+    return setQueryParams((prev) => {
+      return { ...prev, title: value, page: 1 };
+    });
+  }, []);
 
   return (
     <Form {...form}>
@@ -88,6 +117,30 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
         />
         <FormField
           control={form.control}
+          name="compliance"
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Compliance</FormLabel>
+              <FormControl>
+                {isLoading ? (
+                  <IconLoader className="animate-spin" />
+                ) : (
+                  <Combobox
+                    options={compliance?.content ?? []}
+                    searchValueUpdate={handleFiltering}
+                    defaultValues={field.value}
+                    onChangeValue={field.onChange}
+                    placeholder="Search compliance..."
+                  />
+                )}
+              </FormControl>
+              <FormDescription>This is license compliance</FormDescription>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="active"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
@@ -101,6 +154,7 @@ export const LicenseForm: React.FC<LicenseFormProps> = ({ defaultDataForm, onSub
             </FormItem>
           )}
         />
+
         <Button type="submit" className={disabled ? "cursor-progress" : "cursor-pointer"} disabled={disabled}>
           Submit
         </Button>

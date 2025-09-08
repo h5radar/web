@@ -2,6 +2,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
+import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
+
 import { useDeleteProduct, useGetProducts } from "@/queries/product";
 
 import { DataTable } from "@/components/data-table";
@@ -11,11 +13,7 @@ import { useProductColumns } from "@/pages/products/columns";
 export function ProductsPage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const [queryParams, setQueryParams] = useState({
-    page: 1,
-    size: 10,
-    sort: ["title", "asc"],
-  });
+  const [queryParams, setQueryParams] = useState(DEFAULT_QUERY_PARAM);
 
   const {
     data: products = { content: [], pageable: { pageNumber: 0, pageSize: 10 }, totalElements: 0 },

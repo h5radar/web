@@ -29,7 +29,7 @@ export default function LicensesEditPage() {
 
   return (
     <>
-      <LicenseForm defaultDataForm={license} onSubmit={updateLicense} disabled={isPending} />
+      <LicenseForm defaultDataForm={license} onSubmit={updateLicense} auth={auth} disabled={isPending} />
     </>
   );
 }
