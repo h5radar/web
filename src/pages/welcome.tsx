@@ -3,6 +3,8 @@ import { useAuth } from "react-oidc-context";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/card";
 
+import { toBoolean } from "@/lib/converters";
+
 export default function WelcomePage() {
   const auth = useAuth();
 
@@ -21,6 +23,16 @@ export default function WelcomePage() {
               </Button>
             </CardContent>
           </Card>
+          {toBoolean(import.meta.env.VITE_ENABLED_DEMO_BANNER) && (
+            <Card className="bg-neutral-800">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl">Welcome to H5Radar Demo</CardTitle>
+                <CardDescription>
+                  You can explore the application with the demo account alice@example / secret.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          )}
         </div>
       </div>
     </div>
