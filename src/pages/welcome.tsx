@@ -11,9 +11,9 @@ export default function WelcomePage() {
   const auth = useAuth();
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full">
-        <div className="flex flex-col gap-6">
+    <div className="min-h-svh w-full p-6 md:p-10 flex flex-col">
+      <div className="w-full flex flex-col flex-1">
+        <div className="flex flex-col gap-6 flex-1">
           {toBoolean(import.meta.env.VITE_DEMO_BANNER_ENABLED) && (
             <Card
               className="mx-auto max-w-5xl bg-neutral-900 border-neutral-800 text-left shadow-lg shadow-black/30 ring-1 ring-white/5">
@@ -38,18 +38,20 @@ export default function WelcomePage() {
               </CardContent>
             </Card>
           )}
-          <div className="mx-auto w-full max-w-sm">
-            <Card>
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Welcome back</CardTitle>
-                <CardDescription>Login with your account credentials</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" onClick={() => auth.signinRedirect()}>
-                  Login
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="mx-auto w-full max-w-sm ">
+              <Card>
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl">Welcome back</CardTitle>
+                  <CardDescription>Login with your account credentials</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button className="w-full" onClick={() => auth.signinRedirect()}>
+                    Login
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

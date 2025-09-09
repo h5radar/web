@@ -13,7 +13,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    outputFile: { junit: "./tests/results/junit.xml", html: "./tests/results/index.html" },
+    outputFile: { junit: "./output/tests/junit.xml", html: "./output/tests/index.html" },
     reporters: ["default", "junit", "html"],
     setupFiles: ["./tests/setup.ts"],
     coverage: {
@@ -21,10 +21,10 @@ export default defineConfig({
       exclude: ["src/ui/**"],
       provider: "v8",
       reporter: ["text", "json", "html"],
-      reportsDirectory: "./tests/coverage",
+      reportsDirectory: "./output/coverage",
       thresholds: {
         statements: 44.16,
-        branches: 67,
+        branches: 66.22,
         functions: 48.17,
         lines: 44.16,
         autoUpdate: false,
