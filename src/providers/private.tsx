@@ -2,9 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { type FC, useEffect, useState } from "react";
 import { hasAuthParams, useAuth } from "react-oidc-context";
+import { useNavigate } from "react-router";
 
 import { AUTHORITY } from "@/constants/application";
 import { GET_AUTH_HEALTH } from "@/constants/query-keys";
+
+import { toBoolean } from "@/lib/converters";
 
 import WelcomePage from "@/pages/welcome";
 
@@ -23,6 +26,7 @@ interface PrivateProviderProps {
 export const PrivateProvider: FC<PrivateProviderProps> = (props) => {
   const { children } = props;
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const { isPending: getAuthHealthIsPending, error: getAuthHealthError } = useQuery({
     queryKey: [GET_AUTH_HEALTH],
@@ -36,10 +40,14 @@ export const PrivateProvider: FC<PrivateProviderProps> = (props) => {
       return;
     }
     if (!(hasAuthParams() || auth.isAuthenticated || auth.activeNavigator || auth.isLoading || hasTriedSignin)) {
-      void auth.signinRedirect();
-      setHasTriedSignin(true);
+      if (toBoolean(import.meta.env.VITE_DEMO_BANNER_ENABLED)) {
+        navigate("/welcome");
+      } else {
+        void auth.signinRedirect();
+        setHasTriedSignin(true);
+      }
     }
-  }, [auth, hasTriedSignin, getAuthHealthIsPending, getAuthHealthError]);
+  }, [auth, hasTriedSignin, getAuthHealthIsPending, getAuthHealthError, navigate]);
 
   const anyLoading = getAuthHealthIsPending || auth.isLoading;
   const anyErrorMessage = getAuthHealthError?.message || auth.error?.message;
