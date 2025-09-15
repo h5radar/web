@@ -31,6 +31,9 @@
 /node_modules
 
 # vitest files
+/output
+
+# vitest files
 /tests/coverage/*
 /tests/results/*
 
