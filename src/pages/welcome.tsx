@@ -22,7 +22,7 @@ export default function WelcomePage() {
                     <CardTitle className="text-2xl">Welcome to H5Radar Demo</CardTitle>
                     <CardDescription className="mt-1 leading-relaxed">
                       You can explore the application with the demo account
-                      <b> alice@example</b> / <b>secret</b>.
+                      <b> alice@example.com</b> / <b>secret</b>.
                     </CardDescription>
                   </div>
                 </div>
