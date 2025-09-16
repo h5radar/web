@@ -14,7 +14,7 @@ export default function WelcomePage() {
       <div className="w-full flex flex-col flex-1">
         <div className="flex flex-col gap-6 flex-1">
           {toBoolean(import.meta.env.VITE_DEMO_BANNER_ENABLED) && (
-            <Card className="mx-auto max-w-5xl bg-neutral-900 border-neutral-800 text-left shadow-lg shadow-black/30 ring-1 ring-white/5">
+            <Card className="mx-auto max-w-5xl">
               <CardHeader className="pb-2">
                 <div className="flex items-start gap-3">
                   <Info className="h-5 w-5 mt-1 opacity-80" />
