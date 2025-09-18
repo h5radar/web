@@ -11,14 +11,15 @@ import {
   DELETE_LICENSE,
   GET_LICENSE,
   GET_LICENSES,
+  GET_LICENSE_BY_COMPLIANCE,
   SEED_LICENSES,
   UPDATE_LICENSE,
 } from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
-import { licenseSchema } from "@/schemas/license";
-import { responseSchema } from "@/schemas/response";
+import { licenseSchema, licenseSchemaStatistic } from "@/schemas/license";
+import { responseSchema, responseSchemaStatistic } from "@/schemas/response";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -118,6 +119,27 @@ export const useGetLicense = (auth: AuthContextProps, id: string) => {
     },
     meta: {
       errorMessage: "Error getting license",
+    },
+    retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
+  });
+};
+
+export const useGetLicenseByCompliance = (auth: AuthContextProps) => {
+  return useQuery({
+    queryKey: [GET_LICENSE_BY_COMPLIANCE],
+    queryFn: async () => {
+      const response = await fetch(`${RADAR_API_URL}/licenses/by-compliance`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      const data = await response.json();
+      return responseSchemaStatistic(licenseSchemaStatistic).parse(data).content;
+    },
+    meta: {
+      errorMessage: "Error getting license by compliance",
     },
     retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
   });

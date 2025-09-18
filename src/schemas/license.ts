@@ -17,3 +17,15 @@ export const licenseSchema = z.object({
     message: "Compliance is required",
   }),
 });
+
+export const licenseSchemaStatistic = z.object({
+  compliance_id: z.number(),
+  count: z.number(),
+  title: z.literal(["High", "Medium", "Low"]),
+});
+
+export const licenseSchemaChart = z.object({
+  fill: z.string(),
+  count: z.number(),
+  title: z.literal(["High", "Medium", "Low"]),
+});

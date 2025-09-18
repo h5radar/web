@@ -1,12 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
+import z from "zod";
 
 import { ChartConfig } from "@/ui/chart";
 
+import { licenseSchemaChart, licenseSchemaStatistic } from "@/schemas/license";
+
 import { useSeedCompliances } from "@/queries/compliance";
 import { useSeedDomains } from "@/queries/domain";
-import { useSeedLicenses } from "@/queries/license";
+import { useGetLicenseByCompliance, useSeedLicenses } from "@/queries/license";
 import { useSeedMaturities } from "@/queries/maturity";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
@@ -23,6 +26,7 @@ export default function HomePage() {
   const { mutate: seedMaturities, isPending: isPending4 } = useSeedMaturities(auth, queryClient);
   const { mutate: seedDomains, isPending: isPending5 } = useSeedDomains(auth, queryClient);
   const { mutate: seedTechnologies, isPending: isPending6 } = useSeedTechnologies(auth, queryClient);
+  const { data: chartData, isLoading: isLoading } = useGetLicenseByCompliance(auth);
 
   useEffect(() => {
     seedCompliances();
@@ -33,53 +37,48 @@ export default function HomePage() {
     seedTechnologies();
   }, [auth, seedCompliances, seedLicenses, seedPractices, seedMaturities, seedDomains, seedTechnologies]);
 
-  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6) {
+  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6 || isLoading) {
     return <h1>Loading...</h1>;
   }
-
-  const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-  ];
   // TODO - add constant statictic
   const chartConfig = {
-    visitors: {
-      label: "Visitors",
+    count: {
+      label: "Count",
     },
-    chrome: {
-      label: "Chrome",
+    High: {
+      label: "High",
       color: "var(--chart-1)",
     },
-    safari: {
-      label: "Safari",
+    Medium: {
+      label: "Medium",
       color: "var(--chart-2)",
     },
-    firefox: {
-      label: "Firefox",
+    Low: {
+      label: "Low",
       color: "var(--chart-3)",
-    },
-    edge: {
-      label: "Edge",
-      color: "var(--chart-4)",
-    },
-    other: {
-      label: "Other",
-      color: "var(--chart-5)",
     },
   } satisfies ChartConfig;
 
+  const extendedChartData: z.infer<typeof licenseSchemaChart>[] = (chartData ?? [])
+    // .filter((item: z.infer<typeof licenseSchemaStatistic>) => chartConfig[item.title]) // TODO to discus
+    .map((item: z.infer<typeof licenseSchemaStatistic>) => ({
+      title: item.title,
+      count: item.count,
+      fill: `var(--color-${item.title})`, //`var(--chart-${key + 1})`,
+    }));
+
+  if (!chartData || chartData.length === 0) {
+    return <h1>No data available</h1>;
+  }
   return (
     <>
       <h1 className="text-3xl font-bold underline mb-2">Home</h1>
       <ChartPie
-        chartData={chartData}
+        chartData={extendedChartData}
         chartConfig={chartConfig}
         header="Licenses"
-        dataKey="visitors"
-        nameKey="browser"
+        dataKey="count"
+        nameKey="title"
         stroke="0"
       />
     </>

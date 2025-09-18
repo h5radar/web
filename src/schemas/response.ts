@@ -29,3 +29,10 @@ export const responseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
     totalElements: z.number(),
     totalPages: z.number(),
   });
+
+export const responseSchemaStatistic = <T extends z.ZodTypeAny>(itemSchema: T) =>
+  z.object({
+    content: z.array(itemSchema),
+    sort: sortSchema,
+    total: z.number(),
+  });

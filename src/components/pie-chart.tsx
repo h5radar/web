@@ -30,7 +30,7 @@ export function ChartPie<T>({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square min-h-[5vh] max-h-[70vh]  w-full">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square min-h-[5vh] max-h-[75vh] w-full">
           <PieChart>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Pie data={chartData} dataKey={dataKey} nameKey={nameKey} stroke={stroke} />
