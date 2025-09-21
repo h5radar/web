@@ -1,3 +1,4 @@
+import { IconLoader } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
@@ -34,7 +35,7 @@ export default function HomePage() {
     seedTechnologies();
   }, [auth, seedCompliances, seedLicenses, seedPractices, seedMaturities, seedDomains, seedTechnologies]);
 
-  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6 || isLoading) {
+  if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6) {
     return <h1>Loading...</h1>;
   }
 
@@ -43,7 +44,9 @@ export default function HomePage() {
   return (
     <>
       <h1 className="text-3xl font-bold underline mb-2">Home</h1>
-      {licensesData && chartData && chartConfig ? (
+      {isLoading ? (
+        <IconLoader className="animate-spin" />
+      ) : licensesData && chartData && chartConfig ? (
         <ChartPie
           chartData={chartData}
           chartConfig={chartConfig}
