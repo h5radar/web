@@ -23,9 +23,3 @@ export const licenseSchemaStatistic = z.object({
   count: z.number(),
   title: z.literal(["High", "Medium", "Low"]),
 });
-
-export const licenseSchemaChart = z.object({
-  fill: z.string(),
-  count: z.number(),
-  title: z.literal(["High", "Medium", "Low"]),
-});

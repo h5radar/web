@@ -1,11 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
-import z from "zod";
 
-import { ChartConfig } from "@/ui/chart";
-
-import { licenseSchemaChart, licenseSchemaStatistic } from "@/schemas/license";
+import { createChartProps } from "@/lib/create-chart-props";
 
 import { useSeedCompliances } from "@/queries/compliance";
 import { useSeedDomains } from "@/queries/domain";
@@ -26,7 +23,7 @@ export default function HomePage() {
   const { mutate: seedMaturities, isPending: isPending4 } = useSeedMaturities(auth, queryClient);
   const { mutate: seedDomains, isPending: isPending5 } = useSeedDomains(auth, queryClient);
   const { mutate: seedTechnologies, isPending: isPending6 } = useSeedTechnologies(auth, queryClient);
-  const { data: chartData, isLoading: isLoading } = useGetLicenseByCompliance(auth);
+  const { data: licensesData, isLoading: isLoading } = useGetLicenseByCompliance(auth);
 
   useEffect(() => {
     seedCompliances();
@@ -40,47 +37,24 @@ export default function HomePage() {
   if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6 || isLoading) {
     return <h1>Loading...</h1>;
   }
-  // TODO - add constant statictic
-  const chartConfig = {
-    count: {
-      label: "Count",
-    },
-    High: {
-      label: "High",
-      color: "var(--chart-1)",
-    },
-    Medium: {
-      label: "Medium",
-      color: "var(--chart-2)",
-    },
-    Low: {
-      label: "Low",
-      color: "var(--chart-3)",
-    },
-  } satisfies ChartConfig;
 
-  const extendedChartData: z.infer<typeof licenseSchemaChart>[] = (chartData ?? [])
-    // .filter((item: z.infer<typeof licenseSchemaStatistic>) => chartConfig[item.title]) // TODO to discus
-    .map((item: z.infer<typeof licenseSchemaStatistic>) => ({
-      title: item.title,
-      count: item.count,
-      fill: `var(--color-${item.title})`, //`var(--chart-${key + 1})`,
-    }));
+  const { chartData, chartConfig } = createChartProps(licensesData ?? []);
 
-  if (!chartData || chartData.length === 0) {
-    return <h1>No data available</h1>;
-  }
   return (
     <>
       <h1 className="text-3xl font-bold underline mb-2">Home</h1>
-      <ChartPie
-        chartData={extendedChartData}
-        chartConfig={chartConfig}
-        header="Licenses"
-        dataKey="count"
-        nameKey="title"
-        stroke="0"
-      />
+      {licensesData && chartData && chartConfig ? (
+        <ChartPie
+          chartData={chartData}
+          chartConfig={chartConfig}
+          dataKey="count"
+          nameKey="title"
+          header="Licenses"
+          stroke="0"
+        />
+      ) : (
+        <h3>No data available</h3>
+      )}
     </>
   );
 }
