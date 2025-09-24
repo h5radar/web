@@ -17,7 +17,7 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
-import { responseSchema } from "@/schemas/response";
+import { pageSchema } from "@/schemas/page";
 import { technologySchema } from "@/schemas/technology";
 
 import { createQueryParams } from "@/lib/query-params";
@@ -134,7 +134,7 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
         },
       });
       const data = await response.json();
-      return responseSchema(technologySchema).parse(data);
+      return pageSchema(technologySchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting technologies",

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const sortSchema = z.object({
+export const sortSchema = z.object({
   empty: z.boolean(),
   sorted: z.boolean(),
   unsorted: z.boolean(),
@@ -15,7 +15,7 @@ const pageableSchema = z.object({
   unpaged: z.boolean().optional(),
 });
 
-export const responseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
+export const pageSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
   z.object({
     content: z.array(itemSchema),
     empty: z.boolean(),
@@ -28,11 +28,4 @@ export const responseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
     sort: sortSchema,
     totalElements: z.number(),
     totalPages: z.number(),
-  });
-
-export const responseSchemaStatistic = <T extends z.ZodTypeAny>(itemSchema: T) =>
-  z.object({
-    content: z.array(itemSchema),
-    sort: sortSchema,
-    total: z.number(),
   });

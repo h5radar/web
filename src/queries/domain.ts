@@ -18,7 +18,7 @@ import {
 import { QueryParams } from "@/types/query-params";
 
 import { domainSchema } from "@/schemas/domain";
-import { responseSchema } from "@/schemas/response";
+import { pageSchema } from "@/schemas/page";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -137,7 +137,7 @@ export const useGetDomains = (auth: AuthContextProps, queryParams: QueryParams) 
         },
       });
       const data = await response.json();
-      return responseSchema(domainSchema).parse(data);
+      return pageSchema(domainSchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting domains",

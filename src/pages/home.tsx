@@ -3,8 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { createChartProps } from "@/lib/create-chart-props";
-
 import { useSeedCompliances } from "@/queries/compliance";
 import { useSeedDomains } from "@/queries/domain";
 import { useGetLicenseByCompliance, useSeedLicenses } from "@/queries/license";
@@ -12,7 +10,7 @@ import { useSeedMaturities } from "@/queries/maturity";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
 
-import { ChartPie } from "@/components/pie-chart";
+import { ChartPie, createChartProps } from "@/components/pie-chart";
 
 export default function HomePage() {
   const auth = useAuth();

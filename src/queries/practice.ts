@@ -17,8 +17,8 @@ import {
 
 import { QueryParams } from "@/types/query-params";
 
+import { pageSchema } from "@/schemas/page";
 import { practiceSchema } from "@/schemas/practice";
-import { responseSchema } from "@/schemas/response";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -135,7 +135,7 @@ export const useGetPractices = (auth: AuthContextProps, queryParams: QueryParams
         },
       });
       const data = await response.json();
-      return responseSchema(practiceSchema).parse(data);
+      return pageSchema(practiceSchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting practices",

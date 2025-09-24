@@ -1,7 +1,10 @@
 import { Pie, PieChart } from "recharts";
+import z from "zod";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/ui/chart";
+
+import { chartSchema } from "@/schemas/chart";
 
 interface ChartPieProps<T> {
   chartData: T[];
@@ -13,6 +16,33 @@ interface ChartPieProps<T> {
   nameKey?: string;
   stroke: string;
 }
+interface dataStatistic {
+  count: number;
+  title: string;
+}
+export const createChartProps = <T extends dataStatistic>(
+  data: T[],
+  key: string = "Count",
+): { chartConfig: ChartConfig; chartData: z.infer<typeof chartSchema>[] } => {
+  const chartItem = data.reduce<Record<string, { label: string; color: string }>>((acc, item, index) => {
+    acc[item.title] = {
+      label: item.title,
+      color: `var(--chart-${index + 1})`,
+    };
+    return acc;
+  }, {});
+  const chartConfig: ChartConfig = {
+    [key]: { label: key },
+    ...chartItem,
+  };
+
+  const chartData: z.infer<typeof chartSchema>[] = data.map((item) => ({
+    title: item.title,
+    count: item.count,
+    fill: `var(--color-${item.title})`,
+  }));
+  return { chartConfig, chartData };
+};
 export function ChartPie<T>({
   chartData,
   chartConfig,
