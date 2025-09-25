@@ -10,7 +10,7 @@ import { useSeedMaturities } from "@/queries/maturity";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
 
-import { ChartPie, createChartProps } from "@/components/pie-chart";
+import { ChartPie } from "@/components/pie-chart";
 
 export default function HomePage() {
   const auth = useAuth();
@@ -37,22 +37,14 @@ export default function HomePage() {
     return <h1>Loading...</h1>;
   }
 
-  const { chartData, chartConfig } = createChartProps(licensesData ?? []);
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline mb-2">Home</h1>
       {isLoading ? (
-        <IconLoader className="animate-spin" />
-      ) : licensesData && chartData && chartConfig ? (
-        <ChartPie
-          chartData={chartData}
-          chartConfig={chartConfig}
-          dataKey="count"
-          nameKey="title"
-          header="Licenses"
-          stroke="0"
-        />
+        <div className="flex justify-center items-center h-[80vh] w-full">
+          <IconLoader data-testid="loading-icon" className="animate-spin" />
+        </div>
+      ) : licensesData ? (
+        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
       ) : (
         <h3>No data available</h3>
       )}

@@ -6,21 +6,21 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 
 import { chartSchema } from "@/schemas/chart";
 
-interface ChartPieProps<T> {
-  chartData: T[];
-  chartConfig: ChartConfig;
+interface ChartPieProps<T extends dataStatistic> {
+  data: T[];
   header?: string;
   description?: string;
   footer?: string;
   dataKey: string;
-  nameKey?: string;
+  nameKey: string;
   stroke: string;
 }
 interface dataStatistic {
   count: number;
   title: string;
 }
-export const createChartProps = <T extends dataStatistic>(
+
+const createChartProps = <T extends dataStatistic>(
   data: T[],
   key: string = "Count",
 ): { chartConfig: ChartConfig; chartData: z.infer<typeof chartSchema>[] } => {
@@ -43,9 +43,9 @@ export const createChartProps = <T extends dataStatistic>(
   }));
   return { chartConfig, chartData };
 };
-export function ChartPie<T>({
-  chartData,
-  chartConfig,
+
+export function ChartPie<T extends dataStatistic>({
+  data,
   header = "PieChart",
   description = "Data view as a pie chart",
   footer,
@@ -53,6 +53,7 @@ export function ChartPie<T>({
   nameKey,
   stroke,
 }: ChartPieProps<T>) {
+  const { chartData, chartConfig } = createChartProps(data);
   return (
     <Card className="flex flex-col gap-1">
       <CardHeader className="items-center pb-0">
