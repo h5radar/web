@@ -47,7 +47,7 @@ const createChartProps = <T extends dataStatistic>(
 export function ChartPie<T extends dataStatistic>({
   data,
   header = "PieChart",
-  description = "Data view as a pie chart",
+  description = "Licences grouped by compliance",
   footer,
   dataKey,
   nameKey,
