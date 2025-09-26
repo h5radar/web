@@ -1,10 +1,6 @@
 import { z } from "zod";
 
-export const sortSchema = z.object({
-  empty: z.boolean(),
-  sorted: z.boolean(),
-  unsorted: z.boolean(),
-});
+import { sortSchema } from "@/schemas/sort";
 
 const pageableSchema = z.object({
   pageNumber: z.number(),
