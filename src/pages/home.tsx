@@ -38,9 +38,9 @@ export default function HomePage() {
   }
 
   return (
-    <>
+    <div className="grid grid-cols-2 gap-2">
       {isLoading ? (
-        <div className="flex justify-center items-center h-[80vh] w-full">
+        <div className="flex justify-center items-center min-h-[20vh] w-full">
           <IconLoader data-testid="loading-icon" className="animate-spin" />
         </div>
       ) : licensesData ? (
@@ -48,6 +48,33 @@ export default function HomePage() {
       ) : (
         <h3>No data available</h3>
       )}
-    </>
+      {isLoading ? (
+        <div className="flex justify-center items-center min-h-[20vh] w-full">
+          <IconLoader data-testid="loading-icon" className="animate-spin" />
+        </div>
+      ) : licensesData ? (
+        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
+      ) : (
+        <h3>No data available</h3>
+      )}
+      {isLoading ? (
+        <div className="flex justify-center items-center min-h-[20vh] w-full">
+          <IconLoader data-testid="loading-icon" className="animate-spin" />
+        </div>
+      ) : licensesData ? (
+        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
+      ) : (
+        <h3>No data available</h3>
+      )}
+      {isLoading ? (
+        <div className="flex justify-center items-center min-h-[20vh] w-full">
+          <IconLoader data-testid="loading-icon" className="animate-spin" />
+        </div>
+      ) : licensesData ? (
+        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
+      ) : (
+        <h3>No data available</h3>
+      )}
+    </div>
   );
 }
