@@ -1,4 +1,4 @@
-import { LabelList, Pie, PieChart } from "recharts";
+import { LabelList, Pie, PieChart, ResponsiveContainer } from "recharts";
 import z from "zod";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/ui/card";
@@ -13,6 +13,8 @@ import {
 
 import { chartSchema } from "@/schemas/chart";
 
+import { cn } from "@/lib/utils";
+
 interface ChartPieProps<T extends dataStatistic> {
   data: T[];
   header?: string;
@@ -21,6 +23,7 @@ interface ChartPieProps<T extends dataStatistic> {
   dataKey: string;
   nameKey: string;
   stroke: string;
+  variant?: "single" | "quad";
 }
 interface dataStatistic {
   count: number;
@@ -59,6 +62,7 @@ export function ChartPie<T extends dataStatistic>({
   dataKey,
   nameKey,
   stroke,
+  variant = "quad",
 }: ChartPieProps<T>) {
   const { chartData, chartConfig } = createChartProps(data);
   return (
@@ -68,55 +72,64 @@ export function ChartPie<T extends dataStatistic>({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square min-h-[5vh] max-h-[75vh] ">
-          <PieChart>
-            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Pie
-              data={chartData}
-              dataKey={dataKey}
-              nameKey={nameKey}
-              stroke={stroke}
-              labelLine={false}
-              label={({
-                payload,
-                ...props
-              }: {
-                payload: { count: number };
-                cx: number;
-                cy: number;
-                x: number;
-                y: number;
-                textAnchor: string;
-                dominantBaseline: string;
-              }) => {
-                return (
-                  <text
-                    cx={props.cx}
-                    cy={props.cy}
-                    x={props.x}
-                    y={props.y}
-                    textAnchor={props.textAnchor}
-                    dominantBaseline={props.dominantBaseline}
-                    fill="var(--foreground)"
-                  >
-                    {payload.count}
-                  </text>
-                );
-              }}
-            >
-              <LabelList
-                dataKey={nameKey}
-                className="fill-background"
-                stroke="none"
-                fontSize={12}
-                formatter={(value: keyof typeof chartConfig) => chartConfig[value]?.label}
+        <ChartContainer
+          config={chartConfig}
+          className={cn(
+            "mx-auto w-full",
+            variant === "single" && "aspect-square max-h-[75vh]",
+            variant === "quad" && "aspect-[4/3] max-h-[35vh]",
+          )}
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+              <Pie
+                data={chartData}
+                dataKey={dataKey}
+                nameKey={nameKey}
+                stroke={stroke}
+                labelLine={false}
+                label={({
+                  payload,
+                  ...props
+                }: {
+                  payload: { count: number };
+                  cx: number;
+                  cy: number;
+                  x: number;
+                  y: number;
+                  textAnchor: string;
+                  dominantBaseline: string;
+                }) => {
+                  return (
+                    <text
+                      cx={props.cx}
+                      cy={props.cy}
+                      x={props.x}
+                      y={props.y}
+                      textAnchor={props.textAnchor}
+                      dominantBaseline={props.dominantBaseline}
+                      fill="var(--foreground)"
+                    >
+                      {payload.count}
+                    </text>
+                  );
+                }}
+              >
+                <LabelList
+                  dataKey={nameKey}
+                  className="fill-background"
+                  stroke="none"
+                  fontSize={12}
+                  formatter={(value: keyof typeof chartConfig) => chartConfig[value]?.label}
+                />
+              </Pie>
+              <ChartLegend
+                content={<ChartLegendContent nameKey={nameKey} />}
+                className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
               />
-            </Pie>
-            <ChartLegend
-              content={<ChartLegendContent nameKey={nameKey} />}
-              className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
-            />
-          </PieChart>
+            </PieChart>
+          </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
       {footer ? (

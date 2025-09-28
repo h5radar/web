@@ -38,7 +38,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       {isLoading ? (
         <div className="flex justify-center items-center min-h-[20vh] w-full">
           <IconLoader data-testid="loading-icon" className="animate-spin" />
