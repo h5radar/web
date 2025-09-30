@@ -13,6 +13,6 @@ describe("HomePage", () => {
         <HomePage />
       </QueryClientProvider>,
     );
-    expect(screen.getByTestId("loading-icon")).toBeDefined();
+    expect(screen.getByTestId("loading-byCompliance")).toBeDefined();
   });
 });

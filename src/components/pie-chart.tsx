@@ -89,27 +89,21 @@ export function ChartPie<T extends dataStatistic>({
                 nameKey={nameKey}
                 stroke={stroke}
                 labelLine={false}
-                label={({
-                  payload,
-                  ...props
-                }: {
-                  payload: { count: number };
-                  cx: number;
-                  cy: number;
-                  x: number;
-                  y: number;
-                  textAnchor: string;
-                  dominantBaseline: string;
-                }) => {
+                label={({ payload, cx, cy, midAngle, innerRadius, outerRadius }) => {
+                  const RADIAN = Math.PI / 180;
+                  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
                   return (
                     <text
-                      cx={props.cx}
-                      cy={props.cy}
-                      x={props.x}
-                      y={props.y}
-                      textAnchor={props.textAnchor}
-                      dominantBaseline={props.dominantBaseline}
-                      fill="var(--foreground)"
+                      x={x}
+                      y={y}
+                      dy={"1.1rem"}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fontSize={14}
+                      fill="var(--background)"
                     >
                       {payload.count}
                     </text>

@@ -36,39 +36,11 @@ export default function HomePage() {
   if (isPending1 || isPending2 || isPending3 || isPending4 || isPending5 || isPending6) {
     return <h1>Loading...</h1>;
   }
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       {isLoading ? (
         <div className="flex justify-center items-center min-h-[20vh] w-full">
-          <IconLoader data-testid="loading-icon" className="animate-spin" />
-        </div>
-      ) : licensesData ? (
-        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
-      ) : (
-        <h3>No data available</h3>
-      )}
-      {isLoading ? (
-        <div className="flex justify-center items-center min-h-[20vh] w-full">
-          <IconLoader data-testid="loading-icon" className="animate-spin" />
-        </div>
-      ) : licensesData ? (
-        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
-      ) : (
-        <h3>No data available</h3>
-      )}
-      {isLoading ? (
-        <div className="flex justify-center items-center min-h-[20vh] w-full">
-          <IconLoader data-testid="loading-icon" className="animate-spin" />
-        </div>
-      ) : licensesData ? (
-        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
-      ) : (
-        <h3>No data available</h3>
-      )}
-      {isLoading ? (
-        <div className="flex justify-center items-center min-h-[20vh] w-full">
-          <IconLoader data-testid="loading-icon" className="animate-spin" />
+          <IconLoader data-testid="loading-byCompliance" className="animate-spin" />
         </div>
       ) : licensesData ? (
         <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
