@@ -43,7 +43,14 @@ export default function HomePage() {
           <IconLoader data-testid="loading-byCompliance" className="animate-spin" />
         </div>
       ) : licensesData ? (
-        <ChartPie data={licensesData} dataKey="count" nameKey="title" header="Licenses" stroke="0" />
+        <ChartPie
+          data={licensesData}
+          description="Licences grouped by compliance"
+          dataKey="count"
+          nameKey="title"
+          header="Licenses"
+          stroke="0"
+        />
       ) : (
         <h3>No data available</h3>
       )}
