@@ -56,7 +56,7 @@ describe("HomePage", () => {
     );
 
     expect(screen.getByText("Licenses")).toBeDefined();
-    expect(screen.getByText("Licences grouped by compliance")).toBeDefined();
+    expect(screen.getByText("Licenses grouped by compliance")).toBeDefined();
   });
 
   it("renders no data message", () => {
