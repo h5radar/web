@@ -12,7 +12,6 @@ import {
   DELETE_MATURITY,
   GET_MATURITIES,
   GET_MATURITY,
-  SEED_MATURITIES,
   UPDATE_MATURITY,
 } from "@/constants/query-keys";
 
@@ -143,29 +142,5 @@ export const useGetMaturities = (auth: AuthContextProps, queryParams: QueryParam
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
-  });
-};
-
-export const useSeedMaturities = (auth: AuthContextProps, queryClient: QueryClient) => {
-  return useMutation({
-    mutationFn: async () => {
-      await fetch(`${RADAR_API_URL}/maturities/seed`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: [SEED_MATURITIES],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: [GET_MATURITIES] });
-      toast.success("Maturity has been seeded successfully");
-    },
-    onError(error) {
-      toast.error("Error seeding maturities", {
-        description: error.message,
-      });
-    },
   });
 };
