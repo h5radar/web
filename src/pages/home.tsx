@@ -45,7 +45,7 @@ export default function HomePage() {
       ) : licensesData ? (
         <ChartPie
           data={licensesData}
-          description="Licences grouped by compliance"
+          description="Licenses grouped by compliance"
           dataKey="count"
           nameKey="title"
           header="Licenses"
