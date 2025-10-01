@@ -1,4 +1,4 @@
-import { LabelList, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { LabelList, Pie, PieChart } from "recharts";
 import z from "zod";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/ui/card";
@@ -35,8 +35,8 @@ const createChartProps = <T extends dataStatistic>(
   key: string = "Count",
 ): { chartConfig: ChartConfig; chartData: z.infer<typeof chartSchema>[] } => {
   const chartItem = data.reduce<Record<string, { label: string; color: string }>>((acc, item, index) => {
-    acc[item.title] = {
-      label: item.title,
+    acc[item.title.replace(/\s+/g, "_")] = {
+      label: item.title.replace(/\s+/g, "_"),
       color: `var(--chart-${index + 1})`,
     };
     return acc;
@@ -47,10 +47,11 @@ const createChartProps = <T extends dataStatistic>(
   };
 
   const chartData: z.infer<typeof chartSchema>[] = data.map((item) => ({
-    title: item.title,
+    title: item.title.replace(/\s+/g, "_"),
     count: item.count,
-    fill: `var(--color-${item.title})`,
+    fill: `var(--color-${item.title.replace(/\s+/g, "_")})`,
   }));
+  console.log({ chartConfig, chartData });
   return { chartConfig, chartData };
 };
 
@@ -64,7 +65,7 @@ export function ChartPie<T extends dataStatistic>({
   stroke,
   variant = "quad",
 }: ChartPieProps<T>) {
-  const { chartData, chartConfig } = createChartProps(data);
+  const { chartConfig, chartData } = createChartProps(data);
   return (
     <Card className="flex flex-col gap-1">
       <CardHeader className="items-center pb-0">
@@ -80,50 +81,54 @@ export function ChartPie<T extends dataStatistic>({
             variant === "quad" && "aspect-[4/3] max-h-[35vh]",
           )}
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-              <Pie
-                data={chartData}
-                dataKey={dataKey}
-                nameKey={nameKey}
-                stroke={stroke}
-                labelLine={false}
-                label={({ payload, cx, cy, midAngle, innerRadius, outerRadius }) => {
-                  const RADIAN = Math.PI / 180;
-                  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-                  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+          <PieChart>
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <Pie
+              data={chartData}
+              dataKey={dataKey}
+              nameKey={nameKey}
+              stroke={stroke}
+              labelLine={false}
+              label={({ payload, cx, cy, midAngle, innerRadius, outerRadius }) => {
+                const RADIAN = Math.PI / 180;
+                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-                  return (
-                    <text
-                      x={x}
-                      y={y}
-                      dy={"1.1rem"}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fontSize={14}
-                      fill="var(--background)"
-                    >
-                      {payload.count}
-                    </text>
-                  );
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    dy={"1rem"}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize={14}
+                    fill="var(--background)"
+                  >
+                    {payload.count}
+                  </text>
+                );
+              }}
+            >
+              <LabelList
+                dataKey={nameKey}
+                className="fill-background"
+                stroke="none"
+                fontSize={12}
+                formatter={(value: keyof typeof chartConfig) => {
+                  const label = chartConfig[value]?.label;
+                  if (typeof label === "string") {
+                    return label.replace(/_/g, " ");
+                  }
+                  return label;
                 }}
-              >
-                <LabelList
-                  dataKey={nameKey}
-                  className="fill-background"
-                  stroke="none"
-                  fontSize={12}
-                  formatter={(value: keyof typeof chartConfig) => chartConfig[value]?.label}
-                />
-              </Pie>
-              <ChartLegend
-                content={<ChartLegendContent nameKey={nameKey} />}
-                className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
               />
-            </PieChart>
-          </ResponsiveContainer>
+            </Pie>
+            <ChartLegend
+              content={<ChartLegendContent nameKey={nameKey} />}
+              className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
+            />
+          </PieChart>
         </ChartContainer>
       </CardContent>
       {footer ? (
