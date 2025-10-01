@@ -11,7 +11,6 @@ import {
   DELETE_TECHNOLOGY,
   GET_TECHNOLOGIES,
   GET_TECHNOLOGY,
-  SEED_TECHNOLOGIES,
   UPDATE_TECHNOLOGY,
 } from "@/constants/query-keys";
 
@@ -141,29 +140,5 @@ export const useGetTechnologies = (auth: AuthContextProps, queryParams: QueryPar
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
-  });
-};
-
-export const useSeedTechnologies = (auth: AuthContextProps, queryClient: QueryClient) => {
-  return useMutation({
-    mutationFn: async () => {
-      await fetch(`${RADAR_API_URL}/technologies/seed`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: [SEED_TECHNOLOGIES],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: [GET_TECHNOLOGIES] });
-      toast.success("Technologies has been seeded successfully");
-    },
-    onError(error) {
-      toast.error("Error seeding technologies", {
-        description: error.message,
-      });
-    },
   });
 };

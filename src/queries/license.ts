@@ -6,14 +6,7 @@ import { toast } from "sonner";
 import { ZodError, z } from "zod";
 
 import { QUERY_RETRY_COUNT, RADAR_API_URL } from "@/constants/application";
-import {
-  CREATE_LICENSE,
-  DELETE_LICENSE,
-  GET_LICENSE,
-  GET_LICENSES,
-  SEED_LICENSES,
-  UPDATE_LICENSE,
-} from "@/constants/query-keys";
+import { CREATE_LICENSE, DELETE_LICENSE, GET_LICENSE, GET_LICENSES, UPDATE_LICENSE } from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
@@ -142,29 +135,5 @@ export const useGetLicenses = (auth: AuthContextProps, queryParams: QueryParams)
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
-  });
-};
-
-export const useSeedLicenses = (auth: AuthContextProps, queryClient: QueryClient) => {
-  return useMutation({
-    mutationFn: async () => {
-      await fetch(`${RADAR_API_URL}/licenses/seed`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-    },
-    mutationKey: [SEED_LICENSES],
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: [GET_LICENSES] });
-      toast.success("Licenses has been seeded successfully");
-    },
-    onError(error) {
-      toast.error("Error seeding licenses", {
-        description: error.message,
-      });
-    },
   });
 };
