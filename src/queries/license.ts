@@ -19,7 +19,7 @@ import {
 import { QueryParams } from "@/types/query-params";
 
 import { aggregateSchema } from "@/schemas/aggregate";
-import { licenseSchema, licenseByComplianceSchema } from "@/schemas/license";
+import { licenseByComplianceSchema, licenseSchema } from "@/schemas/license";
 import { pageSchema } from "@/schemas/page";
 
 import { createQueryParams } from "@/lib/query-params";
