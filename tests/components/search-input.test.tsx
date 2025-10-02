@@ -12,7 +12,7 @@ import { SearchProvider } from "@/providers/search";
 import { SearchInput } from "@/components/search-input";
 
 describe("SearchInput", () => {
-  it("get search input for empty nav items", () => {
+  it("render search input for empty nav items", () => {
     render(
       <BrowserRouter>
         <SearchProvider navItemList={[]}>
@@ -20,10 +20,11 @@ describe("SearchInput", () => {
         </SearchProvider>
       </BrowserRouter>,
     );
+
     expect(screen.getByText("Search")).toBeDefined();
   });
 
-  it("get search input for account nav items", () => {
+  it("render search input for account nav items", () => {
     render(
       <BrowserRouter>
         <SearchProvider navItemList={accountSearchItem}>
@@ -31,10 +32,11 @@ describe("SearchInput", () => {
         </SearchProvider>
       </BrowserRouter>,
     );
+
     expect(screen.getByText("Search")).toBeDefined();
   });
 
-  it("get search input for billing nav items", () => {
+  it("render search input for billing nav items", () => {
     render(
       <BrowserRouter>
         <SearchProvider navItemList={billingSearchItem}>
@@ -42,10 +44,11 @@ describe("SearchInput", () => {
         </SearchProvider>
       </BrowserRouter>,
     );
+
     expect(screen.getByText("Search")).toBeDefined();
   });
 
-  it("get search input for billing nav items", () => {
+  it("render search input for billing nav items", () => {
     render(
       <BrowserRouter>
         <SearchProvider navItemList={notificationSearchItem}>
@@ -53,10 +56,11 @@ describe("SearchInput", () => {
         </SearchProvider>
       </BrowserRouter>,
     );
+
     expect(screen.getByText("Search")).toBeDefined();
   });
 
-  it("get search input for billing nav items", () => {
+  it("render search input for billing nav items", () => {
     render(
       <BrowserRouter>
         <SearchProvider navItemList={radarSearchItem}>
@@ -64,6 +68,7 @@ describe("SearchInput", () => {
         </SearchProvider>
       </BrowserRouter>,
     );
+
     expect(screen.getByText("Search")).toBeDefined();
   });
 });

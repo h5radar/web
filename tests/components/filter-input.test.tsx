@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { FilterInput } from "@/components/filter-input";
 
 describe("FilterInput", () => {
-  it("get filter input", () => {
+  it("render filter input", () => {
     render(
       <FilterInput
         handleFilter={(value: string) => {
@@ -12,6 +12,7 @@ describe("FilterInput", () => {
         }}
       />,
     );
+
     expect(screen.getByPlaceholderText("Filter, for example: Text%...")).toBeDefined();
   });
 });

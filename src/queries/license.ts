@@ -19,7 +19,7 @@ import {
 import { QueryParams } from "@/types/query-params";
 
 import { aggregateSchema } from "@/schemas/aggregate";
-import { licenseSchema, licenseSchemaStatistic } from "@/schemas/license";
+import { licenseSchema, licenseByComplianceSchema } from "@/schemas/license";
 import { pageSchema } from "@/schemas/page";
 
 import { createQueryParams } from "@/lib/query-params";
@@ -137,7 +137,7 @@ export const useGetLicenseByCompliance = (auth: AuthContextProps) => {
         },
       });
       const data = await response.json();
-      return aggregateSchema(licenseSchemaStatistic).parse(data).content;
+      return aggregateSchema(licenseByComplianceSchema).parse(data).content;
     },
     meta: {
       errorMessage: "Error getting license by compliance",

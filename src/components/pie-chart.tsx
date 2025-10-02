@@ -15,7 +15,7 @@ import { chartSchema } from "@/schemas/chart";
 
 import { cn } from "@/lib/utils";
 
-interface ChartPieProps<T extends dataStatistic> {
+interface PieChartProps<T extends dataStatistic> {
   data: T[];
   header?: string;
   description?: string;
@@ -25,12 +25,13 @@ interface ChartPieProps<T extends dataStatistic> {
   stroke: string;
   variant?: "single" | "quad";
 }
+
 interface dataStatistic {
   count: number;
   title: string;
 }
 
-const createChartProps = <T extends dataStatistic>(
+const createPieChartProps = <T extends dataStatistic>(
   data: T[],
   key: string = "Count",
 ): { chartConfig: ChartConfig; chartData: z.infer<typeof chartSchema>[] } => {
@@ -51,11 +52,10 @@ const createChartProps = <T extends dataStatistic>(
     count: item.count,
     fill: `var(--color-${item.title.replace(/\s+/g, "_")})`,
   }));
-  console.log({ chartConfig, chartData });
   return { chartConfig, chartData };
 };
 
-export function ChartPie<T extends dataStatistic>({
+export function PieChart1<T extends dataStatistic>({
   data,
   header = "PieChart",
   description = "pie chart data",
@@ -64,8 +64,8 @@ export function ChartPie<T extends dataStatistic>({
   nameKey,
   stroke,
   variant = "quad",
-}: ChartPieProps<T>) {
-  const { chartConfig, chartData } = createChartProps(data);
+}: PieChartProps<T>) {
+  const { chartConfig, chartData } = createPieChartProps(data);
   return (
     <Card className="flex flex-col gap-1">
       <CardHeader className="items-center pb-0">

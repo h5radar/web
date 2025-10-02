@@ -40,7 +40,6 @@ export const useCreateDomain = (auth: AuthContextProps, queryClient: QueryClient
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [GET_DOMAINS] });
       toast.success("Domain has been created successfully");
-      console.log(1);
 
       navigate("/domains");
     },

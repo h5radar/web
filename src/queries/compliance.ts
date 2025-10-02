@@ -40,7 +40,6 @@ export const useCreateCompliance = (auth: AuthContextProps, queryClient: QueryCl
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [GET_COMPLIANCES] });
       toast.success("Compliance has been created successfully");
-      console.log(1);
 
       navigate("/compliances");
     },

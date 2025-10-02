@@ -22,7 +22,7 @@ describe("HomePage", () => {
     vi.clearAllMocks();
   });
 
-  it("renders loader when licensesData is loading", () => {
+  it("get home page while licenses data is loading", () => {
     (useGetLicenseByCompliance as Mock).mockReturnValue({
       data: null,
       isLoading: true,
@@ -37,7 +37,7 @@ describe("HomePage", () => {
     expect(screen.getByTestId("loading-byCompliance")).toBeDefined();
   });
 
-  it("renders ChartPie when licensesData exists", () => {
+  it("get home page when licenses data exists", () => {
     (useGetLicenseByCompliance as Mock).mockReturnValue({
       data: [
         {
@@ -59,7 +59,7 @@ describe("HomePage", () => {
     expect(screen.getByText("Licenses grouped by compliance")).toBeDefined();
   });
 
-  it("renders no data message", () => {
+  it("get home page when no data message", () => {
     (useGetLicenseByCompliance as Mock).mockReturnValue({
       data: null,
       isLoading: false,

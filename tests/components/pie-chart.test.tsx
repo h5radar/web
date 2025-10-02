@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
 
-import { ChartPie } from "@/components/pie-chart";
+import { PieChart1 } from "@/components/pie-chart";
 
-describe("ChartPie", () => {
+describe("PieChart", () => {
   const mockData = [
     {
       compliance_id: 1,
@@ -23,9 +23,10 @@ describe("ChartPie", () => {
       count: 3,
     },
   ];
+
   it("renders header and description", () => {
     render(
-      <ChartPie
+      <PieChart1
         data={mockData}
         dataKey="count"
         nameKey="title"
@@ -34,6 +35,7 @@ describe("ChartPie", () => {
         description="Licenses grouped by compliance"
       />,
     );
+
     expect(screen.getByText("Licenses")).toBeDefined();
     expect(screen.getByText("Licenses grouped by compliance")).toBeDefined();
   });

@@ -18,8 +18,8 @@ export const licenseSchema = z.object({
   }),
 });
 
-export const licenseSchemaStatistic = z.object({
+export const licenseByComplianceSchema = z.object({
   compliance_id: z.number(),
-  count: z.number(),
   title: z.literal(["High", "Medium", "Low"]),
+  count: z.number(),
 });
