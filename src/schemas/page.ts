@@ -1,10 +1,6 @@
 import { z } from "zod";
 
-const sortSchema = z.object({
-  empty: z.boolean(),
-  sorted: z.boolean(),
-  unsorted: z.boolean(),
-});
+import { sortSchema } from "@/schemas/sort";
 
 const pageableSchema = z.object({
   pageNumber: z.number(),
@@ -15,7 +11,7 @@ const pageableSchema = z.object({
   unpaged: z.boolean().optional(),
 });
 
-export const responseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
+export const pageSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
   z.object({
     content: z.array(itemSchema),
     empty: z.boolean(),
