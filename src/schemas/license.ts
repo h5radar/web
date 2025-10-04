@@ -20,6 +20,6 @@ export const licenseSchema = z.object({
 
 export const licenseByComplianceSchema = z.object({
   compliance_id: z.number(),
-  title: z.literal(["High", "Medium", "Low"]),
+  title: z.string(),
   count: z.number(),
 });
