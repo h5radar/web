@@ -10,7 +10,7 @@ import { useSeedMaturities } from "@/queries/maturity";
 import { useSeedPractices } from "@/queries/practice";
 import { useSeedTechnologies } from "@/queries/technology";
 
-import { PieChart1 } from "@/components/pie-chart";
+import { CustomPieChart } from "@/components/pie-chart";
 
 export default function HomePage() {
   const auth = useAuth();
@@ -43,7 +43,7 @@ export default function HomePage() {
           <IconLoader data-testid="loading-byCompliance" className="animate-spin" />
         </div>
       ) : licensesData ? (
-        <PieChart1
+        <CustomPieChart
           data={licensesData}
           description="Licenses grouped by compliance"
           dataKey="count"

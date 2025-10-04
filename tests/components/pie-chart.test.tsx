@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
 
-import { PieChart1 } from "@/components/pie-chart";
+import { CustomPieChart } from "@/components/pie-chart";
 
 describe("PieChart", () => {
   const mockData = [
@@ -26,7 +26,7 @@ describe("PieChart", () => {
 
   it("renders header and description", () => {
     render(
-      <PieChart1
+      <CustomPieChart
         data={mockData}
         dataKey="count"
         nameKey="title"

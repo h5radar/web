@@ -55,7 +55,7 @@ const createPieChartProps = <T extends dataStatistic>(
   return { chartConfig, chartData };
 };
 
-export function PieChart1<T extends dataStatistic>({
+export function CustomPieChart<T extends dataStatistic>({
   data,
   header = "PieChart",
   description = "pie chart data",
