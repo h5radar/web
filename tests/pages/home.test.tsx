@@ -4,18 +4,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Mock } from "vitest";
 
 import "@tests/mocks/auth";
+import "@tests/mocks/queries/home";
 
 import { useGetLicenseByCompliance } from "@/queries/license";
 
 import HomePage from "@/pages/home";
-
-vi.mock("@/queries/license", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@/queries/license")>();
-  return {
-    ...actual,
-    useGetLicenseByCompliance: vi.fn(),
-  };
-});
 
 describe("HomePage", () => {
   beforeEach(() => {
