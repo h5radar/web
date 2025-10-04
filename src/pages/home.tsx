@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 
-import { useSeedAll } from "@/queries/seed";
+import { useSeedAll } from "@/queries/radar-user";
 
 export default function HomePage() {
   const auth = useAuth();

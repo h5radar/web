@@ -11,6 +11,7 @@ export const UPDATE_LICENSE = "Update license";
 export const DELETE_LICENSE = "Delete license";
 export const GET_LICENSE = "Get license";
 export const GET_LICENSES = "Get licenses";
+export const SEED_LICENSES = "Seed licenses";
 
 /*
  * TanStack query keys for practices
@@ -20,6 +21,7 @@ export const UPDATE_PRACTICE = "Update practice";
 export const DELETE_PRACTICE = "Delete practice";
 export const GET_PRACTICE = "Get practice";
 export const GET_PRACTICES = "Get practices";
+export const SEED_PRACTICES = "Seed practices";
 
 /*
  * TanStack query keys for technology
@@ -29,6 +31,7 @@ export const UPDATE_TECHNOLOGY = "Update technology";
 export const DELETE_TECHNOLOGY = "Delete technology";
 export const GET_TECHNOLOGY = "Get technology";
 export const GET_TECHNOLOGIES = "Get technologies";
+export const SEED_TECHNOLOGIES = "Seed technologies";
 
 /*
  * TanStack query keys for products
@@ -38,6 +41,7 @@ export const UPDATE_PRODUCT = "Update product";
 export const DELETE_PRODUCT = "Delete product";
 export const GET_PRODUCT = "Get product";
 export const GET_PRODUCTS = "Get products";
+export const SEED_PRODUCTS = "Seed products";
 
 /*
  * TanStack query keys for maturity
@@ -47,6 +51,8 @@ export const UPDATE_MATURITY = "Update maturity";
 export const DELETE_MATURITY = "Delete maturity";
 export const GET_MATURITY = "Get maturity";
 export const GET_MATURITIES = "Get maturities";
+export const SEED_MATURITIES = "Seed maturities";
+
 /*
  * TanStack query keys for compliances
  */
@@ -55,6 +61,8 @@ export const UPDATE_COMPLIANCE = "Update compliance";
 export const DELETE_COMPLIANCE = "Delete compliance";
 export const GET_COMPLIANCE = "Get compliance";
 export const GET_COMPLIANCES = "Get compliances";
+export const SEED_COMPLIANCES = "Seed compliances";
+
 /*
  * TanStack query keys for domains
  */
@@ -63,6 +71,7 @@ export const UPDATE_DOMAIN = "Update domain";
 export const DELETE_DOMAIN = "Delete domain";
 export const GET_DOMAIN = "Get domain";
 export const GET_DOMAINS = "Get domains";
+export const SEED_DOMAINS = "Seed domains";
 
 /*
  * TanStack query keys for seed
