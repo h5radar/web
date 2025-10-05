@@ -6,7 +6,7 @@ import "@tests/mocks/reacharts-container";
 
 import { CustomPieChart } from "@/components/pie-chart";
 
-describe("PieChart1", () => {
+describe("CustomPieChart", () => {
   const mockData = [
     { compliance_id: 1, title: "High", count: 9 },
     { compliance_id: 2, title: "Medium", count: 5 },
@@ -34,7 +34,7 @@ describe("PieChart1", () => {
 
   it("renders all labels (High, Medium, Low)", () => {
     render(
-      <PieChart1
+      <CustomPieChart
         data={mockData}
         dataKey="count"
         nameKey="title"
