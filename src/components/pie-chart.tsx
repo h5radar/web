@@ -24,6 +24,8 @@ interface PieChartProps<T extends dataStatistic> {
   nameKey: string;
   stroke: string;
   variant?: "single" | "quad";
+  widthPie?: number;
+  heightPie?: number;
 }
 
 interface dataStatistic {
@@ -55,7 +57,7 @@ const createPieChartProps = <T extends dataStatistic>(
   return { chartConfig, chartData };
 };
 
-export function PieChart1<T extends dataStatistic>({
+export function CustomPieChart<T extends dataStatistic>({
   data,
   header = "PieChart",
   description = "pie chart data",
@@ -64,6 +66,8 @@ export function PieChart1<T extends dataStatistic>({
   nameKey,
   stroke,
   variant = "quad",
+  heightPie,
+  widthPie,
 }: PieChartProps<T>) {
   const { chartConfig, chartData } = createPieChartProps(data);
   return (
@@ -81,7 +85,7 @@ export function PieChart1<T extends dataStatistic>({
             variant === "quad" && "aspect-[4/3] max-h-[35vh]",
           )}
         >
-          <PieChart>
+          <PieChart width={widthPie} height={heightPie}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={chartData}
