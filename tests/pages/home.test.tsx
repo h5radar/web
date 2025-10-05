@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Mock } from "vitest";
 
 import "@tests/mocks/auth";
-import "@tests/mocks/queries/home";
+import "@tests/mocks/queries/license";
 
 import { useGetLicenseByCompliance } from "@/queries/license";
 

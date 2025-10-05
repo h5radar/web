@@ -13,7 +13,25 @@ vi.mock("@/queries/license", () => ({
     error: null,
   })),
 
+  useGetLicenseByCompliance: vi.fn(() => ({
+    data: [
+      {
+        compliance_id: 1,
+        title: "High",
+        count: 9,
+      },
+    ],
+    isLoading: false,
+    isError: false,
+    error: null,
+  })),
+
   useUpdateLicense: vi.fn(() => ({
+    mutate: vi.fn(),
+    isPending: false,
+  })),
+
+  useSeedLicenses: vi.fn(() => ({
     mutate: vi.fn(),
     isPending: false,
   })),
