@@ -1,5 +1,24 @@
+import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { afterAll, afterEach, vi } from "vitest";
+import { expect } from "vitest";
+
+expect.extend(matchers);
+
+// 🩵 Mock getBoundingClientRect to return fake sizes
+Element.prototype.getBoundingClientRect = function () {
+  return {
+    width: 400,
+    height: 300,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    x: 0,
+    y: 0,
+    toJSON() {},
+  };
+};
 
 // runs a clean after each test case (e.g. clearing jsdom)
 afterEach(() => {

@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
-import "@tests/mocks/reacharts-container";
 
 import { CustomPieChart } from "@/components/pie-chart";
 
