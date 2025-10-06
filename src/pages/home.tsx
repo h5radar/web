@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 
 import { useGetLicenseByCompliance } from "@/queries/license";
-import { useSeedAll } from "@/queries/radar-user";
+import { useSeedRadarUser } from "@/queries/radar-user";
 
 import { CustomPieChart } from "@/components/pie-chart";
 
@@ -12,9 +12,9 @@ export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  const { mutate: seedCompliances, isPending: isPending1 } = useSeedAll(auth, queryClient);
   const { data: licensesData, isLoading: isLoading } = useGetLicenseByCompliance(auth);
 
+  const { mutate: seedCompliances, isPending: isPending1 } = useSeedRadarUser(auth, queryClient);
   useEffect(() => {
     seedCompliances();
   }, [auth, seedCompliances]);
