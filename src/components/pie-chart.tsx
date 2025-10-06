@@ -66,8 +66,8 @@ export function CustomPieChart<T extends dataStatistic>({
   nameKey,
   stroke,
   variant = "quad",
-  heightPie,
-  widthPie,
+  heightPie = 400,
+  widthPie = 400,
 }: PieChartProps<T>) {
   const { chartConfig, chartData } = createPieChartProps(data);
   return (
