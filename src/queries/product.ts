@@ -9,8 +9,8 @@ import { CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCTS, UPDATE_PRODU
 
 import { QueryParams } from "@/types/query-params";
 
+import { pageSchema } from "@/schemas/page";
 import { productSchema } from "@/schemas/product";
-import { responseSchema } from "@/schemas/response";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -126,7 +126,7 @@ export const useGetProducts = (auth: AuthContextProps, queryParams: QueryParams)
         },
       });
       const data = await response.json();
-      return responseSchema(productSchema).parse(data);
+      return pageSchema(productSchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting products",

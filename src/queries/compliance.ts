@@ -18,7 +18,7 @@ import {
 import { QueryParams } from "@/types/query-params";
 
 import { complianceSchema } from "@/schemas/compliance";
-import { responseSchema } from "@/schemas/response";
+import { pageSchema } from "@/schemas/page";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -40,7 +40,6 @@ export const useCreateCompliance = (auth: AuthContextProps, queryClient: QueryCl
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [GET_COMPLIANCES] });
       toast.success("Compliance has been created successfully");
-      console.log(1);
 
       navigate("/compliances");
     },
@@ -137,7 +136,7 @@ export const useGetCompliances = (auth: AuthContextProps, queryParams: QueryPara
         },
       });
       const data = await response.json();
-      return responseSchema(complianceSchema).parse(data);
+      return pageSchema(complianceSchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting compliances",

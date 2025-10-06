@@ -17,3 +17,9 @@ export const licenseSchema = z.object({
     message: "Compliance is required",
   }),
 });
+
+export const licenseByComplianceSchema = z.object({
+  compliance_id: z.number(),
+  title: z.string(),
+  count: z.number(),
+});

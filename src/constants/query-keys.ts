@@ -10,6 +10,7 @@ export const CREATE_LICENSE = "Create license";
 export const UPDATE_LICENSE = "Update license";
 export const DELETE_LICENSE = "Delete license";
 export const GET_LICENSE = "Get license";
+export const GET_LICENSE_BY_COMPLIANCE = "Get license by compliance";
 export const GET_LICENSES = "Get licenses";
 export const SEED_LICENSES = "Seed licenses";
 

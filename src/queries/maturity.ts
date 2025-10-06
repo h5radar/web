@@ -19,7 +19,7 @@ import {
 import { QueryParams } from "@/types/query-params";
 
 import { maturitiesSchema } from "@/schemas/maturity";
-import { responseSchema } from "@/schemas/response";
+import { pageSchema } from "@/schemas/page";
 
 import { createQueryParams } from "@/lib/query-params";
 
@@ -136,7 +136,7 @@ export const useGetMaturities = (auth: AuthContextProps, queryParams: QueryParam
         },
       });
       const data = await response.json();
-      return responseSchema(maturitiesSchema).parse(data);
+      return pageSchema(maturitiesSchema).parse(data);
     },
     meta: {
       errorMessage: "Error getting maturities",
