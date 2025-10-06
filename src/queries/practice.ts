@@ -6,7 +6,14 @@ import { toast } from "sonner";
 import { ZodError, z } from "zod";
 
 import { QUERY_RETRY_COUNT, RADAR_API_URL } from "@/constants/application";
-import { CREATE_PRACTICE, DELETE_PRACTICE, GET_PRACTICE, GET_PRACTICES, UPDATE_PRACTICE } from "@/constants/query-keys";
+import {
+  CREATE_PRACTICE,
+  DELETE_PRACTICE,
+  GET_PRACTICE,
+  GET_PRACTICES,
+  SEED_PRACTICES,
+  UPDATE_PRACTICE,
+} from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
@@ -135,5 +142,29 @@ export const useGetPractices = (auth: AuthContextProps, queryParams: QueryParams
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
+  });
+};
+
+export const useSeedPractices = (auth: AuthContextProps, queryClient: QueryClient) => {
+  return useMutation({
+    mutationFn: async () => {
+      await fetch(`${RADAR_API_URL}/practices/seed`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: [SEED_PRACTICES],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_PRACTICES] });
+      toast.success("Practices has been seeded successfully");
+    },
+    onError(error) {
+      toast.error("Error seeding practices", {
+        description: error.message,
+      });
+    },
   });
 };

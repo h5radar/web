@@ -6,7 +6,14 @@ import { toast } from "sonner";
 import { ZodError, z } from "zod";
 
 import { QUERY_RETRY_COUNT, RADAR_API_URL } from "@/constants/application";
-import { CREATE_DOMAIN, DELETE_DOMAIN, GET_DOMAIN, GET_DOMAINS, UPDATE_DOMAIN } from "@/constants/query-keys";
+import {
+  CREATE_DOMAIN,
+  DELETE_DOMAIN,
+  GET_DOMAIN,
+  GET_DOMAINS,
+  SEED_DOMAINS,
+  UPDATE_DOMAIN,
+} from "@/constants/query-keys";
 
 import { QueryParams } from "@/types/query-params";
 
@@ -137,5 +144,29 @@ export const useGetDomains = (auth: AuthContextProps, queryParams: QueryParams) 
     },
     placeholderData: keepPreviousData,
     retry: (count, error) => count < 3 && !(error instanceof ZodError),
+  });
+};
+
+export const useSeedDomains = (auth: AuthContextProps, queryClient: QueryClient) => {
+  return useMutation({
+    mutationFn: async () => {
+      await fetch(`${RADAR_API_URL}/domains/seed`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+    },
+    mutationKey: [SEED_DOMAINS],
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [GET_DOMAINS] });
+      toast.success("Domains has been seeded successfully");
+    },
+    onError(error) {
+      toast.error("Error seeding domains", {
+        description: error.message,
+      });
+    },
   });
 };
