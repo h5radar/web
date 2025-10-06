@@ -15,7 +15,7 @@ import {
   SEED_ALL,
 } from "@/constants/query-keys";
 
-export const useSeedAll = (auth: AuthContextProps, queryClient: QueryClient) => {
+export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
       await fetch(`${RADAR_API_URL}/radar-users/seed`, {
