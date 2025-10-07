@@ -8,6 +8,7 @@ import {
   GET_COMPLIANCES,
   GET_DOMAINS,
   GET_LICENSES,
+  GET_LICENSE_BY_COMPLIANCE,
   GET_MATURITIES,
   GET_PRACTICES,
   GET_PRODUCTS,
@@ -27,18 +28,20 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
       });
     },
     mutationKey: [SEED_ALL],
-    onSuccess() {
-      queryClient.invalidateQueries({
-        queryKey: [
-          GET_COMPLIANCES,
-          GET_LICENSES,
-          GET_PRACTICES,
-          GET_TECHNOLOGIES,
-          GET_PRODUCTS,
-          GET_MATURITIES,
-          GET_DOMAINS,
-        ],
-      });
+    onSuccess: async () => {
+      const keys = [
+        GET_COMPLIANCES,
+        GET_LICENSES,
+        GET_PRACTICES,
+        GET_TECHNOLOGIES,
+        GET_PRODUCTS,
+        GET_MATURITIES,
+        GET_DOMAINS,
+        GET_LICENSE_BY_COMPLIANCE,
+      ];
+
+      await Promise.all(keys.map((key) => queryClient.invalidateQueries({ queryKey: [key] })));
+
       toast.success("All data has been seeded successfully");
     },
     onError(error) {
