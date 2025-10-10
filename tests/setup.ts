@@ -5,7 +5,7 @@ import { expect } from "vitest";
 
 expect.extend(matchers);
 
-// 🩵 Mock getBoundingClientRect to return fake sizes
+// Mock getBoundingClientRect to return fake sizes
 Element.prototype.getBoundingClientRect = function () {
   return {
     width: 400,
@@ -20,7 +20,6 @@ Element.prototype.getBoundingClientRect = function () {
   };
 };
 
-// runs a clean after each test case (e.g. clearing jsdom)
 afterEach(() => {
   cleanup();
 });
