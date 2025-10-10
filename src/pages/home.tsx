@@ -5,22 +5,21 @@ import { useAuth } from "react-oidc-context";
 
 import { Button } from "@/ui/button";
 
-import { DEFAULT_QUERY_PARAM } from "@/constants/query-defaults";
-
 import { useGetLicenseByCompliance } from "@/queries/license";
-import { useSeedRadarUser } from "@/queries/radar-user";
-import { useGetTechnologies } from "@/queries/technology";
+import { useGetSeed, useSeedRadarUser } from "@/queries/radar-user";
 
 import { CustomPieChart } from "@/components/pie-chart";
 
 export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const queryParams = DEFAULT_QUERY_PARAM;
 
-  const { data: technologies, isLoading: isLoadingTechnologies } = useGetTechnologies(auth, queryParams);
+  console.log(auth);
+
+  const { data: radarUser, isLoading: isLoadingRadarUser } = useGetSeed(auth, "1"); //maybe sub?
   const { data: licensesData, isLoading: isLoadingLicenses } = useGetLicenseByCompliance(auth);
   const { mutate: seedCompliances, isPending: isSeeding } = useSeedRadarUser(auth, queryClient);
+  console.log(radarUser);
 
   const handleLoadData = useCallback(() => seedCompliances(), [seedCompliances]);
 
@@ -31,11 +30,7 @@ export default function HomePage() {
     </div>;
   }
 
-  const noData =
-    !isLoadingTechnologies &&
-    !isLoadingLicenses &&
-    (technologies?.content?.length ?? 0) === 0 &&
-    (licensesData?.length ?? 0) === 0;
+  const noData = !isLoadingRadarUser && !isLoadingLicenses && !radarUser?.seeded;
 
   if (noData) {
     return (

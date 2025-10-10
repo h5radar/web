@@ -78,3 +78,4 @@ export const SEED_DOMAINS = "Seed domains";
  * TanStack query keys for seed
  */
 export const SEED_ALL = "Seed all";
+export const GET_SEED = "Get seed";
