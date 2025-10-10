@@ -59,11 +59,11 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
   });
 };
 
-export const useGetSeed = (auth: AuthContextProps, id: string) =>
+export const useGetSeed = (auth: AuthContextProps) =>
   useQuery({
     queryKey: [GET_SEED],
     queryFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/radar-users/${id}`, {
+      const response = await fetch(`${RADAR_API_URL}/radar-users/0}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",

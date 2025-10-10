@@ -14,7 +14,7 @@ export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  const { data: radarUser, isLoading: isLoadingRadarUser } = useGetSeed(auth, "1"); //maybe sub?
+  const { data: radarUser, isLoading: isLoadingRadarUser } = useGetSeed(auth);
   const { data: licensesData, isLoading: isLoadingLicenses } = useGetLicenseByCompliance(auth);
   const { mutate: seedCompliances, isPending: isSeeding } = useSeedRadarUser(auth, queryClient);
 
