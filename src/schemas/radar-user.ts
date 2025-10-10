@@ -19,9 +19,5 @@ export const radarUserSchema = z.object({
       message: "Username must be less than 256 characters",
     }),
   seeded: z.boolean(),
-  seededDate: z
-    .date()
-    .min(new Date(), "The date should be in the future")
-    .max(new Date(), "The date must be in the past")
-    .nullable(),
+  seededDate: z.preprocess((val: string) => (val ? new Date(val) : null), z.date().nullable()),
 });

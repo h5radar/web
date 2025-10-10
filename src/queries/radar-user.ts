@@ -20,8 +20,6 @@ import {
 
 import { radarUserSchema } from "@/schemas/radar-user";
 
-// type RadarUserSeedResponse = z.infer<typeof radarUserSchema>;
-
 export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
     mutationFn: async () => {
@@ -36,7 +34,6 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
         const errorText = await response.text();
         throw new Error(errorText || response.statusText);
       }
-      // return response.json();
     },
     mutationKey: [SEED_ALL],
     onSuccess: async () => {
@@ -51,14 +48,8 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
         GET_LICENSE_BY_COMPLIANCE,
         GET_SEED,
       ];
-      // const data = radarUserSchema.parse(resData);
-      // console.log(1);
-      // console.log(data);
-      // console.log(2);
       await Promise.all(keys.map((key) => queryClient.invalidateQueries({ queryKey: [key] })));
       toast.success("All data has been seeded successfully");
-      // if (data.seeded)
-      // else toast.error("Data has not been seeded successfully");
     },
     onError(error) {
       toast.error("Error seeding data", {
@@ -70,7 +61,7 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
 
 export const useGetSeed = (auth: AuthContextProps, id: string) =>
   useQuery({
-    queryKey: [GET_SEED, id],
+    queryKey: [GET_SEED],
     queryFn: async () => {
       const response = await fetch(`${RADAR_API_URL}/radar-users/${id}`, {
         method: "GET",
@@ -80,11 +71,10 @@ export const useGetSeed = (auth: AuthContextProps, id: string) =>
         },
       });
       const data = await response.json();
-      // return data;
       return radarUserSchema.parse(data);
     },
     meta: {
-      errorMessage: "Error getting compliance",
+      errorMessage: "Error getting seed",
     },
     retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
   });
