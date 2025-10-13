@@ -8,7 +8,7 @@ import { Button } from "@/ui/button";
 import { useGetLicenseByCompliance } from "@/queries/license";
 import { useGetRadarUser, useSeedRadarUser } from "@/queries/radar-user";
 
-import { CustomPieChart } from "@/components/pie-chart";
+import { CustomPieChart } from "@/components/custom-pie-chart";
 
 export default function HomePage() {
   const auth = useAuth();
@@ -16,12 +16,12 @@ export default function HomePage() {
 
   const { data: radarUser, isLoading: isLoadingRadarUser } = useGetRadarUser(auth);
   const { data: licensesData, isLoading: isLoadingLicenses } = useGetLicenseByCompliance(auth);
-  const { mutate: seedCompliances, isPending: isSeeding } = useSeedRadarUser(auth, queryClient);
+  const { mutate: seedRadarUser, isPending: isPending } = useSeedRadarUser(auth, queryClient);
 
-  const handleLoadData = useCallback(() => seedCompliances(), [seedCompliances]);
+  const handleSeedData = useCallback(() => seedRadarUser(), [seedRadarUser]);
 
   const noData = !isLoadingRadarUser && !isLoadingLicenses && !radarUser?.seeded;
-  if (isSeeding) {
+  if (isPending) {
     return (
       <div className="flex justify-center items-center h-[50vh]">
         <IconLoader className="animate-spin w-8 h-8" />
@@ -32,7 +32,7 @@ export default function HomePage() {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh] space-y-4">
         <p>No data available yet.</p>
-        <Button onClick={handleLoadData}>Seed Data</Button>
+        <Button onClick={handleSeedData}>Seed Data</Button>
       </div>
     );
   } else
