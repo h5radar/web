@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import "@tests/mocks/auth";
 
-import { CustomPieChart } from "@/components/pie-chart";
+import { CustomPieChart } from "@/components/custom-pie-chart";
 
 describe("CustomPieChart", () => {
   const mockData = [

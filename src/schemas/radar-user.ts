@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const userSchema = z.object({
+export const radarUserSchema = z.object({
   id: z.preprocess((val) => Number(val), z.number()),
   sub: z
     .string()
@@ -18,4 +18,6 @@ export const userSchema = z.object({
     .max(256, {
       message: "Username must be less than 256 characters",
     }),
+  seeded: z.boolean(),
+  seededDate: z.preprocess((val: string) => (val ? new Date(val) : null), z.date().nullable()),
 });
