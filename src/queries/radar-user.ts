@@ -13,12 +13,32 @@ import {
   GET_MATURITIES,
   GET_PRACTICES,
   GET_PRODUCTS,
-  GET_SEED,
+  GET_RADAR_USER,
   GET_TECHNOLOGIES,
-  SEED_ALL,
+  SEED_RADAR_USER,
 } from "@/constants/query-keys";
 
 import { radarUserSchema } from "@/schemas/radar-user";
+
+export const useGetRadarUser = (auth: AuthContextProps) =>
+  useQuery({
+    queryKey: [GET_RADAR_USER],
+    queryFn: async () => {
+      const response = await fetch(`${RADAR_API_URL}/radar-users/0`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      const data = await response.json();
+      return radarUserSchema.parse(data);
+    },
+    meta: {
+      errorMessage: "Error getting radar user",
+    },
+    retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
+  });
 
 export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClient) => {
   return useMutation({
@@ -35,7 +55,7 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
         throw new Error(errorText || response.statusText);
       }
     },
-    mutationKey: [SEED_ALL],
+    mutationKey: [SEED_RADAR_USER],
     onSuccess: async () => {
       const keys = [
         GET_COMPLIANCES,
@@ -46,7 +66,7 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
         GET_MATURITIES,
         GET_DOMAINS,
         GET_LICENSE_BY_COMPLIANCE,
-        GET_SEED,
+        GET_RADAR_USER,
       ];
       await Promise.all(keys.map((key) => queryClient.invalidateQueries({ queryKey: [key] })));
       toast.success("All data has been seeded successfully");
@@ -58,23 +78,3 @@ export const useSeedRadarUser = (auth: AuthContextProps, queryClient: QueryClien
     },
   });
 };
-
-export const useGetSeed = (auth: AuthContextProps) =>
-  useQuery({
-    queryKey: [GET_SEED],
-    queryFn: async () => {
-      const response = await fetch(`${RADAR_API_URL}/radar-users/0`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-      const data = await response.json();
-      return radarUserSchema.parse(data);
-    },
-    meta: {
-      errorMessage: "Error getting seed",
-    },
-    retry: (count, error) => count < QUERY_RETRY_COUNT && !(error instanceof ZodError),
-  });

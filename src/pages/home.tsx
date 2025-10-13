@@ -6,7 +6,7 @@ import { useAuth } from "react-oidc-context";
 import { Button } from "@/ui/button";
 
 import { useGetLicenseByCompliance } from "@/queries/license";
-import { useGetSeed, useSeedRadarUser } from "@/queries/radar-user";
+import { useGetRadarUser, useSeedRadarUser } from "@/queries/radar-user";
 
 import { CustomPieChart } from "@/components/pie-chart";
 
@@ -14,7 +14,7 @@ export default function HomePage() {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  const { data: radarUser, isLoading: isLoadingRadarUser } = useGetSeed(auth);
+  const { data: radarUser, isLoading: isLoadingRadarUser } = useGetRadarUser(auth);
   const { data: licensesData, isLoading: isLoadingLicenses } = useGetLicenseByCompliance(auth);
   const { mutate: seedCompliances, isPending: isSeeding } = useSeedRadarUser(auth, queryClient);
 
